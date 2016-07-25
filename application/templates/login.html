@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>스누씨 로그인화면</title>
+<link rel="stylesheet" href="/static/base.css" />
+{% endblock %}
+
+{% block content %}
+<form action="/login" method="POST">
+    <input type="text" name="ID" />
+    <input type="password" name="password" />
+    <input type="submit" value="로그인" />
+</form>
+{% endblock %}
