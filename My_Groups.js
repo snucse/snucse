@@ -1,41 +1,39 @@
 import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
+import DataCon from './Util.js';
 
 var MyGroup = React.createClass({
-    loadGroupfromServer: function() {
-        $.ajax({
-            url: this.props.url,
-            dataType: 'json',
-            cache: false,
-            success: function(data) {
-                this.setState({data: data});
-            }.bind(this)
-        });
-    },
+  loadGroupfromServer: function() {
+    var url = this.props.url;
+    var success = function(data) {
+      this.setState({data: data});
+    }.bind(this);
+    DataCon.loadDataFromServer(url, success);
+  },
 
-    getInitialState: function() {
-        return {data: {groups:[]}}
-    },
+  getInitialState: function() {
+    return {data: {groups:[]}}
+  },
 
-    componentDidMount: function() {
-        this.loadGroupfromServer();
-    },
+  componentDidMount: function() {
+    setInterval(this.loadGroupfromServer, 2000);
+  },
 
-    render: function() {
-        var _this = this;
-        var groups = this.state.data.groups.map(function(group) {
-            return (
-                    <li key={group.id+group.name}><Link to={"/group/"+group.id}>{group.name}</Link></li>
-            );
-        });
+  render: function() {
+    var _this = this;
+    var groups = this.state.data.groups.map(function(group) {
+      return (
+        <li key={group.id+group.name}><Link to={"/group/"+group.id}>{group.name}</Link></li>
+      );
+    });
 
-        return (
-    <ul>
+    return (
+      <ul>
         {groups}
-    </ul>
-        );
-    }
+      </ul>
+    );
+  }
 });
 
 export default MyGroup;
