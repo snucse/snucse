@@ -2,10 +2,19 @@
 
 ###Dependency
 ```
-javascript : {
-    Library : [react, react-dom, react-router, jquery, moment,],
-    module : [npm, webpack]
-}
+
+<Webpack Preset>
+babel-preset-react
+babel-preset-es2015
+babel-loader
+
+<Libraries>
+react
+react-router
+react-dom
+jquery
+moment
+
 ```
 
 ###Others
