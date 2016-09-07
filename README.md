@@ -1,6 +1,6 @@
 > 스누씨 3.0 프론트엔드
 
-###Dependency
+### Dependency
 ```
 
 <Webpack Preset>
@@ -17,7 +17,7 @@ moment
 
 ```
 
-###Others
+### Others
 ```
 indent : 2 spaces
 ```
