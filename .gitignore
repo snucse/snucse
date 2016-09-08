@@ -144,3 +144,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+#############################
+# SNUCSE specific gitignore
+#############################
+
+# Build result
+application.js
