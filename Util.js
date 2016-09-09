@@ -11,7 +11,7 @@ var DataCon = {
       cache: false,
       success: success,
       error: function(xhr) {
-        if(xhr.status=='401' || '404') {
+        if(xhr.status == '401' || xhr.status == '404') {
           location.href="/login";
         }
       },
