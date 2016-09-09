@@ -1,23 +1,24 @@
 import React from 'react';
 import DataCon from './Util.js';
 import $ from 'jquery';
-import browserHistory from 'react-route'
+import browserHistory from 'react-route';
+import fetch from 'whatwg-fetch';
 
-var ProfileMakeForm = React.createClass({
-  getInitialState: () => {
+var ProfileForm = React.createClass({
+  getInitialState: function() {
     return {sid: '', name: '', description: ''};
   },
-  handleSidChange: (e) => {
+  handleSidChange: function(e) {
     this.setState({sid: e.target.sid});
   },
-  handleNameChange: (e) => {
+  handleNameChange: function(e) {
     this.setState({name: e.target.name});
   },
-  handleDescriptionChange: (e) => {
+  handleDescriptionChange: function(e) {
     this.setState({discription: e.target.description});
   },
 
-  handleSubmit: (e) => {
+  handleSubmit: function(e) {
     var reg = /^[A-Za-z_][A-Za-z0-9_]*$/;
     var trimed = {};
     for(var key in this.state){
@@ -36,7 +37,30 @@ var ProfileMakeForm = React.createClass({
       return;
     }
 
-    DataCon.postDataToServer('/profiles', trimed, 'POST');
-    browserHistory.push('/profiles/'+sid);
+    fetch('/profiles', {
+      method: 'POST',
+      body: trimed
+    }).then((res) => {
+      if(res.status >= 200 && res.status < 300){
+        alert('프로필 생성에 성공하였습니다.');
+        browserHistory.push('/'+sid);
+      }
+      else{
+        // TODO
+        // 중복 sid 등의 예외 처리
+      }
+    });
+  },
+
+  render: function() {
+    return (
+        <div className="profileForm">
+        <form onSubmit="this.handleSubmit">
+        SID: <input type="text" name="sid" value={this.state.sid} onChange={this.handleSidChange} /> <br />
+        이름: <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} /> <br />
+        설명: <input type="text" name="description" value={this.state.discription} onChange={this.handleDescriptionChange} /> <br />
+        <input type="submit" value="그룹 만들기">
+        </form>
+        </div> );
   }
 }
