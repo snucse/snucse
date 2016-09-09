@@ -1,6 +1,7 @@
 import React from 'react';
 import DataCon from './Util.js';
 import $ from 'jquery';
+import browserHistory from 'react-route'
 
 var ProfileMakeForm = React.createClass({
   getInitialState: () => {
@@ -35,6 +36,7 @@ var ProfileMakeForm = React.createClass({
       return;
     }
 
-    alert("TODO");
+    DataCon.postDataToServer('/profiles', trimed, 'POST');
+    browserHistory.push('/profiles/'+sid);
   }
 }
