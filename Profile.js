@@ -1,24 +1,45 @@
 import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
+import DataCon from './Util.js';
 
-var Profile = React.createClass({
+var Group = React.createClass({
+  loadGroupsfromServer: function() {
+    var url = this.props.route.url;
+    var success = function(data) {
+      this.setState({data: data});
+    }.bind(this);
+    DataCon.loadDataFromServer(url, success);
+  },
+
   componentDidMount: function() {
-    //var w = new WebSocket("ws://aws.izz.kr:3000/");
+    this.loadGroupsfromServer();
+  },
 
+  getInitialState: function() {
+    return {data: {groups:[]}}
+  },
+
+  Groups: function(id) {
+    browserHistory.push('/'+id);
   },
 
   render: function() {
-    //var w = new WebSocket("ws://aws.izz.kr:3000/");
-    /*w.onmessage = function(event) {
-      console.log(event);
-    };*/
+    var _this = this;
+    var groups = this.state.data.groups.map(function(group) { 
+      return(
+        <div key={group.id + group.name} className="groups">
+          <strong onClick={_this.Groups.bind(_this, group.id)}>{group.name}</strong>
+        </div>
+      );
+    });
+
     return (
       <div>
-        <h1>프로필</h1>
+        {groups}
       </div>
-    );
+     );
   }
 });
 
-export default Profile;
+export default Group;
