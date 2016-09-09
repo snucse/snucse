@@ -5,7 +5,7 @@ import fetch from 'whatwg-fetch'
 
 var Profiles = React.createClass({
   loadProfilesFromServer: function() {
-    fetch('/profiles')
+    fetch(this.props.router.url)
       .then((res) => {
         if(res.status >= 200 && res.status < 300)
           return res.json();
