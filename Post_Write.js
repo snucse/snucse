@@ -46,7 +46,7 @@ var PostForm = React.createClass({
       return;
     }
     this.props.onPostSubmit({title: title, current_user_id: current_user_id, content: content, group_id: group_id});
-    browserHistory.push('/group/'+group_id);
+    browserHistory.push('/'+group_id);
   },
   
   render: function() {
