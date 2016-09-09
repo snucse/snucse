@@ -7,6 +7,7 @@
 
 {% block content %}
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<a href="/">메인</a><br>
 <form id="login" action="#" onsubmit="return false;">
     로그인<br>
     아이디:<br>
@@ -21,7 +22,7 @@ function login() {
     var id = form.elements["ID"].value;
     var pass = form.elements["password"].value;
     $.ajax({
-        url: 'http://aws.izz.kr:3000/api/v1/users/sign_in',
+        url: 'http://snucse.snucse.org:32123/api/v1/users/sign_in',
         dataType: 'json',
         data: {username: id, password: pass},
         type: 'POST',

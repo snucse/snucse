@@ -22,9 +22,10 @@ var MyGroup = React.createClass({
 
   render: function() {
     var _this = this;
-    var groups = this.state.data.groups.map(function(group) {
+    console.log(this.state);
+    var groups = this.state.data.profiles.map(function(group) {
       return (
-        <li key={group.id+group.name}><Link to={"/group/"+group.id}>{group.name}</Link></li>
+        <li key={group.id+group.name}><Link to={"/"+group.id}>{group.name}</Link></li>
       );
     });
 

@@ -21,7 +21,7 @@ var Group = React.createClass({
   },
 
   Groups: function(id) {
-    browserHistory.push('/group/'+id);
+    browserHistory.push('/'+id);
   },
 
   render: function() {

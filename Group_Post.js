@@ -2,17 +2,18 @@ import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import DataCon from './Util.js';
+import Post from './Post.js';
 
 var Group_Post = React.createClass({
   render: function() {
-    let {id} = this.props.params;
+    var id = this.props.id;
     return (
       <div>
         <div className="menu_of_group">
           <Link to={"/group/"+id+"/write"}>글쓰기</Link>
-          <FollowBox id={id}/>
+          <FollowBox id={id} url={this.props.url} />
         </div>
-        {this.props.children}
+        <Post url={this.props.url+"/articles/"} is_profile={true} id={id}/>
       </div>
     );
   }
@@ -21,7 +22,7 @@ var Group_Post = React.createClass({
 var FollowBox = React.createClass({
   check_follow: function() {
     var id = this.props.id;
-    var url = "http://aws.izz.kr:3000/api/v1/groups/" + id;
+    var url = this.props.url + "groups/" + id;
     var _this = this;
     var success = function(data) {
       if (data.following == true) {
@@ -46,7 +47,7 @@ var FollowBox = React.createClass({
 
   group_follow: function(id) {
     if (confirm("팔로우 하시겠습니까?") === true) {
-      var url = "http://aws.izz.kr:3000/api/v1/groups/" + id + "/follow";
+      var url = this.props.url + "groups/" + id + "/follow";
       DataCon.postDataToServer(url, '', 'POST');
     } else {
       return;
@@ -55,7 +56,7 @@ var FollowBox = React.createClass({
 
   group_unfollow: function(id) {
     if (confirm("팔로우를 취소하시겠습니까?") === true) {
-      var url = "http://aws.izz.kr:3000/api/v1/groups/" + id + "/unfollow";
+      var url = this.props.url + "groups/" + id + "/unfollow";
       DataCon.postDataToServer(url, '', 'POST');
     } else {
       return;

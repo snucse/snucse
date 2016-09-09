@@ -8,9 +8,9 @@ import moment from 'moment';
 var Post = React.createClass({
   loadPostFromServer: function() {
     var url = null;
-    if('route' in this.props) {
-      let {id} = this.props.params;
-      url = this.props.route.url+"?group_id="+id;
+    if('is_profile' in this.props && this.props.is_profile === true) {
+      var id = this.props.id;
+      url = this.props.url+"?group_id="+id;
     } else {
       url = this.props.url;
     };

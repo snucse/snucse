@@ -64,37 +64,41 @@
 
 	var _Menu2 = _interopRequireDefault(_Menu);
 
-	var _Others = __webpack_require__(240);
+	var _Others = __webpack_require__(241);
 
 	var _Others2 = _interopRequireDefault(_Others);
 
-	var _Message = __webpack_require__(241);
+	var _Message = __webpack_require__(242);
 
 	var _Message2 = _interopRequireDefault(_Message);
 
-	var _Group = __webpack_require__(242);
+	var _Group = __webpack_require__(243);
 
 	var _Group2 = _interopRequireDefault(_Group);
 
-	var _Group_Post = __webpack_require__(243);
+	var _Group_Post = __webpack_require__(244);
 
 	var _Group_Post2 = _interopRequireDefault(_Group_Post);
 
-	var _Main = __webpack_require__(244);
+	var _Main = __webpack_require__(351);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
-	var _Post_Write = __webpack_require__(351);
+	var _Post_Write = __webpack_require__(352);
 
 	var _Post_Write2 = _interopRequireDefault(_Post_Write);
 
-	var _Post_Edit = __webpack_require__(352);
+	var _Post_Edit = __webpack_require__(353);
 
 	var _Post_Edit2 = _interopRequireDefault(_Post_Edit);
 
 	var _Post = __webpack_require__(245);
 
 	var _Post2 = _interopRequireDefault(_Post);
+
+	var _ClassManager = __webpack_require__(354);
+
+	var _ClassManager2 = _interopRequireDefault(_ClassManager);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -112,23 +116,22 @@
 	  }
 	});
 
+	var url = "http://snucse.snucse.org:32123/api/v1/";
+	//var url = "http://aws.izz.kr:3000/api/v1/";
+
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/', component: _Menu2.default, pollInterval: 2000 },
-	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Main2.default, url: 'http://aws.izz.kr:3000/api/v1/articles', pollInterval: 2000 }),
+	    { path: '/', component: _Menu2.default, pollInterval: 2000, url: url },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Main2.default, url: url + "articles", pollInterval: 2000 }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/message', component: _Message2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/others', component: _Others2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/:post_id/edit', component: _Post_Edit2.default, url: 'http://aws.izz.kr:3000/api/v1/articles' }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/group', component: _Group2.default, url: 'http://aws.izz.kr:3000/api/v1/groups' }),
-	    _react2.default.createElement(
-	      _reactRouter.Route,
-	      { path: '/group/:id', component: _Group_Post2.default, url: 'http://aws.izz.kr:3000/api/v1/articles' },
-	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Post2.default, url: 'http://aws.izz.kr:3000/api/v1/articles' }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/group/:id/write', component: _Post_Write2.default, url: 'http://aws.izz.kr:3000/api/v1/articles' })
-	    )
+	    _react2.default.createElement(_reactRouter.Route, { path: '/:post_id/edit', component: _Post_Edit2.default, url: url + "articles" }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/groups', component: _Group2.default, url: url + "profiles" }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/:id', component: _ClassManager2.default, url: url }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/group/:id/write', component: _Post_Write2.default, url: url + "articles" })
 	  )
 	), rootElement);
 
@@ -37240,8 +37243,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Top_menu = _react2.default.createClass({
-	  displayName: 'Top_menu',
+	var Menu = _react2.default.createClass({
+	  displayName: 'Menu',
 
 	  logout: function logout() {
 	    document.cookie = "snucsesession=0;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
@@ -37315,7 +37318,7 @@
 	          _react2.default.createElement(_Profile2.default, null),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/group' },
+	            { to: '/groups' },
 	            '전체그룹'
 	          ),
 	          _react2.default.createElement(
@@ -37326,7 +37329,7 @@
 	              { className: 'MyGroups' },
 	              '내 그룹'
 	            ),
-	            _react2.default.createElement(_My_Groups2.default, { url: "http://aws.izz.kr:3000/api/v1/groups/following?current_user_id=" + user_id })
+	            _react2.default.createElement(_My_Groups2.default, { url: this.props.route.url + "profiles/following?current_user_id=" + user_id })
 	          )
 	        )
 	      ),
@@ -37339,7 +37342,7 @@
 	  }
 	});
 
-	exports.default = Top_menu;
+	exports.default = Menu;
 
 /***/ },
 /* 237 */
@@ -37367,14 +37370,15 @@
 	  displayName: 'Profile',
 
 	  componentDidMount: function componentDidMount() {
-	    var w = new WebSocket("ws://aws.izz.kr:3000/");
+	    //var w = new WebSocket("ws://aws.izz.kr:3000/");
+
 	  },
 
 	  render: function render() {
-	    var w = new WebSocket("ws://aws.izz.kr:3000/");
-	    w.onmessage = function (event) {
+	    //var w = new WebSocket("ws://aws.izz.kr:3000/");
+	    /*w.onmessage = function(event) {
 	      console.log(event);
-	    };
+	    };*/
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -37436,13 +37440,14 @@
 
 	  render: function render() {
 	    var _this = this;
-	    var groups = this.state.data.groups.map(function (group) {
+	    console.log(this.state);
+	    var groups = this.state.data.profiles.map(function (group) {
 	      return _react2.default.createElement(
 	        'li',
 	        { key: group.id + group.name },
 	        _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: "/group/" + group.id },
+	          { to: "/" + group.id },
 	          group.name
 	        )
 	      );
@@ -37472,11 +37477,16 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _jsCookie = __webpack_require__(240);
+
+	var _jsCookie2 = _interopRequireDefault(_jsCookie);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var DataCon = {
 	  loadDataFromServer: function loadDataFromServer(url, success) {
-	    var user_id = document.cookie.split('=');
+	    //    var user_id = document.cookie.split('=');
+	    var user_id = _jsCookie2.default.get('snucsesession');
 	    _jquery2.default.ajax({
 	      url: url,
 	      dataType: 'json',
@@ -37488,20 +37498,21 @@
 	        }
 	      },
 	      headers: {
-	        Authorization: 'Token token=' + user_id[1]
+	        Authorization: 'Token token=' + user_id
 	      }
 	    });
 	  },
 
 	  postDataToServer: function postDataToServer(url, data, type) {
-	    var user_id = document.cookie.split('=');
+	    //    var user_id = document.cookie.split('=');
+	    var user_id = _jsCookie2.default.get('snucsesession');
 	    _jquery2.default.ajax({
 	      url: url,
 	      dataType: 'json',
 	      data: data,
 	      type: type,
 	      headers: {
-	        Authorization: 'Token token=' + user_id[1]
+	        Authorization: 'Token token=' + user_id
 	      }
 	    });
 	  }
@@ -37511,6 +37522,168 @@
 
 /***/ },
 /* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	 * JavaScript Cookie v2.1.3
+	 * https://github.com/js-cookie/js-cookie
+	 *
+	 * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+	 * Released under the MIT license
+	 */
+	;(function (factory) {
+		var registeredInModuleLoader = false;
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			registeredInModuleLoader = true;
+		}
+		if (true) {
+			module.exports = factory();
+			registeredInModuleLoader = true;
+		}
+		if (!registeredInModuleLoader) {
+			var OldCookies = window.Cookies;
+			var api = window.Cookies = factory();
+			api.noConflict = function () {
+				window.Cookies = OldCookies;
+				return api;
+			};
+		}
+	}(function () {
+		function extend () {
+			var i = 0;
+			var result = {};
+			for (; i < arguments.length; i++) {
+				var attributes = arguments[ i ];
+				for (var key in attributes) {
+					result[key] = attributes[key];
+				}
+			}
+			return result;
+		}
+
+		function init (converter) {
+			function api (key, value, attributes) {
+				var result;
+				if (typeof document === 'undefined') {
+					return;
+				}
+
+				// Write
+
+				if (arguments.length > 1) {
+					attributes = extend({
+						path: '/'
+					}, api.defaults, attributes);
+
+					if (typeof attributes.expires === 'number') {
+						var expires = new Date();
+						expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+						attributes.expires = expires;
+					}
+
+					try {
+						result = JSON.stringify(value);
+						if (/^[\{\[]/.test(result)) {
+							value = result;
+						}
+					} catch (e) {}
+
+					if (!converter.write) {
+						value = encodeURIComponent(String(value))
+							.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+					} else {
+						value = converter.write(value, key);
+					}
+
+					key = encodeURIComponent(String(key));
+					key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+					key = key.replace(/[\(\)]/g, escape);
+
+					return (document.cookie = [
+						key, '=', value,
+						attributes.expires ? '; expires=' + attributes.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+						attributes.path ? '; path=' + attributes.path : '',
+						attributes.domain ? '; domain=' + attributes.domain : '',
+						attributes.secure ? '; secure' : ''
+					].join(''));
+				}
+
+				// Read
+
+				if (!key) {
+					result = {};
+				}
+
+				// To prevent the for loop in the first place assign an empty array
+				// in case there are no cookies at all. Also prevents odd result when
+				// calling "get()"
+				var cookies = document.cookie ? document.cookie.split('; ') : [];
+				var rdecode = /(%[0-9A-Z]{2})+/g;
+				var i = 0;
+
+				for (; i < cookies.length; i++) {
+					var parts = cookies[i].split('=');
+					var cookie = parts.slice(1).join('=');
+
+					if (cookie.charAt(0) === '"') {
+						cookie = cookie.slice(1, -1);
+					}
+
+					try {
+						var name = parts[0].replace(rdecode, decodeURIComponent);
+						cookie = converter.read ?
+							converter.read(cookie, name) : converter(cookie, name) ||
+							cookie.replace(rdecode, decodeURIComponent);
+
+						if (this.json) {
+							try {
+								cookie = JSON.parse(cookie);
+							} catch (e) {}
+						}
+
+						if (key === name) {
+							result = cookie;
+							break;
+						}
+
+						if (!key) {
+							result[name] = cookie;
+						}
+					} catch (e) {}
+				}
+
+				return result;
+			}
+
+			api.set = api;
+			api.get = function (key) {
+				return api.call(api, key);
+			};
+			api.getJSON = function () {
+				return api.apply({
+					json: true
+				}, [].slice.call(arguments));
+			};
+			api.defaults = {};
+
+			api.remove = function (key, attributes) {
+				api(key, '', extend(attributes, {
+					expires: -1
+				}));
+			};
+
+			api.withConverter = init;
+
+			return api;
+		}
+
+		return init(function () {});
+	}));
+
+
+/***/ },
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37542,7 +37715,7 @@
 	exports.default = Others;
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37575,7 +37748,7 @@
 	exports.default = Message;
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37620,7 +37793,7 @@
 	  },
 
 	  Groups: function Groups(id) {
-	    _reactRouter.browserHistory.push('/group/' + id);
+	    _reactRouter.browserHistory.push('/' + id);
 	  },
 
 	  render: function render() {
@@ -37648,7 +37821,7 @@
 	exports.default = Group;
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37671,14 +37844,17 @@
 
 	var _Util2 = _interopRequireDefault(_Util);
 
+	var _Post = __webpack_require__(245);
+
+	var _Post2 = _interopRequireDefault(_Post);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Group_Post = _react2.default.createClass({
 	  displayName: 'Group_Post',
 
 	  render: function render() {
-	    var id = this.props.params.id;
-
+	    var id = this.props.id;
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -37690,9 +37866,9 @@
 	          { to: "/group/" + id + "/write" },
 	          '글쓰기'
 	        ),
-	        _react2.default.createElement(FollowBox, { id: id })
+	        _react2.default.createElement(FollowBox, { id: id, url: this.props.url })
 	      ),
-	      this.props.children
+	      _react2.default.createElement(_Post2.default, { url: this.props.url + "/articles/", is_profile: true, id: id })
 	    );
 	  }
 	});
@@ -37702,7 +37878,7 @@
 
 	  check_follow: function check_follow() {
 	    var id = this.props.id;
-	    var url = "http://aws.izz.kr:3000/api/v1/groups/" + id;
+	    var url = this.props.url + "groups/" + id;
 	    var _this = this;
 	    var success = function success(data) {
 	      if (data.following == true) {
@@ -37727,7 +37903,7 @@
 
 	  group_follow: function group_follow(id) {
 	    if (confirm("팔로우 하시겠습니까?") === true) {
-	      var url = "http://aws.izz.kr:3000/api/v1/groups/" + id + "/follow";
+	      var url = this.props.url + "groups/" + id + "/follow";
 	      _Util2.default.postDataToServer(url, '', 'POST');
 	    } else {
 	      return;
@@ -37736,7 +37912,7 @@
 
 	  group_unfollow: function group_unfollow(id) {
 	    if (confirm("팔로우를 취소하시겠습니까?") === true) {
-	      var url = "http://aws.izz.kr:3000/api/v1/groups/" + id + "/unfollow";
+	      var url = this.props.url + "groups/" + id + "/unfollow";
 	      _Util2.default.postDataToServer(url, '', 'POST');
 	    } else {
 	      return;
@@ -37768,46 +37944,6 @@
 	});
 
 	exports.default = Group_Post;
-
-/***/ },
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _jquery = __webpack_require__(172);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _reactRouter = __webpack_require__(173);
-
-	var _Post = __webpack_require__(245);
-
-	var _Post2 = _interopRequireDefault(_Post);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Main = _react2.default.createClass({
-	  displayName: 'Main',
-
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'posts' },
-	      _react2.default.createElement(_Post2.default, { url: this.props.route.url, pollInterval: this.props.route.pollInterval })
-	    );
-	  }
-	});
-
-	exports.default = Main;
 
 /***/ },
 /* 245 */
@@ -37848,10 +37984,9 @@
 
 	  loadPostFromServer: function loadPostFromServer() {
 	    var url = null;
-	    if ('route' in this.props) {
-	      var id = this.props.params.id;
-
-	      url = this.props.route.url + "?group_id=" + id;
+	    if ('is_profile' in this.props && this.props.is_profile === true) {
+	      var id = this.props.id;
+	      url = this.props.url + "?group_id=" + id;
 	    } else {
 	      url = this.props.url;
 	    };
@@ -52398,6 +52533,46 @@
 
 	var _reactRouter = __webpack_require__(173);
 
+	var _Post = __webpack_require__(245);
+
+	var _Post2 = _interopRequireDefault(_Post);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Main = _react2.default.createClass({
+	  displayName: 'Main',
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'posts' },
+	      _react2.default.createElement(_Post2.default, { url: this.props.route.url, pollInterval: this.props.route.pollInterval })
+	    );
+	  }
+	});
+
+	exports.default = Main;
+
+/***/ },
+/* 352 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _jquery = __webpack_require__(172);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _reactRouter = __webpack_require__(173);
+
 	var _Util = __webpack_require__(239);
 
 	var _Util2 = _interopRequireDefault(_Util);
@@ -52456,7 +52631,7 @@
 	      return;
 	    }
 	    this.props.onPostSubmit({ title: title, current_user_id: current_user_id, content: content, group_id: group_id });
-	    _reactRouter.browserHistory.push('/group/' + group_id);
+	    _reactRouter.browserHistory.push('/' + group_id);
 	  },
 
 	  render: function render() {
@@ -52485,7 +52660,7 @@
 	exports.default = Post_Write;
 
 /***/ },
-/* 352 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52574,6 +52749,57 @@
 	});
 
 	exports.default = Edit;
+
+/***/ },
+/* 354 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _jquery = __webpack_require__(172);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _reactRouter = __webpack_require__(173);
+
+	var _Post = __webpack_require__(245);
+
+	var _Post2 = _interopRequireDefault(_Post);
+
+	var _Group_Post = __webpack_require__(244);
+
+	var _Group_Post2 = _interopRequireDefault(_Group_Post);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ClassManager = _react2.default.createClass({
+	  displayName: 'ClassManager',
+
+	  componentDidMount: function componentDidMount() {},
+
+	  render: function render() {
+	    var id = this.props.params.id;
+
+	    var re = /^\d+&/;
+
+	    if (re.test(id)) {
+	      return _react2.default.createElement(_Group_Post2.default, { url: this.props.route.url, id: id });
+	      //여기서 숫자로 받고 글 하나를 보여줘야함
+	    } else {
+	      return _react2.default.createElement(_Group_Post2.default, { url: this.props.route.url, id: id });
+	    }
+	  }
+	});
+
+	exports.default = ClassManager;
 
 /***/ }
 /******/ ]);

@@ -12,6 +12,7 @@ import Main from './Main.js';
 import Post_Write from './Post_Write.js';
 import Edit from './Post_Edit.js';
 import Post from './Post.js';
+import ClassManager from './ClassManager.js';
 
 const rootElement = document.getElementById('content');
 
@@ -25,20 +26,19 @@ var Test = React.createClass({
   }
 });
 
-var url = "http://aws.izz.kr:3000/api/v1/
+var url = "http://snucse.snucse.org:32123/api/v1/";
+//var url = "http://aws.izz.kr:3000/api/v1/";
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="/" component={Menu} pollInterval={2000}>
-      <IndexRoute component={Main} url=url+"articles" pollInterval={2000} />
+    <Route path="/" component={Menu} pollInterval={2000} url={url}>
+      <IndexRoute component={Main} url={url+"articles"} pollInterval={2000} />
       <Route path="/message" component={Message} />
       <Route path="/others" component={Others} />
-      <Route path="/:post_id/edit" component={Edit} url=url+"articles" />
-      <Route path="/groups" component={Group} url=url+"groups" />
-      <Route path="/group/:id" component={Group_Post} url=url+"articles">
-        <IndexRoute component={Post} url=url+"articles" />
-        <Route path="/group/:id/write" component={Post_Write} url=url+"articles"/>
-      </Route>
+      <Route path="/:post_id/edit" component={Edit} url={url+"articles"} />
+      <Route path="/groups" component={Group} url={url+"profiles"} />
+      <Route path="/:id" component={ClassManager} url={url} />
+      <Route path="/group/:id/write" component={Post_Write} url={url+"articles"} />
     </Route>
   </Router>
   , rootElement);
