@@ -1,7 +1,7 @@
 import React from 'react';
 import DataCon from './Util.js';
 import $ from 'jquery';
-import browserHistory from 'react-route';
+import browserHistory from 'react-router';
 import fetch from 'whatwg-fetch';
 
 var ProfileForm = React.createClass({
@@ -37,7 +37,7 @@ var ProfileForm = React.createClass({
       return;
     }
 
-    fetch('/profiles', {
+    fetch(this.props.url, {
       method: 'POST',
       body: trimed
     }).then((res) => {
@@ -59,8 +59,10 @@ var ProfileForm = React.createClass({
         SID: <input type="text" name="sid" value={this.state.sid} onChange={this.handleSidChange} /> <br />
         이름: <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} /> <br />
         설명: <input type="text" name="description" value={this.state.discription} onChange={this.handleDescriptionChange} /> <br />
-        <input type="submit" value="그룹 만들기">
+        <input type="submit" value="그룹 만들기" />
         </form>
         </div> );
   }
-}
+});
+
+export default ProfileForm;

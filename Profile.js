@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import fetch from 'whatwg-fetch'
+import ProfileForm from './Profile_Make.js'
 
 var Profiles = React.createClass({
   loadProfilesFromServer: function() {
@@ -31,16 +32,19 @@ var Profiles = React.createClass({
     var profiles = this.state.data.profiles.map((profile) => {
       return (
           <div key={profile.sid} className="profile">
-            <strong onClick={this.Profiles(profile.sid)}>{profile.name}</strong>
+          <strong onClick={this.Profiles(profile.sid)}>{profile.name}</strong>
           </div>
           );
     });
 
     return (
-      <div className="profiles">
-        {profiles}
-      </div>
-     );
+        <div className="profile container">
+          <ProfileForm url={this.props.router.url} />
+          <div className="profiles">
+            {profiles}
+          </div>
+        </div>
+        );
   }
 });
 
