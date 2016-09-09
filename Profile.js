@@ -4,15 +4,15 @@ import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 
 var Profile = React.createClass({
   componentDidMount: function() {
-    var w = new WebSocket("ws://aws.izz.kr:3000/");
+    //var w = new WebSocket("ws://aws.izz.kr:3000/");
 
   },
 
   render: function() {
-    var w = new WebSocket("ws://aws.izz.kr:3000/");
-    w.onmessage = function(event) {
+    //var w = new WebSocket("ws://aws.izz.kr:3000/");
+    /*w.onmessage = function(event) {
       console.log(event);
-    };
+    };*/
     return (
       <div>
         <h1>프로필</h1>
