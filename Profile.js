@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import fetch from 'whatwg-fetch'
 
-var Profile = React.createClass({
+var Profiles = React.createClass({
   loadProfilesFromServer: function() {
     fetch('/profiles')
       .then((res) => {
@@ -30,18 +30,18 @@ var Profile = React.createClass({
   render: function() {
     var groups = this.state.data.profiles.map((profile) => {
       return(
-        <div key={profile.sid + profile.name} className="profiles">
+        <div key={profile.sid} className="profile">
           <strong onClick={this.Profiles(profile.sid)}>{profile.name}</strong>
         </div>
       );
     });
 
     return (
-      <div>
+      <div className="profiles">
         {profiles}
       </div>
      );
   }
 });
 
-export default Profile;
+export default Profiles;
