@@ -1,45 +1,47 @@
 import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import DataCon from './Util.js';
+import fetch from 'whatwg-fetch'
 
-var Group = React.createClass({
-  loadGroupsfromServer: function() {
-    var url = this.props.route.url;
-    var success = function(data) {
-      this.setState({data: data});
-    }.bind(this);
-    DataCon.loadDataFromServer(url, success);
+var Profile = React.createClass({
+  loadProfilesFromServer: function() {
+    fetch('/profiles')
+      .then((res) => {
+        if(res.status >= 200 && res.status < 300)
+          return res.json();
+        else throw Error(res.statusText);
+      }).then((data) => {
+        this.setState({data: data});
+      }).catch((error) => {});
   },
 
   componentDidMount: function() {
-    this.loadGroupsfromServer();
+    this.loadProfilesFromServer();
   },
 
   getInitialState: function() {
-    return {data: {groups:[]}}
+    return {data: {profiles: []}}
   },
 
-  Groups: function(id) {
-    browserHistory.push('/'+id);
+  Profiles: function(sid) {
+    browserHistory.push('/'+sid);
   },
 
   render: function() {
-    var _this = this;
-    var groups = this.state.data.groups.map(function(group) { 
+    var groups = this.state.data.profiles.map((profile) => {
       return(
-        <div key={group.id + group.name} className="groups">
-          <strong onClick={_this.Groups.bind(_this, group.id)}>{group.name}</strong>
+        <div key={profile.sid + profile.name} className="profiles">
+          <strong onClick={this.Profiles(profile.sid)}>{profile.name}</strong>
         </div>
       );
     });
 
     return (
       <div>
-        {groups}
+        {profiles}
       </div>
      );
   }
 });
 
-export default Group;
+export default Profile;

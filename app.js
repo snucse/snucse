@@ -6,7 +6,7 @@ import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import Menu from './Menu.js';
 import Others from './Others.js';
 import Message from './Message.js';
-import Group from './Group.js';
+import Profile from './Profile.js';
 import Group_Post from './Group_Post.js';
 import Main from './Main.js';
 import Post_Write from './Post_Write.js';
@@ -36,7 +36,7 @@ ReactDOM.render(
       <Route path="/message" component={Message} />
       <Route path="/others" component={Others} />
       <Route path="/:post_id/edit" component={Edit} url={url+"articles"} />
-      <Route path="/groups" component={Group} url={url+"profiles"} />
+      <Route path="/profiles" component={Profile} url={url+"profiles"} />
       <Route path="/:id" component={ClassManager} url={url} />
       <Route path="/group/:id/write" component={Post_Write} url={url+"articles"} />
     </Route>
