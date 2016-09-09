@@ -28,12 +28,12 @@ var Profiles = React.createClass({
   },
 
   render: function() {
-    var groups = this.state.data.profiles.map((profile) => {
-      return(
-        <div key={profile.sid} className="profile">
-          <strong onClick={this.Profiles(profile.sid)}>{profile.name}</strong>
-        </div>
-      );
+    var profiles = this.state.data.profiles.map((profile) => {
+      return (
+          <div key={profile.sid} className="profile">
+            <strong onClick={this.Profiles(profile.sid)}>{profile.name}</strong>
+          </div>
+          );
     });
 
     return (
