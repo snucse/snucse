@@ -17,7 +17,7 @@ var Group = React.createClass({
   },
 
   getInitialState: function() {
-    return {data: {groups:[]}}
+    return {data: {profiles:[]}}
   },
 
   Groups: function(id) {
@@ -26,7 +26,7 @@ var Group = React.createClass({
 
   render: function() {
     var _this = this;
-    var groups = this.state.data.groups.map(function(group) { 
+    var groups = this.state.data.profiles.map(function(group) {
       return(
         <div key={group.id + group.name} className="groups">
           <strong onClick={_this.Groups.bind(_this, group.id)}>{group.name}</strong>

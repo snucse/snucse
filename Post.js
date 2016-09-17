@@ -10,7 +10,7 @@ var Post = React.createClass({
     var url = null;
     if('is_profile' in this.props && this.props.is_profile === true) {
       var id = this.props.id;
-      url = this.props.url+"?group_id="+id;
+      url = this.props.url+"?profile_id="+id;
     } else {
       url = this.props.url;
     };
@@ -29,7 +29,6 @@ var Post = React.createClass({
 
   componentWillUnmount: function() {
     this.state=null;
-    console.log("un");
     clearInterval(this.Interval);
   },
 
@@ -63,7 +62,6 @@ var Post = React.createClass({
         _this.end = false;
         return;
       } else {
-        var ToGet = "/comment/" +  post.id + ".json";
         var temp = post.content.split("\n");
         var n = temp.length;
         var i = 0;
@@ -94,7 +92,7 @@ var Post = React.createClass({
         return (
           <div className="PostWrap" key={post.id+post.title}>
             <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
-            <h4 className="post_title">Title: {post.title} Group: {post.group.name}</h4>
+            <h4 className="post_title">Title: {post.title} Group: {post.profiles.name}</h4>
             <h3 className="post_author">writer: {post.writer.username}</h3><h3 className="post_date"> date: {date}</h3>
             <div className="content">
               {result}
@@ -154,7 +152,7 @@ var DelEditBox = React.createClass({
         <div/>
       );
     };
-  }   
+  }
 });
 
 

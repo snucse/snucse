@@ -5,7 +5,8 @@ import MyGroup from './My_Groups.js';
 
 var Menu = React.createClass({
   logout: function() {
-    document.cookie = "snucsesession=0;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+    localStorage.removeItem('snucsesession');
+    location.href = '/login';
   },
 
   render: function() {

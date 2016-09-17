@@ -28,7 +28,8 @@ function login() {
         data: {username: id, password: pass},
         type: 'POST',
         success: function(data) {
-            document.cookie = "snucsesession="+data.access_token;
+            localStorage.setItem('snucsesession', data.access_token);
+//            document.cookie = "snucsesession="+data.access_token;
             location.href = "/";
         }.bind(this),
         error: function(xhr) {

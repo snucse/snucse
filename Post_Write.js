@@ -4,9 +4,9 @@ import { Navigation, Router, Route, Link, browserHistory, IndexRoute } from 'rea
 import DataCon from './Util.js';
 
 var Post_Write = React.createClass({
-  handlePostSubmit: function(comment) {
+  handlePostSubmit: function(data) {
     var url = this.props.route.url;
-    DataCon.postDataToServer(url, comment, 'POST');
+    DataCon.postDataToServer(url, data, 'POST');
   },
 
   render: function() {
@@ -30,7 +30,7 @@ var PostForm = React.createClass({
   handleTitleChange: function(e) {
     this.setState({title: e.target.value});
   },
-  
+
   handleSubmit: function(e) {
     var a = confirm("전송하시겠습니까?")
     if (!a) {
@@ -45,10 +45,10 @@ var PostForm = React.createClass({
     if (!content || !title) {
       return;
     }
-    this.props.onPostSubmit({title: title, current_user_id: current_user_id, content: content, group_id: group_id});
+    this.props.onPostSubmit({title: title, content: content, profile_ids: group_id});
     browserHistory.push('/'+group_id);
   },
-  
+
   render: function() {
     return (
       <div className="commentForm">
