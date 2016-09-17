@@ -6,7 +6,6 @@ import ProfileForm from './Profile_Make.js';
 
 var Profiles = React.createClass({
   loadProfilesFromServer: function() {
-    console.log(1+this.props.route.url);
     fetch(this.props.route.url,{headers:{Authorization:'Token token='+localStorage.getItem('snucsesession')}})
       .then((res) => {
         return res.json();
@@ -16,7 +15,6 @@ var Profiles = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log('asdf')
     this.loadProfilesFromServer();
   },
 
@@ -33,11 +31,10 @@ var Profiles = React.createClass({
     var profiles = this.state.data.profiles.map(function(profile) {
       return (
           <div key={profile.sid} className="profile">
-          <strong onClick={_this.Profiles.bind(_this, profile.sid)}>{profile.name}</strong>
+          <strong onClick={()=>_this.Profiles(profile.sid)}>{profile.name}</strong>
           </div>
           );
     });
-    console.log(this.state);
     return (
         <div className="profile container">
           <ProfileForm url={this.props.route.url} />

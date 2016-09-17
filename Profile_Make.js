@@ -29,12 +29,12 @@ var ProfileForm = React.createClass({
 
     if(!reg.test(trimmed.sid)){
       alert("sid는 영어로 시작해야 합니다.");
-      return;
+      return false;
     }
 
     if(trimmed.name === "" || trimmed.description === ""){
       alert("양식을 모두 채워주세요.");
-      return;
+      return false;
     }
 
     fetch(this.props.url, {
