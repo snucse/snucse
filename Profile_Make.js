@@ -2,20 +2,20 @@ import React from 'react';
 import DataCon from './Util.js';
 import $ from 'jquery';
 import browserHistory from 'react-router';
-import fetch from 'whatwg-fetch';
+import 'whatwg-fetch';
 
 var ProfileForm = React.createClass({
   getInitialState: function() {
     return {sid: '', name: '', description: ''};
   },
   handleSidChange: function(e) {
-    this.setState({sid: e.target.sid});
+    this.setState({sid: e.target.value});
   },
   handleNameChange: function(e) {
-    this.setState({name: e.target.name});
+    this.setState({name: e.target.value});
   },
   handleDescriptionChange: function(e) {
-    this.setState({discription: e.target.description});
+    this.setState({description: e.target.value});
   },
 
   handleSubmit: function(e) {
@@ -38,8 +38,9 @@ var ProfileForm = React.createClass({
     }
 
     fetch(this.props.url, {
+      headers:{Authorization: 'Token token='+localStorage.getItem('snucsesession'), 'Content-Type': 'application/json'},
       method: 'POST',
-      body: trimed
+      body: JSON.stringify(trimed)
     }).then((res) => {
       if(res.status >= 200 && res.status < 300){
         alert('프로필 생성에 성공하였습니다.');
@@ -55,10 +56,10 @@ var ProfileForm = React.createClass({
   render: function() {
     return (
         <div className="profileForm">
-        <form onSubmit="this.handleSubmit">
+        <form onSubmit={this.handleSubmit}>
         SID: <input type="text" name="sid" value={this.state.sid} onChange={this.handleSidChange} /> <br />
         이름: <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} /> <br />
-        설명: <input type="text" name="description" value={this.state.discription} onChange={this.handleDescriptionChange} /> <br />
+        설명: <input type="text" name="description" value={this.state.description} onChange={this.handleDescriptionChange} /> <br />
         <input type="submit" value="그룹 만들기" />
         </form>
         </div> );

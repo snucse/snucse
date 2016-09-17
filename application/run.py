@@ -10,6 +10,10 @@ def home():
 def login_page():
     return render_template('login.html')
 
+@snucse.route('/sign-up')
+def sign_up_page():
+    return render_template('sign-up.html')
+
 @snucse.route('/<path:all>')
 def reset(all):
     return redirect(url_for('home'))

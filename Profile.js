@@ -1,22 +1,22 @@
 import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import fetch from 'whatwg-fetch'
-import ProfileForm from './Profile_Make.js'
+import 'whatwg-fetch';
+import ProfileForm from './Profile_Make.js';
 
 var Profiles = React.createClass({
   loadProfilesFromServer: function() {
-    fetch(this.props.router.url)
+    console.log(1+this.props.route.url);
+    fetch(this.props.route.url,{headers:{Authorization:'Token token='+localStorage.getItem('snucsesession')}})
       .then((res) => {
-        if(res.status >= 200 && res.status < 300)
-          return res.json();
-        else throw Error(res.statusText);
+        return res.json();
       }).then((data) => {
         this.setState({data: data});
-      }).catch((error) => {});
+      }).catch((error) => {console.log(error);});
   },
 
   componentDidMount: function() {
+    console.log('asdf')
     this.loadProfilesFromServer();
   },
 
@@ -29,17 +29,18 @@ var Profiles = React.createClass({
   },
 
   render: function() {
-    var profiles = this.state.data.profiles.map((profile) => {
+    var _this = this;
+    var profiles = this.state.data.profiles.map(function(profile) {
       return (
           <div key={profile.sid} className="profile">
-          <strong onClick={this.Profiles(profile.sid)}>{profile.name}</strong>
+          <strong onClick={_this.Profiles.bind(_this, profile.sid)}>{profile.name}</strong>
           </div>
           );
     });
-
+    console.log(this.state);
     return (
         <div className="profile container">
-          <ProfileForm url={this.props.router.url} />
+          <ProfileForm url={this.props.route.url} />
           <div className="profiles">
             {profiles}
           </div>

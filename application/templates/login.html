@@ -11,11 +11,12 @@
 <form id="login" action="#" onsubmit="return false;">
     로그인<br>
     아이디:<br>
-    <input type="text" name="ID" /><br>
+    <input type="text" name="ID" autofocus /><br>
     비밀번호:<br>
     <input type="password" name="password" /><br>
-    <button onclick="login()">로그인</button>
+    <button onclick="login()">로그인</button><br>
 </form>
+<a href="/sign-up">가입</a>
 <script type="text/javascript">
 function login() {
     var form = document.getElementById("login");
@@ -27,7 +28,8 @@ function login() {
         data: {username: id, password: pass},
         type: 'POST',
         success: function(data) {
-            document.cookie = "snucsesession="+data.access_token;
+            localStorage.setItem('snucsesession', data.access_token);
+//            document.cookie = "snucsesession="+data.access_token;
             location.href = "/";
         }.bind(this),
         error: function(xhr) {

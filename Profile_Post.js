@@ -13,7 +13,7 @@ var Group_Post = React.createClass({
           <Link to={"/group/"+id+"/write"}>글쓰기</Link>
           <FollowBox id={id} url={this.props.url} />
         </div>
-        <Post url={this.props.url+"/articles/"} is_profile={true} id={id}/>
+        <Post url={this.props.url+"/articles"} is_profile={true} id={id}/>
       </div>
     );
   }
@@ -22,7 +22,7 @@ var Group_Post = React.createClass({
 var FollowBox = React.createClass({
   check_follow: function() {
     var id = this.props.id;
-    var url = this.props.url + "groups/" + id;
+    var url = this.props.url + "profiles/" + id;
     var _this = this;
     var success = function(data) {
       if (data.following == true) {
@@ -42,12 +42,12 @@ var FollowBox = React.createClass({
   componentWillUnmount: function() {
     clearInterval(this.Interval);
   },
-  
+
   Interval: null,
 
   group_follow: function(id) {
     if (confirm("팔로우 하시겠습니까?") === true) {
-      var url = this.props.url + "groups/" + id + "/follow";
+      var url = this.props.url + "profiles/" + id + "/follow";
       DataCon.postDataToServer(url, '', 'POST');
     } else {
       return;
@@ -56,13 +56,13 @@ var FollowBox = React.createClass({
 
   group_unfollow: function(id) {
     if (confirm("팔로우를 취소하시겠습니까?") === true) {
-      var url = this.props.url + "groups/" + id + "/unfollow";
+      var url = this.props.url + "profiles/" + id + "/unfollow";
       DataCon.postDataToServer(url, '', 'POST');
     } else {
       return;
     }
   },
-  
+
   getInitialState: function() {
     return {
       followed: false
