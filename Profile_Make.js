@@ -19,20 +19,20 @@ var ProfileForm = React.createClass({
   },
 
   handleSubmit: function(e) {
-    var reg = /^[0-9_]+$/;
-    var trimed = {};
+    var reg = /^[[a-zA-Z][a-zA-Z0-9_]+$/;
+    var trimmed = {};
     for(var key in this.state){
       if(this.state.hasOwnProperty(key)){
-        trimed[key] = this.state[key].trim();
+        trimmed[key] = this.state[key].trim();
       }
     }
 
-    if(!reg.test(trimed.sid)){
-      alert("sid는 숫자만 있어야 합니다.");
+    if(!reg.test(trimmed.sid)){
+      alert("sid는 영어로 시작해야 합니다.");
       return;
     }
 
-    if(trimed.name === "" || trimed.description === ""){
+    if(trimmed.name === "" || trimmed.description === ""){
       alert("양식을 모두 채워주세요.");
       return;
     }
@@ -40,7 +40,7 @@ var ProfileForm = React.createClass({
     fetch(this.props.url, {
       headers:{Authorization: 'Token token='+localStorage.getItem('snucsesession'), 'Content-Type': 'application/json'},
       method: 'POST',
-      body: JSON.stringify(trimed)
+      body: JSON.stringify(trimmed)
     }).then((res) => {
       if(res.status >= 200 && res.status < 300){
         alert('프로필 생성에 성공하였습니다.');
