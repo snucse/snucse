@@ -13,7 +13,7 @@ var MyGroup = React.createClass({
   },
 
   getInitialState: function() {
-    return {data: {groups:[]}}
+    return {data: {profiles:[]}}
   },
 
   componentDidMount: function() {
