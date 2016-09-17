@@ -17,7 +17,7 @@ var MyGroup = React.createClass({
   },
 
   componentDidMount: function() {
-    setInterval(this.loadGroupfromServer, 2000);
+    this.loadGroupfromServer();
   },
 
   render: function() {

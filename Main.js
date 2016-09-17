@@ -7,7 +7,7 @@ var Main = React.createClass({
   render: function() {
     return (
       <div className="posts">
-        <Post url={this.props.route.url} pollInterval={this.props.route.pollInterval} />
+        <Post url={this.props.route.url} />
       </div>
     );
   }

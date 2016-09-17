@@ -20,16 +20,12 @@ var Post = React.createClass({
     DataCon.loadDataFromServer(url, success);
   },
 
-  Interval: null,
-
   componentDidMount: function() {
     this.loadPostFromServer();
-    this.Interval = setInterval(this.loadPostFromServer, 2000);
   },
 
   componentWillUnmount: function() {
     this.state=null;
-    clearInterval(this.Interval);
   },
 
   getInitialState: function() {
