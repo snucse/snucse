@@ -35,15 +35,8 @@ var FollowBox = React.createClass({
   },
 
   componentDidMount: function() {
-    this.check_follow;
-    this.Interval = setInterval(this.check_follow, 2000);
+    this.check_follow();
   },
-
-  componentWillUnmount: function() {
-    clearInterval(this.Interval);
-  },
-
-  Interval: null,
 
   group_follow: function(id) {
     if (confirm("팔로우 하시겠습니까?") === true) {
