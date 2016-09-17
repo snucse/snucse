@@ -19,7 +19,7 @@ var ProfileForm = React.createClass({
   },
 
   handleSubmit: function(e) {
-    var reg = /^[A-Za-z_][A-Za-z0-9_]*$/;
+    var reg = /^[0-9_]+$/;
     var trimed = {};
     for(var key in this.state){
       if(this.state.hasOwnProperty(key)){
@@ -28,7 +28,7 @@ var ProfileForm = React.createClass({
     }
 
     if(!reg.test(trimed.sid)){
-      alert("sid는 영문자로 시작해야 합니다.");
+      alert("sid는 숫자만 있어야 합니다.");
       return;
     }
 
