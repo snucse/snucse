@@ -5,10 +5,6 @@ import Post from './Post.js';
 import Profile_Post from './Profile_Post.js';
 
 var ClassManager = React.createClass({
-  componentDidMount: function() {
-
-  },
-
   render: function() {
     let {id} = this.props.params;
     var re = /^\d+&/
