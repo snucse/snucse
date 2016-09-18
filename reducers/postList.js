@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   data: {
     articles: []
   },
-  post_num: 2,
+  post_num: 5,
 }
 
 export default function postList(state = INITIAL_STATE, action) {
