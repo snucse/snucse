@@ -145,14 +145,14 @@ var DelEditBox = React.createClass({
   }
 });
 
-let mapStateToProps = (state) => {
+let mapStateToProps = function(state) {
   return {
     data: state.postList.data,
     post_num: state.postList.post_num,
   }
 }
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = function(dispatch) {
   return {
     onPostLoad: (data) => { dispatch(loadPost(data)) },
     onScrollEnd: () => { dispatch(scrollPostListEnd()) },
