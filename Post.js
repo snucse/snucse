@@ -52,7 +52,6 @@ var Post = React.createClass({
       }
     });
     var flag = 0;
-    var temp = this.props.data.articles;
     var count = 0;
     var postNodes = this.props.data.articles.map((post) => {
       count += 1;
@@ -66,18 +65,14 @@ var Post = React.createClass({
           var temp2 = [temp[i], <br/>];
           result = result.concat(temp2);
         }
-        var is_updated = 0;
         moment.locale('kr');
         var date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
         if (post.created_at.updated === true) {
           date = date + '(수정됨)'+moment(post.created_at.date, 'YYYYMMDD').fromNow();
 
         }
-        var user_id=1;
-        var mine=true;
-        if( user_id!=post.writer.id ) {
-          mine=false;
-        }
+        var user_id = 1; // TODO
+        var mine = (user_id === post.writer.id);
         var url = null;
         if('route' in this.props) {
           url = this.props.route.url;
