@@ -17,9 +17,9 @@ var Post = React.createClass({
     } else {
       url = this.props.url;
     };
-    var success = function(data) {
+    var success = (data) => {
       this.props.onPostLoad(data)
-    }.bind(this);
+    }
     DataCon.loadDataFromServer(url, success);
   },
 
