@@ -38,15 +38,15 @@ var Post = React.createClass({
         if (loading === true) {
           return;
         } else {
-          setTimeout(function() {
+          setTimeout(() =>
             if (this.props.data.articles.length > this.props.post_num) {
               // 보여주는 것보다 갖고 있는게 더 적으면
               this.props.onScrollEnd()
               // 더 보여달라는 요청
             }
-            loading = false
+            loading = false;
           }, 1000);
-          loading = true
+          loading = true;
           return;
         }
       }
@@ -60,7 +60,7 @@ var Post = React.createClass({
       } else {
         var temp = post.content.split("\n");
         var n = temp.length;
-        var result = []
+        var result = [];
         for(let i = 0; i < n; i++) {
           var temp2 = [temp[i], <br/>];
           result = result.concat(temp2);
