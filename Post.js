@@ -32,13 +32,13 @@ var Post = React.createClass({
   },
 
   render: function() {
-    $(window).scroll(() =>
+    $(window).scroll(() => {
       var loading = false
       if($(window).scrollTop() == $(document).height() - $(window).height()) {
         if (loading === true) {
           return;
         } else {
-          setTimeout(() =>
+          setTimeout(() => {
             if (this.props.data.articles.length > this.props.post_num) {
               // 보여주는 것보다 갖고 있는게 더 적으면
               this.props.onScrollEnd()
