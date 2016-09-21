@@ -32,17 +32,16 @@ var Post = React.createClass({
   },
 
   render: function() {
-    var _this = this;
-    $(window).scroll(function() {
+    $(window).scroll(() =>
       var loading = false
       if($(window).scrollTop() == $(document).height() - $(window).height()) {
         if (loading === true) {
           return;
         } else {
           setTimeout(function() {
-            if (_this.props.data.articles.length > _this.props.post_num) {
+            if (this.props.data.articles.length > this.props.post_num) {
               // 보여주는 것보다 갖고 있는게 더 적으면
-              _this.props.onScrollEnd()
+              this.props.onScrollEnd()
               // 더 보여달라는 요청
             }
             loading = false
@@ -55,16 +54,15 @@ var Post = React.createClass({
     var flag = 0;
     var temp = this.props.data.articles;
     var count = 0;
-    var postNodes = this.props.data.articles.map(function(post) {
+    var postNodes = this.props.data.articles.map((post) => {
       count += 1;
-      if (count > _this.props.post_num) {
+      if (count > this.props.post_num) {
         return;
       } else {
         var temp = post.content.split("\n");
         var n = temp.length;
-        var i = 0;
         var result = []
-        for(var i = 0; i < n; i++) {
+        for(let i = 0; i < n; i++) {
           var temp2 = [temp[i], <br/>];
           result = result.concat(temp2);
         }
@@ -81,10 +79,10 @@ var Post = React.createClass({
           mine=false;
         }
         var url = null;
-        if('route' in _this.props) {
-          url = _this.props.route.url;
+        if('route' in this.props) {
+          url = this.props.route.url;
         } else {
-          url = _this.props.url;
+          url = this.props.url;
         };
         return (
           <div className="PostWrap" key={post.id+post.title}>
