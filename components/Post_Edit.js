@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import DataCon from './Util.js';
+import { DataCon } from '../utils';
 
 var Edit = React.createClass({
   data: null,
@@ -32,11 +32,11 @@ var Edit = React.createClass({
   handleTitleChange: function(e) {
     this.setState({title: e.target.value});
   },
-  
+
   handleContentChange: function(e) {
     this.setState({content: e.target.value});
   },
-  
+
   handleEdit: function(e) {
     e.preventDefault();
     var title = this.state.title.trim();
