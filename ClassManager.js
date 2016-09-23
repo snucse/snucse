@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import Post from './Post.js';
-import Profile_Post from './Profile_Post.js';
+import ProfilePost from './ProfilePost.js';
 
 var ClassManager = React.createClass({
   render: function() {
@@ -11,12 +11,12 @@ var ClassManager = React.createClass({
 
     if (re.test(id)) {
       return (
-        <Profile_Post url={this.props.route.url} id={id} />
+        <ProfilePost url={this.props.route.url} id={id} />
       );
 //여기서 숫자로 받고 글 하나를 보여줘야함
     } else {
       return (
-        <Profile_Post url={this.props.route.url} id={id} />
+        <ProfilePost url={this.props.route.url} id={id} />
       );
     }
   }

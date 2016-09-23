@@ -88,7 +88,7 @@ var Post = React.createClass({
         return (
           <div className="PostWrap" key={post.id+post.title}>
             <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
-            <h4 className="post_title">Title: {post.title} Group: {post.profiles[0].name}</h4>
+            <h4 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h4>
             <h3 className="post_author">writer: {post.writer.username}</h3><h3 className="post_date"> date: {date}</h3>
             <div className="content">
               {result}

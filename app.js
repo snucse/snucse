@@ -8,8 +8,8 @@ import Others from './Others.js';
 import Message from './Message.js';
 import Profiles from './Profile.js';
 import Main from './Main.js';
-import Post_Write from './Post_Write.js';
-import Edit from './Post_Edit.js';
+import PostWrite from './PostWrite.js';
+import Edit from './PostEdit.js';
 import Post from './Post.js';
 import ClassManager from './ClassManager.js';
 
@@ -37,7 +37,7 @@ ReactDOM.render(
       <Route path="/:post_id/edit" component={Edit} url={url+"articles"} />
       <Route path="/profiles" component={Profiles} url={url+"profiles"} />
       <Route path="/:id" component={ClassManager} url={url} />
-      <Route path="/group/:id/write" component={Post_Write} url={url+"articles"} />
+      <Route path="/profile/:id/write" component={PostWrite} url={url+"articles"} />
     </Route>
   </Router>
   , rootElement);
