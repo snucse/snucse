@@ -3,8 +3,8 @@ import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import DataCon from './Util.js';
 
-var MyGroup = React.createClass({
-  loadGroupfromServer: function() {
+var MyProfile = React.createClass({
+  loadProfilefromServer: function() {
     var url = this.props.url;
     var success = function(data) {
       this.setState({data: data});
@@ -17,23 +17,23 @@ var MyGroup = React.createClass({
   },
 
   componentDidMount: function() {
-    this.loadGroupfromServer();
+    this.loadProfilefromServer();
   },
 
   render: function() {
     var _this = this;
-    var groups = this.state.data.profiles.map(function(group) {
+    var profiles = this.state.data.profiles.map(function(profile) {
       return (
-        <li key={group.id+group.name}><Link to={"/"+group.id}>{group.name}</Link></li>
+        <li key={profile.id+profile.name}><Link to={"/"+profile.id}>{profile.name}</Link></li>
       );
     });
 
     return (
       <ul>
-        {groups}
+        {profiles}
       </ul>
     );
   }
 });
 
-export default MyGroup;
+export default MyProfile;
