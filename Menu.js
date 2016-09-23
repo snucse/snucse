@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import Profile from './Profile.js';
 import MyGroup from './My_Groups.js';
 
 var Menu = React.createClass({
@@ -27,8 +26,8 @@ var Menu = React.createClass({
             </ul>
           </div>
           <div className="Side_menu">
-            <Profile />
-            <Link to="/groups">전체그룹</Link>
+            <h1>User Info</h1>
+            <Link to="/profiles">전체그룹</Link>
             <ul>
               <li className="MyGroups">내 그룹</li>
               <MyGroup url={this.props.route.url+"profiles/following?current_user_id="+user_id} />
