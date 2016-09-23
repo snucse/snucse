@@ -1,9 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
+import { connect } from 'react-redux';
 import CommentBox from './Comment.js';
 import DataCon from './Util.js';
 import moment from 'moment';
+
+import { loadPost, scrollPostListEnd } from './actions'
 
 var Post = React.createClass({
   loadPostFromServer: function() {
@@ -14,9 +17,9 @@ var Post = React.createClass({
     } else {
       url = this.props.url;
     };
-    var success = function(data) {
-      this.setState({data: data});
-    }.bind(this);
+    var success = (data) => {
+      this.props.onPostLoad(data)
+    }
     DataCon.loadDataFromServer(url, success);
   },
 
@@ -24,67 +27,58 @@ var Post = React.createClass({
     this.loadPostFromServer();
   },
 
-  componentWillUnmount: function() {
-    this.state=null;
-  },
-
   getInitialState: function() {
-    return {data: {articles:[]}, end: true, loading: true, post_num: 5};
+    return {}
   },
 
   render: function() {
-    var _this = this;
-    $(window).scroll(function() {
+    $(window).scroll(() => {
+      var loading = false
       if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        if (_this.loading == true) {
+        if (loading === true) {
           return;
         } else {
-          _this.loading = true;
-          setTimeout(function() {
-            _this.state.post_num += 1;
-            console.log(_this.state);
-            _this.loading = false;
+          setTimeout(() => {
+            if (this.props.data.articles.length > this.props.post_num) {
+              // 보여주는 것보다 갖고 있는게 더 적으면
+              this.props.onScrollEnd()
+              // 더 보여달라는 요청
+            }
+            loading = false;
           }, 1000);
+          loading = true;
           return;
         }
       }
     });
     var flag = 0;
-    var temp = this.state.data.articles;
     var count = 0;
-    var postNodes = this.state.data.articles.map(function(post) {
+    var postNodes = this.props.data.articles.map((post) => {
       count += 1;
-      if (count > _this.state.post_num) {
-        _this.end = false;
+      if (count > this.props.post_num) {
         return;
       } else {
         var temp = post.content.split("\n");
         var n = temp.length;
-        var i = 0;
-        var result = []
-        for(var i = 0; i < n; i++) {
+        var result = [];
+        for(let i = 0; i < n; i++) {
           var temp2 = [temp[i], <br/>];
           result = result.concat(temp2);
         }
-        var is_updated = 0;
         moment.locale('kr');
         var date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
         if (post.created_at.updated === true) {
           date = date + '(수정됨)'+moment(post.created_at.date, 'YYYYMMDD').fromNow();
 
         }
-        var user_id=1;
-        var mine=true;
-        if( user_id!=post.writer.id ) {
-          mine=false;
-        }
+        var user_id = 1; // TODO
+        var mine = (user_id === post.writer.id);
         var url = null;
-        if('route' in _this.props) {
-          url = _this.props.route.url;
+        if('route' in this.props) {
+          url = this.props.route.url;
         } else {
-          url = _this.props.url;
+          url = this.props.url;
         };
-        _this.end = true;
         return (
           <div className="PostWrap" key={post.id+post.title}>
             <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
@@ -97,7 +91,7 @@ var Post = React.createClass({
         );
       }
     });
-    if (this.end == true) {
+    if (this.props.data.articles.length <= this.props.post_num) {
       var load = 'End';
     } else {
       var load = 'Loading...';
@@ -151,5 +145,20 @@ var DelEditBox = React.createClass({
   }
 });
 
+let mapStateToProps = function(state) {
+  return {
+    data: state.postList.data,
+    post_num: state.postList.post_num,
+  }
+}
+
+let mapDispatchToProps = function(dispatch) {
+  return {
+    onPostLoad: (data) => { dispatch(loadPost(data)) },
+    onScrollEnd: () => { dispatch(scrollPostListEnd()) },
+  }
+}
+
+Post = connect(mapStateToProps, mapDispatchToProps)(Post);
 
 export default Post;
