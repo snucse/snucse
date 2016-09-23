@@ -13,7 +13,7 @@ var ProfilePost = React.createClass({
           <Link to={"/profile/"+id+"/write"}>글쓰기</Link>
           <FollowBox id={id} url={this.props.url} />
         </div>
-        <Post url={this.props.url+"/articles"} is_profile={true} id={id}/>
+        <Post url={this.props.url+"articles"} is_profile={true} id={id}/>
       </div>
     );
   }
