@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import MyGroup from './My_Groups.js';
+import MyProfile from './MyProfiles.js';
 
 var Menu = React.createClass({
   logout: function() {
@@ -29,8 +29,8 @@ var Menu = React.createClass({
             <h1>User Info</h1>
             <Link to="/profiles">전체그룹</Link>
             <ul>
-              <li className="MyGroups">내 그룹</li>
-              <MyGroup url={this.props.route.url+"profiles/following?current_user_id="+user_id} />
+              <li className="MyProfiles">내 그룹</li>
+              <MyProfile url={this.props.route.url+"profiles/following?current_user_id="+user_id} />
             </ul>
           </div>
         </div>

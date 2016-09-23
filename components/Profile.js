@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import 'whatwg-fetch';
-import ProfileForm from './Profile_Make.js';
+import ProfileForm from './ProfileMake.js';
 
 var Profiles = React.createClass({
   loadProfilesFromServer: function() {

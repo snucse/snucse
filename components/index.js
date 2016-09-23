@@ -3,8 +3,8 @@ import Others from './Others.js';
 import Message from './Message.js';
 import Profiles from './Profile.js';
 import Main from './Main.js';
-import Post_Write from './Post_Write.js';
-import Edit from './Post_Edit.js';
+import PostWrite from './PostWrite.js';
+import Edit from './PostEdit.js';
 import Post from './Post.js';
 import ClassManager from './ClassManager.js';
 
@@ -14,7 +14,7 @@ export {
   Message,
   Profiles,
   Main,
-  Post_Write,
+  PostWrite,
   Edit,
   Post,
   ClassManager,
