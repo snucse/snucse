@@ -8,8 +8,7 @@ import { Provider } from 'react-redux'
 import Menu from './Menu.js';
 import Others from './Others.js';
 import Message from './Message.js';
-import Group from './Group.js';
-import Group_Post from './Group_Post.js';
+import Profiles from './Profile.js';
 import Main from './Main.js';
 import Post_Write from './Post_Write.js';
 import Edit from './Post_Edit.js';
