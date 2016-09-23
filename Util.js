@@ -12,9 +12,7 @@ var DataCon = {
       .then(function(res) {
         return res.json();
       })
-      .then(
-        success
-      )
+      .then(success)
       .catch(function(err) {
         if(err.status == '401' || err.status == '404') {
           location.href = '/login';
