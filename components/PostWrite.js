@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Navigation, Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import DataCon from './Util.js';
+import { DataCon } from '../utils';
 
 var PostWrite = React.createClass({
   handlePostSubmit: function(data) {

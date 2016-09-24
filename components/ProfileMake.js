@@ -1,5 +1,5 @@
 import React from 'react';
-import DataCon from './Util.js';
+import { DataCon } from '../utils';
 import $ from 'jquery';
 import browserHistory from 'react-router';
 import 'whatwg-fetch';

@@ -5,15 +5,17 @@ import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
-import Menu from './Menu.js';
-import Others from './Others.js';
-import Message from './Message.js';
-import Profiles from './Profile.js';
-import Main from './Main.js';
-import PostWrite from './PostWrite.js';
-import Edit from './PostEdit.js';
-import Post from './Post.js';
-import ClassManager from './ClassManager.js';
+import {
+  Menu,
+  Others,
+  Message,
+  Profiles,
+  Main,
+  PostWrite,
+  Edit,
+  Post,
+  ClassManager,
+} from './components';
 
 import reducers from './reducers'
 

@@ -3,10 +3,10 @@ import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import { connect } from 'react-redux';
 import CommentBox from './Comment.js';
-import DataCon from './Util.js';
+import { DataCon } from '../utils';
 import moment from 'moment';
 
-import { loadPost, scrollPostListEnd } from './actions'
+import { loadPost, scrollPostListEnd } from '../actions'
 
 var Post = React.createClass({
   loadPostFromServer: function() {
