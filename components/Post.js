@@ -82,12 +82,12 @@ var Post = React.createClass({
       };
       return (
         <div className="PostWrap" key={post.id+post.title}>
-          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
-          <h4 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h4>
-          <h3 className="post_author">writer: {post.writer.username}</h3><h3 className="post_date"> date: {date}</h3>
+          <h3 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h3>
+          <h4 className="post_author">writer: {post.writer.username}</h4><h4 className="post_date"> date: {date}</h4>
           <div className="content">
             {result}
           </div>
+          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
         </div>
       );
     });
@@ -133,8 +133,8 @@ var DelEditBox = React.createClass({
     if(this.props.mine) {
       return (
         <div className="delete_edit_box">
-          <strong onClick={this.delete_post}>삭제</strong>
-          <strong onClick={this.submitpage.bind(this,this.props.post_num)}>수정</strong>
+          <span onClick={this.delete_post}>삭제</span>
+          <span onClick={this.submitpage.bind(this,this.props.post_num)}>수정</span>
         </div>
       );
     } else {
