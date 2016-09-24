@@ -57,45 +57,39 @@ var Post = React.createClass({
   },
 
   render: function() {
-    var flag = 0;
-    var count = 0;
-    var postNodes = this.props.data.articles.map((post) => {
-      count += 1;
-      if (count > this.props.post_num) {
-        return;
-      } else {
-        var temp = post.content.split("\n");
-        var n = temp.length;
-        var result = [];
-        for(let i = 0; i < n; i++) {
-          var temp2 = [temp[i], <br/>];
-          result = result.concat(temp2);
-        }
-        moment.locale('kr');
-        var date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
-        if (post.created_at.updated === true) {
-          date = date + '(수정됨)'+moment(post.created_at.date, 'YYYYMMDD').fromNow();
-
-        }
-        var user_id = 1; // TODO
-        var mine = (user_id === post.writer.id);
-        var url = null;
-        if('route' in this.props) {
-          url = this.props.route.url;
-        } else {
-          url = this.props.url;
-        };
-        return (
-          <div className="PostWrap" key={post.id+post.title}>
-            <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
-            <h4 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h4>
-            <h3 className="post_author">writer: {post.writer.username}</h3><h3 className="post_date"> date: {date}</h3>
-            <div className="content">
-              {result}
-            </div>
-          </div>
-        );
+    const postNodes = this.props.data.articles.slice(0, this.props.post_num).map(post => {
+      var temp = post.content.split("\n");
+      var n = temp.length;
+      var result = [];
+      for(let i = 0; i < n; i++) {
+        const brId = `post-br-${post.id}-${i}`;
+        result.push(temp[i]);
+        result.push(<br key={brId} />);
       }
+      moment.locale('kr');
+      var date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
+      if (post.created_at.updated === true) {
+        date = date + '(수정됨)'+moment(post.created_at.date, 'YYYYMMDD').fromNow();
+
+      }
+      var user_id = 1; // TODO
+      var mine = (user_id === post.writer.id);
+      var url = null;
+      if('route' in this.props) {
+        url = this.props.route.url;
+      } else {
+        url = this.props.url;
+      };
+      return (
+        <div className="PostWrap" key={post.id+post.title}>
+          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
+          <h4 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h4>
+          <h3 className="post_author">writer: {post.writer.username}</h3><h3 className="post_date"> date: {date}</h3>
+          <div className="content">
+            {result}
+          </div>
+        </div>
+      );
     });
     if (this.props.data.articles.length <= this.props.post_num) {
       var load = 'End';
