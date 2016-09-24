@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import { connect } from 'react-redux';
 import CommentBox from './Comment.js';
@@ -23,73 +22,74 @@ var Post = React.createClass({
     DataCon.loadDataFromServer(url, success);
   },
 
+  onScroll() {
+    const list = document.documentElement;
+    // http://stackoverflow.com/questions/9439725
+    if(window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+      if (this.state.loading === true) {
+        return;
+      } else {
+        setTimeout(() => {
+          if (this.props.data.articles.length > this.props.post_num) {
+            // 보여주는 것보다 갖고 있는게 더 적으면
+            this.props.onScrollEnd()
+            // 더 보여달라는 요청
+          }
+          this.setState({loading: false});
+        }, 1000);
+        this.setState({loading: true});
+        return;
+      }
+    }
+  },
+
   componentDidMount: function() {
+    window.addEventListener('scroll', this.onScroll);
     this.loadPostFromServer();
   },
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+  },
+
   getInitialState: function() {
-    return {}
+    return {loading: false}
   },
 
   render: function() {
-    $(window).scroll(() => {
-      var loading = false
-      if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        if (loading === true) {
-          return;
-        } else {
-          setTimeout(() => {
-            if (this.props.data.articles.length > this.props.post_num) {
-              // 보여주는 것보다 갖고 있는게 더 적으면
-              this.props.onScrollEnd()
-              // 더 보여달라는 요청
-            }
-            loading = false;
-          }, 1000);
-          loading = true;
-          return;
-        }
+    const postNodes = this.props.data.articles.slice(0, this.props.post_num).map(post => {
+      var temp = post.content.split("\n");
+      var n = temp.length;
+      var result = [];
+      for(let i = 0; i < n; i++) {
+        const brId = `post-br-${post.id}-${i}`;
+        result.push(temp[i]);
+        result.push(<br key={brId} />);
       }
-    });
-    var flag = 0;
-    var count = 0;
-    var postNodes = this.props.data.articles.map((post) => {
-      count += 1;
-      if (count > this.props.post_num) {
-        return;
-      } else {
-        var temp = post.content.split("\n");
-        var n = temp.length;
-        var result = [];
-        for(let i = 0; i < n; i++) {
-          var temp2 = [temp[i], <br/>];
-          result = result.concat(temp2);
-        }
-        moment.locale('kr');
-        var date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
-        if (post.created_at.updated === true) {
-          date = date + '(수정됨)'+moment(post.created_at.date, 'YYYYMMDD').fromNow();
+      moment.locale('kr');
+      var date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
+      if (post.created_at.updated === true) {
+        date = date + '(수정됨)'+moment(post.created_at.date, 'YYYYMMDD').fromNow();
 
-        }
-        var user_id = 1; // TODO
-        var mine = (user_id === post.writer.id);
-        var url = null;
-        if('route' in this.props) {
-          url = this.props.route.url;
-        } else {
-          url = this.props.url;
-        };
-        return (
-          <div className="PostWrap" key={post.id+post.title}>
-            <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
-            <h4 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h4>
-            <h3 className="post_author">writer: {post.writer.username}</h3><h3 className="post_date"> date: {date}</h3>
-            <div className="content">
-              {result}
-            </div>
-          </div>
-        );
       }
+      var user_id = 1; // TODO
+      var mine = (user_id === post.writer.id);
+      var url = null;
+      if('route' in this.props) {
+        url = this.props.route.url;
+      } else {
+        url = this.props.url;
+      };
+      return (
+        <div className="PostWrap" key={post.id+post.title}>
+          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
+          <h4 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h4>
+          <h3 className="post_author">writer: {post.writer.username}</h3><h3 className="post_date"> date: {date}</h3>
+          <div className="content">
+            {result}
+          </div>
+        </div>
+      );
     });
     if (this.props.data.articles.length <= this.props.post_num) {
       var load = 'End';

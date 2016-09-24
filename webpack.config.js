@@ -7,6 +7,7 @@ module.exports = {
         path: './application/static/',
         filename: 'application.js',
     },
+    devtool: 'source-map',
 
     module: {
         loaders: [

@@ -151,3 +151,4 @@ ENV/
 
 # Build result
 application.js
+application.js.map
