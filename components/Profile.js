@@ -14,7 +14,7 @@ var Profiles = React.createClass({
     DataCon.loadDataFromServer(this.props.route.url, success);
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.loadProfilesFromServer();
   },
 
