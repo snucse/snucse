@@ -8,11 +8,13 @@ import { loadProfiles } from '../actions/profilesAction'
 
 var Profiles = React.createClass({
   loadProfilesFromServer: function() {
-    let success = (data) => { this.props.onProfilesLoad(data); };
+    let success = (data) => {
+      this.props.onProfilesLoad(data);
+    };
     DataCon.loadDataFromServer(this.props.route.url, success);
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     this.loadProfilesFromServer();
   },
 

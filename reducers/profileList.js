@@ -1,4 +1,4 @@
-import { LOAD_PROFILES } from '../actions/profilesAction.js'
+import { LOAD_PROFILES } from '../actions/actionTypes'
 
 const INITIAL_STATE = {
   data: {
