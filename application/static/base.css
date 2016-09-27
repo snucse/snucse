@@ -44,3 +44,19 @@
     top: 4em;
     left: 10em;
 }
+
+.Post {
+  padding: 10px;
+}
+
+.PostWrap {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid;
+  overflow: auto;
+}
+
+.delete_edit_box {
+  float: right;
+  font-weight: bold;
+}
