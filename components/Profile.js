@@ -1,42 +1,35 @@
 import React from 'react';
 import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import 'whatwg-fetch';
 import ProfileForm from './ProfileMake.js';
+import DataCon from '../utils/DataCon.js';
+import { connect } from 'react-redux';
+import { loadProfiles } from '../actions/profilesAction'
 
 var Profiles = React.createClass({
   loadProfilesFromServer: function() {
-    fetch(this.props.route.url,{headers:{Authorization:'Token token='+localStorage.getItem('snucsesession')}})
-      .then((res) => {
-        return res.json();
-      }).then((data) => {
-        this.setState({data: data});
-      }).catch((error) => {console.log(error);});
+    let success = (data) => { this.props.onProfilesLoad(data); };
+    DataCon.loadDataFromServer(this.props.route.url, success);
   },
 
   componentDidMount: function() {
     this.loadProfilesFromServer();
   },
 
-  getInitialState: function() {
-    return {data: {profiles: []}}
-  },
-
-  Profiles: function(sid) {
+  toProfiles: function(sid) {
     browserHistory.push('/'+sid);
   },
 
   render: function() {
-    var _this = this;
-    var profiles = this.state.data.profiles.map(function(profile) {
+    let profiles = this.props.data.profiles.map((profile) => {
       return (
           <div key={profile.sid} className="profile">
-          <strong onClick={()=>_this.Profiles(profile.sid)}>{profile.name}</strong>
+          <strong onClick={()=>this.toProfiles(profile.sid)}>{profile.name}</strong>
           </div>
           );
     });
     return (
-        <div className="profile container">
+        <div className="profile-container">
           <ProfileForm url={this.props.route.url} />
           <div className="profiles">
             {profiles}
@@ -45,5 +38,19 @@ var Profiles = React.createClass({
         );
   }
 });
+
+let mapStateToProps = function(state) {
+  return {
+    data: state.profileList.data,
+  }
+}
+
+let mapDispatchToProps = function(dispatch) {
+  return {
+    onProfilesLoad: (data) => { dispatch(loadProfiles(data)) },
+  }
+}
+
+Profiles = connect(mapStateToProps, mapDispatchToProps)(Profiles);
 
 export default Profiles;

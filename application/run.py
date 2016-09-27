@@ -19,4 +19,4 @@ def reset(all):
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
-    snucse.run(host = '0.0.0.0', port = 12321, debug = False)
+    snucse.run(host = '0.0.0.0', port = 12323, debug = False)
