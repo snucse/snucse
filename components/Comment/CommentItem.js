@@ -15,11 +15,13 @@ import React from 'react'
 */
 let CommentItem = React.createClass({
   onClickDelete: function(){
-    this.props.onDelete()
+    if (confirm('정말로 삭제하시겠습니까?')){
+      this.props.onDelete()
+    }
   },
 
   onClickEdit: function(){
-    this.props.onEdit()
+    this.props.onEdit(this.state.newContent)
     this.onEditDisable()
   },
 

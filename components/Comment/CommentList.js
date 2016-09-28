@@ -1,11 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux';
+
 import CommentItemContainer from './CommentItemContainer.js'
 
 const FOLD_COMMENT_LIMIT = 1
 
 /*
   props
-  - comments
+  - articleId
   - isFold
 
   states
@@ -25,19 +27,21 @@ let CommentList = React.createClass({
 
   renderComment: function(comment){
     return (
-      <CommentItemContainer comment={comment} key={comment.id} />
+      <CommentItemContainer comment={comment} key={comment.id}
+          articleId={this.props.articleId} />
     )
   },
 
   render: function(){
-    const commentsNum = this.props.comments.length
+    const comments = this.props.comments[this.props.articleId] || []
+    const commentsNum = comments.length
     let commentsNumToShow;
     if (this.state.isFold){
       commentsNumToShow = FOLD_COMMENT_LIMIT
     } else {
       commentsNumToShow = commentsNum
     }
-    let commentItems = this.props.comments.slice(commentsNum - commentsNumToShow, commentsNum)
+    let commentItems = comments.slice(Math.max(commentsNum - commentsNumToShow, 0), commentsNum)
         .map(this.renderComment)
     let showMoreButton = this.state.isFold && commentsNum > commentsNumToShow
         ? <button onClick={this.onClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>
@@ -54,5 +58,13 @@ let CommentList = React.createClass({
     )
   },
 })
+
+let mapStateToProps = function(state){
+  return {
+    comments: state.comment.comments,
+  }
+}
+
+CommentList = connect(mapStateToProps)(CommentList)
 
 export default CommentList;

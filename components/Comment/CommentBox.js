@@ -1,39 +1,10 @@
 import React from 'react'
-import { DataCon } from '../../utils'
+import { connect } from 'react-redux';
+
+import { loadComment } from '../../actions'
+import { DataCon, Url } from '../../utils'
 import CommentList from './CommentList.js'
 import CommentFormContainer from './CommentFormContainer.js'
-
-let fake_data = [
-  {
-    "id": 1,
-    "content": "content",
-    "created_at": { "date": "20160801",
-      "time": "01:23:45",
-      "updated": false
-    },
-    "writer": {
-      "id": 1,
-      "username": "writer",
-      "name": "작성자",
-      "profile_image_url": "http://placehold.it/100x100"
-    }
-  },
-  {
-    "id": 2,
-    "content": "뀨꺄",
-    "created_at": {
-      "date": "20160922",
-      "time": "01:23:45",
-      "updated": true
-    },
-    "writer": {
-      "id": 1,
-      "username": "writer",
-      "name": "작성자",
-      "profile_image_url": "http://placehold.it/100x100"
-    }
-  }
-]
 
 /*
   props
@@ -41,18 +12,34 @@ let fake_data = [
   - isAddable
 */
 let CommentBox = React.createClass({
+  componentDidMount: function(){
+    let url = Url.getUrl('comments?article_id=' + this.props.articleId)
+    let success = (data) => {
+      this.props.loadComments(this.props.articleId, data.comments)
+    }
+    DataCon.loadDataFromServer(url, success)
+  },
+
   render: function(){
     let commentForm = this.props.isAddable
-        ? <CommentFormContainer />
+        ? <CommentFormContainer articleId={this.props.articleId} />
         : null
     return (
       <section className="comment-wrapper">
-        <CommentList comments={fake_data} isFold={true} />
+        <CommentList isFold={true} articleId={this.props.articleId} />
         {commentForm}
       </section>
     )
     // fixme fake_data should be replaced with store.comment.comments[this.props.articleId]
   }
 })
+
+let mapDispatchToProps = function(dispatch){
+  return {
+    loadComments: (articleId, comments) => { dispatch(loadComment(articleId, comments)) },
+  }
+}
+
+CommentBox = connect(null, mapDispatchToProps)(CommentBox)
 
 export default CommentBox
