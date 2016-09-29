@@ -22,7 +22,7 @@ export function scrollPostListEnd(){
 }
 
 // action related with comment
-export function loadComment(articleId, comments){
+export function loadComments(articleId, comments){
   return {
     type: types.LOAD_COMMENT,
     comments: comments,

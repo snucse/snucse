@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import { loadComment } from '../../actions'
+import { loadComments } from '../../actions'
 import { DataCon, Url } from '../../utils'
 import CommentList from './CommentList.js'
 import CommentFormContainer from './CommentFormContainer.js'
@@ -36,7 +36,7 @@ let CommentBox = React.createClass({
 
 let mapDispatchToProps = function(dispatch){
   return {
-    loadComments: (articleId, comments) => { dispatch(loadComment(articleId, comments)) },
+    loadComments: (articleId, comments) => { dispatch(loadComments(articleId, comments)) },
   }
 }
 
