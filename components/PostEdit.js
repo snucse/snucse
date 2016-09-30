@@ -4,13 +4,15 @@ import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import { DataCon } from '../utils';
 
 var Edit = React.createClass({
+  data: null,
+
   loadPostFromServer: function() {
     let {post_id} = this.props.params;
     var url = this.props.route.url+'/'+post_id;
-    DataCon.loadDataFromServer(url).then(data => {
-      const {title, content} = data;
-      this.setState({title, content});
-    }).catch(console.error);
+    var success = function(data) {
+      this.setState({title: data.title, content: data.content});
+    }.bind(this);
+    DataCon.loadDataFromServer(url, success);
   },
 
   getInitialState: function() {
@@ -24,7 +26,7 @@ var Edit = React.createClass({
   EditSubmit: function(data) {
     let {post_id} = this.props.params;
     var url = this.props.route.url+'/'+post_id;
-    DataCon.postDataToServer(url, 'PUT', data);
+    DataCon.postDataToServer(url, data, 'PUT');
   },
 
   handleTitleChange: function(e) {

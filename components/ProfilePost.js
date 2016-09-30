@@ -20,33 +20,37 @@ var ProfilePost = React.createClass({
 });
 
 var FollowBox = React.createClass({
-  checkFollow: function() {
+  check_follow: function() {
     var id = this.props.id;
     var url = this.props.url + "profiles/" + id;
-    DataCon.loadDataFromServer(url).then(data => {
-      // TODO: data.following이 undefined일 수 있을까요?
-      // 그렇다고 해도 이 코드는 작동하긴 합니다만...
-      this.setState({followed: !!data.following});
-    }).catch(console.error);
+    var _this = this;
+    var success = function(data) {
+      if (data.following == true) {
+        _this.setState({followed: true});
+      } else {
+        _this.setState({followed: false});
+      }
+    };
+    DataCon.loadDataFromServer(url, success);
   },
 
   componentDidMount: function() {
-    this.checkFollow();
+    this.check_follow();
   },
 
-  profileFollow: function(id) {
+  profile_follow: function(id) {
     if (confirm("팔로우 하시겠습니까?") === true) {
       var url = this.props.url + "profiles/" + id + "/follow";
-      DataCon.postDataToServer(url, 'POST').catch(console.error);
+      DataCon.postDataToServer(url, '', 'POST');
     } else {
       return;
     }
   },
 
-  profileUnfollow: function(id) {
+  profile_unfollow: function(id) {
     if (confirm("팔로우를 취소하시겠습니까?") === true) {
       var url = this.props.url + "profiles/" + id + "/unfollow";
-      DataCon.postDataToServer(url, 'POST').catch(console.error);
+      DataCon.postDataToServer(url, '', 'POST');
     } else {
       return;
     }
@@ -62,11 +66,11 @@ var FollowBox = React.createClass({
     var id = this.props.id;
     if (this.state.followed === false) {
       return (
-        <p onClick={() => this.profileFollow(id)}>팔로우</p>
+          <p onClick={this.profile_follow.bind(this, id)}>팔로우</p>
       );
     } else {
       return (
-        <p onClick={() => this.profileUnfollow(id)}>팔로우 취소</p>
+          <p onClick={this.profile_unfollow.bind(this, id)}>팔로우 취소</p>
       );
     };
   }

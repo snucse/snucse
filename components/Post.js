@@ -16,9 +16,10 @@ var Post = React.createClass({
     } else {
       url = this.props.url;
     };
-    DataCon.loadDataFromServer(url).then(
-      this.props.onPostLoad
-    ).catch(console.error);
+    var success = (data) => {
+      this.props.onPostLoad(data)
+    }
+    DataCon.loadDataFromServer(url, success);
   },
 
   onScroll() {
@@ -116,7 +117,7 @@ var DelEditBox = React.createClass({
 
   handlePostDelete: function(id) {
     var url = this.props.url + '/' + this.props.post_num + '?current_user_id=' + id;
-    DataCon.postDataToServer(url, 'DELETE');
+    DataCon.postDataToServer(url, '', 'DELETE');
   },
 
   delete_post: function(e) {

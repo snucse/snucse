@@ -6,7 +6,7 @@ import { DataCon } from '../utils';
 var PostWrite = React.createClass({
   handlePostSubmit: function(data) {
     var url = this.props.route.url;
-    DataCon.postDataToServer(url, 'POST', data);
+    DataCon.postDataToServer(url, data, 'POST');
   },
 
   render: function() {

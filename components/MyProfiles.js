@@ -6,9 +6,10 @@ import { DataCon } from '../utils';
 var MyProfile = React.createClass({
   loadProfilefromServer: function() {
     var url = this.props.url;
-    DataCon.loadDataFromServer(url).then(data => {
-      this.setState({data});
-    }).catch(console.error);
+    var success = function(data) {
+      this.setState({data: data});
+    }.bind(this);
+    DataCon.loadDataFromServer(url, success);
   },
 
   getInitialState: function() {
