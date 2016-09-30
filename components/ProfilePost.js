@@ -37,7 +37,7 @@ var FollowBox = React.createClass({
   profileFollow: function(id) {
     if (confirm("팔로우 하시겠습니까?") === true) {
       var url = this.props.url + "profiles/" + id + "/follow";
-      DataCon.postDataToServer(url, null, 'POST').catch(console.error);
+      DataCon.postDataToServer(url, 'POST').catch(console.error);
     } else {
       return;
     }
@@ -46,7 +46,7 @@ var FollowBox = React.createClass({
   profileUnfollow: function(id) {
     if (confirm("팔로우를 취소하시겠습니까?") === true) {
       var url = this.props.url + "profiles/" + id + "/unfollow";
-      DataCon.postDataToServer(url, null, 'POST').catch(console.error);
+      DataCon.postDataToServer(url, 'POST').catch(console.error);
     } else {
       return;
     }

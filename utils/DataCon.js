@@ -3,10 +3,10 @@ import 'whatwg-fetch';
 
 const DataCon = {
   loadDataFromServer(url) {
-    return DataCon.postDataToServer(url, null, 'GET');
+    return DataCon.postDataToServer(url, 'GET');
   },
 
-  postDataToServer(url, data, method) {
+  postDataToServer(url, method, data) {
     const user_id = localStorage.getItem('snucsesession');
     const headers = {
       Authorization: `Token token=${user_id}`

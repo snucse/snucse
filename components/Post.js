@@ -116,7 +116,7 @@ var DelEditBox = React.createClass({
 
   handlePostDelete: function(id) {
     var url = this.props.url + '/' + this.props.post_num + '?current_user_id=' + id;
-    DataCon.postDataToServer(url, '', 'DELETE');
+    DataCon.postDataToServer(url, 'DELETE');
   },
 
   delete_post: function(e) {

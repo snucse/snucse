@@ -24,7 +24,7 @@ var Edit = React.createClass({
   EditSubmit: function(data) {
     let {post_id} = this.props.params;
     var url = this.props.route.url+'/'+post_id;
-    DataCon.postDataToServer(url, data, 'PUT');
+    DataCon.postDataToServer(url, 'PUT', data);
   },
 
   handleTitleChange: function(e) {
