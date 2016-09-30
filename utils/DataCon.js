@@ -1,34 +1,33 @@
 import Cookies from 'js-cookie';
 import 'whatwg-fetch';
 
-var DataCon = {
-  loadDataFromServer: function(url, success) {
-    var user_id = localStorage.getItem('snucsesession');
-    fetch(url, {
-      headers: {
-        Authorization: 'Token token=' + user_id
-      }
-    })
-      .then(function(res) {
-        return res.json();
-      })
-      .then(success)
-      .catch(function(err) {
-        if(err.status == '401' || err.status == '404') {
-          location.href = '/login';
-        }
-      });
+const DataCon = {
+  loadDataFromServer(url) {
+    return DataCon.postDataToServer(url, null, 'GET');
   },
 
-  postDataToServer: function(url, data, type) {
-    var user_id = localStorage.getItem('snucsesession');
-    fetch(url, {
-      method: type,
-      headers: {
-        Authorization: 'Token token=' + user_id,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
+  postDataToServer(url, data, method) {
+    const user_id = localStorage.getItem('snucsesession');
+    const headers = {
+      Authorization: `Token token=${user_id}`
+    };
+    if (data != null) headers['Content-Type'] = 'application/json';
+    const options = {
+      method,
+      headers,
+      body: data != null ? JSON.stringify(data) : undefined
+    };
+    return fetch(url, options).then(res => {
+      if (!res.ok) {
+        throw res;
+      } else {
+        return res.json();
+      }
+    }).catch(err => {
+      if (err.status === 401) {
+        location.href = '/login';
+      }
+      throw err;
     });
   }
 };

@@ -16,10 +16,9 @@ var Post = React.createClass({
     } else {
       url = this.props.url;
     };
-    var success = (data) => {
-      this.props.onPostLoad(data)
-    }
-    DataCon.loadDataFromServer(url, success);
+    DataCon.loadDataFromServer(url).then(
+      this.props.onPostLoad
+    ).catch(console.error);
   },
 
   onScroll() {
