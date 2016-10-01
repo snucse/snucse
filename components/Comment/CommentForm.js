@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 /*
   props
@@ -10,8 +10,8 @@ import React from 'react'
 let CommentForm = React.createClass({
   onClickWrite: function(){
     if ((this._content || false) && this._content.value !== ''){
-      this.props.onWrite(this._content.value)
-      this._content.value = ''
+      this.props.onWrite(this._content.value);
+      this._content.value = '';
     }
   },
 
@@ -22,8 +22,8 @@ let CommentForm = React.createClass({
         <input ref={ref => this._content = ref} />
         <input onClick={this.onClickWrite} type="button" value="확인" />
       </form>
-    )
+    );
   },
-})
+});
 
-export default CommentForm
+export default CommentForm;

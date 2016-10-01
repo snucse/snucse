@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { connect } from 'react-redux';
 
-import CommentItemContainer from './CommentItemContainer.js'
+import CommentItemContainer from './CommentItemContainer.js';
 
-const FOLD_COMMENT_LIMIT = 1
+const FOLD_COMMENT_LIMIT = 1;
 
 /*
   props
@@ -18,7 +18,7 @@ let CommentList = React.createClass({
   getInitialState: function(){
     return {
       isFold: this.props.isFold || true,
-    }
+    };
   },
 
   onClickShowMore: function(){
@@ -29,23 +29,23 @@ let CommentList = React.createClass({
     return (
       <CommentItemContainer comment={comment} key={comment.id}
           articleId={this.props.articleId} />
-    )
+    );
   },
 
   render: function(){
-    const comments = this.props.comments[this.props.articleId] || []
-    const commentsNum = comments.length
+    const comments = this.props.comments[this.props.articleId] || [];
+    const commentsNum = comments.length;
     let commentsNumToShow;
     if (this.state.isFold){
-      commentsNumToShow = FOLD_COMMENT_LIMIT
+      commentsNumToShow = FOLD_COMMENT_LIMIT;
     } else {
-      commentsNumToShow = commentsNum
+      commentsNumToShow = commentsNum;
     }
     let commentItems = comments.slice(Math.max(commentsNum - commentsNumToShow, 0), commentsNum)
-        .map(this.renderComment)
+        .map(this.renderComment);
     let showMoreButton = this.state.isFold && commentsNum > commentsNumToShow
         ? <button onClick={this.onClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>
-        : null
+        : null;
     return (
       <div>
         <div className="comment-list-controller">
@@ -55,16 +55,16 @@ let CommentList = React.createClass({
           {commentItems}
         </ul>
       </div>
-    )
+    );
   },
-})
+});
 
 let mapStateToProps = function(state){
   return {
     comments: state.comment.comments,
   }
-}
+};
 
-CommentList = connect(mapStateToProps)(CommentList)
+CommentList = connect(mapStateToProps)(CommentList);
 
 export default CommentList;

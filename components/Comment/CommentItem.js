@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 /*
   props
@@ -16,18 +16,18 @@ import React from 'react'
 let CommentItem = React.createClass({
   onClickDelete: function(){
     if (confirm('정말로 삭제하시겠습니까?')){
-      this.props.onDelete()
+      this.props.onDelete();
     }
   },
 
   onClickEdit: function(){
-    this.props.onEdit(this.state.newContent)
-    this.onEditDisable()
+    this.props.onEdit(this.state.newContent);
+    this.onEditDisable();
   },
 
   onClickCancel: function(){
     if (confirm('작성중인 내용이 지워집니다. 계속하시겠습니까?')){
-      this.onEditDisable()
+      this.onEditDisable();
     }
   },
 
@@ -35,48 +35,48 @@ let CommentItem = React.createClass({
     this.setState({
       newContent: this.props.comment.content,
       isEditMode: false,
-    })
+    });
   },
 
   onEditEnable: function(){
     this.setState({
       isEditMode: true,
-    })
+    });
   },
 
   onEdit: function(event){
     this.setState({
       newContent: event.target.value,
-    })
+    });
   },
 
   getInitialState: function(){
     return {
       newContent: this.props.comment.content,
       isEditMode: false,
-    }
+    };
   },
 
   render: function(){
     const edited = this.props.comment.created_at.updated
         ? <span className="comment-edited">수정됨</span>
-        : null
+        : null;
     const editBox = this.props.isEditable && this.state.isEditMode
         ? <div className="comment-editbox">
             <input onChange={this.onEdit} defaultValue={this.state.newContent} />
             <button onClick={this.onClickEdit}>수정</button>
             <button onClick={this.onClickCancel}>취소</button>
           </div>
-        : null
-    let contentWrapper = null
-    let controller = null
+        : null;
+    let contentWrapper = null;
+    let controller = null;
     if (!this.state.isEditMode){
-      contentWrapper = <div className="comment-content">{this.props.comment.content}</div>
-      const buttons = []
-      const id = this.props.comment.id
-      if (this.props.isDeletable) buttons.push(<button onClick={this.onClickDelete} key={`delete-button-${id}`}>삭제</button>)
-      if (this.props.isEditable) buttons.push(<button onClick={this.onEditEnable} key={`edit-button-${id}`}>수정</button>)
-      controller = <div className="comment-controller">{buttons}</div>
+      contentWrapper = <div className="comment-content">{this.props.comment.content}</div>;
+      const buttons = [];
+      const id = this.props.comment.id;
+      if (this.props.isDeletable) buttons.push(<button onClick={this.onClickDelete} key={`delete-button-${id}`}>삭제</button>);
+      if (this.props.isEditable) buttons.push(<button onClick={this.onEditEnable} key={`edit-button-${id}`}>수정</button>);
+      controller = <div className="comment-controller">{buttons}</div>;
     }
     // todo link to user profile?
     return (
@@ -90,8 +90,8 @@ let CommentItem = React.createClass({
         {editBox}
         {controller}
       </li>
-    )
-  }
-})
+    );
+  },
+});
 
-export default CommentItem
+export default CommentItem;
