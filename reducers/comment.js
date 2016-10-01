@@ -39,7 +39,7 @@ export default function comment(state = INITIAL_STATE, action) {
       // 찾아서 대체 // map 사용
       const nestedComments = state.comments[action.articleId].map(comment => {
         if (comment.id === action.comment.id){
-          return action.comment:
+          return action.comment;
         } else {
           return comment;
         }
