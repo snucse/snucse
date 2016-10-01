@@ -9,7 +9,7 @@ import React from 'react'
 */
 let CommentForm = React.createClass({
   onClickWrite: function(){
-    if (this._content || false && this._content.value !== ''){
+    if ((this._content || false) && this._content.value !== ''){
       this.props.onWrite(this._content.value)
       this._content.value = ''
     }
