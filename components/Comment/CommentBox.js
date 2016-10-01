@@ -14,10 +14,9 @@ import CommentFormContainer from './CommentFormContainer.js'
 let CommentBox = React.createClass({
   componentDidMount: function(){
     let url = Url.getUrl('comments?article_id=' + this.props.articleId)
-    let success = (data) => {
+    DataCon.loadDataFromServer(url).then(data => {
       this.props.loadComments(this.props.articleId, data.comments)
-    }
-    DataCon.loadDataFromServer(url, success)
+    }).catch(console.error)
   },
 
   render: function(){

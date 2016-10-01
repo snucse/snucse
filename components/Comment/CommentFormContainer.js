@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux';
 
+import { writeComment } from '../../actions'
 import { DataCon, Url } from '../../utils'
 import CommentForm from './CommentForm.js'
 
@@ -14,14 +16,22 @@ let CommentFormContainer = React.createClass({
       article_id: this.props.articleId,
       content: content,
     }
-    DataCon.postDataToServer(url, data, 'POST')
-    // 해당 댓글 쓰기 통신
-    // 원래라면 새 댓글을 넣어주는 액션을 디스패치 해야할 것 같음
+    DataCon.postDataToServer(url, 'POST', data).then(res => {
+      this.props.writeComment(this.props.articleId, res)
+    }).catch(console.error)
   },
 
   render: function(){
     return <CommentForm onWrite={this.onWrite} />
   },
 })
+
+let mapDispatchToProps = function(dispatch){
+  return {
+    writeComment: (articleId, comment) => { dispatch(writeComment(articleId, comment)) },
+  }
+}
+
+CommentFormContainer = connect(null, mapDispatchToProps)(CommentFormContainer)
 
 export default CommentFormContainer
