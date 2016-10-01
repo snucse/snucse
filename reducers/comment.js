@@ -26,16 +26,42 @@ export default function comment(state = INITIAL_STATE, action) {
       })
     }
     case WRITE_COMMENT: {
-      console.log(action.articleId, action.comment)
-      return state
+      // 끝에 추가 // concat
+      const nestedComments = state.comments[action.articleId].concat([action.comment])
+      let newComments = {}
+      newComments[action.articleId] = nestedComments
+      const comments = Object.assign({}, state.comments, newComments)
+      return Object.assign({}, state, {
+        comments: comments,
+      })
     }
     case EDIT_COMMENT: {
-      console.log(action.articleId, action.comment)
-      return state
+      // 찾아서 대체 // map 사용
+      const nestedComments = state.comments[action.articleId].map(comment => {
+        if (comment.id === action.comment.id){
+          return action.comment
+        } else {
+          return comment
+        }
+      })
+      let newComments = {}
+      newComments[action.articleId] = nestedComments
+      const comments = Object.assign({}, state.comments, newComments)
+      return Object.assign({}, state, {
+        comments: comments,
+      })
     }
     case DELETE_COMMENT: {
-      console.log(action.articleId, action.comment)
-      return state
+      // 찾아서 삭제 // filter
+      const nestedComments = state.comments[action.articleId].filter(comment => {
+        return comment.id !== action.commentId
+      })
+      let newComments = {}
+      newComments[action.articleId] = nestedComments
+      const comments = Object.assign({}, state.comments, newComments)
+      return Object.assign({}, state, {
+        comments: comments,
+      })
     }
     default: {
       return state

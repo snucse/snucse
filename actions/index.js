@@ -46,10 +46,10 @@ export function editComment(articleId, comment){
   }
 }
 
-export function deleteComment(articleId, comment){
+export function deleteComment(articleId, commentId){
   return {
     type: types.DELETE_COMMENT,
-    comment: comment,
+    commentId: commentId,
     articleId: articleId,
   }
 }
