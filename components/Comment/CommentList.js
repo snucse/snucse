@@ -62,7 +62,7 @@ let CommentList = React.createClass({
 let mapStateToProps = function(state){
   return {
     comments: state.comment.comments,
-  }
+  };
 };
 
 CommentList = connect(mapStateToProps)(CommentList);

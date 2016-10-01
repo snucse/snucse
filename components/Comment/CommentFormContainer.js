@@ -24,7 +24,7 @@ let CommentFormContainer = React.createClass({
   render: function(){
     return <CommentForm onWrite={this.onWrite} />;
   },
-})
+});
 
 let mapDispatchToProps = function(dispatch){
   return {

@@ -12,7 +12,7 @@ const INITIAL_STATE = {
       ]
     }
     */
-  }
+  },
 };
 
 export default function comment(state = INITIAL_STATE, action) {
@@ -39,9 +39,9 @@ export default function comment(state = INITIAL_STATE, action) {
       // 찾아서 대체 // map 사용
       const nestedComments = state.comments[action.articleId].map(comment => {
         if (comment.id === action.comment.id){
-          return action.comment
+          return action.comment:
         } else {
-          return comment
+          return comment;
         }
       });
       let newComments = {};
@@ -54,7 +54,7 @@ export default function comment(state = INITIAL_STATE, action) {
     case DELETE_COMMENT: {
       // 찾아서 삭제 // filter
       const nestedComments = state.comments[action.articleId].filter(comment => {
-        return comment.id !== action.commentId
+        return comment.id !== action.commentId;
       });
       let newComments = {};
       newComments[action.articleId] = nestedComments;
