@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
