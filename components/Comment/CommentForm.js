@@ -9,21 +9,9 @@ import React from 'react'
 */
 let CommentForm = React.createClass({
   onClickWrite: function(){
-    if (this.state.content !== ''){
-      this.props.onWrite(this.state.content)
-      this.setState({content: ''})
-    }
-  },
-
-  onEdit: function(event){
-    this.setState({
-      content: event.target.value,
-    })
-  },
-
-  getInitialState: function(){
-    return {
-      content: '',
+    if (this._content || false && this._content.value !== ''){
+      this.props.onWrite(this._content.value)
+      this._content.value = ''
     }
   },
 
@@ -31,7 +19,7 @@ let CommentForm = React.createClass({
     // button 모양이지만 onsubmit 이벤트를 일으키지 않기 위해 input type button을 사용함
     return (
       <form className="comment-form">
-        <input onChange={this.onEdit} />
+        <input ref={ref => this._content = ref} />
         <input onClick={this.onClickWrite} type="button" value="확인" />
       </form>
     )
