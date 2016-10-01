@@ -58,32 +58,26 @@ let CommentItem = React.createClass({
   },
 
   render: function(){
-    let edited = this.props.comment.created_at.updated
+    const edited = this.props.comment.created_at.updated
         ? <span className="comment-edited">수정됨</span>
         : null
-    let editBox = this.props.isEditable && this.state.isEditMode
+    const editBox = this.props.isEditable && this.state.isEditMode
         ? <div className="comment-editbox">
             <input onChange={this.onEdit} defaultValue={this.state.newContent} />
             <button onClick={this.onClickEdit}>수정</button>
             <button onClick={this.onClickCancel}>취소</button>
           </div>
         : null
-    let contentWrapper = !this.state.isEditMode
-        ? <div className="comment-content">{this.props.comment.content}</div>
-        : null
-    let deleteButton = this.props.isDeletable
-        ? <button onClick={this.onClickDelete}>삭제</button>
-        : null
-    let editButton = this.props.isEditable
-        ? <button onClick={this.onEditEnable}>수정</button>
-        : null
-    let controller = !this.state.isEditMode
-        ? <div className="comment-controller">
-            {editButton}
-            {deleteButton}
-          </div>
-        : null
-    // fixme 어떻게 정의하는게 깨끗할까요
+    let contentWrapper = null
+    let controller = null
+    if (!this.state.isEditMode){
+      contentWrapper = <div className="comment-content">{this.props.comment.content}</div>
+      const buttons = []
+      const id = this.props.comment.id
+      if (this.props.isDeletable) buttons.push(<button onClick={this.onClickDelete} key={`delete-button-${id}`}>삭제</button>)
+      if (this.props.isEditable) buttons.push(<button onClick={this.onEditEnable} key={`edit-button-${id}`}>수정</button>)
+      controller = <div className="comment-controller">{buttons}</div>
+    }
     // todo link to user profile?
     return (
       <li className="comment-item">
