@@ -15,10 +15,14 @@ let CommentForm = React.createClass({
     }
   },
 
+  componentDidMount: function(){
+    this.form.onsubmit = () => false;
+  },
+
   render: function(){
     // button 모양이지만 onsubmit 이벤트를 일으키지 않기 위해 input type button을 사용함
     return (
-      <form className="comment-form">
+      <form className="comment-form" ref={ref => this.form = ref}>
         <input ref={ref => this._content = ref} />
         <input onClick={this.onClickWrite} type="button" value="확인" />
       </form>
