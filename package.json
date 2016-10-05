@@ -43,7 +43,7 @@
       "browser"
     ],
     "ignores": [
-      "application"
+      "application/**"
     ],
     "rules": {
       "eqeqeq": "off",
