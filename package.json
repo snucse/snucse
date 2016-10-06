@@ -49,6 +49,7 @@
       "eqeqeq": "off",
       "no-eq-null": "off",
       "xo/filename-case": "off",
+      "react/prop-types": "off",
       "filenames/match-exported": "error"
     },
     "plugins": [
