@@ -29,7 +29,7 @@ var Post = React.createClass({
         return;
       } else {
         setTimeout(() => {
-          if (this.props.data.articles.length > this.props.post_num) {
+          if (this.props.data.articles.length > this.props.postNum) {
             // 보여주는 것보다 갖고 있는게 더 적으면
             this.props.onScrollEnd()
             // 더 보여달라는 요청
@@ -56,7 +56,7 @@ var Post = React.createClass({
   },
 
   render: function() {
-    const postNodes = this.props.data.articles.slice(0, this.props.post_num).map(post => {
+    const postNodes = this.props.data.articles.slice(0, this.props.postNum).map(post => {
       var temp = post.content.split("\n");
       var n = temp.length;
       var result = [];
@@ -86,12 +86,12 @@ var Post = React.createClass({
           <div className="content">
             {result}
           </div>
-          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
+          <DelEditBox url={url} mine={mine} postNum={post.id} user_id={user_id} />
           <CommentBox articleId={post.id} isAddable={true} />
         </div>
       );
     });
-    if (this.props.data.articles.length <= this.props.post_num) {
+    if (this.props.data.articles.length <= this.props.postNum) {
       var load = 'End';
     } else {
       var load = 'Loading...';
@@ -116,7 +116,7 @@ var DelEditBox = React.createClass({
   },
 
   handlePostDelete: function(id) {
-    var url = this.props.url + '/' + this.props.post_num + '?current_user_id=' + id;
+    var url = this.props.url + '/' + this.props.postNum + '?current_user_id=' + id;
     DataCon.postDataToServer(url, 'DELETE');
   },
 
@@ -134,7 +134,7 @@ var DelEditBox = React.createClass({
       return (
         <div className="delete_edit_box">
           <span onClick={this.delete_post}>삭제</span>
-          <span onClick={this.submitpage.bind(this,this.props.post_num)}>수정</span>
+          <span onClick={this.submitpage.bind(this,this.props.postNum)}>수정</span>
         </div>
       );
     } else {
@@ -148,7 +148,7 @@ var DelEditBox = React.createClass({
 let mapStateToProps = function(state) {
   return {
     data: state.postList.data,
-    post_num: state.postList.post_num,
+    postNum: state.postList.postNum,
   }
 }
 

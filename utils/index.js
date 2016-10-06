@@ -3,5 +3,5 @@ import Url from './Url.js';
 
 export {
   DataCon,
-  Url,
+  Url
 };

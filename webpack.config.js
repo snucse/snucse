@@ -3,7 +3,7 @@ module.exports = {
 
   output: {
     path: './application/static/',
-    filename: 'application.js',
+    filename: 'application.js'
   },
   devtool: 'source-map',
 
@@ -22,6 +22,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'xo-loader'
       }
-    ],
+    ]
   }
 };
