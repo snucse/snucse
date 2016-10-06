@@ -21,6 +21,9 @@ const DataCon = {
       if (!res.ok) {
         throw res;
       } else {
+        if (res.status === 204) {
+          return res.text();
+        }
         return res.json();
       }
     }).catch(err => {

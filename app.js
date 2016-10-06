@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
 import {
   Menu,
@@ -17,7 +16,7 @@ import {
   ClassManager,
 } from './components';
 
-import reducers from './reducers'
+import reducers from './reducers';
 
 const rootElement = document.getElementById('content');
 
@@ -34,7 +33,7 @@ var Test = React.createClass({
 var url = "http://snucse.snucse.org:32123/api/v1/";
 //var url = "http://aws.izz.kr:3000/api/v1/";
 
-const store = createStore(combineReducers(reducers))
+const store = createStore(combineReducers(reducers));
 
 ReactDOM.render(
   <Provider store={store}>

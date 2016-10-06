@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import { connect } from 'react-redux';
-import CommentBox from './Comment.js';
 import { DataCon } from '../utils';
+import CommentBox from './Comment';
 import moment from 'moment';
 
 import { loadPost, scrollPostListEnd } from '../actions'
@@ -87,6 +87,7 @@ var Post = React.createClass({
             {result}
           </div>
           <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
+          <CommentBox articleId={post.id} isAddable={true} />
         </div>
       );
     });

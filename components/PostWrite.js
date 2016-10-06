@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import { Navigation, Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import { DataCon } from '../utils';
 
