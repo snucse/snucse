@@ -25,7 +25,7 @@ const CommentBox = React.createClass({
       null;
     return (
       <section className="comment-wrapper">
-        <CommentList isFold={true} articleId={this.props.articleId}/>
+        <CommentList isFold articleId={this.props.articleId}/>
         {commentForm}
       </section>
     );

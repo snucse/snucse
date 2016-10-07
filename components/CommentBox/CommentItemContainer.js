@@ -13,7 +13,7 @@ import CommentItem from './CommentItem.js';
 const CommentItemContainer = React.createClass({
   handleDelete() {
     const url = Url.getUrl('comments/' + this.props.comment.id);
-    DataCon.postDataToServer(url, 'DELETE').then(res => {
+    DataCon.postDataToServer(url, 'DELETE').then(() => {
       this.props.deleteComment(this.props.articleId, this.props.comment.id);
     }).catch(console.error);
   },
@@ -32,8 +32,8 @@ const CommentItemContainer = React.createClass({
     return (
       <CommentItem
         comment={this.props.comment}
-        isEditable={true}
-        isDeletable={true}
+        isEditable
+        isDeletable
         onDelete={this.handleDelete}
         onEdit={this.handleEdit}
         />
