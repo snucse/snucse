@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import {DataCon} from '../utils';
 import {loadPost, scrollPostListEnd} from '../actions';
-import CommentBox from './Comment';
+import CommentBox from './CommentBox';
 
 const ProtoPost = React.createClass({
   loadPostFromServer() {

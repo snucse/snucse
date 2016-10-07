@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 import CommentItemContainer from './CommentItemContainer.js';
 
@@ -14,38 +14,41 @@ const FOLD_COMMENT_LIMIT = 1;
   - isFold
     // 접혀 있으면 true, 펼쳐져 있으면 false, default는 true
 */
-let CommentList = React.createClass({
-  getInitialState: function(){
+const CommentList = React.createClass({
+  getInitialState() {
     return {
-      isFold: this.props.isFold || true,
+      isFold: this.props.isFold || true
     };
   },
 
-  onClickShowMore: function(){
+  handleClickShowMore() {
     this.setState({isFold: false});
   },
 
-  renderComment: function(comment){
+  renderComment(comment) {
     return (
-      <CommentItemContainer comment={comment} key={comment.id}
-          articleId={this.props.articleId} />
+      <CommentItemContainer
+        comment={comment}
+        key={comment.id}
+        articleId={this.props.articleId}
+        />
     );
   },
 
-  render: function(){
+  render() {
     const comments = this.props.comments[this.props.articleId] || [];
     const commentsNum = comments.length;
     let commentsNumToShow;
-    if (this.state.isFold){
+    if (this.state.isFold) {
       commentsNumToShow = FOLD_COMMENT_LIMIT;
     } else {
       commentsNumToShow = commentsNum;
     }
-    let commentItems = comments.slice(Math.max(commentsNum - commentsNumToShow, 0), commentsNum)
+    const commentItems = comments.slice(Math.max(commentsNum - commentsNumToShow, 0), commentsNum)
         .map(this.renderComment);
-    let showMoreButton = this.state.isFold && commentsNum > commentsNumToShow
-        ? <button onClick={this.onClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>
-        : null;
+    const showMoreButton = this.state.isFold && commentsNum > commentsNumToShow ?
+      <button onClick={this.handleClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button> :
+      null;
     return (
       <div>
         <div className="comment-list-controller">
@@ -56,15 +59,13 @@ let CommentList = React.createClass({
         </ul>
       </div>
     );
-  },
+  }
 });
 
-let mapStateToProps = function(state){
+const mapStateToProps = function (state) {
   return {
-    comments: state.comment.comments,
+    comments: state.comment.comments
   };
 };
 
-CommentList = connect(mapStateToProps)(CommentList);
-
-export default CommentList;
+export default connect(mapStateToProps)(CommentList);
