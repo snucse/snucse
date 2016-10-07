@@ -1,4 +1,3 @@
-/* eslint camelcase: "off" */
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon} from '../utils';
