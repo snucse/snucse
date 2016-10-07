@@ -21,7 +21,7 @@ const MyProfile = React.createClass({
   render() {
     const profiles = this.state.data.profiles.map(profile => {
       return (
-        <li key={`${profile.id}${profile.name}`}><Link to={`/${profile.id}`}>{profile.name}</Link></li>
+        <li key={`${profile.id}${profile.name}`}><Link to={`/${profile.sid}`}>{profile.name}</Link></li>
       );
     });
 

@@ -15,16 +15,12 @@ const CommentForm = React.createClass({
     }
   },
 
-  componentDidMount() {
-    this.form.onsubmit = () => false;
-  },
-
   render() {
-    function generateRefHandler(propertyName) {
-      return function (ref) {
+    const generateRefHandler = propertyName => {
+      return ref => {
         this[propertyName] = ref;
       };
-    }
+    };
     // button 모양이지만 onsubmit 이벤트를 일으키지 않기 위해 input type button을 사용함
     return (
       <form className="comment-form" ref={generateRefHandler('refForm')}>

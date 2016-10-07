@@ -10,7 +10,7 @@ import CommentBox from './CommentBox';
 const ProtoPost = React.createClass({
   loadPostFromServer() {
     let url = this.props.url;
-    if ('is_profile' in this.props && this.props.is_profile === true) {
+    if (this.props.isProfile === true) {
       const {id} = this.props;
       url += `?profile_id=${id}`;
     }

@@ -20,7 +20,7 @@ export default function postList(state = INITIAL_STATE, action) {
     }
     case SCROLL_POST_LIST_END: {
       return Object.assign({}, state, {
-        postNum: state.post_num + 1
+        postNum: state.postNum + 1
       });
     }
     default: {

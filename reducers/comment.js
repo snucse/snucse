@@ -3,7 +3,7 @@ import {LOAD_COMMENT, WRITE_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../acti
 const INITIAL_STATE = {
   comments: {
     /*
-    "article_id": {
+    articleId: {
       comments: [
         {},
         {},

@@ -22,12 +22,12 @@ const CommentItem = React.createClass({
 
   handleClickEdit() {
     this.props.onEdit(this.state.newContent);
-    this.onEditDisable();
+    this.handleEditDisable();
   },
 
   handleClickCancel() {
     if (confirm('작성중인 내용이 지워집니다. 계속하시겠습니까?')) {
-      this.onEditDisable();
+      this.handleEditDisable();
     }
   },
 

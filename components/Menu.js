@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import MyProfile from './MyProfiles.js';
+import MyProfile from './MyProfile.js';
 
 const Menu = React.createClass({
   handleLogout() {
