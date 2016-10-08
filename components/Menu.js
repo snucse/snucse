@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 import {DataCon, Url} from '../utils';
 
 import {loadUserId} from '../actions';
-import {Link} from 'react-router';
 import MyProfile from './MyProfile.js';
 
 const Menu = React.createClass({
@@ -13,7 +13,7 @@ const Menu = React.createClass({
   },
 
   getUserId() {
-    let url = Url.getUrl('users/me');
+    const url = Url.getUrl('users/me');
     DataCon.loadDataFromServer(url).then(data => {
       this.props.putUserId(data.id);
     }).catch(console.error);
@@ -57,12 +57,10 @@ const Menu = React.createClass({
   }
 });
 
-let mapDispatchToProps = function(dispatch) {
+const mapDispatchToProps = function (dispatch) {
   return {
-    putUserId: (user_id) => { dispatch(loadUserId(user_id)) },
-  }
-}
+    putUserId: userId => dispatch(loadUserId(userId))
+  };
+};
 
-Menu = connect(null, mapDispatchToProps)(Menu);
-
-export default Menu;
+export default connect(null, mapDispatchToProps)(Menu);

@@ -29,7 +29,7 @@ const CommentItemContainer = React.createClass({
   },
 
   render() {
-    const mine = (this.props.user_id === this.props.writer);
+    const mine = (this.props.userId === this.props.writer);
     return (
       <CommentItem
         comment={this.props.comment}
@@ -44,9 +44,9 @@ const CommentItemContainer = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    user_id: state.userId.user_id,
-  }
-}
+    userId: state.userId.userId
+  };
+};
 
 const mapDispatchToProps = function (dispatch) {
   return {

@@ -19,16 +19,6 @@ import reducers from './reducers';
 
 const rootElement = document.getElementById('content');
 
-var Test = React.createClass({
-  render: function() {
-    return (
-      <div>
-        main
-      </div>
-    );
-  }
-});
-
 const url = 'http://snucse.snucse.org:32123/api/v1/';
 
 const store = createStore(combineReducers(reducers));

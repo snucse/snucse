@@ -55,9 +55,9 @@ export function deleteComment(articleId, commentId) {
 }
 
 // action related with user id
-export function loadUserId(userId){
+export function loadUserId(userId) {
   return {
     type: types.LOAD_USER_ID,
-    userId: userId,
+    userId
   };
 }

@@ -1,9 +1,7 @@
-import Immutable from 'immutable';
-import * as types from '../actions/actionTypes';
-
 import userId from './userId';
 import postList from './postList';
 import comment from './comment';
+// import * as types from '../actions/actionTypes';
 // import other reducers
 
 // define other reducers
@@ -11,7 +9,7 @@ import comment from './comment';
 const reducers = {
   postList,
   comment,
-  userId,
+  userId
   // list up all reducers
 };
 
