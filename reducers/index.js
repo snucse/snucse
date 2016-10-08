@@ -3,6 +3,7 @@ import * as types from '../actions/actionTypes'
 
 import postList from './postList'
 import profileList from './profileList'
+import profileForm from './profileForm'
 // import other reducers
 
 // define other reducers
@@ -10,6 +11,7 @@ import profileList from './profileList'
 const reducers = {
   postList,
   profileList,
+  profileForm,
   // list up all reducers
 }
 

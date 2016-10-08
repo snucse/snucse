@@ -4,14 +4,13 @@ import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import ProfileForm from './ProfileMake.js';
 import DataCon from '../utils/DataCon.js';
 import { connect } from 'react-redux';
-import { loadProfiles } from '../actions/profilesAction'
+import { loadProfiles } from '../actions/profilesAction';
 
 var Profiles = React.createClass({
   loadProfilesFromServer: function() {
-    let success = (data) => {
-      this.props.onProfilesLoad(data);
-    };
-    DataCon.loadDataFromServer(this.props.route.url, success);
+    DataCon.loadDataFromServer(this.props.route.url)
+      .then(this.props.onProfilesLoad)
+      .catch(console.error);
   },
 
   componentDidMount: function() {
@@ -32,7 +31,7 @@ var Profiles = React.createClass({
     });
     return (
         <div className="profile-container">
-          <ProfileForm url={this.props.route.url} />
+         <ProfileForm url={this.props.route.url} />
           <div className="profiles">
             {profiles}
           </div>
@@ -44,13 +43,13 @@ var Profiles = React.createClass({
 let mapStateToProps = function(state) {
   return {
     data: state.profileList.data,
-  }
+  };
 }
 
 let mapDispatchToProps = function(dispatch) {
   return {
     onProfilesLoad: (data) => { dispatch(loadProfiles(data)) },
-  }
+  };
 }
 
 Profiles = connect(mapStateToProps, mapDispatchToProps)(Profiles);
