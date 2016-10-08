@@ -1,6 +1,3 @@
-import Immutable from 'immutable';
-import * as types from '../actions/actionTypes';
-
 import postList from './postList';
 import comment from './comment';
 // import other reducers
@@ -8,9 +5,9 @@ import comment from './comment';
 // define other reducers
 
 const reducers = {
-  postList,
-  comment,
   // list up all reducers
+  postList,
+  comment
 };
 
 // this file exports a mere object, which is to be combined at app.js later

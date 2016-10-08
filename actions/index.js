@@ -1,55 +1,55 @@
-import * as types from './actionTypes'
+import * as types from './actionTypes';
 
 // action related with Post component
-export function loadInitialPost(data){
+export function loadInitialPost(data) {
   return {
     type: types.LOAD_INITIAL_POST,
-    data: data,
+    data
   };
-};
+}
 
-export function loadPost(data){
+export function loadPost(data) {
   return {
     type: types.LOAD_POST,
-    data: data,
+    data
   };
-};
+}
 
-export function scrollPostListEnd(){
+export function scrollPostListEnd() {
   return {
-    type: types.SCROLL_POST_LIST_END,
+    type: types.SCROLL_POST_LIST_END
   };
-};
+}
 
 // action related with comment
-export function loadComments(articleId, comments){
+export function loadComments(articleId, comments) {
   return {
     type: types.LOAD_COMMENT,
-    comments: comments,
-    articleId: articleId,
+    comments,
+    articleId
   };
-};
+}
 
-export function writeComment(articleId, comment){
+export function writeComment(articleId, comment) {
   return {
     type: types.WRITE_COMMENT,
-    comment: comment,
-    articleId: articleId,
+    comment,
+    articleId
   };
-};
+}
 
-export function editComment(articleId, comment){
+export function editComment(articleId, comment) {
   return {
     type: types.EDIT_COMMENT,
-    comment: comment,
-    articleId: articleId,
+    comment,
+    articleId
   };
-};
+}
 
-export function deleteComment(articleId, commentId){
+export function deleteComment(articleId, commentId) {
   return {
     type: types.DELETE_COMMENT,
-    commentId: commentId,
-    articleId: articleId,
+    commentId,
+    articleId
   };
-};
+}

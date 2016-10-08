@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import 'whatwg-fetch';
 
 const DataCon = {
@@ -7,25 +6,26 @@ const DataCon = {
   },
 
   postDataToServer(url, method, data) {
-    const user_id = localStorage.getItem('snucsesession');
+    const userId = localStorage.getItem('snucsesession');
     const headers = {
-      Authorization: `Token token=${user_id}`
+      Authorization: `Token token=${userId}`
     };
-    if (data != null) headers['Content-Type'] = 'application/json';
+    if (data != null) {
+      headers['Content-Type'] = 'application/json';
+    }
     const options = {
       method,
       headers,
-      body: data != null ? JSON.stringify(data) : undefined
+      body: data == null ? undefined : JSON.stringify(data)
     };
     return fetch(url, options).then(res => {
       if (!res.ok) {
         throw res;
-      } else {
-        if (res.status === 204) {
-          return res.text();
-        }
-        return res.json();
       }
+      if (res.status === 204) {
+        return res.text();
+      }
+      return res.json();
     }).catch(err => {
       if (err.status === 401) {
         location.href = '/login';
