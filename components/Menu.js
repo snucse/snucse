@@ -1,11 +1,25 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import {DataCon, Url} from '../utils';
+import {loadUserId} from '../actions';
 import MyProfile from './MyProfile.js';
 
 const Menu = React.createClass({
   handleLogout() {
     localStorage.removeItem('snucsesession');
     location.href = '/login';
+  },
+
+  getUserId() {
+    const url = Url.getUrl('users/me');
+    DataCon.loadDataFromServer(url).then(data => {
+      this.props.putUserId(data.id);
+    }).catch(console.error);
+  },
+
+  componentDidMount() {
+    this.getUserId();
   },
 
   render() {
@@ -42,4 +56,10 @@ const Menu = React.createClass({
   }
 });
 
-export default Menu;
+const mapDispatchToProps = function (dispatch) {
+  return {
+    putUserId: userId => dispatch(loadUserId(userId))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Menu);
