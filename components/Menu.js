@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {DataCon, Url} from '../utils';
-
 import {loadUserId} from '../actions';
 import MyProfile from './MyProfile.js';
 
