@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import 'whatwg-fetch';
 
 const DataCon = {
@@ -7,9 +6,9 @@ const DataCon = {
   },
 
   postDataToServer(url, method, data) {
-    const user_id = localStorage.getItem('snucsesession');
+    const token = localStorage.getItem('snucsesession');
     const headers = {
-      Authorization: `Token token=${user_id}`
+      Authorization: `Token token=${token}`
     };
     if (data != null) headers['Content-Type'] = 'application/json';
     const options = {

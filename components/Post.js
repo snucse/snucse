@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import { connect } from 'react-redux';
-import { DataCon } from '../utils';
+import { DataCon, Url } from '../utils';
 import CommentBox from './Comment';
 import moment from 'moment';
 
@@ -12,9 +12,9 @@ var Post = React.createClass({
     var url = null;
     if('is_profile' in this.props && this.props.is_profile === true) {
       var id = this.props.id;
-      url = this.props.url+"?profile_id="+id;
+      url = Url.getUrl('articles?profile_id='+id);
     } else {
-      url = this.props.url;
+      url = Url.getUrl('articles');
     };
     DataCon.loadDataFromServer(url).then(
       this.props.onPostLoad
@@ -57,23 +57,22 @@ var Post = React.createClass({
 
   render: function() {
     const postNodes = this.props.data.articles.slice(0, this.props.post_num).map(post => {
-      var temp = post.content.split("\n");
-      var n = temp.length;
-      var result = [];
+      let temp = post.content.split("\n");
+      let n = temp.length;
+      let result = [];
       for(let i = 0; i < n; i++) {
         const brId = `post-br-${post.id}-${i}`;
         result.push(temp[i]);
         result.push(<br key={brId} />);
       }
       moment.locale('kr');
-      var date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
+      let date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
       if (post.created_at.updated === true) {
         date = date + '(수정됨)'+moment(post.created_at.date, 'YYYYMMDD').fromNow();
 
       }
-      var user_id = 1; // TODO
-      var mine = (user_id === post.writer.id);
-      var url = null;
+      let mine = (this.props.user_id === post.writer.id);
+      let url = null;
       if('route' in this.props) {
         url = this.props.route.url;
       } else {
@@ -86,15 +85,14 @@ var Post = React.createClass({
           <div className="content">
             {result}
           </div>
-          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={user_id} />
+          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={this.props.user_id} />
           <CommentBox articleId={post.id} isAddable={true} />
         </div>
       );
     });
+    let load = 'Loading...';
     if (this.props.data.articles.length <= this.props.post_num) {
-      var load = 'End';
-    } else {
-      var load = 'Loading...';
+      load = 'End';
     }
     return (
       <div className="Post">
@@ -149,6 +147,7 @@ let mapStateToProps = function(state) {
   return {
     data: state.postList.data,
     post_num: state.postList.post_num,
+    user_id: state.userId.user_id,
   }
 }
 

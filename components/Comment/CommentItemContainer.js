@@ -29,16 +29,26 @@ let CommentItemContainer = React.createClass({
   },
 
   render: function(){
+    let mine = false;
+    if(this.props.user_id === this.props.writer) {
+      mine = true;
+    }
     return (
       <CommentItem comment={this.props.comment}
-          isEditable={true}
-          isDeletable={true}
+          isEditable={mine}
+          isDeletable={mine}
           onDelete={this.onDelete}
           onEdit={this.onEdit} />
     );
     // fixme compare its writer id and user id
   }
 })
+
+let mapStateToProps = function(state){
+  return {
+    user_id: state.userId.user_id,
+  }
+}
 
 let mapDispatchToProps = function(dispatch){
   return {
@@ -47,6 +57,6 @@ let mapDispatchToProps = function(dispatch){
   };
 };
 
-CommentItemContainer = connect(null, mapDispatchToProps)(CommentItemContainer);
+CommentItemContainer = connect(mapStateToProps, mapDispatchToProps)(CommentItemContainer);
 
 export default CommentItemContainer;
