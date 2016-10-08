@@ -1,57 +1,62 @@
 import React from 'react';
-import $ from 'jquery';
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import ProfileForm from './ProfileMake.js';
-import DataCon from '../utils/DataCon.js';
-import { connect } from 'react-redux';
-import { loadProfiles } from '../actions/profilesAction';
+import {browserHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {DataCon} from '../utils';
+import {loadProfiles} from '../actions/profilesAction';
+import ProfileMakeForm from './ProfileMakeForm';
 
-var Profiles = React.createClass({
-  loadProfilesFromServer: function() {
+const Profiles = React.createClass({
+  loadProfilesFromServer() {
     DataCon.loadDataFromServer(this.props.route.url)
       .then(this.props.onProfilesLoad)
       .catch(console.error);
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadProfilesFromServer();
   },
 
-  toProfiles: function(sid) {
-    browserHistory.push('/'+sid);
+  toProfiles(sid) {
+    browserHistory.push('/' + sid);
   },
 
-  render: function() {
-    let profiles = this.props.data.profiles.map((profile) => {
+  render() {
+    const profiles = this.props.data.profiles.map(profile => {
       return (
-          <div key={profile.sid} className="profile">
-          <strong onClick={()=>this.toProfiles(profile.sid)}>{profile.name}</strong>
-          </div>
-          );
+        <div key={profile.sid} className="profile">
+          <strong
+            onClick={function () {
+              this.toProfiles(profile.sid);
+            }}
+            >
+            {profile.name}
+          </strong>
+        </div>
+      );
     });
     return (
-        <div className="profile-container">
-         <ProfileForm url={this.props.route.url} />
-          <div className="profiles">
-            {profiles}
-          </div>
+      <div className="profile container">
+        <ProfileMakeForm url={this.props.route.url}/>
+        <div className="profiles">
+          {profiles}
         </div>
-        );
+      </div>
+    );
   }
 });
 
-let mapStateToProps = function(state) {
+const mapStateToProps = function (state) {
   return {
-    data: state.profileList.data,
+    data: state.profileList.data
   };
-}
+};
 
-let mapDispatchToProps = function(dispatch) {
+const mapDispatchToProps = function (dispatch) {
   return {
-    onProfilesLoad: (data) => { dispatch(loadProfiles(data)) },
+    onProfilesLoad(data) {
+      dispatch(loadProfiles(data));
+    }
   };
-}
+};
 
-Profiles = connect(mapStateToProps, mapDispatchToProps)(Profiles);
-
-export default Profiles;
+export default connect(mapStateToProps, mapDispatchToProps)(Profiles);
