@@ -61,9 +61,9 @@ const ProtoPost = React.createClass({
         result.push(<br key={brId}/>);
       }
       moment.locale('kr');
-      let date = `${moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm')}`;
-      if (post.created_at.updated === true) {
-        date += `(수정됨)${moment(post.created_at.date, 'YYYYMMDD').fromNow()}`;
+      let date = `${moment(post.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(post.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+      if (post.createdAt.updated === true) {
+        date += `(수정됨)${moment(post.createdAt.date, 'YYYYMMDD').fromNow()}`;
       }
       const mine = (this.props.userId === post.writer.id);
       const url = ('route' in this.props) ? this.props.route.url : this.props.url;
@@ -74,7 +74,7 @@ const ProtoPost = React.createClass({
           <div className="content">
             {result}
           </div>
-          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={this.props.user_id}/>
+          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={this.props.userId}/>
           <CommentBox articleId={post.id} isAddable/>
         </div>
       );
