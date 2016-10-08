@@ -27,7 +27,7 @@ let CommentList = React.createClass({
 
   renderComment: function(comment){
     return (
-      <CommentItemContainer comment={comment} key={comment.id}
+      <CommentItemContainer writer={comment.writer.id} comment={comment} key={comment.id}
           articleId={this.props.articleId} />
     );
   },

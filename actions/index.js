@@ -53,3 +53,11 @@ export function deleteComment(articleId, commentId){
     articleId: articleId,
   };
 };
+
+// action related with user id
+export function loadUserId(userId){
+  return {
+    type: types.LOAD_USER_ID,
+    userId: userId,
+  };
+};

@@ -31,7 +31,6 @@ var Test = React.createClass({
 });
 
 var url = "http://snucse.snucse.org:32123/api/v1/";
-//var url = "http://aws.izz.kr:3000/api/v1/";
 
 const store = createStore(combineReducers(reducers));
 
