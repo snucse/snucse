@@ -10,21 +10,22 @@ const DataCon = {
     const headers = {
       Authorization: `Token token=${token}`
     };
-    if (data != null) headers['Content-Type'] = 'application/json';
+    if (data != null) {
+      headers['Content-Type'] = 'application/json';
+    }
     const options = {
       method,
       headers,
-      body: data != null ? JSON.stringify(data) : undefined
+      body: data == null ? undefined : JSON.stringify(data)
     };
     return fetch(url, options).then(res => {
       if (!res.ok) {
         throw res;
-      } else {
-        if (res.status === 204) {
-          return res.text();
-        }
-        return res.json();
       }
+      if (res.status === 204) {
+        return res.text();
+      }
+      return res.json();
     }).catch(err => {
       if (err.status === 401) {
         location.href = '/login';

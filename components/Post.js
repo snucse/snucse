@@ -1,48 +1,43 @@
 import React from 'react';
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import { connect } from 'react-redux';
-import { DataCon, Url } from '../utils';
-import CommentBox from './Comment';
+import {browserHistory} from 'react-router';
+import {connect} from 'react-redux';
 import moment from 'moment';
 
-import { loadPost, scrollPostListEnd } from '../actions'
+import {DataCon, Url} from '../utils';
+import {loadPost, scrollPostListEnd} from '../actions';
+import CommentBox from './CommentBox';
 
-var Post = React.createClass({
-  loadPostFromServer: function() {
-    var url = null;
-    if('is_profile' in this.props && this.props.is_profile === true) {
-      var id = this.props.id;
-      url = Url.getUrl('articles?profile_id='+id);
-    } else {
-      url = Url.getUrl('articles');
-    };
+const ProtoPost = React.createClass({
+  loadPostFromServer() {
+    let url = Url.getUrl(`articles`);
+    if (this.props.isProfile === true) {
+      const {id} = this.props;
+      url += `?profile_id=${id}`;
+    }
     DataCon.loadDataFromServer(url).then(
       this.props.onPostLoad
     ).catch(console.error);
   },
 
   onScroll() {
-    const list = document.documentElement;
     // http://stackoverflow.com/questions/9439725
-    if(window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
       if (this.state.loading === true) {
         return;
-      } else {
-        setTimeout(() => {
-          if (this.props.data.articles.length > this.props.post_num) {
-            // 보여주는 것보다 갖고 있는게 더 적으면
-            this.props.onScrollEnd()
-            // 더 보여달라는 요청
-          }
-          this.setState({loading: false});
-        }, 1000);
-        this.setState({loading: true});
-        return;
       }
+      setTimeout(() => {
+        if (this.props.data.articles.length > this.props.postNum) {
+          // 보여주는 것보다 갖고 있는게 더 적으면
+          this.props.onScrollEnd();
+          // 더 보여달라는 요청
+        }
+        this.setState({loading: false});
+      }, 1000);
+      this.setState({loading: true});
     }
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
     this.loadPostFromServer();
   },
@@ -51,49 +46,41 @@ var Post = React.createClass({
     window.removeEventListener('scroll', this.onScroll);
   },
 
-  getInitialState: function() {
-    return {loading: false}
+  getInitialState() {
+    return {loading: false};
   },
 
-  render: function() {
-    const postNodes = this.props.data.articles.slice(0, this.props.post_num).map(post => {
-      let temp = post.content.split("\n");
-      let n = temp.length;
-      let result = [];
-      for(let i = 0; i < n; i++) {
+  render() {
+    const postNodes = this.props.data.articles.slice(0, this.props.postNum).map(post => {
+      const temp = post.content.split('\n');
+      const n = temp.length;
+      const result = [];
+      for (let i = 0; i < n; i++) {
         const brId = `post-br-${post.id}-${i}`;
         result.push(temp[i]);
-        result.push(<br key={brId} />);
+        result.push(<br key={brId}/>);
       }
       moment.locale('kr');
-      let date = moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY') + ', ' + moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm');
+      let date = `${moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm')}`;
       if (post.created_at.updated === true) {
-        date = date + '(수정됨)'+moment(post.created_at.date, 'YYYYMMDD').fromNow();
-
+        date += `(수정됨)${moment(post.created_at.date, 'YYYYMMDD').fromNow()}`;
       }
-      let mine = (this.props.user_id === post.writer.id);
-      let url = null;
-      if('route' in this.props) {
-        url = this.props.route.url;
-      } else {
-        url = this.props.url;
-      };
+      const mine = (this.props.user_id === post.writer.id);
+      const url = ('route' in this.props) ? this.props.route.url : this.props.url;
       return (
-        <div className="PostWrap" key={post.id+post.title}>
+        <div className="PostWrap" key={`${post.id}${post.title}`}>
           <h3 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h3>
           <h4 className="post_author">writer: {post.writer.username}</h4><h4 className="post_date"> date: {date}</h4>
           <div className="content">
             {result}
           </div>
           <DelEditBox url={url} mine={mine} post_num={post.id} user_id={this.props.user_id} />
-          <CommentBox articleId={post.id} isAddable={true} />
+          <CommentBox articleId={post.id} isAddable/>
         </div>
       );
     });
-    let load = 'Loading...';
-    if (this.props.data.articles.length <= this.props.post_num) {
-      load = 'End';
-    }
+    const load = (this.props.data.articles.length <= this.props.postNum) ?
+      'End' : 'Loading...';
     return (
       <div className="Post">
         {postNodes}
@@ -108,56 +95,54 @@ var Post = React.createClass({
   }
 });
 
-var DelEditBox = React.createClass({
-  submitpage: function(post_num) {
-    browserHistory.push('/'+post_num+'/edit')
+const DelEditBox = React.createClass({
+  updatePost(postNum) {
+    browserHistory.push(`/${postNum}/edit`);
   },
 
-  handlePostDelete: function(id) {
-    var url = this.props.url + '/' + this.props.post_num + '?current_user_id=' + id;
+  handlePostUpdate() {
+    this.updatePost(this.props.postNum);
+  },
+
+  deletePost(id) {
+    const url = `${this.props.url}/${this.props.postNum}?current_user_id=${id}`;
     DataCon.postDataToServer(url, 'DELETE');
   },
 
-  delete_post: function(e) {
-    var check = confirm("이 글을 삭제하시겠습니까?");
+  handleDeletePost() {
+    const check = confirm('이 글을 삭제하시겠습니까?');
     if (check === true) {
-      this.handlePostDelete(this.props.user_id)
-    } else {
-      return;
-    };
+      this.deletePost(this.props.userId);
+    }
   },
 
-  render: function() {
-    if(this.props.mine) {
-      return (
-        <div className="delete_edit_box">
-          <span onClick={this.delete_post}>삭제</span>
-          <span onClick={this.submitpage.bind(this,this.props.post_num)}>수정</span>
-        </div>
-      );
-    } else {
-      return (
-        <div/>
-      );
-    };
+  render() {
+    return this.props.mine ? (
+      <div className="delete_edit_box">
+        <span onClick={this.handleDeletePost}>삭제</span>
+        <span onClick={this.handlePostUpdate}>수정</span>
+      </div>
+    ) : (
+      <div/>
+    );
   }
 });
 
-let mapStateToProps = function(state) {
+const mapStateToProps = function (state) {
   return {
     data: state.postList.data,
     post_num: state.postList.post_num,
-    user_id: state.userId.user_id,
+    userId: state.userId.userId,
   }
 }
 
-let mapDispatchToProps = function(dispatch) {
+const mapDispatchToProps = function (dispatch) {
   return {
-    onPostLoad: (data) => { dispatch(loadPost(data)) },
-    onScrollEnd: () => { dispatch(scrollPostListEnd()) },
-  }
-}
+    onPostLoad: data => dispatch(loadPost(data)),
+    onScrollEnd: () => dispatch(scrollPostListEnd())
+  };
+};
 
-Post = connect(mapStateToProps, mapDispatchToProps)(Post);
+const Post = connect(mapStateToProps, mapDispatchToProps)(ProtoPost);
 
 export default Post;
