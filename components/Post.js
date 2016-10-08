@@ -12,7 +12,7 @@ const ProtoPost = React.createClass({
     let url = this.props.url;
     if (this.props.isProfile === true) {
       const {id} = this.props;
-      url += `?profile_id=${id}`;
+      url += `?profileId=${id}`;
     }
     DataCon.loadDataFromServer(url).then(
       this.props.onPostLoad
@@ -61,9 +61,9 @@ const ProtoPost = React.createClass({
         result.push(<br key={brId}/>);
       }
       moment.locale('kr');
-      let date = `${moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm')}`;
-      if (post.created_at.updated === true) {
-        date += `(수정됨)${moment(post.created_at.date, 'YYYYMMDD').fromNow()}`;
+      let date = `${moment(post.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(post.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+      if (post.createdAt.updated === true) {
+        date += `(수정됨)${moment(post.createdAt.date, 'YYYYMMDD').fromNow()}`;
       }
       const userId = 1; // TODO
       const mine = (userId === post.writer.id);
@@ -106,7 +106,7 @@ const DelEditBox = React.createClass({
   },
 
   deletePost(id) {
-    const url = `${this.props.url}/${this.props.postNum}?current_user_id=${id}`;
+    const url = `${this.props.url}/${this.props.postNum}?currentUserId=${id}`;
     DataCon.postDataToServer(url, 'DELETE');
   },
 

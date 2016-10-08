@@ -46,7 +46,6 @@
       "eqeqeq": "off",
       "no-eq-null": "off",
       "no-alert": "warn",
-      "camelcase": "warn",
       "xo/filename-case": "off",
       "react/prop-types": "off",
       "filenames/match-exported": "error"

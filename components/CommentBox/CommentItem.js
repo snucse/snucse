@@ -58,7 +58,7 @@ const CommentItem = React.createClass({
   },
 
   render() {
-    const edited = this.props.comment.created_at.updated ?
+    const edited = this.props.comment.createdAt.updated ?
       <span className="comment-edited">수정됨</span> :
       null;
     const editBox = this.props.isEditable && this.state.isEditMode ?
@@ -83,12 +83,13 @@ const CommentItem = React.createClass({
       controller = <div className="comment-controller">{buttons}</div>;
     }
     // todo link to user profile?
+    const {writer, createdAt} = this.props.comment;
     return (
       <li className="comment-item">
         <div className="comment-information">
-          <img src={this.props.comment.writer.profile_image_url}/>
-          <a>{this.props.comment.writer.name}</a>
-          {this.props.comment.created_at.date} {this.props.comment.created_at.time} {edited}
+          <img src={writer.profileImageUrl}/>
+          <a>{writer.name}</a>
+          {createdAt.date} {createdAt.time} {edited}
         </div>
         {contentWrapper}
         {editBox}
