@@ -1,13 +1,9 @@
 import React from 'react';
-import $ from 'jquery';
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 
-var Others = React.createClass({
-  render: function() {
+const Others = React.createClass({
+  render() {
     return (
-      <div>
-      </div>
-
+      <div/>
     );
   }
 });

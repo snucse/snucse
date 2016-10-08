@@ -11,3 +11,9 @@ export const LOAD_PROFILES = 'LOAD_PROFILES';
 export const CHANGE_SID = 'CHANGE_SID';
 export const CHANGE_NAME = 'CHANGE_NAME';
 export const CHANGE_DESC = 'CHANGE_DESC';
+
+// action types related with comment
+export const LOAD_COMMENT = 'LOAD_COMMENT';
+export const WRITE_COMMENT = 'WRITE_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';

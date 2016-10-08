@@ -12,7 +12,6 @@ babel-loader
 react
 react-router
 react-dom
-jquery
 moment
 
 ```
