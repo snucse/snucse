@@ -74,7 +74,7 @@ const ProtoPost = React.createClass({
           <div className="content">
             {result}
           </div>
-          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={this.props.userId}/>
+          <DelEditBox url={url} mine={mine} postNum={post.id} userId={this.props.userId}/>
           <CommentBox articleId={post.id} isAddable/>
         </div>
       );
@@ -131,7 +131,7 @@ const DelEditBox = React.createClass({
 const mapStateToProps = function (state) {
   return {
     data: state.postList.data,
-    post_num: state.postList.post_num,
+    postNum: state.postList.postNum,
     userId: state.userId.userId
   };
 };

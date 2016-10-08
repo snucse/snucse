@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   userId: 0
 };
 
-export default function userID(state = INITIAL_STATE, action) {
+export default function userId(state = INITIAL_STATE, action) {
   switch (action.type) {
     case LOAD_USER_ID: {
       return Object.assign({}, state, {
