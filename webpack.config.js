@@ -2,7 +2,7 @@ module.exports = {
   entry: './app.js',
 
   output: {
-    path: './application/static/',
+    path: './dist/static/',
     filename: 'application.js'
   },
   devtool: 'source-map',
