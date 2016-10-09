@@ -3,13 +3,13 @@ import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {DataCon} from '../utils';
+import {DataCon, Url} from '../utils';
 import {loadPost, scrollPostListEnd} from '../actions';
 import CommentBox from './CommentBox';
 
 const ProtoPost = React.createClass({
   loadPostFromServer() {
-    let url = this.props.url;
+    let url = Url.getUrl(`articles`);
     if (this.props.isProfile === true) {
       const {id} = this.props;
       url += `?profile_id=${id}`;
@@ -61,12 +61,11 @@ const ProtoPost = React.createClass({
         result.push(<br key={brId}/>);
       }
       moment.locale('kr');
-      let date = `${moment(post.created_at.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(post.created_at.time, 'HH:mm:ss').format('a hh:mm')}`;
-      if (post.created_at.updated === true) {
-        date += `(수정됨)${moment(post.created_at.date, 'YYYYMMDD').fromNow()}`;
+      let date = `${moment(post.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(post.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+      if (post.createdAt.updated === true) {
+        date += `(수정됨)${moment(post.createdAt.date, 'YYYYMMDD').fromNow()}`;
       }
-      const userId = 1; // TODO
-      const mine = (userId === post.writer.id);
+      const mine = (this.props.userId === post.writer.id);
       const url = ('route' in this.props) ? this.props.route.url : this.props.url;
       return (
         <div className="PostWrap" key={`${post.id}${post.title}`}>
@@ -75,7 +74,7 @@ const ProtoPost = React.createClass({
           <div className="content">
             {result}
           </div>
-          <DelEditBox url={url} mine={mine} postNum={post.id} userId={userId}/>
+          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={this.props.userId}/>
           <CommentBox articleId={post.id} isAddable/>
         </div>
       );
@@ -132,7 +131,8 @@ const DelEditBox = React.createClass({
 const mapStateToProps = function (state) {
   return {
     data: state.postList.data,
-    postNum: state.postList.postNum
+    post_num: state.postList.post_num,
+    userId: state.userId.userId
   };
 };
 

@@ -5,7 +5,6 @@ const re = /^\d+$/;
 const ClassManager = React.createClass({
   render() {
     const {id} = this.props.params;
-
     if (re.test(id)) {
       return (
         <ProfilePost url={this.props.route.url} id={id}/>

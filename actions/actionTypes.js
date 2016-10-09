@@ -1,3 +1,5 @@
+// action types related with user id
+export const LOAD_USER_ID = 'LOAD_USER_ID';
 
 // action types related with Post.js
 export const LOAD_POST = 'LOAD_POST';

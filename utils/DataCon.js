@@ -6,9 +6,9 @@ const DataCon = {
   },
 
   postDataToServer(url, method, data) {
-    const userId = localStorage.getItem('snucsesession');
+    const token = localStorage.getItem('snucsesession');
     const headers = {
-      Authorization: `Token token=${userId}`
+      Authorization: `Token token=${token}`
     };
     if (data != null) {
       headers['Content-Type'] = 'application/json';
