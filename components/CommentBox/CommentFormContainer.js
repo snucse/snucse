@@ -13,7 +13,7 @@ const CommentFormContainer = React.createClass({
   handleWrite(content) {
     const url = Url.getUrl('comments');
     const data = {
-      article_id: this.props.articleId,
+      articleId: this.props.articleId,
       content
     };
     DataCon.postDataToServer(url, 'POST', data).then(res => {

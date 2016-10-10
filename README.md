@@ -1,22 +1,20 @@
 > 스누씨 3.0 프론트엔드
 
-### Dependency
+### Requirements
+* node
+* npm
+
+### 패키지 설치
+```sh
+npm i
 ```
 
-<Webpack Preset>
-babel-preset-react
-babel-preset-es2015
-babel-loader
-
-<Libraries>
-react
-react-router
-react-dom
-moment
-
+### 개발용 서버 실행
+```sh
+npm start
 ```
 
-### Others
-```
-indent : 2 spaces
+### 린터 실행
+```sh
+npm t
 ```

@@ -40,7 +40,7 @@ const PostEdit = React.createClass({
     const content = this.state.content.trim();
     // TODO
     const userId = 1;
-    this.submitEdit({title, content, current_user_id: userId});
+    this.submitEdit({title, content, currentUserId: userId});
     this.setState({title: '', content: ''});
     browserHistory.push('/');
   },

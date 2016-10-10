@@ -42,7 +42,7 @@ const PostForm = React.createClass({
     if (!content || !title) {
       return;
     }
-    this.props.onPostSubmit({title, content, profile_ids: profileId});
+    this.props.onPostSubmit({title, content, profileIds: profileId});
     browserHistory.push(`/${profileId}`);
   },
 
