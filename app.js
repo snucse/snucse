@@ -11,7 +11,7 @@ import {
   Profiles,
   Main,
   PostWrite,
-  Edit,
+  PostEdit,
   ClassManager,
   Login,
   SignUp
@@ -37,7 +37,7 @@ ReactDOM.render(
         <Route path="profiles" component={Profiles} url={`${url}profiles`}/>
         <Route path="profile/:id/write" component={PostWrite} url={`${url}articles`}/>
         <Route path=":id" component={ClassManager} url={url}/>
-        <Route path=":post_id/edit" component={Edit} url={`${url}articles`}/>
+        <Route path=":postId/edit" component={PostEdit} url={`${url}articles`}/>
       </Route>
     </Router>
   </Provider>,
