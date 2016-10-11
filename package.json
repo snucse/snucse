@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "xo",
-    "build": "NODE_ENV=production webpack -p"
+    "build": "NODE_ENV=production webpack -p",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-react": "^6.3.0",
     "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2",
     "xo": "^0.16.0",
     "xo-loader": "^0.7.0"
   },
@@ -42,14 +44,10 @@
     "envs": [
       "browser"
     ],
-    "ignores": [
-      "application/**"
-    ],
     "rules": {
       "eqeqeq": "off",
       "no-eq-null": "off",
       "no-alert": "warn",
-      "camelcase": "warn",
       "xo/filename-case": "off",
       "react/prop-types": "off",
       "filenames/match-exported": "error"

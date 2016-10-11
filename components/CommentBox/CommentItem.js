@@ -83,12 +83,13 @@ const CommentItem = React.createClass({
       controller = <div className="comment-controller">{buttons}</div>;
     }
     // todo link to user profile?
+    const {writer, createdAt} = this.props.comment;
     return (
       <li className="comment-item">
         <div className="comment-information">
-          <img src={this.props.comment.writer.profileImageUrl}/>
-          <a>{this.props.comment.writer.name}</a>
-          {this.props.comment.createdAt.date} {this.props.comment.createdAt.time} {edited}
+          <img src={writer.profileImageUrl}/>
+          <a>{writer.name}</a>
+          {createdAt.date} {createdAt.time} {edited}
         </div>
         {contentWrapper}
         {editBox}

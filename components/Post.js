@@ -12,7 +12,7 @@ const ProtoPost = React.createClass({
     let url = Url.getUrl(`articles`);
     if (this.props.isProfile === true) {
       const {id} = this.props;
-      url += `?profile_id=${id}`;
+      url += `?profileId=${id}`;
     }
     DataCon.loadDataFromServer(url).then(
       this.props.onPostLoad
@@ -74,7 +74,7 @@ const ProtoPost = React.createClass({
           <div className="content">
             {result}
           </div>
-          <DelEditBox url={url} mine={mine} post_num={post.id} user_id={this.props.userId}/>
+          <DelEditBox url={url} mine={mine} postNum={post.id} userId={this.props.userId}/>
           <CommentBox articleId={post.id} isAddable/>
         </div>
       );
@@ -105,7 +105,7 @@ const DelEditBox = React.createClass({
   },
 
   deletePost(id) {
-    const url = `${this.props.url}/${this.props.postNum}?current_user_id=${id}`;
+    const url = `${this.props.url}/${this.props.postNum}?currentUserId=${id}`;
     DataCon.postDataToServer(url, 'DELETE');
   },
 
@@ -131,7 +131,7 @@ const DelEditBox = React.createClass({
 const mapStateToProps = function (state) {
   return {
     data: state.postList.data,
-    post_num: state.postList.post_num,
+    postNum: state.postList.postNum,
     userId: state.userId.userId
   };
 };

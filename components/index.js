@@ -7,6 +7,8 @@ import PostWrite from './PostWrite.js';
 import PostEdit from './PostEdit.js';
 import Post from './Post.js';
 import ClassManager from './ClassManager.js';
+import Login from './Login.js';
+import SignUp from './SignUp.js';
 
 export {
   Menu,
@@ -17,5 +19,7 @@ export {
   PostWrite,
   PostEdit,
   Post,
-  ClassManager
+  ClassManager,
+  Login,
+  SignUp
 };

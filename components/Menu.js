@@ -44,7 +44,7 @@ const Menu = React.createClass({
             <Link to="/profiles">전체그룹</Link>
             <ul>
               <li className="MyProfiles">내 그룹</li>
-              <MyProfile url={`${this.props.route.url}profiles/following?current_user_id=${userId}`}/>
+              <MyProfile url={`${this.props.route.url}profiles/following?currentUserId=${userId}`}/>
             </ul>
           </div>
         </div>

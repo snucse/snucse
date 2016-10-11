@@ -13,7 +13,7 @@ import CommentFormContainer from './CommentFormContainer.js';
 */
 const CommentBox = React.createClass({
   componentDidMount() {
-    const url = Url.getUrl('comments?article_id=' + this.props.articleId);
+    const url = Url.getUrl('comments?articleId=' + this.props.articleId);
     DataCon.loadDataFromServer(url).then(data => {
       this.props.loadComments(this.props.articleId, data.comments);
     }).catch(console.error);
