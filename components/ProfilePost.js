@@ -19,8 +19,7 @@ const ProfilePost = React.createClass({
 });
 
 const FollowBox = React.createClass({
-  checkFollow() {
-    const {id} = this.props;
+  checkFollow(id) {
     const url = `${this.props.url}profiles/${id}`;
     DataCon.loadDataFromServer(url).then(data => {
       // TODO: data.following이 undefined일 수 있을까요?
@@ -30,7 +29,11 @@ const FollowBox = React.createClass({
   },
 
   componentDidMount() {
-    this.checkFollow();
+    this.checkFollow(this.props.id);
+  },
+
+  componentWillReceiveNewProps(props) {
+    this.checkFollow(props.id);
   },
 
   handleFollow() {
