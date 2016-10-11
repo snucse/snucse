@@ -1,9 +1,10 @@
 import React from 'react';
-// import $ from 'jquery';
-// import browserHistory from 'react-router';
+import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {DataCon} from '../utils';
 import {changeSid, changeName, changeDesc} from '../actions/profileFormAction';
+
+const reg = /^[[a-zA-Z][a-zA-Z0-9_]+$/;
 
 const ProfileMakeForm = React.createClass({
   handleSidChange(e) {
@@ -17,7 +18,8 @@ const ProfileMakeForm = React.createClass({
   },
 
   handleSubmit(e) {
-    const reg = /^[[a-zA-Z][a-zA-Z0-9_]+$/;
+    e.preventDefault();
+
     const trimmed = {
       sid: this.props.sid.trim(),
       name: this.props.name.trim(),
@@ -35,14 +37,11 @@ const ProfileMakeForm = React.createClass({
     }
 
     DataCon.postDataToServer(this.props.url, 'POST', trimmed)
-      .then(res => {
-        if (res.status >= 200 && res.status < 300) {
-          alert('프로필 생성에 성공하였습니다.');
-        } else {
-          // TODO
-          // 중복 sid 등의 예외 처리
-        }
-      });
+      .then(() => {
+        alert('프로필 생성에 성공하였습니다.');
+        browserHistory.push('/' + trimmed.sid);
+      })
+      .catch(console.error); // TODO: 중복 sid등의 예외처리
   },
 
   render() {
