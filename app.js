@@ -21,7 +21,7 @@ import reducers from './reducers';
 
 const rootElement = document.getElementById('content');
 
-const url = 'http://snucse.snucse.org:32123/api/v1/';
+const url = '/api/v1/';
 
 const store = createStore(combineReducers(reducers));
 
