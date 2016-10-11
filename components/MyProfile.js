@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {DataCon} from '../utils';
+import {DataCon, Url} from '../utils';
 
 const MyProfile = React.createClass({
   loadProfilefromServer() {
-    const {url} = this.props;
+    const url = Url.getUrl('profiles/following');
     DataCon.loadDataFromServer(url).then(data => {
       this.setState({data});
     }).catch(console.error);
