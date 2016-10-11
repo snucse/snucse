@@ -44,6 +44,12 @@ module.exports = {
     contentBase: 'dist/',
     host: '0.0.0.0',
     port: 12321,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://snucse.snucse.org:30000',
+        secure: false
+      }
+    }
   }
 };
