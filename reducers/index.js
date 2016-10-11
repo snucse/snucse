@@ -1,6 +1,7 @@
 import userId from './userId';
 import postList from './postList';
 import comment from './comment';
+import me from './me';
 // import * as types from '../actions/actionTypes';
 // import other reducers
 
@@ -9,7 +10,8 @@ import comment from './comment';
 const reducers = {
   postList,
   comment,
-  userId
+  userId,
+  me
   // list up all reducers
 };
 

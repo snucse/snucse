@@ -11,3 +11,6 @@ export const LOAD_COMMENT = 'LOAD_COMMENT';
 export const WRITE_COMMENT = 'WRITE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+
+// action types related with updates
+export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';

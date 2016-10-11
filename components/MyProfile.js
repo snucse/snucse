@@ -1,25 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {DataCon, Url} from '../utils';
+import {connect} from 'react-redux';
+import {updateFollowingList} from '../actions/dispatchers';
 
 const MyProfile = React.createClass({
-  loadProfilefromServer() {
-    const url = Url.getUrl('profiles/following');
-    DataCon.loadDataFromServer(url).then(data => {
-      this.setState({data});
-    }).catch(console.error);
-  },
-
-  getInitialState() {
-    return {data: {profiles: []}};
-  },
-
   componentDidMount() {
-    this.loadProfilefromServer();
+    this.props.updateFollowingList();
   },
 
   render() {
-    const profiles = this.state.data.profiles.map(profile => {
+    const profiles = this.props.me.following.map(profile => {
       return (
         <li key={`${profile.id}${profile.name}`}><Link to={`/${profile.id}`}>{profile.name}</Link></li>
       );
@@ -33,4 +23,16 @@ const MyProfile = React.createClass({
   }
 });
 
-export default MyProfile;
+const mapStateToProps = function (state) {
+  return {
+    me: state.me
+  };
+};
+
+const mapDispatchToProps = function (dispatch) {
+  return {
+    updateFollowingList: () => updateFollowingList(dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);
