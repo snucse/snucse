@@ -6,9 +6,10 @@ const reg = /^[a-zA-Z][a-zA-Z0-9_]+$/;
 
 const ProfileMakeForm = React.createClass({
   getInitialState() {
+    // sid here because of Ruby on Rails limitation
     return {sid: '', name: '', description: ''};
   },
-  handleSidChange(e) {
+  handleIdChange(e) {
     this.setState({sid: e.target.value});
   },
   handleNameChange(e) {
@@ -27,7 +28,7 @@ const ProfileMakeForm = React.createClass({
     }
 
     if (!reg.test(trimmed.sid)) {
-      alert('sid는 영어로 시작해야 합니다.');
+      alert('id는 영어로 시작해야 합니다.');
       return;
     }
 
@@ -40,7 +41,7 @@ const ProfileMakeForm = React.createClass({
       alert('프로필 생성에 성공하였습니다.');
       browserHistory.push(`/${trimmed.sid}`);
     }).catch(() => {
-      // TODO: 중복 sid 등의 예외 처리
+      // TODO: 중복 id 등의 예외 처리
     });
   },
 
@@ -48,7 +49,7 @@ const ProfileMakeForm = React.createClass({
     return (
       <div className="profileForm">
         <form onSubmit={this.handleSubmit}>
-          SID: <input type="text" name="sid" value={this.state.sid} onChange={this.handleSidChange}/><br/>
+          ID: <input type="text" name="id" value={this.state.sid} onChange={this.handleIdChange}/><br/>
           이름: <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange}/><br/>
           설명: <input type="text" name="description" value={this.state.description} onChange={this.handleDescriptionChange}/><br/>
           <input type="submit" value="그룹 만들기"/>
