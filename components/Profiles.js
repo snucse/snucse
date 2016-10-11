@@ -16,17 +16,13 @@ const Profiles = React.createClass({
     this.loadProfilesFromServer();
   },
 
-  toProfiles(sid) {
-    browserHistory.push('/' + sid);
-  },
-
   render() {
     const profiles = this.props.data.profiles.map(profile => {
       return (
-        <div key={profile.sid} className="profile">
+        <div key={profile.id} className="profile">
           <strong
             onClick={function () {
-              this.toProfiles(profile.sid);
+              browserHistory.push(profile.id);
             }}
             >
             {profile.name}

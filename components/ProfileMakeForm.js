@@ -16,7 +16,7 @@ const ProfileMakeForm = React.createClass({
     this.props.changeDesc(e.target.value);
   },
 
-  handleSubmit() {
+  handleSubmit(e) {
     const reg = /^[[a-zA-Z][a-zA-Z0-9_]+$/;
     const trimmed = {
       sid: this.props.sid.trim(),
