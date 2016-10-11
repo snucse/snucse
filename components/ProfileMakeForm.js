@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {DataCon} from '../utils';
 import {changeSid, changeName, changeDesc} from '../actions/profileFormAction';
 
-const reg = /^[[a-zA-Z][a-zA-Z0-9_]+$/;
+const reg = /^[a-zA-Z][a-zA-Z0-9_]+$/;
 
 const ProfileMakeForm = React.createClass({
   handleSidChange(e) {
