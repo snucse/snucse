@@ -57,8 +57,8 @@ const FollowBox = React.createClass({
 
   render() {
     return this.state.followed ?
-      <p onClick={this.handleFollow}>팔로우</p> :
-      <p onClick={this.handleUnfollow}>팔로우 취소</p>;
+      <p onClick={this.handleUnfollow}>팔로우 취소</p> :
+      <p onClick={this.handleFollow}>팔로우</p>;
   }
 });
 
