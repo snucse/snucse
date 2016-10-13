@@ -1,5 +1,5 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {DataCon} from '../utils';
 import {loadProfiles} from '../actions/profilesAction';
@@ -20,13 +20,7 @@ const Profiles = React.createClass({
     const profiles = this.props.data.profiles.map(profile => {
       return (
         <div key={profile.id} className="profile">
-          <strong
-            onClick={function () {
-              browserHistory.push(profile.id);
-            }}
-            >
-            {profile.name}
-          </strong>
+          <Link to={`/${profile.id}`}>{profile.name}</Link>
         </div>
       );
     });
