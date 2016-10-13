@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {DataCon} from '../utils';
 import {changeSid, changeName, changeDesc} from '../actions/profileFormAction';
 
-const reg = /^[a-zA-Z][a-zA-Z0-9_]+$/;
+const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
 
 const ProfileMakeForm = React.createClass({
   handleSidChange(e) {
@@ -27,7 +27,7 @@ const ProfileMakeForm = React.createClass({
     };
 
     if (!reg.test(trimmed.sid)) {
-      alert('sid mismatch: sid should be "[a-zA-Z][a-zA-Z0-9_]+"');
+      alert('SID는 정규식 "^[a-zA-Z_][a-zA-Z0-9_]+$"에 맞아야 합니다.');
       return false;
     }
 
