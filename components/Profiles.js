@@ -1,28 +1,26 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 import {DataCon} from '../utils';
-import ProfileMakeForm from './ProfileMakeForm.js';
+import {loadProfiles} from '../actions/profilesAction';
+import ProfileMakeForm from './ProfileMakeForm';
 
 const Profiles = React.createClass({
   loadProfilesFromServer() {
-    DataCon.loadDataFromServer(this.props.route.url).then(data => {
-      this.setState({data});
-    }).catch(console.error);
+    DataCon.loadDataFromServer(this.props.route.url)
+      .then(this.props.onProfilesLoad)
+      .catch(console.error);
   },
 
   componentDidMount() {
     this.loadProfilesFromServer();
   },
 
-  getInitialState() {
-    return {data: {profiles: []}};
-  },
-
   render() {
-    const profiles = this.state.data.profiles.map(profile => {
+    const profiles = this.props.data.profiles.map(profile => {
       return (
         <div key={profile.id} className="profile">
-          <Link to={`/${profile.id}`}><strong>{profile.name}</strong></Link>
+          <Link to={`/${profile.id}`}>{profile.name}</Link>
         </div>
       );
     });
@@ -37,4 +35,18 @@ const Profiles = React.createClass({
   }
 });
 
-export default Profiles;
+const mapStateToProps = function (state) {
+  return {
+    data: state.profileList.data
+  };
+};
+
+const mapDispatchToProps = function (dispatch) {
+  return {
+    onProfilesLoad(data) {
+      dispatch(loadProfiles(data));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profiles);

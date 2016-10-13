@@ -1,5 +1,7 @@
 import userId from './userId';
 import postList from './postList';
+import profileList from './profileList';
+import profileForm from './profileForm';
 import comment from './comment';
 import me from './me';
 // import * as types from '../actions/actionTypes';
@@ -8,6 +10,8 @@ import me from './me';
 // define other reducers
 
 const reducers = {
+  profileList,
+  profileForm,
   postList,
   comment,
   userId,
