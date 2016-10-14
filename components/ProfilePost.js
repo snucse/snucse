@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {updateFollowingList} from '../actions/dispatchers';
-import {loadProfileDetail, updateFollowingState} from '../actions/singleProfileAction';
+import {loadProfileDetail, updateFollowingState} from '../actions/profileAction';
 import {Url, DataCon} from '../utils';
 import Post from './Post.js';
 

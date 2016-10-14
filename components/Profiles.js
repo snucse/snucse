@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {DataCon} from '../utils';
-import {loadProfiles} from '../actions/profilesAction';
+import {loadProfiles} from '../actions/profilesListAction';
 import ProfileMakeForm from './ProfileMakeForm';
 
 const Profiles = React.createClass({
