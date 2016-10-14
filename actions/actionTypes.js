@@ -10,7 +10,7 @@ export const SCROLL_POST_LIST_END = 'SCROLL_POST_LIST_END';
 export const LOAD_PROFILES = 'LOAD_PROFILES';
 
 // action types related with ProfileMake.js
-export const CHANGE_SID = 'CHANGE_SID';
+export const CHANGE_ID = 'CHANGE_ID';
 export const CHANGE_NAME = 'CHANGE_NAME';
 export const CHANGE_DESC = 'CHANGE_DESC';
 

@@ -1,9 +1,9 @@
 import * as types from './actionTypes';
 
-export function changeSid(data) {
+export function changeId(data) {
   return {
-    type: types.CHANGE_SID,
-    sid: data
+    type: types.CHANGE_ID,
+    id: data
   };
 }
 
