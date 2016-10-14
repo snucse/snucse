@@ -22,3 +22,6 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // action types related with updates
 export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';
+
+export const LOAD_PROFILE_DETAIL = 'LOAD_PROFILE_DETAIL';
+export const UPDATE_FOLLOWING_STATE = 'UPDATE_FOLLOWING_STATE';

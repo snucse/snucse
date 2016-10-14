@@ -2,6 +2,7 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {DataCon} from '../utils';
+import {updateFollowingList} from '../actions/dispatchers';
 import {changeId, changeName, changeDesc} from '../actions/profileFormAction';
 
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
@@ -38,6 +39,7 @@ const ProfileMakeForm = React.createClass({
 
     DataCon.postDataToServer(this.props.url, 'POST', trimmed).then(() => {
       alert('프로필 생성에 성공하였습니다.');
+      this.props.updateFollowingList();
       browserHistory.push(`/${trimmed.id}`);
     }).catch(console.error); // TODO: 중복 id등의 예외처리
   },
@@ -74,7 +76,8 @@ const mapDispatchToProps = function (dispatch) {
     },
     changeDesc: data => {
       dispatch(changeDesc(data));
-    }
+    },
+    updateFollowingList: () => updateFollowingList(dispatch)
   };
 };
 

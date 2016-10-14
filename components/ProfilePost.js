@@ -1,16 +1,34 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {DataCon} from '../utils';
+import {connect} from 'react-redux';
+import {updateFollowingList} from '../actions/dispatchers';
+import {loadProfileDetail, updateFollowingState} from '../actions/singleProfileAction';
+import {Url, DataCon} from '../utils';
 import Post from './Post.js';
 
 const ProfilePost = React.createClass({
+  handleFollowChanged(following) {
+    this.props.updateFollowingState(this.props.id, following);
+  },
+
+  componentDidMount() {
+    this.props.loadProfileDetail(this.props.id);
+  },
+
+  componentWillReceiveProps(props) {
+    // 프로필이 바뀌었을 때만 다시 로드
+    if (props.id !== this.props.id) {
+      this.props.loadProfileDetail(props.id);
+    }
+  },
+
   render() {
     const {id} = this.props;
     return (
       <div>
         <div className="menu_of_profile">
           <Link to={`/profile/${id}/write`}>글쓰기</Link>
-          <FollowBox id={id} url={this.props.url}/>
+          <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
         </div>
         <Post url={`${this.props.url}articles`} isProfile id={id}/>
       </div>
@@ -19,50 +37,48 @@ const ProfilePost = React.createClass({
 });
 
 const FollowBox = React.createClass({
-  checkFollow(id) {
-    const url = `${this.props.url}profiles/${id}`;
-    DataCon.loadDataFromServer(url).then(data => {
-      // TODO: data.following이 undefined일 수 있을까요?
-      // 그렇다고 해도 이 코드는 작동하긴 합니다만...
-      this.setState({followed: Boolean(data.following)});
-    }).catch(console.error);
-  },
-
-  componentDidMount() {
-    this.checkFollow(this.props.id);
-  },
-
-  componentWillReceiveNewProps(props) {
-    this.checkFollow(props.id);
-  },
-
   handleFollow() {
-    const {id} = this.props;
     if (confirm('팔로우 하시겠습니까?')) {
-      const url = `${this.props.url}profiles/${id}/follow`;
-      DataCon.postDataToServer(url, 'POST').catch(console.error);
+      this.props.onFollowChanged(true);
     }
   },
 
   handleUnfollow() {
-    const {id} = this.props;
     if (confirm('팔로우를 취소하시겠습니까?')) {
-      const url = `${this.props.url}profiles/${id}/unfollow`;
-      DataCon.postDataToServer(url, 'POST').catch(console.error);
+      this.props.onFollowChanged(false);
     }
   },
 
-  getInitialState() {
-    return {
-      followed: false
-    };
-  },
-
   render() {
-    return this.state.followed ?
+    return this.props.following ?
       <p onClick={this.handleUnfollow}>팔로우 취소</p> :
       <p onClick={this.handleFollow}>팔로우</p>;
   }
 });
 
-export default ProfilePost;
+const mapStateToProps = function (state) {
+  const {following} = state.profile.data;
+  return {
+    following
+  };
+};
+
+const mapDispatchToProps = function (dispatch) {
+  return {
+    loadProfileDetail: id => {
+      DataCon.loadDataFromServer(Url.getUrl(`profiles/${id}`)).then(data => {
+        dispatch(loadProfileDetail(data));
+      }).catch(console.error);
+    },
+    updateFollowingState: (id, following) => {
+      const type = following ? 'follow' : 'unfollow';
+      DataCon.postDataToServer(Url.getUrl(`profiles/${id}/${type}`), 'POST').then(() => {
+        dispatch(updateFollowingState(following));
+        updateFollowingList(dispatch);
+      }).catch(console.error);
+    },
+    updateFollowingList: () => updateFollowingList(dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePost);
