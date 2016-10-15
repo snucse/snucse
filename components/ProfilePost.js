@@ -27,7 +27,7 @@ const ProfilePost = React.createClass({
     return (
       <div>
         <div className="menu_of_profile">
-          <Link to={`/profile/${id}/write`}>글쓰기</Link>
+          <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
         </div>
         <Post url={`${this.props.url}articles`} isProfile id={id}/>
@@ -84,3 +84,4 @@ const mapDispatchToProps = function (dispatch) {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePost);
+
