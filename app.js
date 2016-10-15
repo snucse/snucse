@@ -35,7 +35,7 @@ ReactDOM.render(
         <Route path="message" component={Message}/>
         <Route path="others" component={Others}/>
         <Route path="profiles" component={Profiles} url={`${url}profiles`}/>
-        <Route path="profile/:id/write" component={PostWrite} url={`${url}articles`}/>
+        <Route path="profiles/:id/write" component={PostWrite} url={`${url}articles`}/>
         <Route path=":id" component={ClassManager} url={url}/>
         <Route path=":postId/edit" component={PostEdit} url={`${url}articles`}/>
       </Route>
