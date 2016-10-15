@@ -115,8 +115,8 @@ const DelEditBox = React.createClass({
   render() {
     return this.props.mine ? (
       <div className="delete_edit_box">
-        <span onClick={this.handleDeletePost}>삭제</span>
-        <span onClick={this.handlePostUpdate}>수정</span>
+        <button onClick={this.handleDeletePost}>삭제</button>
+        <button onClick={this.handlePostUpdate}>수정</button>
       </div>
     ) : (
       <div/>
