@@ -1,16 +1,16 @@
-import {CHANGE_NAME, CHANGE_SID, CHANGE_DESC} from '../actions/actionTypes';
+import {CHANGE_NAME, CHANGE_ID, CHANGE_DESC} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  sid: '',
+  id: '',
   name: '',
   desc: ''
 };
 
 export default function profileForm(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case CHANGE_SID: {
+    case CHANGE_ID: {
       return Object.assign({}, state, {
-        sid: action.sid
+        id: action.id
       });
     }
     case CHANGE_NAME: {

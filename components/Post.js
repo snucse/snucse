@@ -8,17 +8,6 @@ import {loadPost, scrollPostListEnd} from '../actions';
 import CommentBox from './CommentBox';
 
 const ProtoPost = React.createClass({
-  loadPostFromServer() {
-    let url = Url.getUrl(`articles`);
-    if (this.props.isProfile === true) {
-      const {id} = this.props;
-      url += `?profileId=${id}`;
-    }
-    DataCon.loadDataFromServer(url).then(
-      this.props.onPostLoad
-    ).catch(console.error);
-  },
-
   onScroll() {
     // http://stackoverflow.com/questions/9439725
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
@@ -39,11 +28,18 @@ const ProtoPost = React.createClass({
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
-    this.loadPostFromServer();
+    this.props.loadPost(this.props.id);
   },
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll);
+  },
+
+  componentWillReceiveProps(props) {
+    if (props.id !== this.props.id) {
+      window.scrollTo(0, 0);
+      this.props.loadPost(props.id);
+    }
   },
 
   getInitialState() {
@@ -119,8 +115,8 @@ const DelEditBox = React.createClass({
   render() {
     return this.props.mine ? (
       <div className="delete_edit_box">
-        <span onClick={this.handleDeletePost}>삭제</span>
-        <span onClick={this.handlePostUpdate}>수정</span>
+        <button onClick={this.handleDeletePost}>삭제</button>
+        <button onClick={this.handlePostUpdate}>수정</button>
       </div>
     ) : (
       <div/>
@@ -138,7 +134,15 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    onPostLoad: data => dispatch(loadPost(data)),
+    loadPost: id => {
+      let url = Url.getUrl('articles');
+      if (id) {
+        url += `?profileId=${id}`;
+      }
+      DataCon.loadDataFromServer(url).then(data => {
+        dispatch(loadPost(data));
+      }).catch(console.error);
+    },
     onScrollEnd: () => dispatch(scrollPostListEnd())
   };
 };

@@ -10,7 +10,7 @@ export const SCROLL_POST_LIST_END = 'SCROLL_POST_LIST_END';
 export const LOAD_PROFILES = 'LOAD_PROFILES';
 
 // action types related with ProfileMake.js
-export const CHANGE_SID = 'CHANGE_SID';
+export const CHANGE_ID = 'CHANGE_ID';
 export const CHANGE_NAME = 'CHANGE_NAME';
 export const CHANGE_DESC = 'CHANGE_DESC';
 
@@ -19,3 +19,9 @@ export const LOAD_COMMENT = 'LOAD_COMMENT';
 export const WRITE_COMMENT = 'WRITE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+
+// action types related with updates
+export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';
+
+export const LOAD_PROFILE_DETAIL = 'LOAD_PROFILE_DETAIL';
+export const UPDATE_FOLLOWING_STATE = 'UPDATE_FOLLOWING_STATE';
