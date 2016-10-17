@@ -1,11 +1,11 @@
 import React from 'react';
-import Post from './Post.js';
+import Article from './Article.js';
 
 const Main = React.createClass({
   render() {
     return (
-      <div className="posts">
-        <Post url={this.props.route.url}/>
+      <div className="articles">
+        <Article url={this.props.route.url}/>
       </div>
     );
   }

@@ -10,8 +10,8 @@ import {
   Message,
   Profiles,
   Main,
-  PostWrite,
-  PostEdit,
+  ArticleWrite,
+  ArticleEdit,
   ClassManager,
   Login,
   SignUp
@@ -35,9 +35,9 @@ ReactDOM.render(
         <Route path="message" component={Message}/>
         <Route path="others" component={Others}/>
         <Route path="profiles" component={Profiles} url={`${url}profiles`}/>
-        <Route path="profiles/:id/write" component={PostWrite} url={`${url}articles`}/>
+        <Route path="profiles/:id/write" component={ArticleWrite} url={`${url}articles`}/>
         <Route path=":id" component={ClassManager} url={url}/>
-        <Route path=":postId/edit" component={PostEdit} url={`${url}articles`}/>
+        <Route path=":articleId/edit" component={ArticleEdit} url={`${url}articles`}/>
       </Route>
     </Router>
   </Provider>,

@@ -2,8 +2,8 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon} from '../utils';
 
-const PostWrite = React.createClass({
-  handlePostSubmit(data) {
+const ArticleWrite = React.createClass({
+  handleArticleSubmit(data) {
     const url = this.props.route.url;
     DataCon.postDataToServer(url, 'POST', data);
   },
@@ -11,15 +11,15 @@ const PostWrite = React.createClass({
   render() {
     const {id} = this.props.params;
     return (
-      <div className="postBox">
+      <div className="articleBox">
         <h3>글쓰기</h3>
-        <PostForm onPostSubmit={this.handlePostSubmit} id={id}/>
+        <ArticleForm onArticleSubmit={this.handleArticleSubmit} id={id}/>
       </div>
     );
   }
 });
 
-const PostForm = React.createClass({
+const ArticleForm = React.createClass({
   getInitialState() {
     return {title: '', content: ''};
   },
@@ -42,14 +42,14 @@ const PostForm = React.createClass({
     if (!content || !title) {
       return;
     }
-    this.props.onPostSubmit({title, content, profileIds: profileId});
+    this.props.onArticleSubmit({title, content, profileIds: profileId});
     browserHistory.push(`/${profileId}`);
   },
 
   render() {
     return (
       <div className="commentForm">
-        <form name="post" onSubmit={this.handleSubmit}>
+        <form name="article" onSubmit={this.handleSubmit}>
           Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
           Content: <textarea rows="4" id="content" name="content" placeholder="Say something..." value={this.state.content} onChange={this.handleContentChange}/><br/>
           <button type="submit">글쓰기</button>
@@ -59,4 +59,4 @@ const PostForm = React.createClass({
   }
 });
 
-export default PostWrite;
+export default ArticleWrite;

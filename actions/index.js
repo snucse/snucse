@@ -1,23 +1,23 @@
 import * as types from './actionTypes';
 
-// action related with Post component
-export function loadInitialPost(data) {
+// action related with Article component
+export function loadInitialArticle(data) {
   return {
-    type: types.LOAD_INITIAL_POST,
+    type: types.LOAD_INITIAL_ARTICLE,
     data
   };
 }
 
-export function loadPost(data) {
+export function loadArticle(data) {
   return {
-    type: types.LOAD_POST,
+    type: types.LOAD_ARTICLE,
     data
   };
 }
 
-export function scrollPostListEnd() {
+export function scrollArticleListEnd() {
   return {
-    type: types.SCROLL_POST_LIST_END
+    type: types.SCROLL_ARTICLE_LIST_END
   };
 }
 
