@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
-import {DataCon, Url} from '../utils';
+import {DataCon, Url, genRefCallback} from '../utils';
 
 const SignUp = React.createClass({
   render() {
@@ -28,17 +28,12 @@ const SignUpForm = React.createClass({
     });
   },
   render() {
-    const refCallback = name => {
-      return ref => {
-        this[name] = ref;
-      };
-    };
     return (
       <form>
         가입<br/>
-        아이디: <input type="text" autoFocus ref={refCallback('id')}/><br/>
-        비밀번호: <input type="password" ref={refCallback('password')}/><br/>
-        이름: <input type="text" ref={refCallback('myname')}/><br/>
+        아이디: <input type="text" autoFocus ref={genRefCallback(this, 'id')}/><br/>
+        비밀번호: <input type="password" ref={genRefCallback(this, 'password')}/><br/>
+        이름: <input type="text" ref={genRefCallback(this, 'myname')}/><br/>
         <input type="button" value="가입" onClick={this.handleSignUp}/>
       </form>
     );
