@@ -25,8 +25,8 @@ const Menu = React.createClass({
   render() {
     return (
       <div>
-        <div className="Menu">
-          <div className="Top_menu">
+        <div className="menu">
+          <div className="top-menu">
             <ul>
               <li><Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link></li>
               <li><form method="POST">
@@ -38,16 +38,16 @@ const Menu = React.createClass({
               <li><a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a></li>
             </ul>
           </div>
-          <div className="Side_menu">
+          <div className="side-menu">
             <h1>User Info</h1>
             <Link to="/profiles">전체그룹</Link>
             <ul>
-              <li className="MyProfiles">내 그룹</li>
+              <li className="my-profiles">내 그룹</li>
               <MyProfile/>
             </ul>
           </div>
         </div>
-        <div className="Content">
+        <div className="content">
           {this.props.children}
         </div>
       </div>

@@ -26,7 +26,7 @@ const ProfileArticle = React.createClass({
     const {id} = this.props;
     return (
       <div>
-        <div className="menu_of_profile">
+        <div className="menu-of-profile">
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
         </div>

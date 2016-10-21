@@ -25,7 +25,7 @@ const Profiles = React.createClass({
       );
     });
     return (
-      <div className="profile container">
+      <div className="profile-container">
         <ProfileMakeForm url={this.props.route.url}/>
         <div className="profiles">
           {profiles}

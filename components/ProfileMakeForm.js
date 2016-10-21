@@ -40,7 +40,7 @@ const ProfileMakeForm = React.createClass({
       };
     };
     return (
-      <div className="profileForm">
+      <div className="profile-form">
         <form onSubmit={this.handleSubmit}>
           ID: <input
             type="text" name="id"
