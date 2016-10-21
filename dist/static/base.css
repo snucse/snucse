@@ -45,11 +45,11 @@
     left: 10em;
 }
 
-.Post {
+.Article {
   padding: 10px;
 }
 
-.PostWrap {
+.ArticleWrap {
   margin: 10px;
   padding: 10px;
   border: 1px solid;

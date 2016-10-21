@@ -2,10 +2,10 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon} from '../utils';
 
-const PostEdit = React.createClass({
-  loadPostFromServer() {
-    const {postId} = this.props.params;
-    const url = `${this.props.route.url}/${postId}`;
+const ArticleEdit = React.createClass({
+  loadArticleFromServer() {
+    const {articleId} = this.props.params;
+    const url = `${this.props.route.url}/${articleId}`;
     DataCon.loadDataFromServer(url).then(data => {
       const {title, content} = data;
       this.setState({title, content});
@@ -17,12 +17,12 @@ const PostEdit = React.createClass({
   },
 
   componentDidMount() {
-    this.loadPostFromServer();
+    this.loadArticleFromServer();
   },
 
   submitEdit(data) {
-    const {postId} = this.props.params;
-    const url = `${this.props.route.url}/${postId}`;
+    const {articleId} = this.props.params;
+    const url = `${this.props.route.url}/${articleId}`;
     DataCon.postDataToServer(url, 'PUT', data);
   },
 
@@ -58,4 +58,4 @@ const PostEdit = React.createClass({
   }
 });
 
-export default PostEdit;
+export default ArticleEdit;

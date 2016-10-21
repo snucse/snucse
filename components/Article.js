@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
-import {loadPost, scrollPostListEnd} from '../actions';
+import {loadArticle, scrollArticleListEnd} from '../actions';
 import CommentBox from './CommentBox';
 
-const ProtoPost = React.createClass({
+const ProtoArticle = React.createClass({
   onScroll() {
     // http://stackoverflow.com/questions/9439725
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
@@ -15,7 +15,7 @@ const ProtoPost = React.createClass({
         return;
       }
       setTimeout(() => {
-        if (this.props.data.articles.length > this.props.postNum) {
+        if (this.props.data.articles.length > this.props.articleNum) {
           // 보여주는 것보다 갖고 있는게 더 적으면
           this.props.onScrollEnd();
           // 더 보여달라는 요청
@@ -28,7 +28,7 @@ const ProtoPost = React.createClass({
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
-    this.props.loadPost(this.props.id);
+    this.props.loadArticle(this.props.id);
   },
 
   componentWillUnmount() {
@@ -38,7 +38,7 @@ const ProtoPost = React.createClass({
   componentWillReceiveProps(props) {
     if (props.id !== this.props.id) {
       window.scrollTo(0, 0);
-      this.props.loadPost(props.id);
+      this.props.loadArticle(props.id);
     }
   },
 
@@ -47,39 +47,39 @@ const ProtoPost = React.createClass({
   },
 
   render() {
-    const postNodes = this.props.data.articles.slice(0, this.props.postNum).map(post => {
-      const temp = post.content.split('\n');
+    const articleNodes = this.props.data.articles.slice(0, this.props.articleNum).map(article => {
+      const temp = article.content.split('\n');
       const n = temp.length;
       const result = [];
       for (let i = 0; i < n; i++) {
-        const brId = `post-br-${post.id}-${i}`;
+        const brId = `article-br-${article.id}-${i}`;
         result.push(temp[i]);
         result.push(<br key={brId}/>);
       }
       moment.locale('kr');
-      let date = `${moment(post.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(post.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
-      if (post.createdAt.updated === true) {
-        date += `(수정됨)${moment(post.createdAt.date, 'YYYYMMDD').fromNow()}`;
+      let date = `${moment(article.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(article.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+      if (article.createdAt.updated === true) {
+        date += `(수정됨)${moment(article.createdAt.date, 'YYYYMMDD').fromNow()}`;
       }
-      const mine = (this.props.userId === post.writer.id);
+      const mine = (this.props.userId === article.writer.id);
       const url = ('route' in this.props) ? this.props.route.url : this.props.url;
       return (
-        <div className="PostWrap" key={`${post.id}${post.title}`}>
-          <h3 className="post_title">Title: {post.title} Profile: {post.profiles[0].name}</h3>
-          <h4 className="post_author">writer: {post.writer.username}</h4><h4 className="post_date"> date: {date}</h4>
+        <div className="ArticleWrap" key={`${article.id}${article.title}`}>
+          <h3 className="article_title">Title: {article.title} Profile: {article.profiles[0].name}</h3>
+          <h4 className="article_author">writer: {article.writer.username}</h4><h4 className="article_date"> date: {date}</h4>
           <div className="content">
             {result}
           </div>
-          <DelEditBox url={url} mine={mine} postNum={post.id} userId={this.props.userId}/>
-          <CommentBox articleId={post.id} isAddable/>
+          <DelEditBox url={url} mine={mine} articleNum={article.id} userId={this.props.userId}/>
+          <CommentBox articleId={article.id} isAddable/>
         </div>
       );
     });
-    const load = (this.props.data.articles.length <= this.props.postNum) ?
+    const load = (this.props.data.articles.length <= this.props.articleNum) ?
       'End' : 'Loading...';
     return (
-      <div className="Post">
-        {postNodes}
+      <div className="Article">
+        {articleNodes}
         <div className="more">
           <br/>
           <br/>
@@ -92,31 +92,31 @@ const ProtoPost = React.createClass({
 });
 
 const DelEditBox = React.createClass({
-  updatePost(postNum) {
-    browserHistory.push(`/${postNum}/edit`);
+  updateArticle(articleNum) {
+    browserHistory.push(`/${articleNum}/edit`);
   },
 
-  handlePostUpdate() {
-    this.updatePost(this.props.postNum);
+  handleArticleUpdate() {
+    this.updateArticle(this.props.articleNum);
   },
 
-  deletePost(id) {
-    const url = `${this.props.url}/${this.props.postNum}?currentUserId=${id}`;
+  deleteArticle(id) {
+    const url = `${this.props.url}/${this.props.articleNum}?currentUserId=${id}`;
     DataCon.postDataToServer(url, 'DELETE');
   },
 
-  handleDeletePost() {
+  handleDeleteArticle() {
     const check = confirm('이 글을 삭제하시겠습니까?');
     if (check === true) {
-      this.deletePost(this.props.userId);
+      this.deleteArticle(this.props.userId);
     }
   },
 
   render() {
     return this.props.mine ? (
       <div className="delete_edit_box">
-        <button onClick={this.handleDeletePost}>삭제</button>
-        <button onClick={this.handlePostUpdate}>수정</button>
+        <button onClick={this.handleDeleteArticle}>삭제</button>
+        <button onClick={this.handleArticleUpdate}>수정</button>
       </div>
     ) : (
       <div/>
@@ -126,27 +126,27 @@ const DelEditBox = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    data: state.postList.data,
-    postNum: state.postList.postNum,
+    data: state.articleList.data,
+    articleNum: state.articleList.articleNum,
     userId: state.userId.userId
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadPost: id => {
+    loadArticle: id => {
       let url = Url.getUrl('articles');
       if (id) {
         url += `?profileId=${id}`;
       }
       DataCon.loadDataFromServer(url).then(data => {
-        dispatch(loadPost(data));
+        dispatch(loadArticle(data));
       }).catch(console.error);
     },
-    onScrollEnd: () => dispatch(scrollPostListEnd())
+    onScrollEnd: () => dispatch(scrollArticleListEnd())
   };
 };
 
-const Post = connect(mapStateToProps, mapDispatchToProps)(ProtoPost);
+const Article = connect(mapStateToProps, mapDispatchToProps)(ProtoArticle);
 
-export default Post;
+export default Article;

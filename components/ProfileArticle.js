@@ -4,9 +4,9 @@ import {connect} from 'react-redux';
 import {updateFollowingList} from '../actions/dispatchers';
 import {loadProfileDetail, updateFollowingState} from '../actions/profileAction';
 import {Url, DataCon} from '../utils';
-import Post from './Post.js';
+import Article from './Article.js';
 
-const ProfilePost = React.createClass({
+const ProfileArticle = React.createClass({
   handleFollowChanged(following) {
     this.props.updateFollowingState(this.props.id, following);
   },
@@ -30,7 +30,7 @@ const ProfilePost = React.createClass({
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
         </div>
-        <Post url={`${this.props.url}articles`} isProfile id={id}/>
+        <Article url={`${this.props.url}articles`} isProfile id={id}/>
       </div>
     );
   }
@@ -83,5 +83,5 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePost);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileArticle);
 

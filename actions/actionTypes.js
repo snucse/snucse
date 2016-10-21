@@ -1,10 +1,10 @@
 // action types related with user id
 export const LOAD_USER_ID = 'LOAD_USER_ID';
 
-// action types related with Post.js
-export const LOAD_POST = 'LOAD_POST';
-export const LOAD_INITIAL_POST = 'LOAD_INITIAL_POST';
-export const SCROLL_POST_LIST_END = 'SCROLL_POST_LIST_END';
+// action types related with Article.js
+export const LOAD_ARTICLE = 'LOAD_ARTICLE';
+export const LOAD_INITIAL_ARTICLE = 'LOAD_INITIAL_ARTICLE';
+export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
 
 // action types related with Profiles.js
 export const LOAD_PROFILES = 'LOAD_PROFILES';

@@ -1,26 +1,26 @@
-import {LOAD_POST, LOAD_INITIAL_POST, SCROLL_POST_LIST_END} from '../actions/actionTypes';
+import {LOAD_ARTICLE, LOAD_INITIAL_ARTICLE, SCROLL_ARTICLE_LIST_END} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   data: {
     articles: []
   },
-  postNum: 5
+  articleNum: 5
 };
 
-export default function postList(state = INITIAL_STATE, action) {
+export default function articleList(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case LOAD_POST: {
+    case LOAD_ARTICLE: {
       return Object.assign({}, state, {
         data: action.data
       });
     }
-    case LOAD_INITIAL_POST: {
+    case LOAD_INITIAL_ARTICLE: {
       return Object.assign({}, state, {
       });
     }
-    case SCROLL_POST_LIST_END: {
+    case SCROLL_ARTICLE_LIST_END: {
       return Object.assign({}, state, {
-        postNum: state.postNum + 1
+        postNum: state.articleNum + 1
       });
     }
     default: {
