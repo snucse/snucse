@@ -3,28 +3,17 @@ import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {DataCon} from '../utils';
 import {updateFollowingList} from '../actions/dispatchers';
-import {changeId, changeName, changeDesc} from '../actions/profileFormAction';
 
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
 
 const ProfileMakeForm = React.createClass({
-  handleIdChange(e) {
-    this.props.changeId(e.target.value);
-  },
-  handleNameChange(e) {
-    this.props.changeName(e.target.value);
-  },
-  handleDescriptionChange(e) {
-    this.props.changeDesc(e.target.value);
-  },
-
   handleSubmit(e) {
     e.preventDefault();
 
     const trimmed = {
-      id: this.props.id.trim(),
-      name: this.props.name.trim(),
-      description: this.props.desc.trim()
+      id: this.formId.value.trim(),
+      name: this.formName.value.trim(),
+      description: this.formDesc.value.trim()
     };
 
     if (!reg.test(trimmed.id)) {
@@ -45,12 +34,26 @@ const ProfileMakeForm = React.createClass({
   },
 
   render() {
+    const refCallback = refName => {
+      return ref => {
+        this[refName] = ref;
+      };
+    };
     return (
       <div className="profileForm">
         <form onSubmit={this.handleSubmit}>
-          ID: <input type="text" name="id" value={this.props.id} onChange={this.handleIdChange}/> <br/>
-          이름: <input type="text" name="name" value={this.props.name} onChange={this.handleNameChange}/> <br/>
-          설명: <input type="text" name="description" value={this.props.desc} onChange={this.handleDescriptionChange}/> <br/>
+          ID: <input
+            type="text" name="id"
+            ref={refCallback('formId')}
+            /> <br/>
+          이름: <input
+            type="text" name="name"
+            ref={refCallback('formName')}
+            /> <br/>
+          설명: <input
+            type="text" name="description"
+            ref={refCallback('formDesc')}
+            /> <br/>
           <input type="submit" value="그룹 만들기"/>
         </form>
       </div>
@@ -58,27 +61,12 @@ const ProfileMakeForm = React.createClass({
   }
 });
 
-const mapStateToProps = function (state) {
-  return {
-    id: state.profileForm.id,
-    name: state.profileForm.name,
-    desc: state.profileForm.desc
-  };
-};
-
 const mapDispatchToProps = function (dispatch) {
   return {
-    changeId: data => {
-      dispatch(changeId(data));
-    },
-    changeName: data => {
-      dispatch(changeName(data));
-    },
-    changeDesc: data => {
-      dispatch(changeDesc(data));
-    },
     updateFollowingList: () => updateFollowingList(dispatch)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileMakeForm);
+export default connect(() => {
+  return {};
+}, mapDispatchToProps)(ProfileMakeForm);
