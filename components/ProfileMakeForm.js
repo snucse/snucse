@@ -1,7 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
-import {DataCon} from '../utils';
+import {DataCon, genRefCallback} from '../utils';
 import {updateFollowingList} from '../actions/dispatchers';
 
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
@@ -34,25 +34,20 @@ const ProfileMakeForm = React.createClass({
   },
 
   render() {
-    const refCallback = refName => {
-      return ref => {
-        this[refName] = ref;
-      };
-    };
     return (
       <div className="profileForm">
         <form onSubmit={this.handleSubmit}>
           ID: <input
             type="text" name="id"
-            ref={refCallback('formId')}
+            ref={genRefCallback(this, 'formId')}
             /> <br/>
           이름: <input
             type="text" name="name"
-            ref={refCallback('formName')}
+            ref={genRefCallback(this, 'formName')}
             /> <br/>
           설명: <input
             type="text" name="description"
-            ref={refCallback('formDesc')}
+            ref={genRefCallback(this, 'formDesc')}
             /> <br/>
           <input type="submit" value="그룹 만들기"/>
         </form>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {genRefCallback} from '../../utils';
 
 /*
   props
@@ -16,15 +17,10 @@ const CommentForm = React.createClass({
   },
 
   render() {
-    const generateRefHandler = propertyName => {
-      return ref => {
-        this[propertyName] = ref;
-      };
-    };
     // button 모양이지만 onsubmit 이벤트를 일으키지 않기 위해 input type button을 사용함
     return (
-      <form className="comment-form" ref={generateRefHandler('refForm')}>
-        <input ref={generateRefHandler('_content')}/>
+      <form className="comment-form" ref={genRefCallback(this, 'refForm')}>
+        <input ref={genRefCallback(this, '_content')}/>
         <input onClick={this.handleClickWrite} type="button" value="확인"/>
       </form>
     );
