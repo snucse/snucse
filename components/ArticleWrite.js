@@ -11,7 +11,7 @@ const ArticleWrite = React.createClass({
   render() {
     const {id} = this.props.params;
     return (
-      <div className="articleBox">
+      <div className="article-box">
         <h3>글쓰기</h3>
         <ArticleForm onArticleSubmit={this.handleArticleSubmit} id={id}/>
       </div>
@@ -48,7 +48,7 @@ const ArticleForm = React.createClass({
 
   render() {
     return (
-      <div className="commentForm">
+      <div className="comment-form">
         <form name="article" onSubmit={this.handleSubmit}>
           Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
           Content: <textarea rows="4" id="content" name="content" placeholder="Say something..." value={this.state.content} onChange={this.handleContentChange}/><br/>

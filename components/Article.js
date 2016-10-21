@@ -64,10 +64,10 @@ const ProtoArticle = React.createClass({
       const mine = (this.props.userId === article.writer.id);
       const url = ('route' in this.props) ? this.props.route.url : this.props.url;
       return (
-        <div className="ArticleWrap" key={`${article.id}${article.title}`}>
-          <h3 className="article_title">Title: {article.title} Profile: {article.profiles[0].name}</h3>
-          <h4 className="article_author">writer: {article.writer.username}</h4><h4 className="article_date"> date: {date}</h4>
-          <div className="content">
+        <div className="article-wrap" key={`${article.id}${article.title}`}>
+          <h3 className="article-title">Title: {article.title} Profile: {article.profiles[0].name}</h3>
+          <h4 className="article-author">writer: {article.writer.username}</h4><h4 className="article-date"> date: {date}</h4>
+          <div className="article-content">
             {result}
           </div>
           <DelEditBox url={url} mine={mine} articleNum={article.id} userId={this.props.userId}/>
@@ -78,7 +78,7 @@ const ProtoArticle = React.createClass({
     const load = (this.props.data.articles.length <= this.props.articleNum) ?
       'End' : 'Loading...';
     return (
-      <div className="Article">
+      <div className="article">
         {articleNodes}
         <div className="more">
           <br/>
@@ -114,7 +114,7 @@ const DelEditBox = React.createClass({
 
   render() {
     return this.props.mine ? (
-      <div className="delete_edit_box">
+      <div className="delete-edit-box">
         <button onClick={this.handleDeleteArticle}>삭제</button>
         <button onClick={this.handleArticleUpdate}>수정</button>
       </div>
