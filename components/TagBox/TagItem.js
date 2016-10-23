@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 const TagItem = React.createClass({
   handleClickDelete() {
@@ -8,7 +9,7 @@ const TagItem = React.createClass({
   render() {
     return (
       <li className="tag-item">
-        {this.props.tag.tag}
+        <Link to={`/tags/${this.props.tag.tag}`}>{this.props.tag.tag}</Link>
         <button onClick={this.handleClickDelete} className="delete-button">×</button>
       </li>
     );

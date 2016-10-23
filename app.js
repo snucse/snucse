@@ -10,6 +10,7 @@ import {
   Message,
   Profiles,
   Main,
+  Tag,
   ArticleWrite,
   ArticleEdit,
   ClassManager,
@@ -32,6 +33,7 @@ ReactDOM.render(
       <Route path="/sign-up" component={SignUp}/>
       <Route path="/" component={Menu} pollInterval={2000} url={url}>
         <IndexRoute component={Main} url={`${url}articles`} pollInterval={2000}/>
+        <Route path="tags/:tagName" component={Tag}/>
         <Route path="message" component={Message}/>
         <Route path="others" component={Others}/>
         <Route path="profiles" component={Profiles} url={`${url}profiles`}/>
