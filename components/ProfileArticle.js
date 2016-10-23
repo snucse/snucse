@@ -1,10 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {updateFollowingList} from '../actions/dispatchers';
+
+import {updateFollowingList, loadProfileTag} from '../actions/dispatchers';
 import {loadProfileDetail, updateFollowingState} from '../actions/profileAction';
 import {Url, DataCon} from '../utils';
 import Article from './Article.js';
+import {ProfileTagBox} from './TagBox';
 
 const ProfileArticle = React.createClass({
   handleFollowChanged(following) {
@@ -29,6 +31,7 @@ const ProfileArticle = React.createClass({
         <div className="menu-of-profile">
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
+          <ProfileTagBox profileId={id}/>
         </div>
         <Article url={`${this.props.url}articles`} isProfile id={id}/>
       </div>
@@ -70,6 +73,7 @@ const mapDispatchToProps = function (dispatch) {
     loadProfileDetail: id => {
       DataCon.loadDataFromServer(Url.getUrl(`profiles/${id}`)).then(data => {
         dispatch(loadProfileDetail(data));
+        loadProfileTag(dispatch, data.id, data.tags);
       }).catch(console.error);
     },
     updateFollowingState: (id, following) => {
