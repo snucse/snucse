@@ -3,7 +3,7 @@ import Others from './Others.js';
 import Message from './Message.js';
 import Profiles from './Profiles.js';
 import Main from './Main.js';
-import Tag from './Tag.js';
+import Tag from './Tag';
 import ArticleWrite from './ArticleWrite.js';
 import ArticleEdit from './ArticleEdit.js';
 import Article from './Article.js';

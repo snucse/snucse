@@ -70,6 +70,21 @@ export function deleteTagToProfile(dispatch, profileId, tagName) {
   }).catch(console.error);
 }
 
+export function loadTagInformation(dispatch, tagName) {
+  DataCon.loadDataFromServer(Url.getUrl(`tags/${tagName}`)).then(tagInformation => {
+    dispatch({
+      type: types.LOAD_TAG_INFORMATION,
+      tagInformation
+    });
+  }).catch(err => {
+    console.error(err);
+    dispatch({
+      type: types.LOAD_TAG_INFORMATION,
+      tagInformation: null
+    });
+  });
+}
+
 export {
   updateFollowingList
 };

@@ -1,4 +1,4 @@
-import {LOAD_ARTICLES_TAG, LOAD_ARTICLE_TAG, LOAD_PROFILE_TAG} from '../actions/actionTypes';
+import {LOAD_ARTICLES_TAG, LOAD_ARTICLE_TAG, LOAD_PROFILE_TAG, LOAD_TAG_INFORMATION} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   tags: {
@@ -25,7 +25,9 @@ const INITIAL_STATE = {
       ~
     }
     */
-  }
+  },
+
+  tag: null // GET /api/v1/tags/:tag 의 response를 집어넣는다
 };
 
 export default function tag(state = INITIAL_STATE, action) {
@@ -66,6 +68,12 @@ export default function tag(state = INITIAL_STATE, action) {
       });
       return Object.assign({}, state, {
         tags
+      });
+    }
+    case LOAD_TAG_INFORMATION: {
+      const tag = action.tagInformation;
+      return Object.assign({}, state, {
+        tag
       });
     }
     default: {
