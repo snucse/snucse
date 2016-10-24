@@ -36,7 +36,7 @@ export default function tag(state = INITIAL_STATE, action) {
         newArticleTag[article.id] = article.tags;
         return newArticleTag;
       });
-      const articles = tagList.reduce((prev, curr) => {
+      const articles = tagList.length === 0 ? {} : tagList.reduce((prev, curr) => {
         return Object.assign({}, prev, curr);
       });
       const tags = Object.assign({}, state.tags, {
