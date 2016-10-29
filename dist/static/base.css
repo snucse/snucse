@@ -37,6 +37,7 @@
     top: 4em;
     bottom: 0px;
     background-color: #cfc;
+    overflow: auto;
 }
 
 .content {
@@ -106,4 +107,17 @@
 .tag-form-wrapper {
   display: inline;
   margin-left: 10px;
+}
+
+#tagcloud h3 {
+  margin: 0;
+}
+#tagcloud ul {
+  margin: 0;
+  padding: 0;
+}
+#tagcloud .tag-item {
+  display: inline;
+  margin: 0px 5px;
+  list-style: none;
 }

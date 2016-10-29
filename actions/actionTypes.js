@@ -25,6 +25,7 @@ export const LOAD_ARTICLES_TAG = 'LOAD_ARTICLES_TAG';
 export const LOAD_ARTICLE_TAG = 'LOAD_ARTICLE_TAG';
 export const LOAD_PROFILE_TAG = 'LOAD_PROFILE_TAG';
 export const LOAD_TAG_INFORMATION = 'LOAD_TAG_INFORMATION';
+export const LOAD_TAGCLOUD = 'LOAD_TAGCLOUD';
 
 // action types related with updates
 export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';

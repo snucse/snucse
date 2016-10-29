@@ -85,6 +85,15 @@ export function loadTagInformation(dispatch, tagName) {
   });
 }
 
+export function loadTagCloud(dispatch) {
+  DataCon.loadDataFromServer(Url.getUrl('tags')).then(res => {
+    dispatch({
+      type: types.LOAD_TAGCLOUD,
+      tags: res.tags
+    });
+  }).catch(console.error);
+}
+
 export {
   updateFollowingList
 };
