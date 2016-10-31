@@ -19,6 +19,8 @@ import {
 
 import reducers from './reducers';
 
+import './base.css';
+
 const rootElement = document.getElementById('content');
 
 const url = '/api/v1/';

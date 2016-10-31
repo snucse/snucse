@@ -67,6 +67,7 @@ __pycache__/
 .Python
 env/
 build/
+dist/
 develop-eggs/
 downloads/
 eggs/
@@ -147,7 +148,3 @@ ENV/
 #############################
 # SNUCSE specific gitignore
 #############################
-
-# Build result
-application.js
-application.js.map
