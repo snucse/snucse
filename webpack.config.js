@@ -1,7 +1,11 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Always-enabled plugins
 const plugins = [
+  new ExtractTextPlugin('static/application.css'),
+  new CopyWebpackPlugin([{from: '*.html'}])
 ];
 
 // Production-only plugins
@@ -25,6 +29,14 @@ module.exports = {
   plugins: process.env.NODE_ENV === 'production' ? plugins.concat(productionPlugins) : plugins,
   module: {
     loaders: [
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css')
+      },
+      {
+        test: /\.styl$/,
+        loader: ExtractTextPlugin.extract('style', 'css!stylus')
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
