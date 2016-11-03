@@ -15,7 +15,7 @@ const TagCloudContainer = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {tags} = state.tagcloud;
+  const {tags} = state.tag.cloud;
   return {
     tags
   };

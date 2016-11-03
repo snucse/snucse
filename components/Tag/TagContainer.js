@@ -21,9 +21,9 @@ const TagContainer = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {tag} = state.tag;
+  const {targetTag} = state.tag.view;
   return {
-    tag
+    tag: targetTag
   };
 };
 
