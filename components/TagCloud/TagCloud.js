@@ -3,7 +3,6 @@ import {Link} from 'react-router';
 
 const TagCloud = React.createClass({
   render() {
-    console.log(this.props.tags);
     const tagItems = this.props.tags.map(tag => {
       return (
         <li className="tag-item" key={tag.tag}>
