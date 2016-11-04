@@ -62,7 +62,6 @@ const ProtoArticle = React.createClass({
         date += `(수정됨)${moment(article.createdAt.date, 'YYYYMMDD').fromNow()}`;
       }
       const mine = (this.props.userId === article.writer.id);
-      const url = ('route' in this.props) ? this.props.route.url : this.props.url;
       return (
         <div className="article-wrap" key={`${article.id}${article.title}`}>
           <h3 className="article-title">Title: {article.title} Profile: {article.profiles[0].name}</h3>
@@ -70,7 +69,7 @@ const ProtoArticle = React.createClass({
           <div className="article-content">
             {result}
           </div>
-          <DelEditBox url={url} mine={mine} articleNum={article.id} userId={this.props.userId}/>
+          <DelEditBox mine={mine} articleId={article.id}/>
           <CommentBox articleId={article.id} isAddable/>
         </div>
       );
@@ -92,23 +91,23 @@ const ProtoArticle = React.createClass({
 });
 
 const DelEditBox = React.createClass({
-  updateArticle(articleNum) {
-    browserHistory.push(`/${articleNum}/edit`);
+  updateArticle(articleId) {
+    browserHistory.push(`/${articleId}/edit`);
   },
 
   handleArticleUpdate() {
-    this.updateArticle(this.props.articleNum);
+    this.updateArticle(this.props.articleId);
   },
 
-  deleteArticle(id) {
-    const url = `${this.props.url}/${this.props.articleNum}?currentUserId=${id}`;
+  deleteArticle() {
+    const url = Url.getUrl(`articles/${this.props.articleId}`);
     DataCon.postDataToServer(url, 'DELETE');
   },
 
   handleDeleteArticle() {
     const check = confirm('이 글을 삭제하시겠습니까?');
     if (check === true) {
-      this.deleteArticle(this.props.userId);
+      this.deleteArticle();
     }
   },
 

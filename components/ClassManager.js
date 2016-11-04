@@ -7,12 +7,12 @@ const ClassManager = React.createClass({
     const {id} = this.props.params;
     if (re.test(id)) {
       return (
-        <ProfileArticle url={this.props.route.url} id={id}/>
+        <ProfileArticle id={id}/>
       );
       // 여기서 숫자로 받고 글 하나를 보여줘야함
     }
     return (
-      <ProfileArticle url={this.props.route.url} id={id}/>
+      <ProfileArticle id={id}/>
     );
   }
 });

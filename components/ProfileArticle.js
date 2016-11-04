@@ -30,7 +30,7 @@ const ProfileArticle = React.createClass({
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
         </div>
-        <Article url={`${this.props.url}articles`} isProfile id={id}/>
+        <Article isProfile id={id}/>
       </div>
     );
   }

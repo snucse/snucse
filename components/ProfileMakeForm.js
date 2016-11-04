@@ -1,7 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
-import {DataCon, genRefCallback} from '../utils';
+import {DataCon, Url, genRefCallback} from '../utils';
 import {updateFollowingList} from '../actions/dispatchers';
 
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
@@ -26,7 +26,8 @@ const ProfileMakeForm = React.createClass({
       return false;
     }
 
-    DataCon.postDataToServer(this.props.url, 'POST', trimmed).then(() => {
+    const url = Url.getUrl('profiles');
+    DataCon.postDataToServer(url, 'POST', trimmed).then(() => {
       alert('프로필 생성에 성공하였습니다.');
       this.props.updateFollowingList();
       browserHistory.push(`/${trimmed.id}`);
