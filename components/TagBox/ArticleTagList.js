@@ -20,7 +20,7 @@ const ArticleTagList = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    tags: state.tag.tags.articles
+    tags: state.tag.attached.articles
   };
 };
 

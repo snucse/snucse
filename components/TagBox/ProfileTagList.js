@@ -20,7 +20,7 @@ const ProfileTagList = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    tags: state.tag.tags.profiles
+    tags: state.tag.attached.profiles
   };
 };
 

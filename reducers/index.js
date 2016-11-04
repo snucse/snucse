@@ -5,7 +5,6 @@ import profileList from './profileList';
 import profileForm from './profileForm';
 import comment from './comment';
 import tag from './tag';
-import tagcloud from './tagcloud';
 import me from './me';
 // import * as types from '../actions/actionTypes';
 // import other reducers
@@ -19,7 +18,6 @@ const reducers = {
   articleList,
   comment,
   tag,
-  tagcloud,
   userId,
   me
   // list up all reducers
