@@ -20,6 +20,8 @@ import {
 
 import reducers from './reducers';
 
+import './base.styl';
+
 const rootElement = document.getElementById('content');
 
 const url = '/api/v1/';
