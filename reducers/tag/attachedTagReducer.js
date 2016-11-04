@@ -1,19 +1,5 @@
-import {combineReducers} from 'redux';
-
-import {LOAD_ARTICLES_TAG, LOAD_ARTICLE_TAG, LOAD_PROFILE_TAG, LOAD_TAG_INFORMATION, LOAD_TAGCLOUD} from '../actions/actionTypes';
-import {updateObject} from './common';
-
-/*
-tag reducer structure
-
-* attached
-  * profiles
-  * articles
-* view
-  * targetTag
-* cloud
-  * tags
-*/
+import {LOAD_ARTICLES_TAG, LOAD_ARTICLE_TAG, LOAD_PROFILE_TAG} from '../../actions/actionTypes';
+import {updateObject} from '../common';
 
 const ATTACHED_TAGS_INITIAL_STATE = {
   profiles: {
@@ -28,14 +14,6 @@ const ATTACHED_TAGS_INITIAL_STATE = {
   /* articleId: [ ~ ] */
   }
 /* (태그가 붙을 수 있는 다른 오브젝트): { ~ } */
-};
-
-const TAG_VIEW_INITIAL_STATE = {
-  targetTag: null // GET /api/v1/tags/:tag 의 response를 집어넣는다
-};
-
-const TAGCLOUD_INITIAL_STATE = {
-  tags: []
 };
 
 function loadArticlesTag(state, action) {
@@ -64,7 +42,7 @@ function loadProfileTag(state, action) {
   return updateObject(state, {profiles});
 }
 
-function attachedTagReducer(attachedTagsState = ATTACHED_TAGS_INITIAL_STATE, action) {
+export default function attachedTagReducer(attachedTagsState = ATTACHED_TAGS_INITIAL_STATE, action) {
   switch (action.type) {
     case LOAD_ARTICLES_TAG: return loadArticlesTag(attachedTagsState, action);
     case LOAD_ARTICLE_TAG: return loadArticleTag(attachedTagsState, action);
@@ -72,31 +50,3 @@ function attachedTagReducer(attachedTagsState = ATTACHED_TAGS_INITIAL_STATE, act
     default: return attachedTagsState;
   }
 }
-
-function loadTagInformation(tagViewState, action) {
-  return updateObject(tagViewState, {targetTag: action.tagInformation});
-}
-
-function tagViewReducer(tagViewState = TAG_VIEW_INITIAL_STATE, action) {
-  switch (action.type) {
-    case LOAD_TAG_INFORMATION: return loadTagInformation(tagViewState, action);
-    default: return tagViewState;
-  }
-}
-
-function loadTagCloud(tagCloudState, action) {
-  return updateObject(tagCloudState, {tags: action.tags});
-}
-
-function tagCloudReducer(tagCloudState = TAGCLOUD_INITIAL_STATE, action) {
-  switch (action.type) {
-    case LOAD_TAGCLOUD: return loadTagCloud(tagCloudState, action);
-    default: return tagCloudState;
-  }
-}
-
-export default combineReducers({
-  attached: attachedTagReducer,
-  view: tagViewReducer,
-  cloud: tagCloudReducer
-});
