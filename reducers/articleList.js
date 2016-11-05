@@ -20,7 +20,7 @@ export default function articleList(state = INITIAL_STATE, action) {
     }
     case SCROLL_ARTICLE_LIST_END: {
       return Object.assign({}, state, {
-        postNum: state.articleNum + 1
+        articleNum: state.articleNum + 1
       });
     }
     default: {
