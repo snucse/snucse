@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import CommentItemContainer from './CommentItemContainer.js';
+import CommentItemContainer from './CommentItemContainer';
 
 const FOLD_COMMENT_LIMIT = 1;
 

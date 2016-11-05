@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {addTagToProfile} from '../../actions/dispatchers.js';
-import TagForm from './TagForm.js';
+import {addTagToProfile} from '../../actions/dispatchers';
+import TagForm from './TagForm';
 
 const ProfileTagFormContainer = React.createClass({
   handleAdd(tagName) {

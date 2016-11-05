@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import {DataCon, Url} from '../utils';
 import {loadUserId} from '../actions';
 import '../stylesheets/menu.styl';
-import MyProfile from './MyProfile.js';
+import MyProfile from './MyProfile';
 import TagCloud from './TagCloud';
 
 const Menu = React.createClass({

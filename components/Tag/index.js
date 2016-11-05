@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TagContainer from './TagContainer.js';
+import TagContainer from './TagContainer';
 
 const Tag = React.createClass({
   render() {

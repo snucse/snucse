@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RelatedTagItemContainer from './RelatedTagItemContainer.js';
+import RelatedTagItemContainer from './RelatedTagItemContainer';
 
 const RelatedTagList = React.createClass({
   render() {

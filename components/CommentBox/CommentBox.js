@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {loadComments} from '../../actions';
 import {DataCon, Url} from '../../utils';
 import '../../stylesheets/comment-box.styl';
-import CommentList from './CommentList.js';
-import CommentFormContainer from './CommentFormContainer.js';
+import CommentList from './CommentList';
+import CommentFormContainer from './CommentFormContainer';
 
 /*
   props

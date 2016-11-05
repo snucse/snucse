@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteTagToArticle} from '../../actions/dispatchers.js';
-import TagItem from './TagItem.js';
+import {deleteTagToArticle} from '../../actions/dispatchers';
+import TagItem from './TagItem';
 
 const ArticleTagItemContainer = React.createClass({
   handleDelete(tagName) {
