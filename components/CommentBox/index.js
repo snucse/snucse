@@ -1,3 +1,3 @@
-import CommentBox from './CommentBox.js';
+import CommentBox from './CommentBox';
 
 export default CommentBox;

@@ -1,15 +1,15 @@
-import Menu from './Menu.js';
-import Others from './Others.js';
-import Message from './Message.js';
-import Profiles from './Profiles.js';
-import Main from './Main.js';
+import Menu from './Menu';
+import Others from './Others';
+import Message from './Message';
+import Profiles from './Profiles';
+import Main from './Main';
 import Tag from './Tag';
-import ArticleWrite from './ArticleWrite.js';
-import ArticleEdit from './ArticleEdit.js';
-import Article from './Article.js';
-import ClassManager from './ClassManager.js';
-import Login from './Login.js';
-import SignUp from './SignUp.js';
+import ArticleWrite from './ArticleWrite';
+import ArticleEdit from './ArticleEdit';
+import Article from './Article';
+import ClassManager from './ClassManager';
+import Login from './Login';
+import SignUp from './SignUp';
 
 export {
   Menu,

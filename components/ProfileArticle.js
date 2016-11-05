@@ -6,7 +6,7 @@ import {updateFollowingList, loadProfileTag} from '../actions/dispatchers';
 import {loadProfileDetail, updateFollowingState} from '../actions/profileAction';
 import {Url, DataCon} from '../utils';
 import '../stylesheets/tagbox.styl';
-import Article from './Article.js';
+import Article from './Article';
 import {ProfileTagBox} from './TagBox';
 
 const ProfileArticle = React.createClass({

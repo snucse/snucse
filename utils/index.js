@@ -1,6 +1,6 @@
-import DataCon from './DataCon.js';
-import Url from './Url.js';
-import RefCallbackHelper from './RefCallbackHelper.js';
+import DataCon from './DataCon';
+import Url from './Url';
+import RefCallbackHelper from './RefCallbackHelper';
 
 const genRefCallback = RefCallbackHelper.generate;
 

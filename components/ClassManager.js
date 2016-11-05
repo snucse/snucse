@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileArticle from './ProfileArticle.js';
+import ProfileArticle from './ProfileArticle';
 
 const re = /^\d+$/;
 const ClassManager = React.createClass({
