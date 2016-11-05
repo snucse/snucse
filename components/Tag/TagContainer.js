@@ -11,7 +11,7 @@ const TagContainer = React.createClass({
 
   componentWillReceiveProps(props) {
     if (props.tagName !== this.props.tagName) {
-      this.props.loadTagInformation(this.props.tagName);
+      this.props.loadTagInformation(props.tagName);
     }
   },
 
