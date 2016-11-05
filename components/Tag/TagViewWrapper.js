@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-import RelatedTagBox from '../TagBox/RelatedTagBox.js';
+import '../../stylesheets/tagbox.styl';
+import {RelatedTagBox} from '../TagBox';
 
 const TagEmptyView = React.createClass({
   render() {

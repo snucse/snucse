@@ -1,10 +1,10 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
-import {DataCon} from '../utils';
+import {DataCon, Url} from '../utils';
 
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
-    const url = this.props.route.url;
+    const url = Url.getUrl('articles');
     DataCon.postDataToServer(url, 'POST', data);
   },
 
