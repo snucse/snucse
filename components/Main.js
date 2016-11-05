@@ -4,9 +4,7 @@ import ArticleList from './ArticleList';
 const Main = React.createClass({
   render() {
     return (
-      <div className="articles">
-        <ArticleList/>
-      </div>
+      <ArticleList/>
     );
   }
 });
