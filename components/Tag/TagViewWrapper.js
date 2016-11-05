@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+import RelatedTagBox from '../TagBox/RelatedTagBox.js';
+
 const TagEmptyView = React.createClass({
   render() {
     return (
@@ -13,7 +15,7 @@ const TagEmptyView = React.createClass({
 
 const TagView = React.createClass({
   render() {
-    const {creator, articles, profiles} = this.props.tag;
+    const {creator, articles, profiles, relatedTags} = this.props.tag;
     const articlesView = articles.length === 0 ?
       <tr>
         <td colSpan={4}>관련 글이 없습니다.</td>
@@ -46,6 +48,10 @@ const TagView = React.createClass({
           <img src={creator.profileImageUrl}/>
           태그 만든 사람 {creator.name}
         </p>
+        <h4>연관 태그</h4>
+        <section>
+          <RelatedTagBox targetTagName={this.props.tagName} relatedTags={relatedTags}/>
+        </section>
         <h4>관련 글</h4>
         <section>
           <table>

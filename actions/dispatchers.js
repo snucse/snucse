@@ -1,7 +1,7 @@
 import {DataCon, Url} from '../utils';
 import * as types from './actionTypes';
 
-function updateFollowingList(dispatch) {
+export function updateFollowingList(dispatch) {
   DataCon.loadDataFromServer(Url.getUrl('profiles/following')).then(data => {
     dispatch({
       type: types.UPDATE_FOLLOWING,
@@ -94,6 +94,20 @@ export function loadTagCloud(dispatch) {
   }).catch(console.error);
 }
 
-export {
-  updateFollowingList
-};
+export function makeTagRelationship(dispatch, targetTagName, tagName) {
+  const params = {
+    relatedTag: tagName
+  };
+  DataCon.postDataToServer(Url.getUrl(`tags/${targetTagName}/add_related_tag`), 'POST', params).then(() => {
+  }).catch(console.error);
+}
+
+export function breakTagRelationship(dispatch, targetTagName, tagName) {
+  const params = {
+    relatedTag: tagName
+  };
+  DataCon.postDataToServer(Url.getUrl(`tags/${targetTagName}/destroy_related_tag`), 'POST', params).then(() => {
+  }).catch(console.error);
+}
+// end of dispatchers related with tag
+// fixme 파일로 빼기
