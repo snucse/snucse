@@ -2,9 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-import {updateFollowingList, loadProfileTag} from '../actions/dispatchers';
-import {loadProfileDetail, updateFollowingState} from '../actions/profileAction';
-import {Url, DataCon} from '../utils';
+import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
 import ArticleList from './ArticleList';
 import {ProfileTagBox} from './TagBox';
@@ -71,19 +69,8 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadProfileDetail: id => {
-      DataCon.loadDataFromServer(Url.getUrl(`profiles/${id}`)).then(data => {
-        dispatch(loadProfileDetail(data));
-        loadProfileTag(dispatch, data.id, data.tags);
-      }).catch(console.error);
-    },
-    updateFollowingState: (id, following) => {
-      const type = following ? 'follow' : 'unfollow';
-      DataCon.postDataToServer(Url.getUrl(`profiles/${id}/${type}`), 'POST').then(() => {
-        dispatch(updateFollowingState(following));
-        updateFollowingList(dispatch);
-      }).catch(console.error);
-    },
+    loadProfileDetail: id => loadProfileDetail(dispatch, id),
+    updateFollowingState: (id, following) => updateFollowingState(dispatch, id, following),
     updateFollowingList: () => updateFollowingList(dispatch)
   };
 };
