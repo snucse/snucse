@@ -21,9 +21,9 @@ export function scrollArticleListEnd() {
   };
 }
 
-export function loadingArticle() {
+export function onLoadArticle() {
   return {
-    type: types.LOADING_ARTICLE
+    type: types.ON_LOADING_ARTICLE
   };
 }
 
