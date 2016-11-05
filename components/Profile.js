@@ -6,10 +6,10 @@ import {updateFollowingList, loadProfileTag} from '../actions/dispatchers';
 import {loadProfileDetail, updateFollowingState} from '../actions/profileAction';
 import {Url, DataCon} from '../utils';
 import '../stylesheets/tagbox.styl';
-import Article from './Article';
+import ArticleList from './ArticleList';
 import {ProfileTagBox} from './TagBox';
 
-const ProfileArticle = React.createClass({
+const Profile = React.createClass({
   handleFollowChanged(following) {
     this.props.updateFollowingState(this.props.id, following);
   },
@@ -34,7 +34,7 @@ const ProfileArticle = React.createClass({
           <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
           <ProfileTagBox profileId={id}/>
         </div>
-        <Article isProfile id={id}/>
+        <ArticleList isProfile id={id}/>
       </div>
     );
   }
@@ -88,5 +88,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileArticle);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

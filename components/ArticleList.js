@@ -11,7 +11,7 @@ import '../stylesheets/tagbox.styl';
 import CommentBox from './CommentBox';
 import {ArticleTagBox} from './TagBox';
 
-const ProtoArticle = React.createClass({
+const ArticleList = React.createClass({
   onScroll() {
     // http://stackoverflow.com/questions/9439725
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
@@ -153,6 +153,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-const Article = connect(mapStateToProps, mapDispatchToProps)(ProtoArticle);
-
-export default Article;
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
