@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 
-import attachedTagReducer from './attachedTagReducer.js';
-import tagViewReducer from './tagViewReducer.js';
-import tagCloudReducer from './tagCloudReducer.js';
+import attachedTagReducer from './attachedTagReducer';
+import tagViewReducer from './tagViewReducer';
+import tagCloudReducer from './tagCloudReducer';
 
 /*
 tag reducer structure

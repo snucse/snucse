@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ArticleTagList from './ArticleTagList.js';
-import ArticleTagFormContainer from './ArticleTagFormContainer.js';
+import ArticleTagList from './ArticleTagList';
+import ArticleTagFormContainer from './ArticleTagFormContainer';
 
 const ArticleTagBox = React.createClass({
   render() {

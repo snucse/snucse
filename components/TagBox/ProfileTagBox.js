@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ProfileTagList from './ProfileTagList.js';
-import ProfileTagFormContainer from './ProfileTagFormContainer.js';
+import ProfileTagList from './ProfileTagList';
+import ProfileTagFormContainer from './ProfileTagFormContainer';
 
 const ProfileTagBox = React.createClass({
   render() {

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {loadTagCloud} from '../../actions/dispatchers';
-import TagCloud from './TagCloud.js';
+import TagCloud from './TagCloud';
 
 const TagCloudContainer = React.createClass({
   componentDidMount() {

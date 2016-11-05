@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
 import {loadArticle, scrollArticleListEnd} from '../actions';
-import {loadArticlesTag} from '../actions/dispatchers.js';
+import {loadArticlesTag} from '../actions/dispatchers';
 import '../stylesheets/article.styl';
 import '../stylesheets/tagbox.styl';
 import CommentBox from './CommentBox';

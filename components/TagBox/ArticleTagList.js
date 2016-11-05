@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ArticleTagItemContainer from './ArticleTagItemContainer.js';
+import ArticleTagItemContainer from './ArticleTagItemContainer';
 
 const ArticleTagList = React.createClass({
   render() {

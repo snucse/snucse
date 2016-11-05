@@ -1,7 +1,7 @@
 import React from 'react';
 
-import RelatedTagList from './RelatedTagList.js';
-import RelatedTagFormContainer from './RelatedTagFormContainer.js';
+import RelatedTagList from './RelatedTagList';
+import RelatedTagFormContainer from './RelatedTagFormContainer';
 
 const RelatedTagBox = React.createClass({
   render() {
