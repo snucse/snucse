@@ -18,11 +18,10 @@ export function loadArticlesTag(dispatch, articles) {
   });
 }
 
-export function loadArticleTag(dispatch, articleId, tags) {
+export function loadArticleTag(dispatch, article) {
   dispatch({
-    type: types.LOAD_ARTICLE_TAG,
-    articleId,
-    tags
+    type: types.LOAD_ARTICLES_TAG,
+    articles: [article]
   });
 }
 
@@ -31,7 +30,7 @@ export function addTagToArticle(dispatch, articleId, tagName) {
     tag: tagName
   };
   DataCon.postDataToServer(Url.getUrl(`articles/${articleId}/add_tag`), 'POST', data).then(article => {
-    loadArticleTag(dispatch, article.id, article.tags);
+    loadArticleTag(dispatch, article);
   }).catch(console.error);
 }
 
@@ -40,7 +39,7 @@ export function deleteTagToArticle(dispatch, articleId, tagName) {
     tag: tagName
   };
   DataCon.postDataToServer(Url.getUrl(`articles/${articleId}/destroy_tag`), 'POST', data).then(article => {
-    loadArticleTag(dispatch, article.id, article.tags);
+    loadArticleTag(dispatch, article);
   }).catch(console.error);
 }
 

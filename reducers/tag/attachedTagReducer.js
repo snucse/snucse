@@ -1,4 +1,4 @@
-import {LOAD_ARTICLES_TAG, LOAD_ARTICLE_TAG, LOAD_PROFILE_TAG} from '../../actions/actionTypes';
+import {LOAD_ARTICLES_TAG, LOAD_PROFILE_TAG} from '../../actions/actionTypes';
 import {updateObject} from '../common';
 
 const ATTACHED_TAGS_INITIAL_STATE = {
@@ -28,13 +28,6 @@ function loadArticlesTag(state, action) {
   return updateObject(state, {articles});
 }
 
-function loadArticleTag(state, action) {
-  const newArticleTag = {};
-  newArticleTag[action.articleId] = action.tags;
-  const articles = updateObject(state.articles, newArticleTag);
-  return updateObject(state, {articles});
-}
-
 function loadProfileTag(state, action) {
   const newProfileTag = {};
   newProfileTag[action.profileId] = action.tags;
@@ -45,7 +38,6 @@ function loadProfileTag(state, action) {
 export default function attachedTagReducer(attachedTagsState = ATTACHED_TAGS_INITIAL_STATE, action) {
   switch (action.type) {
     case LOAD_ARTICLES_TAG: return loadArticlesTag(attachedTagsState, action);
-    case LOAD_ARTICLE_TAG: return loadArticleTag(attachedTagsState, action);
     case LOAD_PROFILE_TAG: return loadProfileTag(attachedTagsState, action);
     default: return attachedTagsState;
   }
