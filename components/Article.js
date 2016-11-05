@@ -5,8 +5,11 @@ import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
 import {loadArticle, scrollArticleListEnd, setLoadingTrue} from '../actions';
+import {loadArticlesTag} from '../actions/dispatchers.js';
 import '../stylesheets/article.styl';
+import '../stylesheets/tagbox.styl';
 import CommentBox from './CommentBox';
+import {ArticleTagBox} from './TagBox';
 
 const ProtoArticle = React.createClass({
   onScroll() {
@@ -67,6 +70,7 @@ const ProtoArticle = React.createClass({
             {result}
           </div>
           <DelEditBox mine={mine} articleId={article.id}/>
+          <ArticleTagBox articleId={article.id}/>
           <CommentBox articleId={article.id} isAddable/>
         </div>
       );
@@ -138,6 +142,7 @@ const mapDispatchToProps = function (dispatch) {
       }
       DataCon.loadDataFromServer(url).then(data => {
         dispatch(loadArticle(data));
+        loadArticlesTag(dispatch, data.articles);
       }).catch(console.error);
     },
     onScrollEnd: () => dispatch(scrollArticleListEnd()),

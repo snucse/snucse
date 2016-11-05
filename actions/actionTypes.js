@@ -21,6 +21,12 @@ export const WRITE_COMMENT = 'WRITE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
+// action types related with tag
+export const LOAD_ARTICLES_TAG = 'LOAD_ARTICLES_TAG';
+export const LOAD_PROFILE_TAG = 'LOAD_PROFILE_TAG';
+export const LOAD_TAG_INFORMATION = 'LOAD_TAG_INFORMATION';
+export const LOAD_TAGCLOUD = 'LOAD_TAGCLOUD';
+
 // action types related with updates
 export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';
 
