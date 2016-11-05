@@ -5,7 +5,7 @@ export const LOAD_USER_ID = 'LOAD_USER_ID';
 export const LOAD_ARTICLE = 'LOAD_ARTICLE';
 export const LOAD_INITIAL_ARTICLE = 'LOAD_INITIAL_ARTICLE';
 export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
-export const SET_LOADING_TRUE = 'SET_LOADING_TRUE';
+export const LOADING_ARTICLE = 'LOADING_ARTICLE';
 
 // action types related with Profiles.js
 export const LOAD_PROFILES = 'LOAD_PROFILES';

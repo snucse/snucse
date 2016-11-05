@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
-import {loadArticle, scrollArticleListEnd, setLoadingTrue} from '../actions';
+import {loadArticle, scrollArticleListEnd, loadingArticle} from '../actions';
 import {loadArticlesTag} from '../actions/dispatchers';
 import '../stylesheets/article.styl';
 import '../stylesheets/tagbox.styl';
@@ -25,7 +25,7 @@ const ArticleList = React.createClass({
           // 더 보여달라는 요청
         }
       }, 1000);
-      this.props.setLoadingTrue();
+      this.props.loadingArticle();
     }
   },
 
@@ -146,7 +146,7 @@ const mapDispatchToProps = function (dispatch) {
       }).catch(console.error);
     },
     onScrollEnd: () => dispatch(scrollArticleListEnd()),
-    setLoadingTrue: () => dispatch(setLoadingTrue())
+    loadingArticle: () => dispatch(loadingArticle())
   };
 };
 

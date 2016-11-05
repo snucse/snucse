@@ -1,4 +1,4 @@
-import {LOAD_ARTICLE, LOAD_INITIAL_ARTICLE, SCROLL_ARTICLE_LIST_END, SET_LOADING_TRUE} from '../actions/actionTypes';
+import {LOAD_ARTICLE, LOAD_INITIAL_ARTICLE, SCROLL_ARTICLE_LIST_END, LOADING_ARTICLE} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   data: {
@@ -25,7 +25,7 @@ export default function articleList(state = INITIAL_STATE, action) {
         loading: false
       });
     }
-    case SET_LOADING_TRUE: {
+    case LOADING_ARTICLE: {
       return Object.assign({}, state, {
         loading: true
       });
