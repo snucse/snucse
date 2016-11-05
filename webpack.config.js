@@ -1,10 +1,8 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Always-enabled plugins
 const plugins = [
-  new ExtractTextPlugin('static/application.css'),
   new CopyWebpackPlugin([{from: '*.html'}])
 ];
 
@@ -31,11 +29,11 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css')
+        loader: 'style!css'
       },
       {
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract('style', 'css!stylus')
+        loader: 'style!css!stylus'
       },
       {
         test: /\.js$/,
