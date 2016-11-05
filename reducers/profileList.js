@@ -1,16 +1,14 @@
-import {LOAD_PROFILES} from '../actions/actionTypes';
+import {LOAD_PROFILE_LIST} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  data: {
-    profiles: []
-  }
+  profileList: []
 };
 
-export default function profileList(state = INITIAL_STATE, action) {
+export default function loadProfileList(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case LOAD_PROFILES: {
+    case LOAD_PROFILE_LIST: {
       return Object.assign({}, state, {
-        data: action.data
+        profileList: action.profileList
       });
     }
     default: {

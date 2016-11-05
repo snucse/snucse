@@ -7,7 +7,7 @@ export const LOAD_INITIAL_ARTICLE = 'LOAD_INITIAL_ARTICLE';
 export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
 
 // action types related with Profiles.js
-export const LOAD_PROFILES = 'LOAD_PROFILES';
+export const LOAD_PROFILE_LIST = 'LOAD_PROFILE_LIST';
 
 // action types related with ProfileMake.js
 export const CHANGE_ID = 'CHANGE_ID';
