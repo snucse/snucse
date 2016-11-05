@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {deleteComment, editComment} from '../../actions';
 import {DataCon, Url} from '../../utils';
-import CommentItem from './CommentItem.js';
+import CommentItem from './CommentItem';
 
 /*
   props

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {updateFollowingList} from '../actions/dispatchers';
+import {updateFollowingList} from '../../actions/dispatchers';
 
-const MyProfile = React.createClass({
+const FollowingProfileList = React.createClass({
   componentDidMount() {
     this.props.updateFollowingList();
   },
@@ -35,4 +35,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(FollowingProfileList);

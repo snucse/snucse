@@ -1,6 +1,6 @@
-import ArticleTagBox from './ArticleTagBox.js';
-import ProfileTagBox from './ProfileTagBox.js';
-import RelatedTagBox from './RelatedTagBox.js';
+import ArticleTagBox from './ArticleTagBox';
+import ProfileTagBox from './ProfileTagBox';
+import RelatedTagBox from './RelatedTagBox';
 
 export {
   ArticleTagBox,

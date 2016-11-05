@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ProfileTagItemContainer from './ProfileTagItemContainer.js';
+import ProfileTagItemContainer from './ProfileTagItemContainer';
 
 const ProfileTagList = React.createClass({
   render() {

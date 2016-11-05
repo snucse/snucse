@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {loadTagInformation} from '../../actions/dispatchers';
-import TagViewWrapper from './TagViewWrapper.js';
+import TagViewWrapper from './TagViewWrapper';
 
 const TagContainer = React.createClass({
   componentDidMount() {

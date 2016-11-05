@@ -1,20 +1,25 @@
-> 스누씨 3.0 프론트엔드
+# 스누씨 3.0 프론트엔드
 
-### Requirements
+## Requirements
 * node
-* npm
+* yarn
 
-### 패키지 설치
+### `yarn`이 없어요?
 ```sh
-npm i
+sudo npm install -g yarn
 ```
 
-### 개발용 서버 실행
+## 패키지 설치
 ```sh
-npm start
+yarn
 ```
 
-### 린터 실행
+## 개발용 서버 실행
 ```sh
-npm t
+yarn start
+```
+
+## 린터 실행
+```sh
+yarn test
 ```

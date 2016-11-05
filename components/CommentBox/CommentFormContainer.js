@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {writeComment} from '../../actions';
 import {DataCon, Url} from '../../utils';
-import CommentForm from './CommentForm.js';
+import CommentForm from './CommentForm';
 
 /*
   props
