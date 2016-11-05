@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
 import {loadArticle, scrollArticleListEnd} from '../actions';
+import '../stylesheets/article.styl';
 import CommentBox from './CommentBox';
 
 const ProtoArticle = React.createClass({
