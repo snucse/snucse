@@ -34,7 +34,7 @@ const Profile = React.createClass({
           <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
           <ProfileTagBox profileId={id}/>
         </div>
-        <ArticleList isProfile id={id}/>
+        <ArticleList id={id}/>
       </div>
     );
   }
