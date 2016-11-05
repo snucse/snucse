@@ -19,8 +19,6 @@ import {
 
 import reducers from './reducers';
 
-import './base.styl';
-
 const rootElement = document.getElementById('content');
 
 const store = createStore(combineReducers(reducers));
