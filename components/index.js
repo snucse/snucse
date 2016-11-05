@@ -1,12 +1,11 @@
 import Menu from './Menu';
 import Others from './Others';
 import Message from './Message';
-import Profiles from './Profiles';
+import ProfileList from './ProfileList';
 import Main from './Main';
-import Tag from './Tag';
+import TagInfo from './TagInfo';
 import ArticleWrite from './ArticleWrite';
 import ArticleEdit from './ArticleEdit';
-import Article from './Article';
 import ClassManager from './ClassManager';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -15,12 +14,11 @@ export {
   Menu,
   Others,
   Message,
-  Profiles,
+  ProfileList,
   Main,
-  Tag,
+  TagInfo,
   ArticleWrite,
   ArticleEdit,
-  Article,
   ClassManager,
   Login,
   SignUp

@@ -5,7 +5,7 @@ import {DataCon, Url} from '../utils';
 import {loadProfiles} from '../actions/profilesListAction';
 import ProfileMakeForm from './ProfileMakeForm';
 
-const Profiles = React.createClass({
+const ProfileList = React.createClass({
   loadProfilesFromServer() {
     DataCon.loadDataFromServer(Url.getUrl('profiles'))
       .then(this.props.onProfilesLoad)
@@ -49,4 +49,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profiles);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileList);
