@@ -1,7 +1,7 @@
 // from http://redux.js.org/docs/recipes/reducers/RefactoringReducersExample.html
 
 export function updateObject(oldObject, newValues) {
-  return Object.assign({}, oldObject, newValues);
+  return {...oldObject, ...newValues};
 }
 
 export function updateItemInArray(array, itemIdString, itemId, updateItemCallback) {
