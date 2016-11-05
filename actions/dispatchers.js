@@ -98,7 +98,11 @@ export function makeTagRelationship(dispatch, targetTagName, tagName) {
   const params = {
     relatedTag: tagName
   };
-  DataCon.postDataToServer(Url.getUrl(`tags/${targetTagName}/add_related_tag`), 'POST', params).then(() => {
+  DataCon.postDataToServer(Url.getUrl(`tags/${targetTagName}/add_related_tag`), 'POST', params).then(tagInformation => {
+    dispatch({
+      type: types.LOAD_TAG_INFORMATION,
+      tagInformation
+    });
   }).catch(console.error);
 }
 
@@ -106,7 +110,11 @@ export function breakTagRelationship(dispatch, targetTagName, tagName) {
   const params = {
     relatedTag: tagName
   };
-  DataCon.postDataToServer(Url.getUrl(`tags/${targetTagName}/destroy_related_tag`), 'POST', params).then(() => {
+  DataCon.postDataToServer(Url.getUrl(`tags/${targetTagName}/destroy_related_tag`), 'POST', params).then(tagInformation => {
+    dispatch({
+      type: types.LOAD_TAG_INFORMATION,
+      tagInformation
+    });
   }).catch(console.error);
 }
 // end of dispatchers related with tag
