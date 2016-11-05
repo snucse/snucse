@@ -5,7 +5,7 @@ const Main = React.createClass({
   render() {
     return (
       <div className="articles">
-        <Article url={this.props.route.url}/>
+        <Article/>
       </div>
     );
   }
