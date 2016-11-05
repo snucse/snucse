@@ -21,6 +21,12 @@ export function scrollArticleListEnd() {
   };
 }
 
+export function setLoadingTrue() {
+  return {
+    type: types.SET_LOADING_TRUE
+  };
+}
+
 // action related with comment
 export function loadComments(articleId, comments) {
   return {

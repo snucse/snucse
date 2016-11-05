@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
-import {loadArticle, scrollArticleListEnd} from '../actions';
+import {loadArticle, scrollArticleListEnd, setLoadingTrue} from '../actions';
 import '../stylesheets/article.styl';
 import CommentBox from './CommentBox';
 
@@ -12,7 +12,7 @@ const ProtoArticle = React.createClass({
   onScroll() {
     // http://stackoverflow.com/questions/9439725
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-      if (this.state.loading === true) {
+      if (this.props.loading === true) {
         return;
       }
       setTimeout(() => {
@@ -21,9 +21,8 @@ const ProtoArticle = React.createClass({
           this.props.onScrollEnd();
           // 더 보여달라는 요청
         }
-        this.setState({loading: false});
       }, 1000);
-      this.setState({loading: true});
+      this.props.setLoadingTrue();
     }
   },
 
@@ -41,10 +40,6 @@ const ProtoArticle = React.createClass({
       window.scrollTo(0, 0);
       this.props.loadArticle(props.id);
     }
-  },
-
-  getInitialState() {
-    return {loading: false};
   },
 
   render() {
@@ -129,7 +124,8 @@ const mapStateToProps = function (state) {
   return {
     data: state.articleList.data,
     articleNum: state.articleList.articleNum,
-    userId: state.userId.userId
+    userId: state.userId.userId,
+    loading: state.articleList.loading
   };
 };
 
@@ -144,7 +140,8 @@ const mapDispatchToProps = function (dispatch) {
         dispatch(loadArticle(data));
       }).catch(console.error);
     },
-    onScrollEnd: () => dispatch(scrollArticleListEnd())
+    onScrollEnd: () => dispatch(scrollArticleListEnd()),
+    setLoadingTrue: () => dispatch(setLoadingTrue())
   };
 };
 
