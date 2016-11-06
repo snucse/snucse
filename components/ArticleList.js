@@ -18,14 +18,7 @@ const ArticleList = React.createClass({
       if (this.props.loading === true) {
         return;
       }
-      setTimeout(() => {
-        if (this.props.data.articles.length > this.props.articleNum) {
-          // 보여주는 것보다 갖고 있는게 더 적으면
-          this.props.onScrollEnd();
-          // 더 보여달라는 요청
-        }
-      }, 1000);
-      this.props.onLoadArticle();
+      this.props.onLoadArticle(this.props.data.articles.length, this.props.articleNum);
     }
   },
 
@@ -145,8 +138,16 @@ const mapDispatchToProps = function (dispatch) {
         loadArticlesTag(dispatch, data.articles);
       }).catch(console.error);
     },
-    onScrollEnd: () => dispatch(scrollArticleListEnd()),
-    onLoadArticle: () => dispatch(onLoadArticle())
+    onLoadArticle: (articleNum, renderedArticleNum) => {
+      dispatch(onLoadArticle());
+      setTimeout(() => {
+        if (articleNum > renderedArticleNum) {
+          // 보여주는 것보다 갖고 있는게 더 적으면
+          dispatch(scrollArticleListEnd());
+          // 더 보여달라는 요청
+        }
+      }, 1000);
+    }
   };
 };
 
