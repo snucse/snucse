@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadComments} from '../../actions';
-import {DataCon, Url} from '../../utils';
+import {loadComments} from '../../actions/dispatchers';
 import '../../stylesheets/comment-box.styl';
 import CommentList from './CommentList';
 import CommentFormContainer from './CommentFormContainer';
@@ -14,10 +13,7 @@ import CommentFormContainer from './CommentFormContainer';
 */
 const CommentBox = React.createClass({
   componentDidMount() {
-    const url = Url.getUrl('comments?articleId=' + this.props.articleId);
-    DataCon.loadDataFromServer(url).then(data => {
-      this.props.loadComments(this.props.articleId, data.comments);
-    }).catch(console.error);
+    this.props.loadComments(this.props.articleId);
   },
 
   render() {
@@ -36,9 +32,7 @@ const CommentBox = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadComments: (articleId, comments) => {
-      dispatch(loadComments(articleId, comments));
-    }
+    loadComments: articleId => loadComments(dispatch, articleId)
   };
 };
 
