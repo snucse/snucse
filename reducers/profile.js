@@ -1,9 +1,11 @@
 import {LOAD_PROFILE_DETAIL, UPDATE_FOLLOWING_STATE, LOAD_ALL_PROFILES} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  following: false,
-  name: '',
-  description: '',
+  data: {
+    following: false,
+    name: '',
+    description: ''
+  },
   allProfiles: []
 };
 
