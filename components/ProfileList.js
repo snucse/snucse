@@ -1,12 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {loadProfileList} from '../actions/dispatchers';
+import {loadAllProfiles} from '../actions/dispatchers';
 import ProfileMakeForm from './ProfileMakeForm';
 
 const ProfileList = React.createClass({
   componentDidMount() {
-    this.props.loadProfileList();
+    this.props.loadAllProfiles();
   },
 
   render() {
@@ -30,13 +30,13 @@ const ProfileList = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    profileList: state.profileList.profileList
+    profileList: state.profile.allProfiles
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadProfileList: () => loadProfileList(dispatch)
+    loadAllProfiles: () => loadAllProfiles(dispatch)
   };
 };
 

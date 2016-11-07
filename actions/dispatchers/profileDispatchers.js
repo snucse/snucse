@@ -2,6 +2,15 @@ import {DataCon, Url} from '../../utils';
 import {loadProfileTag, updateFollowingList} from '../dispatchers';
 import * as types from '../actionTypes';
 
+export function loadAllProfiles(dispatch) {
+  DataCon.loadDataFromServer(Url.getUrl('profiles')).then(data => {
+    dispatch({
+      type: types.LOAD_ALL_PROFILES,
+      allProfiles: data.profiles
+    });
+  }).catch(console.error);
+}
+
 export function loadProfileDetail(dispatch, id) {
   DataCon.loadDataFromServer(Url.getUrl(`profiles/${id}`)).then(data => {
     dispatch({
