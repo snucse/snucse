@@ -14,7 +14,8 @@ import {ArticleTagBox} from './TagBox';
 const ArticleList = React.createClass({
   onScroll() {
     // http://stackoverflow.com/questions/9439725
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+    const scrollHeight = document.documentElement ? document.documentElement.scrollHeight : document.body.scrollHeight;
+    if (window.innerHeight + window.scrollY >= scrollHeight) {
       if (this.props.loading === true) {
         return;
       }
