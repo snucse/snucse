@@ -25,6 +25,8 @@ export default function articleList(state = INITIAL_STATE, action) {
         loading: false
       });
     }
+    // TODO: 페이징api가 구현되면 글을 불러오는 기능과 merge
+    // reducers/articleList.js, actions/actionTypes.js, actions/index.js, components/ArticleList.js
     case ON_LOAD_ARTICLE: {
       return Object.assign({}, state, {
         loading: true
