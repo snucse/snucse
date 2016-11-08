@@ -21,6 +21,12 @@ export function scrollArticleListEnd() {
   };
 }
 
+export function onLoadArticle() {
+  return {
+    type: types.ON_LOADING_ARTICLE
+  };
+}
+
 // action related with comment
 export function loadComments(articleId, comments) {
   return {

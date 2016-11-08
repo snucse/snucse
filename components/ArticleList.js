@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
-import {loadArticle, scrollArticleListEnd} from '../actions';
+import {loadArticle, scrollArticleListEnd, onLoadArticle} from '../actions';
 import {loadArticlesTag} from '../actions/dispatchers';
 import '../stylesheets/article.styl';
 import '../stylesheets/tagbox.styl';
@@ -15,18 +15,10 @@ const ArticleList = React.createClass({
   onScroll() {
     // http://stackoverflow.com/questions/9439725
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-      if (this.state.loading === true) {
+      if (this.props.loading === true) {
         return;
       }
-      setTimeout(() => {
-        if (this.props.data.articles.length > this.props.articleNum) {
-          // 보여주는 것보다 갖고 있는게 더 적으면
-          this.props.onScrollEnd();
-          // 더 보여달라는 요청
-        }
-        this.setState({loading: false});
-      }, 1000);
-      this.setState({loading: true});
+      this.props.onLoadArticle(this.props.data.articles.length, this.props.articleNum);
     }
   },
 
@@ -44,10 +36,6 @@ const ArticleList = React.createClass({
       window.scrollTo(0, 0);
       this.props.loadArticle(props.id);
     }
-  },
-
-  getInitialState() {
-    return {loading: false};
   },
 
   render() {
@@ -133,7 +121,8 @@ const mapStateToProps = function (state) {
   return {
     data: state.articleList.data,
     articleNum: state.articleList.articleNum,
-    userId: state.userId.userId
+    userId: state.userId.userId,
+    loading: state.articleList.loading
   };
 };
 
@@ -149,7 +138,16 @@ const mapDispatchToProps = function (dispatch) {
         loadArticlesTag(dispatch, data.articles);
       }).catch(console.error);
     },
-    onScrollEnd: () => dispatch(scrollArticleListEnd())
+    onLoadArticle: (articleNum, renderedArticleNum) => {
+      dispatch(onLoadArticle());
+      setTimeout(() => {
+        if (articleNum > renderedArticleNum) {
+          // 보여주는 것보다 갖고 있는게 더 적으면
+          dispatch(scrollArticleListEnd());
+          // 더 보여달라는 요청
+        }
+      }, 1000);
+    }
   };
 };
 
