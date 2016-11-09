@@ -1,5 +1,5 @@
 import {DataCon, Url} from '../../utils';
-import {loadProfileTag, updateFollowingList} from '../dispatchers';
+import {loadProfileTag, updateFollowingList} from './'
 import * as types from '../actionTypes';
 
 export function loadAllProfiles(dispatch) {

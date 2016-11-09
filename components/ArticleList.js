@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
-import {loadArticle, scrollArticleListEnd, onLoadArticle} from '../actions';
-import {loadArticlesTag} from '../actions/dispatchers';
+import {loadArticle, onLoadArticle} from '../actions/dispatchers';
 import '../stylesheets/article.styl';
 import '../stylesheets/tagbox.styl';
 import CommentBox from './CommentBox';
@@ -128,26 +127,9 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadArticle: id => {
-      let url = Url.getUrl('articles');
-      if (id) {
-        url += `?profileId=${id}`;
-      }
-      DataCon.loadDataFromServer(url).then(data => {
-        dispatch(loadArticle(data));
-        loadArticlesTag(dispatch, data.articles);
-      }).catch(console.error);
-    },
-    onLoadArticle: (articleNum, renderedArticleNum) => {
-      dispatch(onLoadArticle());
-      setTimeout(() => {
-        if (articleNum > renderedArticleNum) {
-          // 보여주는 것보다 갖고 있는게 더 적으면
-          dispatch(scrollArticleListEnd());
-          // 더 보여달라는 요청
-        }
-      }, 1000);
-    }
+    loadArticle: id => loadArticle(dispatch, id),
+    onLoadArticle: (articleNum, renderedArticleNum) =>
+      onLoadArticle(dispatch, articleNum, renderedArticleNum)
   };
 };
 
