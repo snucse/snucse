@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {DataCon, Url} from '../utils';
-import {loadArticle, onLoadArticle} from '../actions/dispatchers';
+import {clearArticleList, loadArticle, onLoadArticle} from '../actions/dispatchers';
 import '../stylesheets/article.styl';
 import '../stylesheets/tagbox.styl';
 import CommentBox from './CommentBox';
@@ -24,6 +24,7 @@ const ArticleList = React.createClass({
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
+    this.props.clearArticleList();
     this.props.loadArticle(this.props.id);
   },
 
@@ -34,6 +35,7 @@ const ArticleList = React.createClass({
   componentWillReceiveProps(props) {
     if (props.id !== this.props.id) {
       window.scrollTo(0, 0);
+      this.props.clearArticleList();
       this.props.loadArticle(props.id);
     }
   },
@@ -128,6 +130,7 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
+    clearArticleList: () => clearArticleList(dispatch),
     loadArticle: id => loadArticle(dispatch, id),
     onLoadArticle: (articleNum, renderedArticleNum) =>
       onLoadArticle(dispatch, articleNum, renderedArticleNum)

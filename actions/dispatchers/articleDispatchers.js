@@ -35,3 +35,9 @@ export function onLoadArticle(dispatch, articleNum, renderedArticleNum) {
     }
   }, 1000);
 }
+
+export function clearArticleList(dispatch) {
+  dispatch({
+    type: types.CLEAR_ARTICLE_LIST
+  });
+}

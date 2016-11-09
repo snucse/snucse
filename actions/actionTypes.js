@@ -6,6 +6,7 @@ export const LOAD_ARTICLE = 'LOAD_ARTICLE';
 export const LOAD_INITIAL_ARTICLE = 'LOAD_INITIAL_ARTICLE';
 export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
 export const ON_LOADING_ARTICLE = 'ON_LOADING_ARTICLE';
+export const CLEAR_ARTICLE_LIST = 'CLEAR_ARTICLE_LIST';
 
 // action types related with ProfileMake.js
 export const CHANGE_ID = 'CHANGE_ID';
