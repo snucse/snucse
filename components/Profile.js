@@ -61,7 +61,7 @@ const FollowBox = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {following} = state.profile.data;
+  const {following} = state.profile.current;
   return {
     following
   };

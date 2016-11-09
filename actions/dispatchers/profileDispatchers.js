@@ -12,14 +12,15 @@ export function loadAllProfiles(dispatch) {
 }
 
 export function loadProfileDetail(dispatch, id) {
-  DataCon.loadDataFromServer(Url.getUrl(`profiles/${id}`)).then(data => {
+  DataCon.loadDataFromServer(Url.getUrl(`profiles/${id}`)).then(current => {
     dispatch({
       type: types.LOAD_PROFILE_DETAIL,
-      data
+      current
     });
-    return data;
-  }).then(data => {
-    loadProfileTag(dispatch, data.id, data.tags);
+    return current;
+  }).then(current => {
+    const {id, tags} = current;
+    loadProfileTag(dispatch, id, tags);
   }).catch(console.error);
 }
 
