@@ -1,23 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {DataCon, Url} from '../../utils';
-import {loadUserId} from '../../actions';
+import {loadUserId} from '../../actions/dispatchers';
 import '../../stylesheets/menu.styl';
 
 import TopMenu from './TopMenu';
 import SideMenu from './SideMenu';
 
 const Menu = React.createClass({
-  getUserId() {
-    const url = Url.getUrl('users/me');
-    DataCon.loadDataFromServer(url).then(data => {
-      this.props.putUserId(data.id);
-    }).catch(console.error);
-  },
-
   componentDidMount() {
-    this.getUserId();
+    this.props.loadUserId();
   },
 
   render() {
@@ -37,7 +29,7 @@ const Menu = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    putUserId: userId => dispatch(loadUserId(userId))
+    loadUserId: () => loadUserId(dispatch)
   };
 };
 

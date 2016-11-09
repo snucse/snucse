@@ -63,6 +63,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(() => {
-  return {};
-}, mapDispatchToProps)(ProfileMakeForm);
+export default connect(null, mapDispatchToProps)(ProfileMakeForm);

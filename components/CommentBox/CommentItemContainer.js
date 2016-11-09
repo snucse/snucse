@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteComment, editComment} from '../../actions';
-import {DataCon, Url} from '../../utils';
+import {deleteComment, editComment} from '../../actions/dispatchers';
 import CommentItem from './CommentItem';
 
 /*
@@ -12,20 +11,11 @@ import CommentItem from './CommentItem';
 */
 const CommentItemContainer = React.createClass({
   handleDelete() {
-    const url = Url.getUrl('comments/' + this.props.comment.id);
-    DataCon.postDataToServer(url, 'DELETE').then(() => {
-      this.props.deleteComment(this.props.articleId, this.props.comment.id);
-    }).catch(console.error);
+    this.props.deleteComment(this.props.comment.id, this.props.articleId);
   },
 
   handleEdit(newContent) {
-    const url = Url.getUrl('comments/' + this.props.comment.id);
-    const data = {
-      content: newContent
-    };
-    DataCon.postDataToServer(url, 'PUT', data).then(res => {
-      this.props.editComment(this.props.articleId, res);
-    }).catch(console.error);
+    this.props.editComment(this.props.comment.id, this.props.articleId, newContent);
   },
 
   render() {
@@ -50,11 +40,11 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    deleteComment: (articleId, comment) => {
-      dispatch(deleteComment(articleId, comment));
+    deleteComment: (commentId, articleId) => {
+      deleteComment(dispatch, commentId, articleId);
     },
-    editComment: (articleId, comment) => {
-      dispatch(editComment(articleId, comment));
+    editComment: (commentId, articleId, newContent) => {
+      editComment(dispatch, commentId, articleId, newContent);
     }
   };
 };

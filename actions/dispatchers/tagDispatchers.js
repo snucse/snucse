@@ -1,16 +1,6 @@
-import {DataCon, Url} from '../utils';
-import * as types from './actionTypes';
+import {DataCon, Url} from '../../utils';
+import * as types from '../actionTypes';
 
-export function updateFollowingList(dispatch) {
-  DataCon.loadDataFromServer(Url.getUrl('profiles/following')).then(data => {
-    dispatch({
-      type: types.UPDATE_FOLLOWING,
-      profiles: data.profiles
-    });
-  }).catch(console.error);
-}
-
-// dispatchers related with tag
 export function loadArticlesTag(dispatch, articles) {
   dispatch({
     type: types.LOAD_ARTICLES_TAG,
@@ -116,5 +106,3 @@ export function breakTagRelationship(dispatch, targetTagName, tagName) {
     });
   }).catch(console.error);
 }
-// end of dispatchers related with tag
-// fixme 파일로 빼기

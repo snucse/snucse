@@ -1,23 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {DataCon, Url} from '../utils';
-import {loadProfiles} from '../actions/profilesListAction';
+import {loadAllProfiles} from '../actions/dispatchers';
 import ProfileMakeForm from './ProfileMakeForm';
 
 const ProfileList = React.createClass({
-  loadProfilesFromServer() {
-    DataCon.loadDataFromServer(Url.getUrl('profiles'))
-      .then(this.props.onProfilesLoad)
-      .catch(console.error);
-  },
-
   componentDidMount() {
-    this.loadProfilesFromServer();
+    this.props.loadAllProfiles();
   },
 
   render() {
-    const profiles = this.props.data.profiles.map(profile => {
+    const profileList = this.props.profileList.map(profile => {
       return (
         <div key={profile.id} className="profile">
           <Link to={`/${profile.id}`}>{profile.name}</Link>
@@ -28,7 +21,7 @@ const ProfileList = React.createClass({
       <div className="profile-container">
         <ProfileMakeForm/>
         <div className="profiles">
-          {profiles}
+          {profileList}
         </div>
       </div>
     );
@@ -37,15 +30,13 @@ const ProfileList = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    data: state.profileList.data
+    profileList: state.profile.allProfiles
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    onProfilesLoad(data) {
-      dispatch(loadProfiles(data));
-    }
+    loadAllProfiles: () => loadAllProfiles(dispatch)
   };
 };
 
