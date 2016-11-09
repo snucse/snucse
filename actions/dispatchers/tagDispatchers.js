@@ -60,7 +60,7 @@ export function deleteTagToProfile(dispatch, profileId, tagName) {
 }
 
 export function loadTagInformation(dispatch, tagName) {
-  DataCon.loadDataFromServer(Url.getUrl(`tags/${tagName}`)).then(tagInformation => {
+  DataCon.loadDataFromServer(Url.getUrl(`tags/show?tag=${tagName}`)).then(tagInformation => {
     dispatch({
       type: types.LOAD_TAG_INFORMATION,
       tagInformation
@@ -85,9 +85,10 @@ export function loadTagCloud(dispatch) {
 
 export function makeTagRelationship(dispatch, targetTagName, tagName) {
   const params = {
+    tag: targetTagName,
     relatedTag: tagName
   };
-  DataCon.postDataToServer(Url.getUrl(`tags/${targetTagName}/add_related_tag`), 'POST', params).then(tagInformation => {
+  DataCon.postDataToServer(Url.getUrl(`tags/add_related_tag`), 'POST', params).then(tagInformation => {
     dispatch({
       type: types.LOAD_TAG_INFORMATION,
       tagInformation
@@ -97,9 +98,10 @@ export function makeTagRelationship(dispatch, targetTagName, tagName) {
 
 export function breakTagRelationship(dispatch, targetTagName, tagName) {
   const params = {
+    tag: targetTagName,
     relatedTag: tagName
   };
-  DataCon.postDataToServer(Url.getUrl(`tags/${targetTagName}/destroy_related_tag`), 'POST', params).then(tagInformation => {
+  DataCon.postDataToServer(Url.getUrl(`tags/destroy_related_tag`), 'POST', params).then(tagInformation => {
     dispatch({
       type: types.LOAD_TAG_INFORMATION,
       tagInformation
