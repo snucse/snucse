@@ -51,6 +51,9 @@
     "envs": [
       "browser"
     ],
+    "ignores": [
+      "docker/**"
+    ],
     "rules": {
       "eqeqeq": "off",
       "no-eq-null": "off",
