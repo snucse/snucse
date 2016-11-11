@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadComments} from '../../actions/dispatchers';
-import '../../stylesheets/comment-box.styl';
+import {loadComments} from '../../../actions/dispatchers';
+import '../../../stylesheets/comment-box.styl';
 import CommentList from './CommentList';
 import CommentFormContainer from './CommentFormContainer';
 

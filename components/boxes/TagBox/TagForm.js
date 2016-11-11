@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {genRefCallback} from '../../utils';
+import {genRefCallback} from '../../../utils';
 
 const TagForm = React.createClass({
   handleClickAdd() {

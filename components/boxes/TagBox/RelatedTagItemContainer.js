@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {breakTagRelationship} from '../../actions/dispatchers';
+import {breakTagRelationship} from '../../../actions/dispatchers';
 import TagItem from './TagItem';
 
 const RelatedTagItemContainer = React.createClass({
