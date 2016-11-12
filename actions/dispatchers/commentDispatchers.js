@@ -12,6 +12,21 @@ export function loadComments(dispatch, articleId) {
   }).catch(console.error);
 }
 
+export function setLastComment(dispatch, id, comment) {
+  dispatch({
+    type: types.SET_LAST_COMMENT,
+    articleId: id,
+    comment
+  });
+}
+
+export function unfoldComment(dispatch, id) {
+  dispatch({
+    type: types.UNFOLD_COMMENT,
+    articleId: id
+  });
+}
+
 export function writeComment(dispatch, comment) {
   DataCon.postDataToServer(Url.getUrl('comments'), 'POST', comment).then(res => {
     dispatch({

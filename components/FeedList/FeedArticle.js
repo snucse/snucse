@@ -33,7 +33,7 @@ const FeedArticle = React.createClass({
         </div>
         <DelEditBox mine={mine} articleId={article.id}/>
         <ArticleTagBox articleId={article.id}/>
-        <CommentBox articleId={article.id} isAddable/>
+        <CommentBox articleId={article.id} lastComment={article.lastComment} isAddable/>
       </div>
     );
   }

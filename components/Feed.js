@@ -1,39 +1,27 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadArticle, onLoadArticle} from '../actions/dispatchers';
+import {loadFeed, loadMoreFeed} from '../actions/dispatchers';
 import FeedList from './FeedList';
 
 const Feed = React.createClass({
   componentDidMount() {
-    this.props.loadArticle(this.props.id);
-  },
-
-  componentWillReceiveProps(props) {
-    if (props.id !== this.props.id) {
-      window.scrollTo(0, 0);
-      this.props.loadArticle(props.id);
-    }
+    this.props.loadFeed();
   },
 
   handleLoadMore() {
     if (this.props.loading === true) {
       return;
     }
-    this.props.onLoadArticle(this.props.data.articles.length, this.props.articleNum);
+    this.props.loadMoreFeed(this.props.feeds.length, this.props.feedNum);
   },
 
   render() {
-    const feeds = this.props.data.articles.slice(0, this.props.articleNum).map(item => {
-      return {
-        type: 'article',
-        ...item
-      };
-    });
-    if (this.props.data.articles.length > this.props.articleNum) {
+    const feeds = this.props.feeds.slice(0, this.props.feedNum);
+    if (this.props.feeds.length > this.props.feedNum) {
       feeds.push({
         type: 'loadmore',
-        id: `${this.props.articleNum}`,
+        id: `${this.props.feedNum}`,
         automatic: true
       });
     }
@@ -45,17 +33,17 @@ const Feed = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    data: state.articleList.data,
-    articleNum: state.articleList.articleNum,
-    loading: state.articleList.loading
+    feeds: state.feeds.feeds,
+    feedNum: state.feeds.count,
+    loading: state.feeds.loading
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadArticle: id => loadArticle(dispatch, id),
-    onLoadArticle: (articleNum, renderedArticleNum) =>
-      onLoadArticle(dispatch, articleNum, renderedArticleNum)
+    loadFeed: () => loadFeed(dispatch),
+    loadMoreFeed: (...args) =>
+      loadMoreFeed(dispatch, ...args)
   };
 };
 

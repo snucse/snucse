@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadComments} from '../../../actions/dispatchers';
+import {loadComments, setLastComment} from '../../../actions/dispatchers';
 import '../../../stylesheets/comment-box.styl';
 import CommentList from './CommentList';
 import CommentFormContainer from './CommentFormContainer';
@@ -13,7 +13,19 @@ import CommentFormContainer from './CommentFormContainer';
 */
 const CommentBox = React.createClass({
   componentDidMount() {
-    this.props.loadComments(this.props.articleId);
+    if (this.props.lastComment) {
+      this.props.setLastComment(this.props.articleId, this.props.lastComment);
+    } else {
+      this.props.loadComments(this.props.articleId);
+    }
+  },
+
+  componentWillReceiveProps(props) {
+    if (this.props.lastComment) {
+      this.props.setLastComment(this.props.lastComment);
+    } else if (this.props.articleId !== props.articleId) {
+      this.props.loadComments(this.props.articleId);
+    }
   },
 
   render() {
@@ -22,7 +34,7 @@ const CommentBox = React.createClass({
       null;
     return (
       <section className="comment-wrapper">
-        <CommentList isFold articleId={this.props.articleId}/>
+        <CommentList articleId={this.props.articleId}/>
         {commentForm}
       </section>
     );
@@ -32,7 +44,8 @@ const CommentBox = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadComments: articleId => loadComments(dispatch, articleId)
+    loadComments: articleId => loadComments(dispatch, articleId),
+    setLastComment: (...args) => setLastComment(dispatch, ...args)
   };
 };
 
