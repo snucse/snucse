@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FeedArticle from './FeedArticle';
+import FeedLoadMore from './FeedLoadMore';
 
 // Props: {type: string, data: any}
 const FeedItem = React.createClass({
@@ -9,6 +10,8 @@ const FeedItem = React.createClass({
     switch (type) {
       case 'article':
         return <FeedArticle article={this.props.data}/>;
+      case 'loadmore':
+        return <FeedLoadMore automatic={this.props.automatic}/>;
       default:
         return null;
     }
