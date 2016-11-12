@@ -6,6 +6,7 @@ import FeedList from './FeedList';
 
 const ArticleList = React.createClass({
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.loadArticle(this.props.id);
   },
 
