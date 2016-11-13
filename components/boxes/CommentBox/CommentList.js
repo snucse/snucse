@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadComments, unfoldComments} from '../../../actions/dispatchers';
+import {loadComments, modifyFoldComments} from '../../../actions/dispatchers';
 import CommentItemContainer from './CommentItemContainer';
 
 const FOLD_COMMENT_LIMIT = 1;
@@ -9,19 +9,23 @@ const FOLD_COMMENT_LIMIT = 1;
 /*
   props
   - articleId
-  - isFold
-
-  states
-  - isFold
-    // 접혀 있으면 true, 펼쳐져 있으면 false, default는 true
 */
 const CommentList = React.createClass({
+  componentDidMount() {
+    this.props.foldComments(this.props.articleId);
+  },
+
+  componentWillReceiveProps(props) {
+    if (this.props.articleId !== props.articleId) {
+      this.props.foldComments(props.articleId);
+    }
+  },
+
   handleClickShowMore() {
-    if (this.props.loaded[this.props.articleId]) {
-      this.props.unfoldComments(this.props.articleId);
-    } else {
+    if (!this.props.loaded[this.props.articleId]) {
       this.props.loadComments(this.props.articleId);
     }
+    this.props.unfoldComments(this.props.articleId);
   },
 
   renderComment(comment) {
@@ -77,7 +81,8 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     loadComments: id => loadComments(dispatch, id),
-    unfoldComments: id => unfoldComments(dispatch, id)
+    foldComments: id => modifyFoldComments(dispatch, id, true),
+    unfoldComments: id => modifyFoldComments(dispatch, id, false)
   };
 };
 

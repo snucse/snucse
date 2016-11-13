@@ -1,4 +1,4 @@
-import {LOAD_COMMENT, SET_LAST_COMMENT, UNFOLD_COMMENT, WRITE_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../actions/actionTypes';
+import {LOAD_COMMENT, SET_LAST_COMMENT, MODIFY_FOLD_COMMENT, WRITE_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   comments: {
@@ -51,11 +51,9 @@ export default function comment(state = INITIAL_STATE, action) {
         fold: {...state.fold, ...newFold}
       });
     }
-    case UNFOLD_COMMENT: {
-      const newFold = {};
-      newFold[articleId] = false;
+    case MODIFY_FOLD_COMMENT: {
       return Object.assign({}, state, {
-        fold: {...state.fold, ...newFold}
+        fold: {...state.fold, [articleId]: action.fold}
       });
     }
     case WRITE_COMMENT: {

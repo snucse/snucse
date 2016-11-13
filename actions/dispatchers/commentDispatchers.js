@@ -21,10 +21,11 @@ export function setLastComment(dispatch, id, comment, commentCount) {
   });
 }
 
-export function unfoldComment(dispatch, id) {
+export function modifyFoldComments(dispatch, id, fold) {
   dispatch({
-    type: types.UNFOLD_COMMENT,
-    articleId: id
+    type: types.MODIFY_FOLD_COMMENT,
+    articleId: id,
+    fold
   });
 }
 

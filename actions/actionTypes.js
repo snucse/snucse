@@ -20,7 +20,7 @@ export const CHANGE_DESC = 'CHANGE_DESC';
 // action types related with comment
 export const LOAD_COMMENT = 'LOAD_COMMENT';
 export const SET_LAST_COMMENT = 'SET_LAST_COMMENT';
-export const UNFOLD_COMMENT = 'UNFOLD_COMMENT';
+export const MODIFY_FOLD_COMMENT = 'MODIFY_FOLD_COMMENT';
 export const WRITE_COMMENT = 'WRITE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
