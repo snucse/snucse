@@ -79,7 +79,7 @@ export function loadTagInformation(dispatch, tagName) {
 }
 
 export function loadTagCloud(dispatch) {
-  DataCon.loadDataFromServer(Url.getUrl('tags')).then(res => {
+  DataCon.loadDataFromServer(Url.getUrl('tags/recent')).then(res => {
     dispatch({
       type: types.LOAD_TAGCLOUD,
       tags: res.tags
