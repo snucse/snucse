@@ -1,7 +1,7 @@
 import {LOAD_PROFILE_DETAIL, UPDATE_FOLLOWING_STATE, LOAD_ALL_PROFILES} from '../actions/actionTypes';
-import {updateObject} from './common';
+import {updateObject, createReducer} from './common';
 
-const INITIAL_STATE = {
+const PROFILE_INITIAL_STATE = {
   current: {
     following: false,
     name: '',
@@ -10,26 +10,31 @@ const INITIAL_STATE = {
   allProfiles: []
 };
 
-export default function profile(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case LOAD_PROFILE_DETAIL: {
-      return updateObject(state, {
-        current: action.current
-      });
-    }
-    case UPDATE_FOLLOWING_STATE: {
-      const current = updateObject(state.current, {
-        following: action.following
-      });
-      return updateObject(state, {
-        current
-      });
-    }
-    case LOAD_ALL_PROFILES: {
-      return updateObject(state, {
-        allProfiles: action.allProfiles
-      });
-    }
-    default: return state;
-  }
+function loadProfileDetail(state, action) {
+  return updateObject(state, {
+    current: action.current
+  });
 }
+
+function updateFollowingState(state, action) {
+  const current = updateObject(state.current, {
+    following: action.following
+  });
+  return updateObject(state, {
+    current
+  });
+}
+
+function loadAllProfiles(state, action) {
+  return updateObject(state, {
+    allProfiles: action.allProfiles
+  });
+}
+
+const profile = createReducer(PROFILE_INITIAL_STATE, {
+  [LOAD_PROFILE_DETAIL]: loadProfileDetail,
+  [UPDATE_FOLLOWING_STATE]: updateFollowingState,
+  [LOAD_ALL_PROFILES]: loadAllProfiles
+});
+
+export default profile;

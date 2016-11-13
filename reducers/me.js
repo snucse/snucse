@@ -1,17 +1,18 @@
 import {UPDATE_FOLLOWING} from '../actions/actionTypes';
-import {updateObject} from './common';
+import {updateObject, createReducer} from './common';
 
-const INITIAL_STATE = {
+const ME_INITIAL_STATE = {
   following: []
 };
 
-export default function me(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case UPDATE_FOLLOWING: {
-      return updateObject(state, {
-        following: action.profiles
-      });
-    }
-    default: return state;
-  }
+function updateFollowing(state, action) {
+  return updateObject(state, {
+    following: action.profiles
+  });
 }
+
+const me = createReducer(ME_INITIAL_STATE, {
+  [UPDATE_FOLLOWING]: updateFollowing
+});
+
+export default me;
