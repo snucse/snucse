@@ -112,3 +112,17 @@ export function breakTagRelationship(dispatch, targetTagName, tagName) {
     });
   }).catch(console.error);
 }
+
+export function initializeCandidateTags(dispatch) {
+  dispatch({type: types.INITIALIZE_CANDIDATE_TAGS});
+}
+
+export function loadCandidateTags(dispatch, query) {
+  DataCon.loadDataFromServer(Url.getUrl(`tags?prefix=${query}`)).then(res => {
+    dispatch({
+      type: types.LOAD_CANDIDATE_TAGS,
+      tags: res.tags.slice(0, 10)
+    });
+    // fixme slice at the server
+  }).catch(console.error);
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {makeTagRelationship} from '../../actions/dispatchers';
+import {makeTagRelationship, loadCandidateTags} from '../../actions/dispatchers';
 import TagForm from './TagForm';
 
 const RelatedTagFormContainer = React.createClass({
@@ -9,15 +9,26 @@ const RelatedTagFormContainer = React.createClass({
     this.props.makeTagRelationship(this.props.targetTagName, tagName);
   },
 
+  handleLoadCandidateTags(query) {
+    this.props.loadCandidateTags(query);
+  },
+
   render() {
-    return <TagForm onAdd={this.handleAdd}/>;
+    return <TagForm onAdd={this.handleAdd} onLoadCandidateTags={this.handleLoadCandidateTags} candidateTags={this.props.candidates}/>;
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
+const mapStateToProps = function (state) {
   return {
-    makeTagRelationship: (targetTagName, relatedTagName) => makeTagRelationship(dispatch, targetTagName, relatedTagName)
+    candidates: state.tag.candidate.tags
   };
 };
 
-export default connect(null, mapDispatchToProps)(RelatedTagFormContainer);
+const mapDispatchToProps = function (dispatch) {
+  return {
+    makeTagRelationship: (targetTagName, relatedTagName) => makeTagRelationship(dispatch, targetTagName, relatedTagName),
+    loadCandidateTags: query => loadCandidateTags(dispatch, query)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RelatedTagFormContainer);
