@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {addTagToArticle, loadCandidateTags} from '../../actions/dispatchers';
+import {addTagToArticle, loadCandidateTags, initializeCandidateTags} from '../../actions/dispatchers';
 import TagForm from './TagForm';
 
 const ArticleTagFormContainer = React.createClass({
@@ -13,8 +13,19 @@ const ArticleTagFormContainer = React.createClass({
     this.props.loadCandidateTags(query);
   },
 
+  handleInitialCandidateTags() {
+    this.props.initializeCandidateTags();
+  },
+
   render() {
-    return <TagForm onAdd={this.handleAdd} onLoadCandidateTags={this.handleLoadCandidateTags} candidateTags={this.props.candidates}/>;
+    return (
+      <TagForm
+        onAdd={this.handleAdd}
+        onLoadCandidateTags={this.handleLoadCandidateTags}
+        onInitialCandidateTags={this.handleInitialCandidateTags}
+        candidateTags={this.props.candidates}
+        />
+    );
   }
 });
 
@@ -27,6 +38,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     addTagToArticle: (articleId, tagName) => addTagToArticle(dispatch, articleId, tagName),
+    initializeCandidateTags: () => initializeCandidateTags(dispatch),
     loadCandidateTags: query => loadCandidateTags(dispatch, query)
   };
 };

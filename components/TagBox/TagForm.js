@@ -12,6 +12,7 @@ const TagForm = React.createClass({
         isShowCandidateTags: false,
         candidateTag: -1
       });
+      this.props.onInitialCandidateTags();
     }
   },
 
@@ -38,11 +39,13 @@ const TagForm = React.createClass({
   handleKeyDownInput(event) {
     if (event.keyCode == 13) {
       this.addTag();
-    } else if (event.keyCode === 40) {
-      const candidates = this.props.candidateTags || [];
-      if (candidates.length === 0) {
-        return;
-      }
+      return;
+    }
+    const candidates = this.props.candidateTags || [];
+    if (candidates.length === 0) {
+      return;
+    }
+    if (event.keyCode === 40) {
       // down
       if (candidates.length > this.state.candidateTag + 1) {
         this.setState({
@@ -56,10 +59,6 @@ const TagForm = React.createClass({
         });
       }
     } else if (event.keyCode === 38) {
-      const candidates = this.props.candidateTags || [];
-      if (candidates.length === 0) {
-        return;
-      }
       // up
       if (this.state.candidateTag > 0) {
         this.setState({
@@ -86,7 +85,12 @@ const TagForm = React.createClass({
   },
 
   handleClickHideForm() {
-    this.setState({isEditMode: false});
+    this.props.onInitialCandidateTags();
+    this.setState({
+      isEditMode: false,
+      isShowCandidateTags: false,
+      candidateTag: -1
+    });
   },
 
   getInitialState() {
