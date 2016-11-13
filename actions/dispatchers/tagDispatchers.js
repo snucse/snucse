@@ -21,6 +21,7 @@ export function addTagToArticle(dispatch, articleId, tagName) {
   };
   DataCon.postDataToServer(Url.getUrl(`articles/${articleId}/add_tag`), 'POST', data).then(article => {
     loadArticleTag(dispatch, article);
+    loadTagCloud(dispatch);
   }).catch(console.error);
 }
 
@@ -30,6 +31,7 @@ export function deleteTagToArticle(dispatch, articleId, tagName) {
   };
   DataCon.postDataToServer(Url.getUrl(`articles/${articleId}/destroy_tag`), 'POST', data).then(article => {
     loadArticleTag(dispatch, article);
+    loadTagCloud(dispatch);
   }).catch(console.error);
 }
 
@@ -47,6 +49,7 @@ export function addTagToProfile(dispatch, profileId, tagName) {
   };
   DataCon.postDataToServer(Url.getUrl(`profiles/${profileId}/add_tag`), 'POST', data).then(profile => {
     loadProfileTag(dispatch, profile.id, profile.tags);
+    loadTagCloud(dispatch);
   }).catch(console.error);
 }
 
@@ -56,6 +59,7 @@ export function deleteTagToProfile(dispatch, profileId, tagName) {
   };
   DataCon.postDataToServer(Url.getUrl(`profiles/${profileId}/destroy_tag`), 'POST', data).then(profile => {
     loadProfileTag(dispatch, profile.id, profile.tags);
+    loadTagCloud(dispatch);
   }).catch(console.error);
 }
 
