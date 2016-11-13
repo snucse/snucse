@@ -1,5 +1,5 @@
 import {LOAD_ARTICLES_TAG, LOAD_PROFILE_TAG} from '../../actions/actionTypes';
-import {updateObject} from '../common';
+import {updateObject, createReducer} from '../common';
 
 const ATTACHED_TAGS_INITIAL_STATE = {
   profiles: {
@@ -35,10 +35,9 @@ function loadProfileTag(state, action) {
   return updateObject(state, {profiles});
 }
 
-export default function attachedTagReducer(attachedTagsState = ATTACHED_TAGS_INITIAL_STATE, action) {
-  switch (action.type) {
-    case LOAD_ARTICLES_TAG: return loadArticlesTag(attachedTagsState, action);
-    case LOAD_PROFILE_TAG: return loadProfileTag(attachedTagsState, action);
-    default: return attachedTagsState;
-  }
-}
+const attachedTagReducer = createReducer(ATTACHED_TAGS_INITIAL_STATE, {
+  [LOAD_ARTICLES_TAG]: loadArticlesTag,
+  [LOAD_PROFILE_TAG]: loadProfileTag
+});
+
+export default attachedTagReducer;
