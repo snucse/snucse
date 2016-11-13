@@ -18,9 +18,9 @@ const ATTACHED_TAGS_INITIAL_STATE = {
 
 function loadArticlesTag(state, action) {
   const tagList = action.articles.map(article => {
-    const newArticleTag = {};
-    newArticleTag[article.id] = article.tags;
-    return newArticleTag;
+    return {
+      [article.id]: article.tags
+    };
   });
   const articles = tagList.length === 0 ? {} : tagList.reduce((prev, curr) => {
     return updateObject(prev, curr);
@@ -29,8 +29,9 @@ function loadArticlesTag(state, action) {
 }
 
 function loadProfileTag(state, action) {
-  const newProfileTag = {};
-  newProfileTag[action.profileId] = action.tags;
+  const newProfileTag = {
+    [action.profileId]: action.tags
+  };
   const profiles = updateObject(state.profiles, newProfileTag);
   return updateObject(state, {profiles});
 }
