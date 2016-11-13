@@ -13,8 +13,9 @@ const COMMENT_INITIAL_STATE = {
 };
 
 function loadComment(state, action) {
-  const newComments = {};
-  newComments[action.articleId] = action.comments;
+  const newComments = {
+    [action.articleId]: action.comments
+  };
   const comments = updateObject(state.comments, newComments);
   return updateObject(state, {
     comments
@@ -23,8 +24,9 @@ function loadComment(state, action) {
 
 function writeComment(state, action) {
   const nestedComments = state.comments[action.articleId].concat([action.comment]);
-  const newComments = {};
-  newComments[action.articleId] = nestedComments;
+  const newComments = {
+    [action.articleId]: nestedComments
+  };
   const comments = updateObject(state.comments, newComments);
   return updateObject(state, {
     comments
@@ -39,8 +41,9 @@ function editComment(state, action) {
       action.comment.id,
       () => action.comment
       );
-  const newComments = {};
-  newComments[action.articleId] = nestedComments;
+  const newComments = {
+    [action.articleId]: nestedComments
+  };
   const comments = updateObject(state.comments, newComments);
   return updateObject(state, {
     comments
@@ -52,8 +55,9 @@ function deleteComment(state, action) {
   const nestedComments = state.comments[action.articleId].filter(comment => {
     return comment.id !== action.commentId;
   });
-  const newComments = {};
-  newComments[action.articleId] = nestedComments;
+  const newComments = {
+    [action.articleId]: nestedComments
+  };
   const comments = updateObject(state.comments, newComments);
   return updateObject(state, {
     comments
