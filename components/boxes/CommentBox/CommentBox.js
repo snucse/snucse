@@ -14,7 +14,7 @@ import CommentFormContainer from './CommentFormContainer';
 const CommentBox = React.createClass({
   componentDidMount() {
     if (this.props.lastComment) {
-      this.props.setLastComment(this.props.articleId, this.props.lastComment);
+      this.props.setLastComment(this.props.articleId, this.props.lastComment, this.props.commentCount);
     } else {
       this.props.loadComments(this.props.articleId);
     }
@@ -22,9 +22,9 @@ const CommentBox = React.createClass({
 
   componentWillReceiveProps(props) {
     if (this.props.lastComment) {
-      this.props.setLastComment(this.props.lastComment);
+      this.props.setLastComment(props.lastComment, props.commentCount);
     } else if (this.props.articleId !== props.articleId) {
-      this.props.loadComments(this.props.articleId);
+      this.props.loadComments(props.articleId);
     }
   },
 

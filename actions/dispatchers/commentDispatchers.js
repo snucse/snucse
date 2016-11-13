@@ -12,11 +12,12 @@ export function loadComments(dispatch, articleId) {
   }).catch(console.error);
 }
 
-export function setLastComment(dispatch, id, comment) {
+export function setLastComment(dispatch, id, comment, commentCount) {
   dispatch({
     type: types.SET_LAST_COMMENT,
     articleId: id,
-    comment
+    comment,
+    commentCount
   });
 }
 

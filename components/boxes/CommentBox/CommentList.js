@@ -16,12 +16,12 @@ const FOLD_COMMENT_LIMIT = 1;
     // 접혀 있으면 true, 펼쳐져 있으면 false, default는 true
 */
 const CommentList = React.createClass({
-  handleLoadMore() {
-    this.props.loadComments(this.props.articleId);
-  },
-
   handleClickShowMore() {
-    this.props.unfoldComments(this.props.articleId);
+    if (this.props.loaded[this.props.articleId]) {
+      this.props.unfoldComments(this.props.articleId);
+    } else {
+      this.props.loadComments(this.props.articleId);
+    }
   },
 
   renderComment(comment) {
@@ -37,7 +37,7 @@ const CommentList = React.createClass({
 
   render() {
     const comments = this.props.comments[this.props.articleId] || [];
-    const commentsNum = comments.length;
+    const commentsNum = this.props.commentsNum[this.props.articleId] || 0;
     const isFold = this.props.fold[this.props.articleId];
     let commentsNumToShow;
     if (isFold) {
@@ -45,12 +45,11 @@ const CommentList = React.createClass({
     } else {
       commentsNumToShow = commentsNum;
     }
-    const commentItems = comments.slice(Math.max(commentsNum - commentsNumToShow, 0), commentsNum)
+    commentsNumToShow = Math.min(commentsNumToShow, comments.length);
+    const commentItems = comments.slice(Math.max(comments.length - commentsNumToShow, 0), commentsNum)
       .map(this.renderComment);
     let showMoreButton = null;
-    if (!this.props.loaded[this.props.articleId]) {
-      showMoreButton = <button onClick={this.handleLoadMore}>더 불러오기</button>;
-    } else if (isFold && commentsNum > commentsNumToShow) {
+    if ((!this.props.loaded[this.props.articleId] || isFold) && commentsNum > commentsNumToShow) {
       showMoreButton = <button onClick={this.handleClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>;
     }
     return (
@@ -70,7 +69,8 @@ const mapStateToProps = function (state) {
   return {
     loaded: state.comment.loaded,
     fold: state.comment.fold,
-    comments: state.comment.comments
+    comments: state.comment.comments,
+    commentsNum: state.comment.count
   };
 };
 

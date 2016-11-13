@@ -9,6 +9,7 @@ const INITIAL_STATE = {
     ]
     */
   },
+  count: {},
   loaded: {},
   fold: {}
 };
@@ -19,14 +20,17 @@ export default function comment(state = INITIAL_STATE, action) {
     case LOAD_COMMENT: {
       const newComments = {};
       newComments[articleId] = action.comments;
+      const newCount = {};
+      newCount[articleId] = action.comments.length;
       const newLoaded = {};
       newLoaded[articleId] = true;
       const newFold = {};
-      if (articleId in state.fold) {
+      if (!(articleId in state.fold)) {
         newFold[articleId] = true;
       }
       return Object.assign({}, state, {
         comments: {...state.comments, ...newComments},
+        count: {...state.count, ...newCount},
         loaded: {...state.loaded, ...newLoaded},
         fold: {...state.fold, ...newFold}
       });
@@ -34,12 +38,15 @@ export default function comment(state = INITIAL_STATE, action) {
     case SET_LAST_COMMENT: {
       const newComments = {};
       newComments[articleId] = [action.comment];
+      const newCount = {};
+      newCount[articleId] = action.commentCount;
       const newLoaded = {};
       newLoaded[articleId] = false;
       const newFold = {};
       newFold[articleId] = false; // 더 보기 누르면 바로 펼친다
       return Object.assign({}, state, {
         comments: {...state.comments, ...newComments},
+        count: {...state.count, ...newCount},
         loaded: {...state.loaded, ...newLoaded},
         fold: {...state.fold, ...newFold}
       });
@@ -56,9 +63,12 @@ export default function comment(state = INITIAL_STATE, action) {
       const nestedComments = state.comments[articleId].concat([action.comment]);
       const newComments = {};
       newComments[articleId] = nestedComments;
+      const newCount = {};
+      newCount[articleId] = nestedComments.length;
       const comments = Object.assign({}, state.comments, newComments);
       return Object.assign({}, state, {
-        comments
+        comments,
+        count: {...state.count, ...newCount}
       });
     }
     case EDIT_COMMENT: {
@@ -80,9 +90,12 @@ export default function comment(state = INITIAL_STATE, action) {
       });
       const newComments = {};
       newComments[articleId] = nestedComments;
+      const newCount = {};
+      newCount[articleId] = nestedComments.length;
       const comments = Object.assign({}, state.comments, newComments);
       return Object.assign({}, state, {
-        comments
+        comments,
+        count: {...state.count, ...newCount}
       });
     }
     default: {
