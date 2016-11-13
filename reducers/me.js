@@ -1,4 +1,5 @@
 import {UPDATE_FOLLOWING} from '../actions/actionTypes';
+import {updateObject} from './common';
 
 const INITIAL_STATE = {
   following: []
@@ -7,7 +8,7 @@ const INITIAL_STATE = {
 export default function me(state = INITIAL_STATE, action) {
   switch (action.type) {
     case UPDATE_FOLLOWING: {
-      return Object.assign({}, state, {
+      return updateObject(state, {
         following: action.profiles
       });
     }

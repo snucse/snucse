@@ -1,4 +1,5 @@
 import {CHANGE_NAME, CHANGE_ID, CHANGE_DESC} from '../actions/actionTypes';
+import {updateObject} from './common';
 
 const INITIAL_STATE = {
   id: '',
@@ -9,17 +10,17 @@ const INITIAL_STATE = {
 export default function profileForm(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CHANGE_ID: {
-      return Object.assign({}, state, {
+      return updateObject(state, {
         id: action.id
       });
     }
     case CHANGE_NAME: {
-      return Object.assign({}, state, {
+      return updateObject(state, {
         name: action.name
       });
     }
     case CHANGE_DESC: {
-      return Object.assign({}, state, {
+      return updateObject(state, {
         desc: action.desc
       });
     }
