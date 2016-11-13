@@ -6,7 +6,7 @@ const USER_ID_INITIAL_STATE = {
 };
 
 function loadUserId(state, action) {
-  updateObject(state, {
+  return updateObject(state, {
     userId: action.userId
   });
 }
