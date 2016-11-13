@@ -36,9 +36,7 @@ function loadProfileTag(state, action) {
   return updateObject(state, {profiles});
 }
 
-const attachedTagReducer = createReducer(ATTACHED_TAGS_INITIAL_STATE, {
+export default createReducer(ATTACHED_TAGS_INITIAL_STATE, {
   [LOAD_ARTICLES_TAG]: loadArticlesTag,
   [LOAD_PROFILE_TAG]: loadProfileTag
 });
-
-export default attachedTagReducer;

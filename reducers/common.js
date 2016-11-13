@@ -17,7 +17,7 @@ export function updateItemInArray(array, itemIdString, itemId, updateItemCallbac
 
 export function createReducer(initialState, handlers) {
   return (state = initialState, action) => {
-    if (Object.hasOwnProperty.call(handlers, action.type)) {
+    if (action.type in handlers) {
       return handlers[action.type](state, action);
     }
     return state;

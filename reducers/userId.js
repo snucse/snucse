@@ -11,8 +11,6 @@ function loadUserId(state, action) {
   });
 }
 
-const userId = createReducer(USER_ID_INITIAL_STATE, {
+export default createReducer(USER_ID_INITIAL_STATE, {
   [LOAD_USER_ID]: loadUserId
 });
-
-export default userId;

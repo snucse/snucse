@@ -64,11 +64,9 @@ function deleteComment(state, action) {
   });
 }
 
-const comment = createReducer(COMMENT_INITIAL_STATE, {
+export default createReducer(COMMENT_INITIAL_STATE, {
   [LOAD_COMMENT]: loadComment,
   [WRITE_COMMENT]: writeComment,
   [EDIT_COMMENT]: editComment,
   [DELETE_COMMENT]: deleteComment
 });
-
-export default comment;

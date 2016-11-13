@@ -31,10 +31,8 @@ function loadAllProfiles(state, action) {
   });
 }
 
-const profile = createReducer(PROFILE_INITIAL_STATE, {
+export default createReducer(PROFILE_INITIAL_STATE, {
   [LOAD_PROFILE_DETAIL]: loadProfileDetail,
   [UPDATE_FOLLOWING_STATE]: updateFollowingState,
   [LOAD_ALL_PROFILES]: loadAllProfiles
 });
-
-export default profile;

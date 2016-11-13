@@ -9,8 +9,6 @@ function loadTagInformation(tagViewState, action) {
   return updateObject(tagViewState, {targetTag: action.tagInformation});
 }
 
-const tagViewReducer = createReducer(TAG_VIEW_INITIAL_STATE, {
+export default createReducer(TAG_VIEW_INITIAL_STATE, {
   [LOAD_TAG_INFORMATION]: loadTagInformation
 });
-
-export default tagViewReducer;

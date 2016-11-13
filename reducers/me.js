@@ -11,8 +11,6 @@ function updateFollowing(state, action) {
   });
 }
 
-const me = createReducer(ME_INITIAL_STATE, {
+export default createReducer(ME_INITIAL_STATE, {
   [UPDATE_FOLLOWING]: updateFollowing
 });
-
-export default me;

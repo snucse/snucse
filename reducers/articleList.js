@@ -32,11 +32,9 @@ function onLoadArticle(state) {
   });
 }
 
-const articleList = createReducer(ARTICLE_LIST_INITIAL_STATE, {
+export default createReducer(ARTICLE_LIST_INITIAL_STATE, {
   [LOAD_ARTICLE]: loadArticle,
   [LOAD_INITIAL_ARTICLE]: loadInitialArticle,
   [SCROLL_ARTICLE_LIST_END]: scrollArticleListEnd,
   [ON_LOAD_ARTICLE]: onLoadArticle
 });
-
-export default articleList;
