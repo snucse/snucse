@@ -22,7 +22,6 @@ const TagForm = React.createClass({
   },
 
   loadCandidateTagsTimeout: null,
-
   handleChangeInput(event) {
     if (this._content.value === '') {
       this.setState({isShowCandidateTags: false, candidateTag: -1});
@@ -75,10 +74,17 @@ const TagForm = React.createClass({
     }
   },
 
-  handleClickCandidateTag(event) {
-    this._content.value = event.currentTarget.innerHTML;
-    // fixme search instead of innerHTML...
-    this.setState({isShowCandidateTags: false, candidateTag: -1});
+  clickCandidateTagFuncs: {},
+  handleClickCandidateTag(tag) {
+    if (this.clickCandidateTagFuncs[tag] === undefined) {
+      const func = () => {
+        this._content.value = tag;
+        this.setState({isShowCandidateTags: false, candidateTag: -1});
+      };
+      this.clickCandidateTagFuncs[tag] = func;
+      return func;
+    }
+    return this.clickCandidateTagFuncs[tag];
   },
 
   handleClickShowForm() {
@@ -116,7 +122,7 @@ const TagForm = React.createClass({
             'autocomplete-tag-item': true,
             'selected': i === this.state.candidateTag
           })}
-          onClick={this.handleClickCandidateTag}
+          onClick={this.handleClickCandidateTag(candidateTag.tag)}
           key={candidateTag.tag}
           >
           {candidateTag.tag}
