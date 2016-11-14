@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 import {genRefCallback} from '../../utils';
 
@@ -104,17 +105,20 @@ const TagForm = React.createClass({
   render() {
     const candidateTags = this.props.candidateTags || [];
     const candidateTagListItems = candidateTags.map((candidateTag, i) => {
-      let clazz;
       if (i === this.state.candidateTag) {
-        clazz = 'autocomplete-tag-item selected';
         if (this._content !== null) {
           this._content.value = candidateTag.tag;
         }
-      } else {
-        clazz = 'autocomplete-tag-item';
       }
       return (
-        <li className={clazz} onClick={this.handleClickCandidateTag} key={candidateTag.tag}>
+        <li
+          className={classnames({
+            'autocomplete-tag-item': true,
+            'selected': i === this.state.candidateTag
+          })}
+          onClick={this.handleClickCandidateTag}
+          key={candidateTag.tag}
+          >
           {candidateTag.tag}
         </li>
       );
