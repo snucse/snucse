@@ -12,25 +12,18 @@ const COMMENT_INITIAL_STATE = {
   }
 };
 
+function updateComments(state, articleId, newComments) {
+  const comments = updateObject(state.comments, {[articleId]: newComments});
+  return updateObject(state, {comments});
+}
+
 function loadComment(state, action) {
-  const newComments = {
-    [action.articleId]: action.comments
-  };
-  const comments = updateObject(state.comments, newComments);
-  return updateObject(state, {
-    comments
-  });
+  return updateComments(state, action.articleId, action.comments);
 }
 
 function writeComment(state, action) {
   const nestedComments = state.comments[action.articleId].concat([action.comment]);
-  const newComments = {
-    [action.articleId]: nestedComments
-  };
-  const comments = updateObject(state.comments, newComments);
-  return updateObject(state, {
-    comments
-  });
+  return updateComments(state, action.articleId, nestedComments);
 }
 
 function editComment(state, action) {
@@ -41,13 +34,7 @@ function editComment(state, action) {
       action.comment.id,
       () => action.comment
       );
-  const newComments = {
-    [action.articleId]: nestedComments
-  };
-  const comments = updateObject(state.comments, newComments);
-  return updateObject(state, {
-    comments
-  });
+  return updateComments(state, action.articleId, nestedComments);
 }
 
 function deleteComment(state, action) {
@@ -55,13 +42,7 @@ function deleteComment(state, action) {
   const nestedComments = state.comments[action.articleId].filter(comment => {
     return comment.id !== action.commentId;
   });
-  const newComments = {
-    [action.articleId]: nestedComments
-  };
-  const comments = updateObject(state.comments, newComments);
-  return updateObject(state, {
-    comments
-  });
+  return updateComments(state, action.articleId, nestedComments);
 }
 
 export default createReducer(COMMENT_INITIAL_STATE, {
