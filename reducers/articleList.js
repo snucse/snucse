@@ -2,15 +2,13 @@ import {LOAD_ARTICLE, LOAD_INITIAL_ARTICLE, SCROLL_ARTICLE_LIST_END, ON_LOAD_ART
 import {updateObject, createReducer} from './common';
 
 const ARTICLE_LIST_INITIAL_STATE = {
-  data: {
-    articles: []
-  },
+  articles: [],
   articleNum: 5,
   loading: false
 };
 
 function loadArticle(state, action) {
-  return updateObject(state, {data: action.data});
+  return updateObject(state, {articles: action.articles});
 }
 
 function loadInitialArticle(state) {

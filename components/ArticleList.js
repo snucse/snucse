@@ -18,7 +18,7 @@ const ArticleList = React.createClass({
       if (this.props.loading === true) {
         return;
       }
-      this.props.onLoadArticle(this.props.data.articles.length, this.props.articleNum);
+      this.props.onLoadArticle(this.props.articles.length, this.props.articleNum);
     }
   },
 
@@ -39,7 +39,7 @@ const ArticleList = React.createClass({
   },
 
   render() {
-    const articleNodes = this.props.data.articles.slice(0, this.props.articleNum).map(article => {
+    const articleNodes = this.props.articles.slice(0, this.props.articleNum).map(article => {
       const temp = article.content.split('\n');
       const n = temp.length;
       const result = [];
@@ -68,7 +68,7 @@ const ArticleList = React.createClass({
         </div>
       );
     });
-    const load = (this.props.data.articles.length <= this.props.articleNum) ?
+    const load = (this.props.articles.length <= this.props.articleNum) ?
       'End' : 'Loading...';
     return (
       <div className="article">
@@ -119,7 +119,7 @@ const DelEditBox = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    data: state.articleList.data,
+    articles: state.articleList.articles,
     articleNum: state.articleList.articleNum,
     userId: state.userId.userId,
     loading: state.articleList.loading
