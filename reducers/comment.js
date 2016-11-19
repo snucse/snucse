@@ -18,37 +18,23 @@ export default function comment(state = INITIAL_STATE, action) {
   const {articleId} = action;
   switch (action.type) {
     case LOAD_COMMENT: {
-      const newComments = {};
-      newComments[articleId] = action.comments;
-      const newCount = {};
-      newCount[articleId] = action.comments.length;
-      const newLoaded = {};
-      newLoaded[articleId] = true;
       const newFold = {};
       if (!(articleId in state.fold)) {
         newFold[articleId] = true;
       }
       return Object.assign({}, state, {
-        comments: {...state.comments, ...newComments},
-        count: {...state.count, ...newCount},
-        loaded: {...state.loaded, ...newLoaded},
+        comments: {...state.comments, [articleId]: action.comments},
+        count: {...state.count, [articleId]: action.comments.length},
+        loaded: {...state.loaded, [articleId]: true},
         fold: {...state.fold, ...newFold}
       });
     }
     case SET_LAST_COMMENT: {
-      const newComments = {};
-      newComments[articleId] = [action.comment];
-      const newCount = {};
-      newCount[articleId] = action.commentCount;
-      const newLoaded = {};
-      newLoaded[articleId] = false;
-      const newFold = {};
-      newFold[articleId] = false; // 더 보기 누르면 바로 펼친다
       return Object.assign({}, state, {
-        comments: {...state.comments, ...newComments},
-        count: {...state.count, ...newCount},
-        loaded: {...state.loaded, ...newLoaded},
-        fold: {...state.fold, ...newFold}
+        comments: {...state.comments, [articleId]: [action.comment]},
+        count: {...state.count, [articleId]: action.commentCount},
+        loaded: {...state.loaded, [articleId]: false},
+        fold: {...state.fold, [articleId]: false}
       });
     }
     case MODIFY_FOLD_COMMENT: {
@@ -59,14 +45,9 @@ export default function comment(state = INITIAL_STATE, action) {
     case WRITE_COMMENT: {
       // 끝에 추가 // concat
       const nestedComments = state.comments[articleId].concat([action.comment]);
-      const newComments = {};
-      newComments[articleId] = nestedComments;
-      const newCount = {};
-      newCount[articleId] = nestedComments.length;
-      const comments = Object.assign({}, state.comments, newComments);
       return Object.assign({}, state, {
-        comments,
-        count: {...state.count, ...newCount}
+        comments: {...state.comments, [articleId]: nestedComments},
+        count: {...state.count, [articleId]: nestedComments.length}
       });
     }
     case EDIT_COMMENT: {
@@ -74,11 +55,8 @@ export default function comment(state = INITIAL_STATE, action) {
       const nestedComments = state.comments[articleId].map(comment => {
         return comment.id === action.comment.id ? action.comment : comment;
       });
-      const newComments = {};
-      newComments[articleId] = nestedComments;
-      const comments = Object.assign({}, state.comments, newComments);
       return Object.assign({}, state, {
-        comments
+        comments: {...state.comments, [articleId]: nestedComments}
       });
     }
     case DELETE_COMMENT: {
@@ -86,14 +64,9 @@ export default function comment(state = INITIAL_STATE, action) {
       const nestedComments = state.comments[articleId].filter(comment => {
         return comment.id !== action.commentId;
       });
-      const newComments = {};
-      newComments[articleId] = nestedComments;
-      const newCount = {};
-      newCount[articleId] = nestedComments.length;
-      const comments = Object.assign({}, state.comments, newComments);
       return Object.assign({}, state, {
-        comments,
-        count: {...state.count, ...newCount}
+        comments: {...state.comments, [articleId]: nestedComments},
+        count: {...state.count, [articleId]: nestedComments.length}
       });
     }
     default: {
