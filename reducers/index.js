@@ -6,6 +6,7 @@ import profileForm from './profileForm';
 import comment from './comment';
 import tag from './tag';
 import me from './me';
+import search from './search';
 // import * as types from '../actions/actionTypes';
 // import other reducers
 
@@ -19,7 +20,8 @@ const reducers = {
   comment,
   tag,
   userId,
-  me
+  me,
+  search
   // list up all reducers
 };
 

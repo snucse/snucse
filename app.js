@@ -15,6 +15,7 @@ import {
   TagInfo,
   ArticleWrite,
   ArticleEdit,
+  SearchResult,
   ClassManager,
   Login,
   SignUp
@@ -38,6 +39,7 @@ ReactDOM.render(
         <Route path="others" component={Others}/>
         <Route path="profiles" component={ProfileList}/>
         <Route path="profiles/:id/write" component={ArticleWrite}/>
+        <Route path="search" component={SearchResult}/>
         <Route path=":id" component={ClassManager}/>
         <Route path=":articleId/edit" component={ArticleEdit}/>
       </Route>
