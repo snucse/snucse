@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
 import ArticleList from './ArticleList';
-import {ProfileTagBox} from './TagBox';
+import {ProfileTagBox} from './boxes';
 
 const Profile = React.createClass({
   handleFollowChanged(following) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteTagToProfile} from '../../actions/dispatchers';
+import {deleteTagToProfile} from '../../../actions/dispatchers';
 import TagItem from './TagItem';
 
 const ProfileTagItemContainer = React.createClass({
