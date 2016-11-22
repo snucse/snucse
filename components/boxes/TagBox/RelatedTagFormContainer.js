@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {makeTagRelationship} from '../../actions/dispatchers';
+import {makeTagRelationship} from '../../../actions/dispatchers';
 import TagForm from './TagForm';
 
 const RelatedTagFormContainer = React.createClass({

@@ -12,6 +12,23 @@ export function loadComments(dispatch, articleId) {
   }).catch(console.error);
 }
 
+export function setLastComment(dispatch, id, comment, commentCount) {
+  dispatch({
+    type: types.SET_LAST_COMMENT,
+    articleId: id,
+    comment,
+    commentCount
+  });
+}
+
+export function modifyFoldComments(dispatch, id, fold) {
+  dispatch({
+    type: types.MODIFY_FOLD_COMMENT,
+    articleId: id,
+    fold
+  });
+}
+
 export function writeComment(dispatch, comment) {
   DataCon.postDataToServer(Url.getUrl('comments'), 'POST', comment).then(res => {
     dispatch({
@@ -23,7 +40,6 @@ export function writeComment(dispatch, comment) {
 }
 
 export function editComment(dispatch, commentId, articleId, newContent) {
-  console.log(commentId, articleId, newContent);
   DataCon.postDataToServer(Url.getUrl(`comments/${commentId}`), 'PUT', {
     content: newContent
   }).then(comment => {

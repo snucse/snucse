@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteComment, editComment} from '../../actions/dispatchers';
+import {deleteComment, editComment} from '../../../actions/dispatchers';
 import CommentItem from './CommentItem';
 
 /*

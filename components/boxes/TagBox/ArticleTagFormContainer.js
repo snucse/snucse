@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {addTagToArticle} from '../../actions/dispatchers';
+import {addTagToArticle} from '../../../actions/dispatchers';
 import TagForm from './TagForm';
 
 const ArticleTagFormContainer = React.createClass({

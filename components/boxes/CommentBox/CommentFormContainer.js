@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {writeComment} from '../../actions/dispatchers';
+import {writeComment} from '../../../actions/dispatchers';
 import CommentForm from './CommentForm';
 
 /*
