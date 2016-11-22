@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {makeTagRelationship, loadCandidateTags, initializeCandidateTags} from '../../actions/dispatchers';
+import {addTagToArticle, loadCandidateTags, initializeCandidateTags} from '../../../actions/dispatchers';
 import TagForm from './TagForm';
 
-const RelatedTagFormContainer = React.createClass({
+const ArticleTagFormContainer = React.createClass({
   handleAdd(tagName) {
-    this.props.makeTagRelationship(this.props.targetTagName, tagName);
+    this.props.addTagToArticle(this.props.articleId, tagName);
   },
 
   handleLoadCandidateTags(query) {
@@ -37,10 +37,10 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    makeTagRelationship: (targetTagName, relatedTagName) => makeTagRelationship(dispatch, targetTagName, relatedTagName),
+    addTagToArticle: (articleId, tagName) => addTagToArticle(dispatch, articleId, tagName),
     initializeCandidateTags: () => initializeCandidateTags(dispatch),
     loadCandidateTags: query => loadCandidateTags(dispatch, query)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RelatedTagFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleTagFormContainer);

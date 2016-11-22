@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteTagToArticle} from '../../actions/dispatchers';
+import {deleteTagToArticle} from '../../../actions/dispatchers';
 import TagItem from './TagItem';
 
 const ArticleTagItemContainer = React.createClass({

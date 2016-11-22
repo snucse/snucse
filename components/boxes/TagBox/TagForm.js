@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import {genRefCallback} from '../../utils';
+import {genRefCallback} from '../../../utils';
 
 const TagForm = React.createClass({
   addTag() {

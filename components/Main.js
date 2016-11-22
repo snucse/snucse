@@ -1,10 +1,11 @@
 import React from 'react';
-import ArticleList from './ArticleList';
+
+import Feed from './Feed';
 
 const Main = React.createClass({
   render() {
     return (
-      <ArticleList/>
+      <Feed/>
     );
   }
 });

@@ -7,6 +7,11 @@ export const LOAD_INITIAL_ARTICLE = 'LOAD_INITIAL_ARTICLE';
 export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
 export const ON_LOADING_ARTICLE = 'ON_LOADING_ARTICLE';
 
+// action types related with feeds
+export const LOAD_FEED = 'LOAD_FEED';
+export const LOADING_FEED_STARTED = 'LOADING_FEED_STARTED';
+export const LOADING_FEED_FINISHED = 'LOADING_FEED_FINISHED';
+
 // action types related with ProfileMake.js
 export const CHANGE_ID = 'CHANGE_ID';
 export const CHANGE_NAME = 'CHANGE_NAME';
@@ -14,6 +19,8 @@ export const CHANGE_DESC = 'CHANGE_DESC';
 
 // action types related with comment
 export const LOAD_COMMENT = 'LOAD_COMMENT';
+export const SET_LAST_COMMENT = 'SET_LAST_COMMENT';
+export const MODIFY_FOLD_COMMENT = 'MODIFY_FOLD_COMMENT';
 export const WRITE_COMMENT = 'WRITE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
