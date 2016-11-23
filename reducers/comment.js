@@ -78,22 +78,23 @@ function writeComment(state, action) {
 }
 
 function editComment(state, action) {
+  const {articleId, comment} = action;
   // 찾아서 대체 // map 사용
   const nestedComments = updateItemInArray(
-      state.comments[action.articleId],
+      state.comments[articleId],
       'id',
-      action.comment.id,
-      () => action.comment
+      comment.id,
+      () => comment
       );
-  return updateComments(state, action.articleId, nestedComments);
+  return updateComments(state, articleId, nestedComments);
 }
 
 function deleteComment(state, action) {
-  const {articleId} = action;
+  const {articleId, commentId} = action;
   const loaded = state.loaded[articleId];
   // 찾아서 삭제 // filter
   const nestedComments = state.comments[articleId].filter(comment => {
-    return comment.id !== action.commentId;
+    return comment.id !== commentId;
   });
   return updateObject(state, {
     comments: updateComments(state, articleId, nestedComments),
