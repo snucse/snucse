@@ -76,7 +76,7 @@ const TagForm = React.createClass({
 
   clickCandidateTagFuncs: {},
   handleClickCandidateTag(tag) {
-    if (this.clickCandidateTagFuncs[tag] === undefined) {
+    if (!(tag in this.clickCandidateTagFuncs)) {
       const func = () => {
         this._content.value = tag;
         this.setState({isShowCandidateTags: false, candidateTag: -1});
