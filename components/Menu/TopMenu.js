@@ -1,5 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+
+import {UserLevel} from '../../utils';
 
 const TopMenu = React.createClass({
   handleLogout() {
@@ -8,14 +11,18 @@ const TopMenu = React.createClass({
   },
 
   render() {
+    const search = this.props.userLevel === UserLevel.REGULAR ? (
+      <li><form method="POST">
+        <input type="text" name="search" placeholder="snucse검색"/>
+        <input type="submit" value="검색"/>
+      </form></li>
+    ) : null;
+
     return (
       <div className="top-menu">
         <ul>
           <li><Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link></li>
-          <li><form method="POST">
-            <input type="text" name="search" placeholder="snucse검색"/>
-            <input type="submit" value="검색"/>
-          </form></li>
+          {search}
           <li><Link to="/message"><span className="menulink">쪽지</span></Link></li>
           <li><Link to="/others"><span className="menulink">기타</span></Link></li>
           <li><a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a></li>
@@ -25,4 +32,10 @@ const TopMenu = React.createClass({
   }
 });
 
-export default TopMenu;
+function mapStateToProps(state) {
+  return {
+    userLevel: state.userInfo.userLevel
+  };
+}
+
+export default connect(mapStateToProps)(TopMenu);
