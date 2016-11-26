@@ -15,7 +15,7 @@ function loadFeed(state, action) {
 
 function loadingFeedFinished(state) {
   return updateObject(state, {
-    feedNum: state.feedNum + 1,
+    count: state.count + 1,
     loading: false
   });
 }
