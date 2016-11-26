@@ -2,14 +2,24 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {loadAllProfiles} from '../actions/dispatchers';
+import {UserLevel} from '../utils';
 import ProfileMakeForm from './ProfileMakeForm';
 
 const ProfileList = React.createClass({
   componentDidMount() {
-    this.props.loadAllProfiles();
+    if (this.props.userLevel === UserLevel.REGULAR) {
+      this.props.loadAllProfiles();
+    }
   },
 
   render() {
+    if (this.props.userLevel === UserLevel.ASSOCIATE) { // TODO: 아니면 404?
+      return (
+        <div className="profile-container">
+          <p>준회원은 전체 프로필을 조회할 수 없습니다.</p>
+        </div>
+      );
+    }
     const profileList = this.props.profileList.map(profile => {
       return (
         <div key={profile.id} className="profile">
@@ -30,6 +40,7 @@ const ProfileList = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
+    userLevel: state.userInfo.userLevel,
     profileList: state.profile.allProfiles
   };
 };
