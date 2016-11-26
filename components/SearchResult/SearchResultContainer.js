@@ -24,7 +24,7 @@ const SearchResultContainer = React.createClass({
 
   render() {
     const {result} = this.props;
-    const {category, query} = this.props.location;
+    const {category, query} = this.props.location.query;
     return <SearchResultView category={category} query={query} result={result}/>;
   }
 });
