@@ -10,7 +10,7 @@ export function loadArticle(dispatch, id) {
   DataCon.loadDataFromServer(url).then(data => {
     dispatch({
       type: types.LOAD_ARTICLE,
-      data
+      articles: data.articles
     });
     return data.articles;
   }).then(articles => {
