@@ -23,29 +23,9 @@ const SearchResultContainer = React.createClass({
   },
 
   render() {
-    let SearchView;
-    switch (this.props.location.query.category) {
-      case 'article': {
-        // assign article search view
-      } break;
-      case 'comment': {
-        // assign comment search view
-      } break;
-      case 'profile': {
-        // assign profile search view
-      } break;
-      case 'tag': {
-        // assign tag search view
-      } break;
-      default: {
-        SearchView = <SearchResultView query={this.props.location.query.query} result={this.props.result}/>;
-        // fixme rename overall search result view
-      } break;
-    }
-    SearchView = <SearchResultView query={this.props.location.query.query} result={this.props.result}/>;
-    // fixme erase this
-    return SearchView;
-    // container 로서 역할이 맞는가, result view에 category를 넘겨주고 거기서 분화해야할 듯?
+    const {result} = this.props;
+    const {category, query} = this.props.location;
+    return <SearchResultView category={category} query={query} result={result}/>;
   }
 });
 
