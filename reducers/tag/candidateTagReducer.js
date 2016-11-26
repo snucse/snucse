@@ -1,5 +1,5 @@
 import {INITIALIZE_CANDIDATE_TAGS, LOAD_CANDIDATE_TAGS} from '../../actions/actionTypes';
-import {updateObject} from '../common';
+import {updateObject, createReducer} from '../common';
 
 const CANDIDATE_TAGS_INITIAL_STATE = {
   tags: []
@@ -13,10 +13,7 @@ function loadCandidateTags(candidateTagsState, action) {
   return updateObject(candidateTagsState, {tags: action.tags});
 }
 
-export default function candidateTagReducer(candidateTagsState = CANDIDATE_TAGS_INITIAL_STATE, action) {
-  switch (action.type) {
-    case INITIALIZE_CANDIDATE_TAGS: return initializeCandidateTags(candidateTagsState, action);
-    case LOAD_CANDIDATE_TAGS: return loadCandidateTags(candidateTagsState, action);
-    default: return candidateTagsState;
-  }
-}
+export default createReducer(CANDIDATE_TAGS_INITIAL_STATE, {
+  [INITIALIZE_CANDIDATE_TAGS]: initializeCandidateTags,
+  [LOAD_CANDIDATE_TAGS]: loadCandidateTags
+});
