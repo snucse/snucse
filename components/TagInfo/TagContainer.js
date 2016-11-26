@@ -22,9 +22,7 @@ const TagContainer = React.createClass({
     if (this.props.userLevel === UserLevel.REGULAR) {
       return <TagViewWrapper tagName={this.props.tagName} tag={this.props.tag}/>;
     }
-    else {
-      return <p>준회원은 태그 조회가 불가능합니다.</p>
-    }
+    return <p>준회원은 태그 조회가 불가능합니다.</p>;
   }
 });
 
