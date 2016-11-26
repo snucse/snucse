@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-import {genRefCallback} from '../../../utils';
+import {genRefCallback, UserLevel} from '../../../utils';
 
 const TagForm = React.createClass({
   handleClickAdd() {
@@ -26,6 +27,9 @@ const TagForm = React.createClass({
   },
 
   render() {
+    if (this.props.userLevel !== UserLevel.REGULAR) {
+      return null;
+    }
     const form = this.state.isEditMode ?
       <form className="tag-form">
         <input ref={genRefCallback(this, '_content')}/>
@@ -42,4 +46,10 @@ const TagForm = React.createClass({
   }
 });
 
-export default TagForm;
+function mapStateToProps(state) {
+  return {
+    userLevel: state.userInfo.userLevel
+  };
+}
+
+export default connect(mapStateToProps)(TagForm);
