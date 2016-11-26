@@ -46,7 +46,7 @@ const ArticleList = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    articles: state.articleList.data.articles,
+    articles: state.articleList.articles,
     articleNum: state.articleList.articleNum,
     loading: state.articleList.loading
   };
