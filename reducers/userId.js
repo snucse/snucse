@@ -1,18 +1,16 @@
 import {LOAD_USER_ID} from '../actions/actionTypes';
+import {updateObject, createReducer} from './common';
 
-const INITIAL_STATE = {
+const USER_ID_INITIAL_STATE = {
   userId: 0
 };
 
-export default function userId(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case LOAD_USER_ID: {
-      return Object.assign({}, state, {
-        userId: action.userId
-      });
-    }
-    default: {
-      return state;
-    }
-  }
+function loadUserId(state, action) {
+  return updateObject(state, {
+    userId: action.userId
+  });
 }
+
+export default createReducer(USER_ID_INITIAL_STATE, {
+  [LOAD_USER_ID]: loadUserId
+});

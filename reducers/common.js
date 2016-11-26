@@ -14,3 +14,12 @@ export function updateItemInArray(array, itemIdString, itemId, updateItemCallbac
   });
   return updatedItems;
 }
+
+export function createReducer(initialState, handlers) {
+  return (state = initialState, action) => {
+    if (action.type in handlers) {
+      return handlers[action.type](state, action);
+    }
+    return state;
+  };
+}

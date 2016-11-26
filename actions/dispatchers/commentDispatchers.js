@@ -40,7 +40,6 @@ export function writeComment(dispatch, comment) {
 }
 
 export function editComment(dispatch, commentId, articleId, newContent) {
-  console.log(commentId, articleId, newContent);
   DataCon.postDataToServer(Url.getUrl(`comments/${commentId}`), 'PUT', {
     content: newContent
   }).then(comment => {
