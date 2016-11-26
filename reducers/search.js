@@ -1,6 +1,5 @@
 import {LOAD_SEARCH_RESULT} from '../actions/actionTypes';
-import {updateObject} from './common';
-// fixme refactoring reducer
+import {updateObject, createReducer} from './common';
 
 const SEARCH_RESULT_INITIAL_STATE = {
   articles: [],
@@ -18,9 +17,6 @@ function loadSearchResult(state, action) {
   });
 }
 
-export default function search(state = SEARCH_RESULT_INITIAL_STATE, action) {
-  switch (action.type) {
-    case LOAD_SEARCH_RESULT: return loadSearchResult(state, action);
-    default: return state;
-  }
-}
+export default createReducer(SEARCH_RESULT_INITIAL_STATE, {
+  [LOAD_SEARCH_RESULT]: loadSearchResult
+});
