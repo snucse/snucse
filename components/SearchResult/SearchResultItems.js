@@ -1,17 +1,19 @@
 import React from 'react';
-// import moment from 'moment';
+import {Link} from 'react-router';
+import moment from 'moment';
 
 export const ArticleSearchResult = React.createClass({
   render() {
-    const {article} = this.props;
-    const {title, writer, createdAt} = article;
+    const {profiles, id, title, content, writer, createdAt} = this.props.article;
+    const primaryProfile = profiles[0];
+    moment.locale('kr');
+    const date = `${moment(createdAt.date, 'YYYYMMDD').format('YYYY-MM-DD')}`;
     return (
-      <article>
-        {JSON.stringify(this.props.article)}<br/>
-        {`${title} (to article) - ${writer.name} (to profile)`}
-        <time>{JSON.stringify(createdAt)}</time>
+      <article className="search-item article-search-item">
+        <Link to={`/${id}`}>{`${title}`}</Link> <time>{date}</time>
         <br/>
-        글 내용 대충
+        <p>{content.substring(0, 200)} {content.length > 200 ? '...' : ''}</p>
+        <Link to={`/${primaryProfile.id}`}>{primaryProfile.name}</Link> | <Link to={`/${writer.username}`}>{`${writer.name}`}</Link>
       </article>
     );
   }
@@ -22,7 +24,7 @@ export const CommentSearchResult = React.createClass({
     // const {comment} = this.props;
     // const {title, writer, createdAt} = article;
     return (
-      <article>
+      <article className="search-item comment-search-item">
         {JSON.stringify(this.props.comment)}<br/>
         <br/>
         댓글 내용 대충
@@ -33,13 +35,12 @@ export const CommentSearchResult = React.createClass({
 
 export const ProfileSearchResult = React.createClass({
   render() {
-    // const {article} = this.props;
-    // const {title, writer, createdAt} = article;
+    const {profile} = this.props;
+    const {name, description, id} = profile;
     return (
-      <article>
-        {JSON.stringify(this.props.profile)}<br/>
-        <br/>
-        프로필 (to profile)
+      <article className="search-item profile-search-item">
+        <Link to={`/${id}`}>{name}</Link>
+        <p>{description}</p>
       </article>
     );
   }
@@ -47,13 +48,10 @@ export const ProfileSearchResult = React.createClass({
 
 export const TagSearchResult = React.createClass({
   render() {
-    // const {tag} = this.props;
-    // const {title, writer, createdAt} = article;
+    const {tag} = this.props.tag;
     return (
-      <article>
-        {JSON.stringify(this.props.tag)}<br/>
-        <br/>
-        태그 결과? (to tag)
+      <article className="search-item tag-search-item">
+        <Link to={`/tags/${tag}`}>{tag}</Link>
       </article>
     );
   }

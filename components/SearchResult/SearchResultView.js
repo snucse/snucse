@@ -1,6 +1,10 @@
 import React from 'react';
 
 import OverallSearchResultView from './OverallSearchResultView';
+import ArticleSearchResultView from './ArticleSearchResultView';
+import CommentSearchResultView from './CommentSearchResultView';
+import ProfileSearchResultView from './ProfileSearchResultView';
+import TagSearchResultView from './TagSearchResultView';
 
 const SearchResultView = React.createClass({
   render() {
@@ -8,23 +12,21 @@ const SearchResultView = React.createClass({
     let SearchView;
     switch (category) {
       case 'article': {
-        // assign article search view
+        SearchView = <ArticleSearchResultView query={this.props.query} result={this.props.result}/>;
       } break;
       case 'comment': {
-        // assign comment search view
+        SearchView = <CommentSearchResultView query={this.props.query} result={this.props.result}/>;
       } break;
       case 'profile': {
-        // assign profile search view
+        SearchView = <ProfileSearchResultView query={this.props.query} result={this.props.result}/>;
       } break;
       case 'tag': {
-        // assign tag search view
+        SearchView = <TagSearchResultView query={this.props.query} result={this.props.result}/>;
       } break;
       default: {
         SearchView = <OverallSearchResultView query={this.props.query} result={this.props.result}/>;
       } break;
     }
-    SearchView = <OverallSearchResultView query={this.props.query} result={this.props.result}/>;
-    // fixme erase this
     return SearchView;
   }
 });
