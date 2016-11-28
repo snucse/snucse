@@ -6,7 +6,7 @@ import {TagSearchResult} from './SearchResultItems';
 const TagSearchResultView = React.createClass({
   render() {
     const {query, result} = this.props;
-    const tagResults = result.tags.map(tag => {
+    const tagResults = result.tags.data.map(tag => {
       return <TagSearchResult tag={tag} key={`${query}-${tag.tag}`}/>;
     });
     return (

@@ -6,7 +6,7 @@ import {ArticleSearchResult} from './SearchResultItems';
 const ArticleSearchResultView = React.createClass({
   render() {
     const {query, result} = this.props;
-    const articleResults = result.articles.map(article => {
+    const articleResults = result.articles.data.map(article => {
       return <ArticleSearchResult article={article} key={`${query}-${article.id}`}/>;
     });
     return (
