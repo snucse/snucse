@@ -1,5 +1,6 @@
-import {DataCon, Url} from '../../utils';
+import {DataCon, Url, UserLevel} from '../../utils';
 import * as types from '../actionTypes';
+import {updateFollowingList, loadTagCloud} from './';
 
 export function loadUserInfo(dispatch) {
   DataCon.loadDataFromServer(Url.getUrl('users/me')).then(data => {
@@ -8,5 +9,11 @@ export function loadUserInfo(dispatch) {
       userId: data.id,
       userLevel: data.level
     });
+    return data.level;
+  }).then(userLevel => {
+    if (userLevel === UserLevel.REGULAR) {
+      updateFollowingList(dispatch);
+      loadTagCloud(dispatch);
+    }
   }).catch(console.error);
 }
