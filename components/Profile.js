@@ -25,9 +25,13 @@ const Profile = React.createClass({
   },
 
   render() {
-    const {id} = this.props;
+    const {id, name, description} = this.props;
     return (
       <div>
+        <div className="head-of-profile">
+          <h2>{name}</h2>
+          {description}
+        </div>
         <div className="menu-of-profile">
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
@@ -65,10 +69,12 @@ const FollowBox = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {following} = state.profile.current;
+  const {following, name, description} = state.profile.current;
   const {userLevel} = state.userInfo;
   return {
     following,
+    name,
+    description,
     userLevel
   };
 };
