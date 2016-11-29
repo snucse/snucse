@@ -6,14 +6,14 @@ import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../a
 import '../stylesheets/tagbox.styl';
 import {UserLevel} from '../utils';
 import ArticleList from './ArticleList';
-import {ProfileTagBox} from './boxes';
+import {ProfileTagBox, ProfileBox} from './boxes';
 
 const Profile = React.createClass({
   handleFollowChanged(following) {
     this.props.updateFollowingState(this.props.id, following);
   },
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.loadProfileDetail(this.props.id);
   },
 
@@ -25,12 +25,11 @@ const Profile = React.createClass({
   },
 
   render() {
-    const {id, name, description} = this.props;
+    const {id, userId} = this.props;
     return (
       <div>
-        <div className="head-of-profile">
-          <h2>{name}</h2>
-          {description}
+        <div className="profile-detail">
+          <ProfileBox id={id} userId={userId}/>
         </div>
         <div className="menu-of-profile">
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
@@ -69,12 +68,11 @@ const FollowBox = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {following, name, description} = state.profile.current;
-  const {userLevel} = state.userInfo;
+  const {following} = state.profile.current;
+  const {userId, userLevel} = state.userInfo;
   return {
     following,
-    name,
-    description,
+    userId,
     userLevel
   };
 };

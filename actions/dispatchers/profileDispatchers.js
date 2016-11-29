@@ -12,10 +12,18 @@ export function loadAllProfiles(dispatch) {
 }
 
 export function loadProfileDetail(dispatch, id) {
+  dispatch({
+    type: types.MODIFY_PROFILE_LOADED_STATE,
+    loaded: false
+  });
   DataCon.loadDataFromServer(Url.getUrl(`profiles/${id}`)).then(current => {
     dispatch({
       type: types.LOAD_PROFILE_DETAIL,
       current
+    });
+    dispatch({
+      type: types.MODIFY_PROFILE_LOADED_STATE,
+      loaded: true
     });
     return current;
   }).then(current => {
@@ -34,4 +42,17 @@ export function updateFollowingState(dispatch, id, following) {
   }).then(() => {
     updateFollowingList(dispatch);
   }).catch(console.error);
+}
+
+export function editProfileName(dispatch, id, newName) {
+  DataCon.postDataToServer(Url.getUrl(`profiles/${id}`), 'PUT', {
+    name: newName
+  }).then(() => {
+    dispatch({
+      type: types.LOAD_PROFILE_DETAIL,
+      current: {
+        name: newName
+      }
+    });
+  });
 }

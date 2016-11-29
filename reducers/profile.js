@@ -1,4 +1,4 @@
-import {LOAD_PROFILE_DETAIL, UPDATE_FOLLOWING_STATE, LOAD_ALL_PROFILES} from '../actions/actionTypes';
+import {MODIFY_PROFILE_LOADED_STATE, LOAD_PROFILE_DETAIL, UPDATE_FOLLOWING_STATE, LOAD_ALL_PROFILES} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
 const PROFILE_INITIAL_STATE = {
@@ -7,8 +7,15 @@ const PROFILE_INITIAL_STATE = {
     name: '',
     description: ''
   },
+  loaded: false,
   allProfiles: []
 };
+
+function modifyProfileLoadedState(state, action) {
+  return updateObject(state, {
+    loaded: action.loaded
+  });
+}
 
 function loadProfileDetail(state, action) {
   return updateObject(state, {
@@ -32,6 +39,7 @@ function loadAllProfiles(state, action) {
 }
 
 export default createReducer(PROFILE_INITIAL_STATE, {
+  [MODIFY_PROFILE_LOADED_STATE]: modifyProfileLoadedState,
   [LOAD_PROFILE_DETAIL]: loadProfileDetail,
   [UPDATE_FOLLOWING_STATE]: updateFollowingState,
   [LOAD_ALL_PROFILES]: loadAllProfiles
