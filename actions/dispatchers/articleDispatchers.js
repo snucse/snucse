@@ -3,7 +3,7 @@ import * as types from '../actionTypes';
 import {loadArticlesTag} from './';
 
 export function loadArticle(dispatch, id) {
-  let url = Url.getUrl('articles');
+  let url = Url.getUrl('/articles');
   if (id) {
     url += `?profileId=${id}`;
   }
