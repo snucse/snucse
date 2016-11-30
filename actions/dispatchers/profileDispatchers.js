@@ -45,7 +45,7 @@ export function updateFollowingState(dispatch, id, following) {
 }
 
 export function editProfileName(dispatch, id, newName) {
-  DataCon.postDataToServer(Url.getUrl(`profiles/${id}`), 'PUT', {
+  DataCon.postDataToServer(Url.getUrl(`/profiles/${id}`), 'PUT', {
     name: newName
   }).then(() => {
     dispatch({
