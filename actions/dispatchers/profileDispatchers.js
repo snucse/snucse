@@ -3,7 +3,7 @@ import * as types from '../actionTypes';
 import {loadProfileTag, updateFollowingList} from './';
 
 export function loadAllProfiles(dispatch) {
-  DataCon.loadDataFromServer(Url.getUrl('profiles')).then(data => {
+  DataCon.loadDataFromServer(Url.getUrl('/profiles')).then(data => {
     dispatch({
       type: types.LOAD_ALL_PROFILES,
       allProfiles: data.profiles
@@ -12,7 +12,7 @@ export function loadAllProfiles(dispatch) {
 }
 
 export function loadProfileDetail(dispatch, id) {
-  DataCon.loadDataFromServer(Url.getUrl(`profiles/${id}`)).then(current => {
+  DataCon.loadDataFromServer(Url.getUrl(`/profiles/${id}`)).then(current => {
     dispatch({
       type: types.LOAD_PROFILE_DETAIL,
       current
@@ -26,7 +26,7 @@ export function loadProfileDetail(dispatch, id) {
 
 export function updateFollowingState(dispatch, id, following) {
   const type = following ? 'follow' : 'unfollow';
-  DataCon.postDataToServer(Url.getUrl(`profiles/${id}/${type}`), 'POST').then(() => {
+  DataCon.postDataToServer(Url.getUrl(`/profiles/${id}/${type}`), 'POST').then(() => {
     dispatch({
       type: types.UPDATE_FOLLOWING_STATE,
       following

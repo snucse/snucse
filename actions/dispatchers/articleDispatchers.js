@@ -3,10 +3,7 @@ import * as types from '../actionTypes';
 import {loadArticlesTag} from './';
 
 export function loadArticle(dispatch, id) {
-  let url = Url.getUrl('articles');
-  if (id) {
-    url += `?profileId=${id}`;
-  }
+  const url = Url.getUrl('/articles', {profileId: id});
   DataCon.loadDataFromServer(url).then(data => {
     dispatch({
       type: types.LOAD_ARTICLE,

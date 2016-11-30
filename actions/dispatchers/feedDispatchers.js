@@ -3,7 +3,7 @@ import * as types from '../actionTypes';
 import {loadArticlesTag} from './';
 
 export function loadFeed(dispatch) {
-  const url = Url.getUrl('feeds');
+  const url = Url.getUrl('/feeds');
   DataCon.loadDataFromServer(url).then(data => {
     dispatch({
       type: types.LOAD_FEED,

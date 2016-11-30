@@ -5,7 +5,7 @@ import {DataCon, Url} from '../utils';
 const ArticleEdit = React.createClass({
   loadArticleFromServer() {
     const {articleId} = this.props.params;
-    const url = Url.getUrl(`articles/${articleId}`);
+    const url = Url.getUrl(`/articles/${articleId}`);
     DataCon.loadDataFromServer(url).then(data => {
       const {title, content} = data;
       this.setState({title, content});
@@ -22,7 +22,7 @@ const ArticleEdit = React.createClass({
 
   submitEdit(data) {
     const {articleId} = this.props.params;
-    const url = Url.getUrl(`articles/${articleId}`);
+    const url = Url.getUrl(`/articles/${articleId}`);
     DataCon.postDataToServer(url, 'PUT', data);
   },
 
