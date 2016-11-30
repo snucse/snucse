@@ -12,7 +12,7 @@ const DelEditBox = React.createClass({
   },
 
   deleteArticle() {
-    const url = Url.getUrl(`articles/${this.props.articleId}`);
+    const url = Url.getUrl(`/articles/${this.props.articleId}`);
     DataCon.postDataToServer(url, 'DELETE');
   },
 

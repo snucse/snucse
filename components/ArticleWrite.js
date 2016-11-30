@@ -4,7 +4,7 @@ import {DataCon, Url} from '../utils';
 
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
-    const url = Url.getUrl('articles');
+    const url = Url.getUrl('/articles');
     DataCon.postDataToServer(url, 'POST', data);
   },
 
