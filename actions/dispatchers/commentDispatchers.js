@@ -2,7 +2,7 @@ import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
 
 export function loadComments(dispatch, articleId) {
-  const url = Url.getUrl(`comments?articleId=${articleId}`);
+  const url = Url.getUrl('/comments', {articleId});
   DataCon.loadDataFromServer(url).then(data => {
     dispatch({
       type: types.LOAD_COMMENT,
@@ -30,7 +30,7 @@ export function modifyFoldComments(dispatch, id, fold) {
 }
 
 export function writeComment(dispatch, comment) {
-  DataCon.postDataToServer(Url.getUrl('comments'), 'POST', comment).then(res => {
+  DataCon.postDataToServer(Url.getUrl('/comments'), 'POST', comment).then(res => {
     dispatch({
       type: types.WRITE_COMMENT,
       comment: res,
@@ -40,7 +40,7 @@ export function writeComment(dispatch, comment) {
 }
 
 export function editComment(dispatch, commentId, articleId, newContent) {
-  DataCon.postDataToServer(Url.getUrl(`comments/${commentId}`), 'PUT', {
+  DataCon.postDataToServer(Url.getUrl(`/comments/${commentId}`), 'PUT', {
     content: newContent
   }).then(comment => {
     dispatch({
@@ -52,7 +52,7 @@ export function editComment(dispatch, commentId, articleId, newContent) {
 }
 
 export function deleteComment(dispatch, commentId, articleId) {
-  DataCon.postDataToServer(Url.getUrl(`comments/${commentId}`), 'DELETE').then(() => {
+  DataCon.postDataToServer(Url.getUrl(`/comments/${commentId}`), 'DELETE').then(() => {
     dispatch({
       type: types.DELETE_COMMENT,
       commentId,

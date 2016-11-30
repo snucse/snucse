@@ -26,7 +26,7 @@ const ProfileMakeForm = React.createClass({
       return false;
     }
 
-    const url = Url.getUrl('profiles');
+    const url = Url.getUrl('/profiles');
     DataCon.postDataToServer(url, 'POST', trimmed).then(() => {
       alert('프로필 생성에 성공하였습니다.');
       this.props.updateFollowingList();

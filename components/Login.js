@@ -18,7 +18,7 @@ const LoginForm = React.createClass({
   handleLogin() {
     const username = this.id.value.trim();
     const password = this.password.value;
-    DataCon.postDataToServer(Url.getUrl('users/sign_in'), 'POST', {
+    DataCon.postDataToServer(Url.getUrl('/users/sign_in'), 'POST', {
       username, password
     }).then(data => {
       localStorage.setItem('snucsesession', data.accessToken);
