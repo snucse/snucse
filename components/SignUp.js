@@ -18,7 +18,7 @@ const SignUpForm = React.createClass({
     const username = this.id.value.trim();
     const password = this.password.value;
     const name = this.myname.value.trim();
-    DataCon.postDataToServer(Url.getUrl('users/sign_up'), 'POST', {
+    DataCon.postDataToServer(Url.getUrl('/users/sign_up'), 'POST', {
       username, password, name
     }).then(() => {
       browserHistory.push('/login');
