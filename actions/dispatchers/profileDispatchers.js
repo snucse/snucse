@@ -54,5 +54,5 @@ export function editProfileName(dispatch, id, newName) {
         name: newName
       }
     });
-  });
+  }).catch(console.error);
 }
