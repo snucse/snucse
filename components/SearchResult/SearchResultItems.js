@@ -26,8 +26,10 @@ export const CommentSearchResult = React.createClass({
     return (
       <article className="search-item comment-search-item">
         {JSON.stringify(this.props.comment)}<br/>
+        쓴 글로 가야하는데 쓴 글에 대한 정보가 없네요
         <br/>
-        댓글 내용 대충
+        #링크를 사용할까
+        <br/>
       </article>
     );
   }

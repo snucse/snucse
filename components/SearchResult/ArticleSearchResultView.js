@@ -1,11 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router';
 
 import {ArticleSearchResult} from './SearchResultItems';
+import SearchResultLinks from './SearchResultLinks';
 
 const ArticleSearchResultView = React.createClass({
   render() {
-    const {query, result} = this.props;
+    const {query, num, result} = this.props;
+    const page = Number(this.props.page) || 0;
     const articleResults = result.articles.data.map(article => {
       return <ArticleSearchResult article={article} key={`${query}-${article.id}`}/>;
     });
@@ -19,12 +20,9 @@ const ArticleSearchResultView = React.createClass({
           </header>
           {articleResults}
           <footer>
-            <span><Link to={`/search?category=article&query=${query}`}>더보기</Link> (총 개수?)</span>
+            <SearchResultLinks category={'article'} query={query} page={page} num={num} count={result.articles.count}/>
           </footer>
         </section>
-        <p>
-          {'0, 1, 2, 3, 4, 5, 6, 7, 8, 9 > 임시'}
-        </p>
       </section>
     );
   }

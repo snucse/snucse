@@ -1,11 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router';
 
 import {ProfileSearchResult} from './SearchResultItems';
+import SearchResultLinks from './SearchResultLinks';
 
 const ProfileSearchResultView = React.createClass({
   render() {
-    const {query, result} = this.props;
+    const {query, num, result} = this.props;
+    const page = Number(this.props.page) || 0;
     const profileResults = result.profiles.data.map(profile => {
       return <ProfileSearchResult profile={profile} key={`${query}-${profile.id}`}/>;
     });
@@ -17,12 +18,9 @@ const ProfileSearchResultView = React.createClass({
           <h4>프로필</h4>
           {profileResults}
           <footer>
-            <span><Link to={`/search?category=profile&query=${query}`}>더보기</Link> (총 개수?)</span>
+            <SearchResultLinks category={'profile'} query={query} page={page} num={num} count={result.profiles.count}/>
           </footer>
         </section>
-        <p>
-          {'0, 1, 2, 3, 4, 5, 6, 7, 8, 9 > 임시'}
-        </p>
       </section>
     );
   }

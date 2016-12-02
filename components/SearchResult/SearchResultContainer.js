@@ -6,7 +6,7 @@ import SearchResultView from './SearchResultView';
 
 const SearchResultContainer = React.createClass({
   loadSearchResult(query) {
-    this.props.loadSearchResult(query.query, query.category, query.page, query.num);
+    this.props.loadSearchResult(query.query, query.category, (Number(query.page) || 0) + 1, query.num);
   },
 
   componentDidMount() {
@@ -15,7 +15,8 @@ const SearchResultContainer = React.createClass({
 
   componentWillReceiveProps(props) {
     if (props.location.query.query !== this.props.location.query.query ||
-      props.location.query.category !== this.props.location.query.category) {
+      props.location.query.category !== this.props.location.query.category ||
+      props.location.query.page !== this.props.location.query.page) {
       // fixme 더 좋은 방법 없나, obj 째로 비교하는
       window.scrollTo(0, 0);
       this.loadSearchResult(props.location.query);
@@ -24,8 +25,8 @@ const SearchResultContainer = React.createClass({
 
   render() {
     const {result} = this.props;
-    const {category, query} = this.props.location.query;
-    return <SearchResultView category={category} query={query} result={result}/>;
+    const {category, query, page} = this.props.location.query;
+    return <SearchResultView category={category} query={query} page={page} result={result}/>;
   }
 });
 

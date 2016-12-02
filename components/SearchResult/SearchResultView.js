@@ -12,19 +12,19 @@ const SearchResultView = React.createClass({
     let SearchView;
     switch (category) {
       case 'article': {
-        SearchView = <ArticleSearchResultView query={this.props.query} result={this.props.result}/>;
+        SearchView = <ArticleSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
       } break;
       case 'comment': {
-        SearchView = <CommentSearchResultView query={this.props.query} result={this.props.result}/>;
+        SearchView = <CommentSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
       } break;
       case 'profile': {
-        SearchView = <ProfileSearchResultView query={this.props.query} result={this.props.result}/>;
+        SearchView = <ProfileSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
       } break;
       case 'tag': {
-        SearchView = <TagSearchResultView query={this.props.query} result={this.props.result}/>;
+        SearchView = <TagSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
       } break;
       default: {
-        SearchView = <OverallSearchResultView query={this.props.query} result={this.props.result}/>;
+        SearchView = <OverallSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
       } break;
     }
     return SearchView;
