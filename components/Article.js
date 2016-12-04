@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {loadArticle} from '../actions/dispatchers';
+import {ArticleItem} from './ArticleItem';
 
 const Article = React.createClass({
 
@@ -16,8 +17,18 @@ const Article = React.createClass({
   },
 
   render() {
+    let view = null;
+    if (this.props.article === undefined) {
+      // 404?
+    } else if (this.props.article === null) {
+      // now loading?
+    } else {
+      view = <ArticleItem article={this.props.article}/>;
+    }
     return (
-      <span>{JSON.stringify(this.props.article)}</span>
+      <section className="article-view">
+        {view}
+      </section>
     );
   }
 });

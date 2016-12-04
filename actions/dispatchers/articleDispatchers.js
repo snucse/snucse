@@ -7,5 +7,12 @@ export function loadArticle(dispatch, articleId) {
       type: types.LOAD_ARTICLE,
       article
     });
-  }).catch(console.error);
+  }).catch(err => {
+    console.log(err);
+    dispatch({
+      type: types.LOAD_ARTICLE,
+      article: undefined
+    });
+    // 이게 맞는지
+  });
 }
