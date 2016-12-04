@@ -7,14 +7,7 @@ import TagCloud from '../TagCloud';
 import FollowingProfileList from './FollowingProfileList';
 
 const SideMenu = React.createClass({
-  render() {
-    if (this.props.userLevel === UserLevel.ASSOCIATE) {
-      return (
-        <div className="side-menu">
-          <h1>User Info</h1>
-        </div>
-      );
-    }
+  regularSideMenu() {
     return (
       <div className="side-menu">
         <h1>User Info</h1>
@@ -26,6 +19,23 @@ const SideMenu = React.createClass({
         <TagCloud/>
       </div>
     );
+  },
+
+  defaultSideMenu() {
+    return (
+      <div className="side-menu">
+        <h1>User Info</h1>
+      </div>
+    );
+  },
+
+  render() {
+    const mapUserLevelToRenderer = {
+      [UserLevel.REGULAR]: this.regularSideMenu,
+      default: this.defaultSideMenu
+    };
+
+    return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
   }
 });
 

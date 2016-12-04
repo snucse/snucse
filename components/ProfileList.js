@@ -12,14 +12,7 @@ const ProfileList = React.createClass({
     }
   },
 
-  render() {
-    if (this.props.userLevel === UserLevel.ASSOCIATE) { // TODO: 아니면 404?
-      return (
-        <div className="profile-container">
-          <p>준회원은 전체 프로필을 조회할 수 없습니다.</p>
-        </div>
-      );
-    }
+  regularProfileList() {
     const profileList = this.props.profileList.map(profile => {
       return (
         <div key={profile.id} className="profile">
@@ -35,6 +28,23 @@ const ProfileList = React.createClass({
         </div>
       </div>
     );
+  },
+
+  defaultProfileList() {
+    return (
+      <div className="profile-container">
+        <p>준회원은 전체 프로필을 조회할 수 없습니다.</p>
+      </div>
+    );
+  },
+
+  render() {
+    const mapUserLevelToRenderer = {
+      [UserLevel.REGULAR]: this.regularProfileList,
+      default: this.defaultProfileList
+    };
+
+    return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
   }
 });
 

@@ -10,25 +10,43 @@ const TopMenu = React.createClass({
     location.href = '/login';
   },
 
-  render() {
-    const search = this.props.userLevel === UserLevel.REGULAR ? (
-      <li><form method="POST">
-        <input type="text" name="search" placeholder="snucse검색"/>
-        <input type="submit" value="검색"/>
-      </form></li>
-    ) : null;
-
+  regularTopMenu() {
     return (
       <div className="top-menu">
         <ul>
           <li><Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link></li>
-          {search}
+          <li><form method="POST">
+            <input type="text" name="search" placeholder="snucse검색"/>
+            <input type="submit" value="검색"/>
+          </form></li>
           <li><Link to="/message"><span className="menulink">쪽지</span></Link></li>
           <li><Link to="/others"><span className="menulink">기타</span></Link></li>
           <li><a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a></li>
         </ul>
       </div>
     );
+  },
+
+  defaultTopMenu() {
+    return (
+      <div className="top-menu">
+        <ul>
+          <li><Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link></li>
+          <li><Link to="/message"><span className="menulink">쪽지</span></Link></li>
+          <li><Link to="/others"><span className="menulink">기타</span></Link></li>
+          <li><a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a></li>
+        </ul>
+      </div>
+    );
+  },
+
+  render() {
+    const mapUserLevelToRenderer = {
+      [UserLevel.REGULAR]: this.regularTopMenu,
+      default: this.defaultTopMenu
+    };
+
+    return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
   }
 });
 

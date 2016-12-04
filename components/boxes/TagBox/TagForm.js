@@ -109,10 +109,7 @@ const TagForm = React.createClass({
     };
   },
 
-  render() {
-    if (this.props.userLevel !== UserLevel.REGULAR) {
-      return null;
-    }
+  regularRenderer() {
     const candidateTags = this.props.candidateTags || [];
     const candidateTagListItems = candidateTags.map((candidateTag, i) => {
       if (i === this.state.candidateTag) {
@@ -155,6 +152,15 @@ const TagForm = React.createClass({
         {form}
       </section>
     );
+  },
+
+  render() {
+    const mapUserLevelToRenderer = {
+      [UserLevel.REGULAR]: this.regularRenderer,
+      default: () => null
+    };
+
+    return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
   }
 });
 
