@@ -2,7 +2,7 @@
 export const LOAD_USER_ID = 'LOAD_USER_ID';
 
 // action types related with Article.js
-export const LOAD_ARTICLE = 'LOAD_ARTICLE';
+export const LOAD_ARTICLES = 'LOAD_ARTICLES';
 export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
 export const ON_LOADING_ARTICLE = 'ON_LOADING_ARTICLE';
 

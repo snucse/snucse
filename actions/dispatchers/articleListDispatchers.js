@@ -2,11 +2,11 @@ import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
 import {loadArticlesTag} from './';
 
-export function loadArticle(dispatch, id) {
-  const url = Url.getUrl('/articles', {profileId: id});
+export function loadArticles(dispatch, profileId) {
+  const url = Url.getUrl('/articles', {profileId});
   DataCon.loadDataFromServer(url).then(data => {
     dispatch({
-      type: types.LOAD_ARTICLE,
+      type: types.LOAD_ARTICLES,
       articles: data.articles
     });
     return data.articles;

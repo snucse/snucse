@@ -3,5 +3,5 @@ export * from './tagDispatchers';
 export * from './profileDispatchers';
 export * from './userIdDispatchers';
 export * from './commentDispatchers';
-export * from './articleDispatchers';
+export * from './articleListDispatchers';
 export * from './feedDispatchers';
