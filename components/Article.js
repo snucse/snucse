@@ -5,7 +5,6 @@ import {loadArticle} from '../actions/dispatchers';
 
 const Article = React.createClass({
 
-  // load article
   componentDidMount() {
     this.props.loadArticle(this.props.id);
   },
@@ -17,15 +16,22 @@ const Article = React.createClass({
   },
 
   render() {
-    return <span>{this.props.id}</span>;
+    return (
+      <span>{JSON.stringify(this.props.article)}</span>
+    );
   }
 });
 
-// connect state to props
+const mapStateToProps = function (state) {
+  return {
+    article: state.article.article
+  };
+};
+
 const mapDispatchToProps = function (dispatch) {
   return {
     loadArticle: id => loadArticle(dispatch, id)
   };
 };
 
-export default connect(null, mapDispatchToProps)(Article);
+export default connect(mapStateToProps, mapDispatchToProps)(Article);
