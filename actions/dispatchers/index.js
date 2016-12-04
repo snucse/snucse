@@ -5,3 +5,4 @@ export * from './userIdDispatchers';
 export * from './commentDispatchers';
 export * from './articleListDispatchers';
 export * from './feedDispatchers';
+export * from './articleDispatchers';
