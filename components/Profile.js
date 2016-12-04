@@ -52,7 +52,7 @@ const FollowBox = React.createClass({
     }
   },
 
-  regularFollowBox() {
+  regularRenderer() {
     return this.props.following ? (
       <p onClick={this.handleUnfollow}>팔로우 취소</p>
     ) : (
@@ -62,7 +62,7 @@ const FollowBox = React.createClass({
 
   render() {
     const mapUserLevelToRenderer = {
-      [UserLevel.REGULAR]: this.regularFollowBox,
+      [UserLevel.REGULAR]: this.regularRenderer,
       default: () => null
     };
 

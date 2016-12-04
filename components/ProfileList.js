@@ -12,7 +12,7 @@ const ProfileList = React.createClass({
     }
   },
 
-  regularProfileList() {
+  regularRenderer() {
     const profileList = this.props.profileList.map(profile => {
       return (
         <div key={profile.id} className="profile">
@@ -40,7 +40,7 @@ const ProfileList = React.createClass({
 
   render() {
     const mapUserLevelToRenderer = {
-      [UserLevel.REGULAR]: this.regularProfileList,
+      [UserLevel.REGULAR]: this.regularRenderer,
       default: this.defaultProfileList
     };
 

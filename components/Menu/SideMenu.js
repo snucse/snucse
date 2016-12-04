@@ -7,7 +7,7 @@ import TagCloud from '../TagCloud';
 import FollowingProfileList from './FollowingProfileList';
 
 const SideMenu = React.createClass({
-  regularSideMenu() {
+  regularRenderer() {
     return (
       <div className="side-menu">
         <h1>User Info</h1>
@@ -21,7 +21,7 @@ const SideMenu = React.createClass({
     );
   },
 
-  defaultSideMenu() {
+  defaultRenderer() {
     return (
       <div className="side-menu">
         <h1>User Info</h1>
@@ -31,8 +31,8 @@ const SideMenu = React.createClass({
 
   render() {
     const mapUserLevelToRenderer = {
-      [UserLevel.REGULAR]: this.regularSideMenu,
-      default: this.defaultSideMenu
+      [UserLevel.REGULAR]: this.regularRenderer,
+      default: this.defaultRenderer
     };
 
     return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
