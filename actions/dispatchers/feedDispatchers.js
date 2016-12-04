@@ -11,13 +11,15 @@ export function loadFeed(dispatch, options) {
     sinceId,
     limit
   };
+  const reset = options == null;
+
   const url = Url.getUrl('/feeds', params);
   DataCon.postDataToServer(url).then(data => {
     const moreDataPresent = (data.feeds.length >= limit);
     dispatch({
       type: types.LOAD_FEED,
       feeds: data.feeds,
-      reset: (options == null),
+      reset,
       maxId,
       sinceId,
       moreDataPresent
@@ -25,6 +27,6 @@ export function loadFeed(dispatch, options) {
     return data.feeds;
   }).then(feeds => {
     const articles = feeds.filter(item => item.type === 'article');
-    loadArticlesTag(dispatch, articles);
+    loadArticlesTag(dispatch, articles, reset);
   }).catch(console.error);
 }
