@@ -1,33 +1,50 @@
-import {LOAD_FEED, LOADING_FEED_STARTED, LOADING_FEED_FINISHED} from '../actions/actionTypes';
+import {LOAD_FEED} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
 const FEEDS_INITIAL_STATE = {
-  feeds: [],
-  count: 5,
-  loading: false
+  byId: {},
+  allIds: [],
+  loadMore: []
 };
 
 function loadFeed(state, action) {
-  return updateObject(state, {
-    feeds: action.feeds
+  const byId = action.feeds.reduce((obj, item) => {
+    obj[item.id] = item;
+    return obj;
+  }, {});
+  // 내림차순 정렬
+  const newIds = action.feeds.map(item => item.id).sort((a, b) => b - a);
+  if (action.reset) {
+    return updateObject(state, {
+      byId,
+      allIds: newIds,
+      loadMore: [
+        {maxId: newIds[newIds.length - 1] - 1, limit: 5}
+      ]
+    });
+  }
+  const ids = new Set(state.allIds);
+  const loadMore = state.loadMore.filter(item => {
+    return !(item.sinceId === action.sinceId && item.maxId === action.maxId);
   });
-}
-
-function loadingFeedFinished(state) {
+  if (action.moreDataPresent) { // 덜 로드됨
+    const val = newIds[newIds.length - 1];
+    loadMore.push({
+      maxId: val - 1,
+      sinceId: action.sinceId,
+      limit: 5
+    });
+  }
+  for (const id of newIds) {
+    ids.add(id);
+  }
   return updateObject(state, {
-    count: state.count + 1,
-    loading: false
-  });
-}
-
-function loadingFeedStarted(state) {
-  return updateObject(state, {
-    loading: true
+    byId: {...state.byId, ...byId},
+    allIds: Array.from(ids).sort((a, b) => b - a),
+    loadMore: loadMore.sort((a, b) => b.maxId - a.maxId)
   });
 }
 
 export default createReducer(FEEDS_INITIAL_STATE, {
-  [LOAD_FEED]: loadFeed,
-  [LOADING_FEED_STARTED]: loadingFeedStarted,
-  [LOADING_FEED_FINISHED]: loadingFeedFinished
+  [LOAD_FEED]: loadFeed
 });

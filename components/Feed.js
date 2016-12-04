@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadFeed, loadMoreFeed} from '../actions/dispatchers';
+import {loadFeed} from '../actions/dispatchers';
 import FeedList from './FeedList';
 
 const Feed = React.createClass({
@@ -10,41 +10,61 @@ const Feed = React.createClass({
     this.props.loadFeed();
   },
 
-  handleLoadMore() {
-    if (this.props.loading === true) {
-      return;
-    }
-    this.props.loadMoreFeed(this.props.feeds.length, this.props.feedNum);
+  handleLoadMore(options) {
+    this.props.loadFeed(options);
   },
 
   render() {
-    const feeds = this.props.feeds.slice(0, this.props.feedNum);
-    if (this.props.feeds.length > this.props.feedNum) {
-      feeds.push({
-        type: 'loadmore',
-        id: `${this.props.feedNum}`,
-        automatic: true
-      });
-    }
     return (
-      <FeedList feeds={feeds} onLoadMore={this.handleLoadMore}/>
+      <FeedList feeds={this.props.feeds} onLoadMore={this.handleLoadMore}/>
     );
   }
 });
 
+function bs(arr, val, start, end) {
+  start = start || 0;
+  if (end == null) {
+    end = arr.length;
+  }
+  const mid = Math.floor((start + end) / 2);
+  if (arr[mid] === val) {
+    return mid;
+  }
+  if (end - start <= 1) {
+    return -1;
+  }
+
+  // 내림차순 정렬된 데이터 검색
+  if (arr[mid] < val) {
+    return bs(arr, val, start, mid);
+  }
+  return bs(arr, val, mid, end);
+}
+
 const mapStateToProps = function (state) {
+  const feeds = state.feeds.allIds.map(id => state.feeds.byId[id]);
+  let p = 0;
+  for (const metadata of state.feeds.loadMore) {
+    const targetId = metadata.maxId + 1;
+    const idx = bs(state.feeds.allIds, targetId);
+    if (idx !== -1) {
+      feeds.splice(idx + 1 + p, 0, {
+        type: 'loadmore',
+        automatic: false,
+        options: metadata
+      });
+      p++;
+    }
+  }
+  // TODO
   return {
-    feeds: state.feeds.feeds,
-    feedNum: state.feeds.count,
-    loading: state.feeds.loading
+    feeds
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadFeed: () => loadFeed(dispatch),
-    loadMoreFeed: (...args) =>
-      loadMoreFeed(dispatch, ...args)
+    loadFeed: options => loadFeed(dispatch, options)
   };
 };
 
