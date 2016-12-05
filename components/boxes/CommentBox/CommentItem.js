@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {CommentRecommendBox} from '../../boxes';
+
 /*
   props
   - isEditable
@@ -87,7 +89,12 @@ const CommentItem = React.createClass({
       if (this.props.isEditable) {
         buttons.push(<button onClick={this.handleEditEnable} key={`edit-button-${id}`}>수정</button>);
       }
-      controller = <div className="comment-controller">{buttons}</div>;
+      controller = (
+        <div className="comment-controller">
+          {buttons}
+          <CommentRecommendBox commentId={id}/>
+        </div>
+      );
     }
     // todo link to user profile?
     const {writer, createdAt} = this.props.comment;
