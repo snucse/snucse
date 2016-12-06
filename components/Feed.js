@@ -50,6 +50,7 @@ function bs(arr, val, start, end) {
 
 const mapStateToProps = function (state) {
   const feeds = state.feeds.allIds.map(id => state.feeds.byId[id]);
+  const refreshSince = (feeds.length > 0 ? feeds[0].id : undefined);
   let p = 0;
   for (const metadata of state.feeds.loadMore) {
     const targetId = metadata.maxId + 1;
@@ -63,7 +64,14 @@ const mapStateToProps = function (state) {
       p++;
     }
   }
-  // TODO
+  feeds.unshift({
+    type: 'loadmore',
+    automatic: false,
+    options: {
+      sinceId: refreshSince,
+      limit: 5
+    }
+  });
   return {
     feeds
   };
