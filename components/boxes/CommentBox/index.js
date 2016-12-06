@@ -1,3 +1,7 @@
 import CommentBox from './CommentBox';
+import ProfileCommentBox from './ProfileCommentBox';
 
-export default CommentBox;
+export {
+  CommentBox,
+  ProfileCommentBox
+};

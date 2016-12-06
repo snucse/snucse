@@ -3,5 +3,6 @@ export * from './tagDispatchers';
 export * from './profileDispatchers';
 export * from './userIdDispatchers';
 export * from './commentDispatchers';
+export * from './profileCommentDispatchers';
 export * from './articleDispatchers';
 export * from './feedDispatchers';

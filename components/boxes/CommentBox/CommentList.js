@@ -71,10 +71,10 @@ const CommentList = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    loaded: state.comment.loaded,
-    fold: state.comment.fold,
-    comments: state.comment.comments,
-    commentsNum: state.comment.count
+    loaded: state.comment.article.loaded,
+    fold: state.comment.article.fold,
+    comments: state.comment.article.comments,
+    commentsNum: state.comment.article.count
   };
 };
 
