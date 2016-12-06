@@ -6,25 +6,34 @@ export function loadFeed(dispatch, options) {
   const limit = (options && options.limit) || 5;
   const maxId = options && options.maxId;
   const sinceId = options && options.sinceId;
+  const profileId = (options && options.profileId) || undefined;
   const params = {
     maxId,
     sinceId,
-    limit
+    limit,
+    profileId
   };
-  const reset = options == null;
+  const reset = (maxId == null && sinceId == null);
 
-  const url = Url.getUrl('/feeds', params);
+  // options.profileId가 있으면 프로필 글 목록을 불러옴
+  const endpoint = profileId ? 'articles' : 'feeds';
+  const url = Url.getUrl(`/${endpoint}`, params);
   DataCon.postDataToServer(url).then(data => {
-    const moreDataPresent = (data.feeds.length >= limit);
+    // 프로필 글 목록이라면 type: 'article'을 추가함
+    const feeds = profileId ? data.articles.map(item => {
+      return {...item, type: 'article'};
+    }) : data.feeds;
+
+    const moreDataPresent = (feeds.length >= limit);
     dispatch({
       type: types.LOAD_FEED,
-      feeds: data.feeds,
+      feeds,
       reset,
       maxId,
       sinceId,
       moreDataPresent
     });
-    return data.feeds;
+    return feeds;
   }).then(feeds => {
     const articles = feeds.filter(item => item.type === 'article');
     loadArticlesTag(dispatch, articles, reset);

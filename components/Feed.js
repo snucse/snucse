@@ -7,11 +7,18 @@ import FeedList from './FeedList';
 const Feed = React.createClass({
   componentDidMount() {
     window.scrollTo(0, 0);
-    this.props.loadFeed();
+    this.props.loadFeed({profileId: this.props.profileId});
+  },
+
+  componentWillReceiveProps(props) {
+    if (props.profileId !== this.props.profileId) {
+      window.scrollTo(0, 0);
+      props.loadFeed({profileId: props.profileId});
+    }
   },
 
   handleLoadMore(options) {
-    this.props.loadFeed(options);
+    this.props.loadFeed({...options, profileId: this.props.profileId});
   },
 
   render() {
