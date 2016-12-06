@@ -4,14 +4,16 @@ import {updateObject, createReducer} from './common';
 const FEEDS_INITIAL_STATE = {
   byId: {},
   allIds: [],
-  loadMore: []
+  loadMore: [],
+  resetLoading: false
 };
 
 function loadFeedReset() {
   return {
     byId: {},
     allIds: [],
-    loadMore: []
+    loadMore: [],
+    resetLoading: true
   };
 }
 
@@ -30,7 +32,8 @@ function loadFeed(state, action) {
     return updateObject(state, {
       byId,
       allIds: newIds,
-      loadMore
+      loadMore,
+      resetLoading: false
     });
   }
   const ids = new Set(state.allIds);

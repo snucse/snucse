@@ -22,8 +22,41 @@ const Feed = React.createClass({
   },
 
   render() {
+    const {byId, allIds, loadMore, resetLoading} = this.props;
+    const refreshSince = (allIds.length > 0 ? allIds[0] : undefined);
+
+    // O(n)
+    const feeds = allIds.map(id => byId[id]);
+    let p = 0;
+    // O(m lg n)
+    for (const metadata of loadMore) {
+      const targetId = metadata.maxId + 1;
+      const idx = bs(allIds, targetId);
+      if (idx !== -1) {
+        feeds.splice(idx + 1 + p, 0, {
+          id: JSON.stringify(metadata),
+          type: 'loadmore',
+          automatic: false,
+          options: metadata
+        });
+        p++;
+      }
+    }
+    if (!resetLoading) {
+      const refreshMetadata = {
+        sinceId: refreshSince,
+        limit: 5
+      };
+      feeds.unshift({
+        id: JSON.stringify(refreshMetadata),
+        type: 'loadmore',
+        automatic: false,
+        options: refreshMetadata
+      });
+    }
+    // total O(n + m lg n)
     return (
-      <FeedList feeds={this.props.feeds} onLoadMore={this.handleLoadMore}/>
+      <FeedList feeds={feeds} onLoadMore={this.handleLoadMore}/>
     );
   }
 });
@@ -49,38 +82,7 @@ function bs(arr, val, start, end) {
 }
 
 const mapStateToProps = function (state) {
-  const feeds = state.feeds.allIds.map(id => state.feeds.byId[id]);
-  const hasFeedItems = feeds.length > 0;
-  const refreshSince = (feeds.length > 0 ? feeds[0].id : undefined);
-  let p = 0;
-  for (const metadata of state.feeds.loadMore) {
-    const targetId = metadata.maxId + 1;
-    const idx = bs(state.feeds.allIds, targetId);
-    if (idx !== -1) {
-      feeds.splice(idx + 1 + p, 0, {
-        id: JSON.stringify(metadata),
-        type: 'loadmore',
-        automatic: false,
-        options: metadata
-      });
-      p++;
-    }
-  }
-  if (hasFeedItems) {
-    const refreshMetadata = {
-      sinceId: refreshSince,
-      limit: 5
-    };
-    feeds.unshift({
-      id: JSON.stringify(refreshMetadata),
-      type: 'loadmore',
-      automatic: false,
-      options: refreshMetadata
-    });
-  }
-  return {
-    feeds
-  };
+  return {...state.feeds};
 };
 
 const mapDispatchToProps = function (dispatch) {
