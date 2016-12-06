@@ -15,12 +15,14 @@ function loadFeed(state, action) {
   // 내림차순 정렬
   const newIds = action.feeds.map(item => item.id).sort((a, b) => b - a);
   if (action.reset) {
+    const loadMore = [];
+    if (action.moreDataPresent) {
+      loadMore.push({maxId: newIds[newIds.length - 1] - 1, limit: 5});
+    }
     return updateObject(state, {
       byId,
       allIds: newIds,
-      loadMore: [
-        {maxId: newIds[newIds.length - 1] - 1, limit: 5}
-      ]
+      loadMore
     });
   }
   const ids = new Set(state.allIds);
