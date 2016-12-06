@@ -14,6 +14,11 @@ export function loadFeed(dispatch, options) {
     profileId
   };
   const reset = (maxId == null && sinceId == null);
+  if (reset) {
+    dispatch({
+      type: types.LOAD_FEED_RESET
+    });
+  }
 
   // options.profileId가 있으면 프로필 글 목록을 불러옴
   const endpoint = profileId ? 'articles' : 'feeds';

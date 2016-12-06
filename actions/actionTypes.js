@@ -3,6 +3,7 @@ export const LOAD_USER_ID = 'LOAD_USER_ID';
 
 // action types related with feeds
 export const LOAD_FEED = 'LOAD_FEED';
+export const LOAD_FEED_RESET = 'LOAD_FEED_RESET';
 export const LOADING_FEED_STARTED = 'LOADING_FEED_STARTED';
 export const LOADING_FEED_FINISHED = 'LOADING_FEED_FINISHED';
 

@@ -1,4 +1,4 @@
-import {LOAD_FEED} from '../actions/actionTypes';
+import {LOAD_FEED, LOAD_FEED_RESET} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
 const FEEDS_INITIAL_STATE = {
@@ -6,6 +6,14 @@ const FEEDS_INITIAL_STATE = {
   allIds: [],
   loadMore: []
 };
+
+function loadFeedReset() {
+  return {
+    byId: {},
+    allIds: [],
+    loadMore: []
+  };
+}
 
 function loadFeed(state, action) {
   const byId = action.feeds.reduce((obj, item) => {
@@ -49,5 +57,6 @@ function loadFeed(state, action) {
 }
 
 export default createReducer(FEEDS_INITIAL_STATE, {
-  [LOAD_FEED]: loadFeed
+  [LOAD_FEED]: loadFeed,
+  [LOAD_FEED_RESET]: loadFeedReset
 });
