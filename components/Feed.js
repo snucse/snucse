@@ -57,6 +57,7 @@ const mapStateToProps = function (state) {
     const idx = bs(state.feeds.allIds, targetId);
     if (idx !== -1) {
       feeds.splice(idx + 1 + p, 0, {
+        id: JSON.stringify(metadata),
         type: 'loadmore',
         automatic: false,
         options: metadata
@@ -64,13 +65,15 @@ const mapStateToProps = function (state) {
       p++;
     }
   }
+  const refreshMetadata = {
+    sinceId: refreshSince,
+    limit: 5
+  };
   feeds.unshift({
+    id: JSON.stringify(refreshMetadata),
     type: 'loadmore',
     automatic: false,
-    options: {
-      sinceId: refreshSince,
-      limit: 5
-    }
+    options: refreshMetadata
   });
   return {
     feeds
