@@ -1,11 +1,6 @@
 // action types related with user id
 export const LOAD_USER_ID = 'LOAD_USER_ID';
 
-// action types related with Article.js
-export const LOAD_ARTICLE = 'LOAD_ARTICLE';
-export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
-export const ON_LOADING_ARTICLE = 'ON_LOADING_ARTICLE';
-
 // action types related with feeds
 export const LOAD_FEED = 'LOAD_FEED';
 export const LOADING_FEED_STARTED = 'LOADING_FEED_STARTED';
