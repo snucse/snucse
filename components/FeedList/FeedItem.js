@@ -19,7 +19,7 @@ const FeedItem = React.createClass({
       case 'article':
         return <FeedArticle article={this.props.data}/>;
       case 'loadmore':
-        return <FeedLoadMore onLoadMore={this.handleLoadMore} options={this.props.data.options} automatic={this.props.data.automatic}/>;
+        return <FeedLoadMore onLoadMore={this.handleLoadMore} options={this.props.data.options}/>;
       default:
         return null;
     }

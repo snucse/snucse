@@ -24,11 +24,13 @@ export function loadFeed(dispatch, options) {
       return {...item, type: 'article'};
     }) : data.feeds;
 
+    const automatic = Boolean(options && options.automatic);
     const moreDataPresent = (feeds.length >= limit);
     dispatch({
       type: types.LOAD_FEED,
       feeds,
       reset,
+      automatic,
       maxId,
       sinceId,
       moreDataPresent

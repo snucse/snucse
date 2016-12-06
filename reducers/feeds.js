@@ -17,7 +17,7 @@ function loadFeed(state, action) {
   if (action.reset) {
     const loadMore = [];
     if (action.moreDataPresent) {
-      loadMore.push({maxId: newIds[newIds.length - 1] - 1, limit: 5});
+      loadMore.push({automatic: true, maxId: newIds[newIds.length - 1] - 1, limit: 5});
     }
     return updateObject(state, {
       byId,
@@ -32,6 +32,7 @@ function loadFeed(state, action) {
   if (action.moreDataPresent) { // 덜 로드됨
     const val = newIds[newIds.length - 1];
     loadMore.push({
+      automatic: Boolean(action.automatic),
       maxId: val - 1,
       sinceId: action.sinceId,
       limit: 5
