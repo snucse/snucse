@@ -12,39 +12,33 @@ const ProfileList = React.createClass({
     }
   },
 
-  regularRenderer() {
-    const profileList = this.props.profileList.map(profile => {
-      return (
-        <div key={profile.id} className="profile">
-          <Link to={`/${profile.id}`}>{profile.name}</Link>
-        </div>
-      );
-    });
-    return (
-      <div className="profile-container">
-        <ProfileMakeForm/>
-        <div className="profiles">
-          {profileList}
-        </div>
-      </div>
-    );
-  },
-
-  defaultProfileList() {
-    return (
-      <div className="profile-container">
-        <p>준회원은 전체 프로필을 조회할 수 없습니다.</p>
-      </div>
-    );
-  },
-
   render() {
-    const mapUserLevelToRenderer = {
-      [UserLevel.REGULAR]: this.regularRenderer,
-      default: this.defaultProfileList
-    };
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR: {
+        const profileList = this.props.profileList.map(profile => {
+          return (
+            <div key={profile.id} className="profile">
+              <Link to={`/${profile.id}`}>{profile.name}</Link>
+            </div>
+          );
+        });
+        return (
+          <div className="profile-container">
+            <ProfileMakeForm/>
+            <div className="profiles">
+              {profileList}
+            </div>
+          </div>
+        );
+      }
 
-    return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
+      default:
+        return (
+          <div className="profile-container">
+            <p>준회원은 전체 프로필을 조회할 수 없습니다.</p>
+          </div>
+        );
+    }
   }
 });
 

@@ -18,21 +18,14 @@ const TagContainer = React.createClass({
     }
   },
 
-  regularRenderer() {
-    return <TagViewWrapper tagName={this.props.tagName} tag={this.props.tag}/>;
-  },
-
-  defaultRenderer() {
-    return <p>준회원은 태그 조회가 불가능합니다.</p>;
-  },
-
   render() {
-    const mapUserLevelToRenderer = {
-      [UserLevel.REGULAR]: this.regularRenderer,
-      default: this.defaultRenderer
-    };
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR:
+        return <TagViewWrapper tagName={this.props.tagName} tag={this.props.tag}/>;
 
-    return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
+      default:
+        return <p>준회원은 태그 조회가 불가능합니다.</p>;
+    }
   }
 });
 

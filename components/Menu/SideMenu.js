@@ -7,35 +7,28 @@ import TagCloud from '../TagCloud';
 import FollowingProfileList from './FollowingProfileList';
 
 const SideMenu = React.createClass({
-  regularRenderer() {
-    return (
-      <div className="side-menu">
-        <h1>User Info</h1>
-        <Link to="/profiles">전체그룹</Link>
-        <ul>
-          <li className="my-profiles">팔로우 중인 그룹</li>
-          <FollowingProfileList/>
-        </ul>
-        <TagCloud/>
-      </div>
-    );
-  },
-
-  defaultRenderer() {
-    return (
-      <div className="side-menu">
-        <h1>User Info</h1>
-      </div>
-    );
-  },
-
   render() {
-    const mapUserLevelToRenderer = {
-      [UserLevel.REGULAR]: this.regularRenderer,
-      default: this.defaultRenderer
-    };
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR:
+        return (
+          <div className="side-menu">
+            <h1>User Info</h1>
+            <Link to="/profiles">전체그룹</Link>
+            <ul>
+              <li className="my-profiles">팔로우 중인 그룹</li>
+              <FollowingProfileList/>
+            </ul>
+            <TagCloud/>
+          </div>
+        );
 
-    return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
+      default:
+        return (
+          <div className="side-menu">
+            <h1>User Info</h1>
+          </div>
+        );
+    }
   }
 });
 

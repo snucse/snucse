@@ -109,58 +109,56 @@ const TagForm = React.createClass({
     };
   },
 
-  regularRenderer() {
-    const candidateTags = this.props.candidateTags || [];
-    const candidateTagListItems = candidateTags.map((candidateTag, i) => {
-      if (i === this.state.candidateTag) {
-        if (this._content !== null) {
-          this._content.value = candidateTag.tag;
-        }
-      }
-      return (
-        <li
-          className={classnames({
-            'autocomplete-tag-item': true,
-            'selected': i === this.state.candidateTag
-          })}
-          onClick={this.handleClickCandidateTag(candidateTag.tag)}
-          key={candidateTag.tag}
-          >
-          {candidateTag.tag}
-        </li>
-      );
-    });
-    const candidateTagList = this.state.isShowCandidateTags ?
-      <ul className="autocomplete-tag-list">
-        {candidateTagListItems}
-      </ul> : null;
-    const form = this.state.isEditMode ?
-      <form className="tag-form">
-        <input
-          ref={genRefCallback(this, '_content')}
-          onChange={this.handleChangeInput}
-          onKeyDown={this.handleKeyDownInput}
-          />
-        <input onClick={this.handleClickAdd} type="button" value="추가"/>
-        <input onClick={this.handleClickHideForm} type="button" value="취소"/>
-        {candidateTagList}
-      </form> :
-      null;
-    return (
-      <section className="tag-form-wrapper">
-        <button onClick={this.handleClickShowForm}>태그추가</button>
-        {form}
-      </section>
-    );
-  },
-
   render() {
-    const mapUserLevelToRenderer = {
-      [UserLevel.REGULAR]: this.regularRenderer,
-      default: () => null
-    };
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR: {
+        const candidateTags = this.props.candidateTags || [];
+        const candidateTagListItems = candidateTags.map((candidateTag, i) => {
+          if (i === this.state.candidateTag) {
+            if (this._content !== null) {
+              this._content.value = candidateTag.tag;
+            }
+          }
+          return (
+            <li
+              className={classnames({
+                'autocomplete-tag-item': true,
+                'selected': i === this.state.candidateTag
+              })}
+              onClick={this.handleClickCandidateTag(candidateTag.tag)}
+              key={candidateTag.tag}
+              >
+              {candidateTag.tag}
+            </li>
+          );
+        });
+        const candidateTagList = this.state.isShowCandidateTags ?
+          <ul className="autocomplete-tag-list">
+            {candidateTagListItems}
+          </ul> : null;
+        const form = this.state.isEditMode ?
+          <form className="tag-form">
+            <input
+              ref={genRefCallback(this, '_content')}
+              onChange={this.handleChangeInput}
+              onKeyDown={this.handleKeyDownInput}
+              />
+            <input onClick={this.handleClickAdd} type="button" value="추가"/>
+            <input onClick={this.handleClickHideForm} type="button" value="취소"/>
+            {candidateTagList}
+          </form> :
+          null;
+        return (
+          <section className="tag-form-wrapper">
+            <button onClick={this.handleClickShowForm}>태그추가</button>
+            {form}
+          </section>
+        );
+      }
 
-    return UserLevel.getRenderer(mapUserLevelToRenderer, this.props.userLevel)();
+      default:
+        return null;
+    }
   }
 });
 
