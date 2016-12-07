@@ -1,13 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {updateFollowingList} from '../../actions/dispatchers';
 
 const FollowingProfileList = React.createClass({
-  componentDidMount() {
-    this.props.updateFollowingList();
-  },
-
   render() {
     const profiles = this.props.me.following.map(profile => {
       return (
@@ -29,10 +24,4 @@ const mapStateToProps = function (state) {
   };
 };
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    updateFollowingList: () => updateFollowingList(dispatch)
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FollowingProfileList);
+export default connect(mapStateToProps)(FollowingProfileList);
