@@ -1,4 +1,4 @@
-import userId from './userId';
+import userInfo from './userInfo';
 import articleList from './articleList';
 import feeds from './feeds';
 import profile from './profile';
@@ -17,7 +17,7 @@ const reducers = {
   feeds,
   comment,
   tag,
-  userId,
+  userInfo,
   me,
   search
   // list up all reducers

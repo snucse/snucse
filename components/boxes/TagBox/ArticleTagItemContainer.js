@@ -10,7 +10,7 @@ const ArticleTagItemContainer = React.createClass({
   },
 
   render() {
-    return <TagItem onDelete={this.handleDelete} tag={this.props.tag}/>;
+    return <TagItem onDelete={this.handleDelete} tag={this.props.tag} accessible={this.props.accessible}/>;
   }
 });
 

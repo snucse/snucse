@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {addTagToProfile} from '../../../actions/dispatchers';
+import {addTagToProfile, loadCandidateTags, initializeCandidateTags} from '../../../actions/dispatchers';
 import TagForm from './TagForm';
 
 const ProfileTagFormContainer = React.createClass({
@@ -9,15 +9,38 @@ const ProfileTagFormContainer = React.createClass({
     this.props.addTagToProfile(this.props.profileId, tagName);
   },
 
+  handleLoadCandidateTags(query) {
+    this.props.loadCandidateTags(query);
+  },
+
+  handleInitialCandidateTags() {
+    this.props.initializeCandidateTags();
+  },
+
   render() {
-    return <TagForm onAdd={this.handleAdd}/>;
+    return (
+      <TagForm
+        onAdd={this.handleAdd}
+        onLoadCandidateTags={this.handleLoadCandidateTags}
+        onInitialCandidateTags={this.handleInitialCandidateTags}
+        candidateTags={this.props.candidates}
+        />
+    );
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
+const mapStateToProps = function (state) {
   return {
-    addTagToProfile: (profileId, tagName) => addTagToProfile(dispatch, profileId, tagName)
+    candidates: state.tag.candidate.tags
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProfileTagFormContainer);
+const mapDispatchToProps = function (dispatch) {
+  return {
+    addTagToProfile: (profileId, tagName) => addTagToProfile(dispatch, profileId, tagName),
+    initializeCandidateTags: () => initializeCandidateTags(dispatch),
+    loadCandidateTags: query => loadCandidateTags(dispatch, query)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileTagFormContainer);
