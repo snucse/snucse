@@ -33,7 +33,7 @@ const ProfileContent = React.createClass({
 
   handleChange(e) {
     this.setState({
-      name: e.target.value
+      content: e.target.value
     });
   },
 

@@ -6,12 +6,6 @@ import ProfileDescContainer from './ProfileDescContainer';
 
 const ProfileBox = React.createClass({
   render() {
-    if (this.props.loaded === false) {
-      return (
-        <div className="profile-box"/>
-      );
-    }
-
     const {userId, id, name, description, admin} = this.props;
     const mine = (admin && userId === admin.id);
     return (
@@ -27,7 +21,6 @@ const mapStateToProps = function (state) {
   const {name, description, admin} = state.profile.current;
   const {userId} = state.userInfo;
   return {
-    loaded: state.profile.loaded,
     name,
     description,
     admin,

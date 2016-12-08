@@ -12,7 +12,7 @@ const PROFILE_INITIAL_STATE = {
 
 function loadProfileDetail(state, action) {
   return updateObject(state, {
-    current: action.current
+    current: updateObject(state.current, action.current)
   });
 }
 
