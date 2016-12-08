@@ -34,31 +34,34 @@ const Feed = React.createClass({
         options: metadata
       };
     });
-    // O((n+m)lg(n+m))
-    const feeds = [...rawFeeds, ...feedLoadMore].sort((a, b) => {
-      if (a.id !== b.id) {
-        return b.id - a.id;
-      }
-      if (a.type !== 'loadmore' && b.type !== 'loadmore') {
-        return 0;
-      }
-      if (a.type === 'loadmore') {
-        return 1;
-      }
-      return -1;
-    });
-    // O(1)? O(n)?
+    // 리셋 중이 아니면 첫 번째 항목은 리프레시 버튼
+    const startPos = resetLoading ? 0 : 1;
+    const feeds = new Array(rawFeeds.length + feedLoadMore.length + startPos);
     if (!resetLoading) {
-      feeds.unshift({
+      feeds[0] = {
         id: 'refresh',
         type: 'loadmore',
         options: {
           sinceId: refreshSince,
           limit: 5
         }
-      });
+      };
     }
-    // total O((n+m)lg(n+m))
+    // 두 리스트가 모두 정렬되어 있으므로 merge
+    // O(n + m)
+    let i = 0;
+    let j = 0;
+    for (let p = startPos; p < feeds.length; p++) {
+      if (i >= rawFeeds.length) {
+        feeds[p] = feedLoadMore[j++];
+      } else if (j >= feedLoadMore.length) {
+        feeds[p] = rawFeeds[i++];
+      } else {
+        // 양쪽의 id가 같으면 피드 항목이 우선됨
+        feeds[p] = (rawFeeds[i].id >= feedLoadMore[j].id) ? rawFeeds[i++] : feedLoadMore[j++];
+      }
+    }
+    // total O(n + m)
     return (
       <FeedList feeds={feeds} onLoadMore={this.handleLoadMore}/>
     );
