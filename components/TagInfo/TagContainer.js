@@ -2,27 +2,38 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {loadTagInformation} from '../../actions/dispatchers';
+import {UserLevel} from '../../utils';
 import TagViewWrapper from './TagViewWrapper';
 
 const TagContainer = React.createClass({
   componentDidMount() {
-    this.props.loadTagInformation(this.props.tagName);
+    if (this.props.userLevel === UserLevel.REGULAR) {
+      this.props.loadTagInformation(this.props.tagName);
+    }
   },
 
   componentWillReceiveProps(props) {
-    if (props.tagName !== this.props.tagName) {
+    if (props.tagName !== this.props.tagName && this.props.userLevel === UserLevel.REGULAR) {
       this.props.loadTagInformation(props.tagName);
     }
   },
 
   render() {
-    return <TagViewWrapper tagName={this.props.tagName} tag={this.props.tag}/>;
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR:
+        return <TagViewWrapper tagName={this.props.tagName} tag={this.props.tag}/>;
+
+      default:
+        return <p>준회원은 태그 조회가 불가능합니다.</p>;
+    }
   }
 });
 
 const mapStateToProps = function (state) {
+  const {userLevel} = state.userInfo;
   const {targetTag} = state.tag.view;
   return {
+    userLevel,
     tag: targetTag
   };
 };
