@@ -46,6 +46,8 @@ export function editProfileName(dispatch, id, newName) {
         name: newName
       }
     });
+  }).then(() => {
+    updateFollowingList(dispatch);
   }).catch(console.error);
 }
 
