@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {UserLevel} from '../../../utils';
 import {deleteTagToProfile} from '../../../actions/dispatchers';
 import TagItem from './TagItem';
 
@@ -10,9 +11,15 @@ const ProfileTagItemContainer = React.createClass({
   },
 
   render() {
-    return <TagItem onDelete={this.handleDelete} tag={this.props.tag}/>;
+    return <TagItem onDelete={this.handleDelete} tag={this.props.tag} accessible={UserLevel.tagAccessible(this.props.userLevel)}/>;
   }
 });
+
+const mapStateToProps = function (state) {
+  return {
+    userLevel: state.userInfo.userLevel
+  };
+};
 
 const mapDispatchToProps = function (dispatch) {
   return {
@@ -20,4 +27,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProfileTagItemContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileTagItemContainer);
