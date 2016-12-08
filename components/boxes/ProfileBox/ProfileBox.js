@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-// import {ProfileDescContainer} from './ProfileDescContainer';
 import ProfileNameContainer from './ProfileNameContainer';
+import ProfileDescContainer from './ProfileDescContainer';
 
 const ProfileBox = React.createClass({
   render() {
@@ -12,15 +12,15 @@ const ProfileBox = React.createClass({
       );
     }
 
-    const {userId, id, name, admin} = this.props;
+    const {userId, id, name, description, admin} = this.props;
     const mine = (admin && userId === admin.id);
     return (
       <div className="profile-box">
         <ProfileNameContainer id={id} name={name} mine={mine}/>
+        <ProfileDescContainer id={id} desc={description} mine={mine}/>
       </div>
     );
   }
-  // <ProfileDescContainer id={id} desc={description} mine={mine}/>
 });
 
 const mapStateToProps = function (state) {

@@ -48,3 +48,16 @@ export function editProfileName(dispatch, id, newName) {
     });
   }).catch(console.error);
 }
+
+export function editProfileDesc(dispatch, id, newDesc) {
+  DataCon.postDataToServer(Url.getUrl(`/profiles/${id}`), 'PUT', {
+    description: newDesc
+  }).then(() => {
+    dispatch({
+      type: types.LOAD_PROFILE_DETAIL,
+      current: {
+        description: newDesc
+      }
+    });
+  }).catch(console.error);
+}

@@ -2,19 +2,22 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {editProfileName} from '../../../actions/dispatchers';
-import ProfileName from './ProfileName';
+import ProfileContent from './ProfileContent';
 
 const ProfileNameContainer = React.createClass({
   handleEdit(newName) {
-    this.props.editProfileName(this.props.id, newName);
+    if (this.props.name !== newName) {
+      this.props.editProfileName(this.props.id, newName);
+    }
   },
 
   render() {
     return (
-      <ProfileName
-        name={this.props.name}
+      <ProfileContent
+        content={this.props.name}
         onEdit={this.handleEdit}
         mine={this.props.mine}
+        classname="profile-name"
         />
     );
   }

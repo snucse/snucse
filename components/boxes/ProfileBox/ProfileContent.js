@@ -1,11 +1,16 @@
 import React from 'react';
 
-const ProfileName = React.createClass({
+const ProfileContent = React.createClass({
   getInitialState() {
     return {
-      name: this.props.name,
       isEditMode: false
     };
+  },
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      content: props.content
+    });
   },
 
   handleEnableEditMode() {
@@ -16,34 +21,33 @@ const ProfileName = React.createClass({
 
   handleDisableEditMode() {
     this.setState({
-      name: this.props.name,
+      content: this.props.content,
       isEditMode: false
     });
   },
 
   handleClickEdit() {
-    this.props.onEdit(this.state.name);
+    this.props.onEdit(this.state.content);
     this.handleDisableEditMode();
   },
 
   handleChange(e) {
-    console.log(e.target);
     this.setState({
       name: e.target.value
     });
   },
 
   render() {
-    console.log(this.props);
-    if (this.props.mine !== true) {
-      return <div className="profile-name"><h3>{this.props.name}</h3></div>;
+    const {content, mine, classname} = this.props;
+    if (mine !== true) {
+      return <div className={classname}>{content}</div>;
     }
 
     if (this.state.isEditMode === false) {
       return (
-        <div className="profile-name">
-          <h3>{this.props.name}</h3>
-          <div className="profile-name-editbox">
+        <div className={classname}>
+          {content}
+          <div className={`${classname}-editbox`}>
             <button onClick={this.handleEnableEditMode}>수정</button>
           </div>
         </div>
@@ -51,9 +55,9 @@ const ProfileName = React.createClass({
     }
 
     return (
-      <div className="profile-name">
-        <input onChange={this.handleChange} defaultValue={this.props.name}/>
-        <div className="profile-name-editbox">
+      <div className={classname}>
+        <input onChange={this.handleChange} defaultValue={this.props.content}/>
+        <div className={`${classname}-editbox`}>
           <button onClick={this.handleClickEdit}>확인</button>
         </div>
       </div>
@@ -61,4 +65,4 @@ const ProfileName = React.createClass({
   }
 });
 
-export default ProfileName;
+export default ProfileContent;
