@@ -5,14 +5,15 @@ export function loadArticle(dispatch, articleId) {
   DataCon.loadDataFromServer(Url.getUrl(`/articles/${articleId}`)).then(article => {
     dispatch({
       type: types.LOAD_ARTICLE,
-      article
+      article,
+      isError: false
     });
   }).catch(err => {
     console.log(err);
     dispatch({
       type: types.LOAD_ARTICLE,
-      article: undefined
+      article: null,
+      isError: true
     });
-    // 이게 맞는지
   });
 }

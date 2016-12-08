@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {loadArticle} from '../actions/dispatchers';
-import {ArticleItem} from './ArticleItem';
+import {ArticleItem, ArticleNotFound} from './ArticleItem';
 
 const Article = React.createClass({
 
@@ -18,10 +18,11 @@ const Article = React.createClass({
 
   render() {
     let view = null;
-    if (this.props.article === undefined) {
-      // 404?
+    if (this.props.isError) {
+      view = <ArticleNotFound/>;
     } else if (this.props.article === null) {
-      // now loading?
+      view = <ArticleNotFound/>;
+      // now loading
     } else {
       view = <ArticleItem article={this.props.article}/>;
     }
@@ -35,7 +36,8 @@ const Article = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    article: state.article.article
+    article: state.article.article,
+    isError: state.article.isError
   };
 };
 
