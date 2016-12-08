@@ -25,61 +25,45 @@ const Feed = React.createClass({
     const {byId, allIds, loadMore, resetLoading} = this.props;
     const refreshSince = (allIds.length > 0 ? allIds[0] : undefined);
 
-    // O(n)
-    const feeds = allIds.map(id => byId[id]);
-    let p = 0;
-    // O(m lg n)
-    for (const metadata of loadMore) {
-      const targetId = metadata.maxId + 1;
-      const idx = bs(allIds, targetId);
-      if (idx !== -1) {
-        feeds.splice(idx + 1 + p, 0, {
-          id: JSON.stringify(metadata),
-          type: 'loadmore',
-          automatic: false,
-          options: metadata
-        });
-        p++;
-      }
-    }
-    if (!resetLoading) {
-      const refreshMetadata = {
-        sinceId: refreshSince,
-        limit: 5
-      };
-      feeds.unshift({
-        id: JSON.stringify(refreshMetadata),
+    // O(n + m)
+    const rawFeeds = allIds.map(id => byId[id]);
+    const feedLoadMore = loadMore.map(metadata => {
+      return {
+        id: metadata.maxId + 1,
         type: 'loadmore',
-        automatic: false,
-        options: refreshMetadata
+        options: metadata
+      };
+    });
+    // O((n+m)lg(n+m))
+    const feeds = [...rawFeeds, ...feedLoadMore].sort((a, b) => {
+      if (a.id !== b.id) {
+        return b.id - a.id;
+      }
+      if (a.type !== 'loadmore' && b.type !== 'loadmore') {
+        return 0;
+      }
+      if (a.type === 'loadmore') {
+        return 1;
+      }
+      return -1;
+    });
+    // O(1)? O(n)?
+    if (!resetLoading) {
+      feeds.unshift({
+        id: 'refresh',
+        type: 'loadmore',
+        options: {
+          sinceId: refreshSince,
+          limit: 5
+        }
       });
     }
-    // total O(n + m lg n)
+    // total O((n+m)lg(n+m))
     return (
       <FeedList feeds={feeds} onLoadMore={this.handleLoadMore}/>
     );
   }
 });
-
-function bs(arr, val, start, end) {
-  start = start || 0;
-  if (end == null) {
-    end = arr.length;
-  }
-  const mid = Math.floor((start + end) / 2);
-  if (arr[mid] === val) {
-    return mid;
-  }
-  if (end - start <= 1) {
-    return -1;
-  }
-
-  // 내림차순 정렬된 데이터 검색
-  if (arr[mid] < val) {
-    return bs(arr, val, start, mid);
-  }
-  return bs(arr, val, mid, end);
-}
 
 const mapStateToProps = function (state) {
   return {...state.feeds};
