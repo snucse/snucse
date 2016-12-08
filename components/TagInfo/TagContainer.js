@@ -19,10 +19,13 @@ const TagContainer = React.createClass({
   },
 
   render() {
-    if (this.props.userLevel === UserLevel.REGULAR) {
-      return <TagViewWrapper tagName={this.props.tagName} tag={this.props.tag}/>;
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR:
+        return <TagViewWrapper tagName={this.props.tagName} tag={this.props.tag}/>;
+
+      default:
+        return <p>준회원은 태그 조회가 불가능합니다.</p>;
     }
-    return <p>준회원은 태그 조회가 불가능합니다.</p>;
   }
 });
 

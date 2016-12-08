@@ -56,14 +56,17 @@ const FollowBox = React.createClass({
   },
 
   render() {
-    if (this.props.userLevel === UserLevel.ASSOCIATE) {
-      return null;
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR:
+        return this.props.following ? (
+          <p onClick={this.handleUnfollow}>팔로우 취소</p>
+        ) : (
+          <p onClick={this.handleFollow}>팔로우</p>
+        );
+
+      default:
+        return null;
     }
-    return this.props.following ? (
-      <p onClick={this.handleUnfollow}>팔로우 취소</p>
-    ) : (
-      <p onClick={this.handleFollow}>팔로우</p>
-    );
   }
 });
 

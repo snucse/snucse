@@ -8,24 +8,27 @@ import FollowingProfileList from './FollowingProfileList';
 
 const SideMenu = React.createClass({
   render() {
-    if (this.props.userLevel === UserLevel.ASSOCIATE) {
-      return (
-        <div className="side-menu">
-          <h1>User Info</h1>
-        </div>
-      );
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR:
+        return (
+          <div className="side-menu">
+            <h1>User Info</h1>
+            <Link to="/profiles">전체그룹</Link>
+            <ul>
+              <li className="my-profiles">팔로우 중인 그룹</li>
+              <FollowingProfileList/>
+            </ul>
+            <TagCloud/>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="side-menu">
+            <h1>User Info</h1>
+          </div>
+        );
     }
-    return (
-      <div className="side-menu">
-        <h1>User Info</h1>
-        <Link to="/profiles">전체그룹</Link>
-        <ul>
-          <li className="my-profiles">팔로우 중인 그룹</li>
-          <FollowingProfileList/>
-        </ul>
-        <TagCloud/>
-      </div>
-    );
   }
 });
 

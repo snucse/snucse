@@ -13,28 +13,32 @@ const ProfileList = React.createClass({
   },
 
   render() {
-    if (this.props.userLevel === UserLevel.ASSOCIATE) { // TODO: 아니면 404?
-      return (
-        <div className="profile-container">
-          <p>준회원은 전체 프로필을 조회할 수 없습니다.</p>
-        </div>
-      );
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR: {
+        const profileList = this.props.profileList.map(profile => {
+          return (
+            <div key={profile.id} className="profile">
+              <Link to={`/${profile.id}`}>{profile.name}</Link>
+            </div>
+          );
+        });
+        return (
+          <div className="profile-container">
+            <ProfileMakeForm/>
+            <div className="profiles">
+              {profileList}
+            </div>
+          </div>
+        );
+      }
+
+      default:
+        return (
+          <div className="profile-container">
+            <p>준회원은 전체 프로필을 조회할 수 없습니다.</p>
+          </div>
+        );
     }
-    const profileList = this.props.profileList.map(profile => {
-      return (
-        <div key={profile.id} className="profile">
-          <Link to={`/${profile.id}`}>{profile.name}</Link>
-        </div>
-      );
-    });
-    return (
-      <div className="profile-container">
-        <ProfileMakeForm/>
-        <div className="profiles">
-          {profileList}
-        </div>
-      </div>
-    );
   }
 });
 
