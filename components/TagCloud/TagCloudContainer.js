@@ -5,10 +5,6 @@ import {loadTagCloud} from '../../actions/dispatchers';
 import TagCloud from './TagCloud';
 
 const TagCloudContainer = React.createClass({
-  componentDidMount() {
-    this.props.loadTagCloud();
-  },
-
   render() {
     return <TagCloud tags={this.props.tags}/>;
   }

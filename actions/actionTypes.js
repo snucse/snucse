@@ -1,5 +1,5 @@
 // action types related with user id
-export const LOAD_USER_ID = 'LOAD_USER_ID';
+export const LOAD_USER_INFO = 'LOAD_USER_INFO';
 
 // action types related with ArticleList
 export const LOAD_ARTICLES = 'LOAD_ARTICLES';
