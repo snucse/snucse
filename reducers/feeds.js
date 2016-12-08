@@ -27,7 +27,16 @@ function loadFeed(state, action) {
   if (action.reset) {
     const loadMore = [];
     if (action.moreDataPresent) {
-      loadMore.push({automatic: true, maxId: newIds[newIds.length - 1] - 1, limit: 5});
+      if (newIds.length <= 0) {
+        console.warn('feeds.length <= 0 while moreDataPresent, impossible');
+      } else {
+        const val = newIds[newIds.length - 1];
+        loadMore.push({
+          automatic: true,
+          maxId: val - 1,
+          limit: 5
+        });
+      }
     }
     return updateObject(state, {
       byId,
@@ -41,13 +50,17 @@ function loadFeed(state, action) {
     return !(item.sinceId === action.sinceId && item.maxId === action.maxId);
   });
   if (action.moreDataPresent) { // 덜 로드됨
-    const val = newIds[newIds.length - 1];
-    loadMore.push({
-      automatic: Boolean(action.automatic),
-      maxId: val - 1,
-      sinceId: action.sinceId,
-      limit: 5
-    });
+    if (newIds.length <= 0) {
+      console.warn('feeds.length <= 0 while moreDataPresent, impossible');
+    } else {
+      const val = newIds[newIds.length - 1];
+      loadMore.push({
+        automatic: Boolean(action.automatic),
+        maxId: val - 1,
+        sinceId: action.sinceId,
+        limit: 5
+      });
+    }
   }
   for (const id of newIds) {
     ids.add(id);
