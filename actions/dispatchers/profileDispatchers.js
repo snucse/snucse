@@ -12,18 +12,10 @@ export function loadAllProfiles(dispatch) {
 }
 
 export function loadProfileDetail(dispatch, id) {
-  dispatch({
-    type: types.MODIFY_PROFILE_LOADED_STATE,
-    loaded: false
-  });
   DataCon.loadDataFromServer(Url.getUrl(`/profiles/${id}`)).then(current => {
     dispatch({
       type: types.LOAD_PROFILE_DETAIL,
       current
-    });
-    dispatch({
-      type: types.MODIFY_PROFILE_LOADED_STATE,
-      loaded: true
     });
     return current;
   }).then(current => {

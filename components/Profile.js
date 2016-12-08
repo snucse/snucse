@@ -25,11 +25,11 @@ const Profile = React.createClass({
   },
 
   render() {
-    const {id, userId} = this.props;
+    const {id} = this.props;
     return (
       <div>
         <div className="profile-detail">
-          <ProfileBox id={id} userId={userId}/>
+          <ProfileBox id={id}/>
         </div>
         <div className="menu-of-profile">
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
@@ -72,10 +72,9 @@ const FollowBox = React.createClass({
 
 const mapStateToProps = function (state) {
   const {following} = state.profile.current;
-  const {userId, userLevel} = state.userInfo;
+  const {userLevel} = state.userInfo;
   return {
     following,
-    userId,
     userLevel
   };
 };

@@ -13,8 +13,7 @@ const ProfileBox = React.createClass({
     }
 
     const {userId, id, name, admin} = this.props;
-    const mine = (userId === admin.id);
-    console.log(this.props, mine);
+    const mine = (admin && userId === admin.id);
     return (
       <div className="profile-box">
         <ProfileNameContainer id={id} name={name} mine={mine}/>
@@ -26,11 +25,13 @@ const ProfileBox = React.createClass({
 
 const mapStateToProps = function (state) {
   const {name, description, admin} = state.profile.current;
+  const {userId} = state.userInfo;
   return {
     loaded: state.profile.loaded,
     name,
     description,
-    admin
+    admin,
+    userId
   };
 };
 
