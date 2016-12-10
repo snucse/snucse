@@ -6,8 +6,8 @@ import {UserLevel} from '../utils';
 import ProfileMakeForm from './ProfileMakeForm';
 
 const ProfileList = React.createClass({
-  componentDidMount() {
-    if (this.props.userLevel === UserLevel.REGULAR) {
+  componentWillReceiveProps(props) {
+    if (this.props.userLevel !== props.userLevel && props.userLevel === UserLevel.REGULAR) {
       this.props.loadAllProfiles();
     }
   },
