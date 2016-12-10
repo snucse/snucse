@@ -32,10 +32,17 @@ const ProfileList = React.createClass({
         );
       }
 
-      default:
+      case UserLevel.ASSOCIATE:
         return (
           <div className="profile-container">
             <p>준회원은 전체 프로필을 조회할 수 없습니다.</p>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="profile-container">
+            <p>Loading...</p>
           </div>
         );
     }
