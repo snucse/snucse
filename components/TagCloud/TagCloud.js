@@ -5,14 +5,14 @@ const TagCloud = React.createClass({
   render() {
     const tagItems = this.props.tags.map(tag => {
       return (
-        <li className="tag-item" key={tag.tag}>
+        <li className="tag-cloud-tag-item" key={tag.tag}>
           <Link to={`/tags/${tag.tag}`}>{tag.tag}</Link>
         </li>
       );
     });
     return (
-      <section id="tagcloud">
-        <h3>태그클라우드</h3>
+      <section id="tag-cloud-box">
+        <h5 id="tag-cloud-title">태그클라우드</h5>
         <ul>
           {tagItems}
         </ul>

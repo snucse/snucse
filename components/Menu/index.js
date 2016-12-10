@@ -16,12 +16,12 @@ const Menu = React.createClass({
   render() {
     return (
       <div>
-        <div className="menu">
-          <TopMenu/>
+        <TopMenu/>
+        <div id="main-container">
           <SideMenu/>
-        </div>
-        <div className="content">
-          {this.props.children}
+          <div id="main">
+            {this.props.children}
+          </div>
         </div>
         <Modal/>
       </div>

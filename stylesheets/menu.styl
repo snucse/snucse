@@ -1,39 +1,71 @@
-.top-menu
-  position: fixed
-  z-index: 999
-  top: 0
-  left: 0
-  right: 0
-  height: 4em
-  background-color: #2d2d2d
-  display: inline
-  li
-    line-height: 2em
-    list-style: none
-    color: white
-    float: left
-    vertical-align: middle
-    text-align: center
-
-.menulink
-  text-decoration: none
-  display: block
-  width: 4em
-  color: white
-  &:hover
-    color: red
-    background-color: #4d4d4d
-
-.side-menu
-  position: fixed
-  width: 10em
-  left: 0
-  top: 4em
-  bottom: 0
-  overflow: auto
-  background-color: #cfc
-
-.content
-  position: absolute
-  top: 4em
-  left: 10em
+@import "mixin.styl"
+@import "variable.styl"
+#header
+  background-color header-color
+#header-container
+  width 1230px
+  margin auto
+#logo-container
+  float left
+#logo
+  float left
+  padding 15px
+  height 50px
+  font-size 18px
+  line-height 20px
+  color header-text-color
+#logo:hover
+  text-decoration none
+#logout-link
+  float right
+  padding 15px
+  height 50px
+  font-size 14px
+  line-height 20px
+  color alpha(header-text-color, 0.7)
+#search-form
+  float right
+  margin 7px 15px
+#search-form-input
+  padding 6px 12px
+  border 1px solid header-input-border-color
+  border-radius 4px
+  display inline-block
+  vertical-align middle
+  width 180px
+  height 36px
+  font-size 14px
+  line-height 1.6
+  color header-input-text-color
+#header:after
+  clearfix()
+#main-container
+  padding-top 30px
+  width 1230px
+  margin auto
+#sidemenu-container
+  float left
+  width 25%
+  padding 0 15px
+#following-profiles-box
+  box()
+#following-profiles-title
+  box-title()
+#all-profiles-link
+  margin-left 5px
+  font-size 10px
+  font-weight normal
+  line-height 1
+#tag-cloud-box
+  box()
+#tag-cloud-title
+  box-title()
+.tag-cloud-tag-item
+  display inline
+  margin 0 5px
+#main
+  float left
+  width 75%
+  padding 0 15px
+#main-container:after
+  clearfix()

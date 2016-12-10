@@ -15,51 +15,27 @@ const TopMenu = React.createClass({
     switch (this.props.userLevel) {
       case UserLevel.REGULAR:
         return (
-          <div className="top-menu">
-            <ul>
-              <li>
-                <Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link>
-              </li>
-              <li>
-                <SearchForm/>
-              </li>
-              <li>
-                <Link to="/message"><span className="menulink">쪽지</span></Link>
-              </li>
-              <li>
-                <Link to="/others"><span className="menulink">기타</span></Link>
-              </li>
-              <li>
-                <Link to="/settings"><span className="menulink">설정</span></Link>
-              </li>
-              <li>
-                <a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a>
-              </li>
-            </ul>
-          </div>
+          <header id="header">
+            <div id="header-container">
+              <div id="logo-container">
+                <Link id="logo" to="/">SNUCSE</Link>
+              </div>
+              <a id="logout-link" href="#" onClick={this.handleLogout}>로그아웃</a>
+              <SearchForm/>
+            </div>
+          </header>
         );
 
       default:
         return (
-          <div className="top-menu">
-            <ul>
-              <li>
-                <Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link>
-              </li>
-              <li>
-                <Link to="/message"><span className="menulink">쪽지</span></Link>
-              </li>
-              <li>
-                <Link to="/others"><span className="menulink">기타</span></Link>
-              </li>
-              <li>
-                <Link to="/settings"><span className="menulink">설정</span></Link>
-              </li>
-              <li>
-                <a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a>
-              </li>
-            </ul>
-          </div>
+          <header id="header">
+            <div id="header-container">
+              <div id="logo-container">
+                <Link id="logo" to="/">SNUCSE</Link>
+              </div>
+              <a id="logout-link" href="#" onClick={this.handleLogout}>로그아웃</a>
+            </div>
+          </header>
         );
     }
   }

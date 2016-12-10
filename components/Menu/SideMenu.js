@@ -11,22 +11,18 @@ const SideMenu = React.createClass({
     switch (this.props.userLevel) {
       case UserLevel.REGULAR:
         return (
-          <div className="side-menu">
-            <h1>User Info</h1>
-            <Link to="/profiles">전체그룹</Link>
-            <ul>
-              <li className="my-profiles">팔로우 중인 그룹</li>
+          <aside id="sidemenu-container">
+            <section id="following-profiles-box">
+              <h5 id="following-profiles-title">팔로우 중인 프로필<Link id="all-profiles-link" to="/profiles">전체 프로필 보기</Link></h5>
               <FollowingProfileList/>
-            </ul>
+            </section>
             <TagCloud/>
-          </div>
+          </aside>
         );
 
       default:
         return (
-          <div className="side-menu">
-            <h1>User Info</h1>
-          </div>
+          <aside id="sidemenu-container"/>
         );
     }
   }
