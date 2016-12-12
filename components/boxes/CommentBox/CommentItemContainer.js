@@ -35,7 +35,7 @@ const CommentItemContainer = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    userId: state.userId.userId
+    userId: state.userInfo.userId
   };
 };
 

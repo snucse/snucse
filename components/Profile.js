@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
+import {UserLevel} from '../utils';
 import ArticleList from './ArticleList';
 import {ProfileTagBox, ProfileCommentBox} from './boxes';
 
@@ -29,7 +30,7 @@ const Profile = React.createClass({
       <div>
         <div className="menu-of-profile">
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
-          <FollowBox following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
+          <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
           <ProfileTagBox profileId={id}/>
           <ProfileCommentBox profileId={id} isAddable/>
         </div>
@@ -53,18 +54,26 @@ const FollowBox = React.createClass({
   },
 
   render() {
-    return this.props.following ? (
-      <p onClick={this.handleUnfollow}>팔로우 취소</p>
-    ) : (
-      <p onClick={this.handleFollow}>팔로우</p>
-    );
+    switch (this.props.userLevel) {
+      case UserLevel.REGULAR:
+        return this.props.following ? (
+          <p onClick={this.handleUnfollow}>팔로우 취소</p>
+        ) : (
+          <p onClick={this.handleFollow}>팔로우</p>
+        );
+
+      default:
+        return null;
+    }
   }
 });
 
 const mapStateToProps = function (state) {
   const {following} = state.profile.current;
+  const {userLevel} = state.userInfo;
   return {
-    following
+    following,
+    userLevel
   };
 };
 

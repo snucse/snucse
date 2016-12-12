@@ -86,7 +86,9 @@ function editComment(state, action) {
     comment.id,
     () => comment
   );
-  return updateComments(state, articleId, nestedComments);
+  return updateObject(state, {
+    comments: updateComments(state, articleId, nestedComments)
+  });
 }
 
 function deleteComment(state, action) {

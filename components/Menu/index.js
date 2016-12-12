@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadUserId} from '../../actions/dispatchers';
+import {loadUserInfo} from '../../actions/dispatchers';
 import '../../stylesheets/menu.styl';
 
 import TopMenu from './TopMenu';
@@ -9,7 +9,7 @@ import SideMenu from './SideMenu';
 
 const Menu = React.createClass({
   componentDidMount() {
-    this.props.loadUserId();
+    this.props.loadUserInfo();
   },
 
   render() {
@@ -29,7 +29,7 @@ const Menu = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadUserId: () => loadUserId(dispatch)
+    loadUserInfo: () => loadUserInfo(dispatch)
   };
 };
 

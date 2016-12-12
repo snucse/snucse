@@ -1,4 +1,4 @@
-import {LOAD_ARTICLE, SCROLL_ARTICLE_LIST_END, ON_LOAD_ARTICLE} from '../actions/actionTypes';
+import {LOAD_ARTICLES, SCROLL_ARTICLE_LIST_END, ON_LOAD_ARTICLE} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
 const ARTICLE_LIST_INITIAL_STATE = {
@@ -7,7 +7,7 @@ const ARTICLE_LIST_INITIAL_STATE = {
   loading: false
 };
 
-function loadArticle(state, action) {
+function loadArticles(state, action) {
   return updateObject(state, {articles: action.articles});
 }
 
@@ -27,7 +27,7 @@ function onLoadArticle(state) {
 }
 
 export default createReducer(ARTICLE_LIST_INITIAL_STATE, {
-  [LOAD_ARTICLE]: loadArticle,
+  [LOAD_ARTICLES]: loadArticles,
   [SCROLL_ARTICLE_LIST_END]: scrollArticleListEnd,
   [ON_LOAD_ARTICLE]: onLoadArticle
 });
