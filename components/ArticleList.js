@@ -1,19 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadArticle, onLoadArticle} from '../actions/dispatchers';
+import {loadArticles, onLoadArticle} from '../actions/dispatchers';
 import FeedList from './FeedList';
 
 const ArticleList = React.createClass({
   componentDidMount() {
     window.scrollTo(0, 0);
-    this.props.loadArticle(this.props.id);
+    this.props.loadArticles(this.props.id);
   },
 
   componentWillReceiveProps(props) {
     if (props.id !== this.props.id) {
       window.scrollTo(0, 0);
-      this.props.loadArticle(props.id);
+      this.props.loadArticles(props.id);
     }
   },
 
@@ -54,7 +54,7 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadArticle: id => loadArticle(dispatch, id),
+    loadArticles: id => loadArticles(dispatch, id),
     onLoadArticle: (articleNum, renderedArticleNum) =>
       onLoadArticle(dispatch, articleNum, renderedArticleNum)
   };

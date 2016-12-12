@@ -1,8 +1,8 @@
 // action types related with user id
 export const LOAD_USER_INFO = 'LOAD_USER_INFO';
 
-// action types related with Article.js
-export const LOAD_ARTICLE = 'LOAD_ARTICLE';
+// action types related with ArticleList
+export const LOAD_ARTICLES = 'LOAD_ARTICLES';
 export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
 export const ON_LOADING_ARTICLE = 'ON_LOADING_ARTICLE';
 
@@ -43,3 +43,6 @@ export const UPDATE_FOLLOWING_STATE = 'UPDATE_FOLLOWING_STATE';
 export const PROFILE_ERROR_INIT = 'PROFILE_ERROR_INIT';
 export const PROFILE_ERROR_NOT_ADMIN = 'PROFILE_ERROR_NOT_ADMIN';
 export const PROFILE_ERROR_INVALID_ID = 'PROFILE_ERROR_INVALID_ID';
+
+// action types related with article view
+export const LOAD_ARTICLE = 'LOAD_ARTICLE';

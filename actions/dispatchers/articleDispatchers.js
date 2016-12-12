@@ -1,34 +1,19 @@
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
-import {loadArticlesTag} from './';
 
-export function loadArticle(dispatch, id) {
-  const url = Url.getUrl('/articles', {profileId: id});
-  DataCon.loadDataFromServer(url).then(data => {
+export function loadArticle(dispatch, articleId) {
+  DataCon.loadDataFromServer(Url.getUrl(`/articles/${articleId}`)).then(article => {
     dispatch({
       type: types.LOAD_ARTICLE,
-      articles: data.articles
+      article,
+      isError: false
     });
-    return data.articles;
-  }).then(articles => {
-    loadArticlesTag(dispatch, articles);
-  }).catch(console.error);
-}
-
-export function scrollArticleListEnd(dispatch) {
-  dispatch({
-    type: types.SCROLL_ARTICLE_LIST_END
+  }).catch(err => {
+    console.log(err);
+    dispatch({
+      type: types.LOAD_ARTICLE,
+      article: null,
+      isError: true
+    });
   });
-}
-
-export function onLoadArticle(dispatch, articleNum, renderedArticleNum) {
-  dispatch({
-    type: types.ON_LOADING_ARTICLE
-  });
-  // TODO: promise?
-  setTimeout(() => {
-    if (articleNum > renderedArticleNum) {
-      scrollArticleListEnd(dispatch);
-    }
-  }, 1000);
 }
