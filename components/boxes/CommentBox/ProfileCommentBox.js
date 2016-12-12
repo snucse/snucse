@@ -1,52 +1,44 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadProfileComments, setLastProfileComment} from '../../../actions/dispatchers';
-import '../../../stylesheets/comment-box.styl';
-import ProfileCommentList from './ProfileCommentList';
-import ProfileCommentFormContainer from './ProfileCommentFormContainer';
+import {loadProfileComments, setLastProfileComment, writeProfileComment, modifyFoldProfileComments, editProfileComment, deleteProfileComment} from '../../../actions/dispatchers';
+import CommentBox from './CommentBox';
 
-/*
-  props
-  - profileId
-  - isAddable
-*/
 const ProfileCommentBox = React.createClass({
-  componentDidMount() {
-    if (this.props.lastComment) {
-      this.props.setLastComment(this.props.profileId, this.props.lastComment, this.props.commentCount);
-    } else {
-      this.props.loadComments(this.props.profileId);
-    }
-  },
-
-  componentWillReceiveProps(props) {
-    if (this.props.lastComment) {
-      this.props.setLastComment(props.profileId, props.lastComment, props.commentCount);
-    } else if (this.props.profileId !== props.profileId) {
-      this.props.loadComments(props.profileId);
-    }
-  },
-
   render() {
-    const commentForm = this.props.isAddable ?
-      <ProfileCommentFormContainer profileId={this.props.profileId}/> :
-      null;
     return (
-      <section className="comment-wrapper">
-        <ProfileCommentList profileId={this.props.profileId}/>
-        {commentForm}
-      </section>
+      <CommentBox
+        id={this.props.profileId}
+        lastComment={this.props.lastComment}
+        commentCount={this.props.commentCount}
+        isAddable={this.props.isAddable}
+        loadComments={this.props.loadComments}
+        setLastComment={this.props.setLastComment}
+        writeComment={this.props.writeComment}
+        modifyFoldComments={this.props.modifyFoldComments}
+        commentsInfo={this.props.commentsInfo}
+        editComment={this.props.editComment}
+        deleteComment={this.props.deleteComment}
+        />
     );
-    // fixme fake_data should be replaced with store.comment.comments[this.props.profileId]
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
+const mapStateToProps = function (state) {
   return {
-    loadComments: profileId => loadProfileComments(dispatch, profileId),
-    setLastComment: (...args) => setLastProfileComment(dispatch, ...args)
+    commentsInfo: state.comment.profile
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProfileCommentBox);
+const mapDispatcherToProps = function (dispatch) {
+  return {
+    loadComments: id => loadProfileComments(dispatch, id),
+    setLastComment: (...args) => setLastProfileComment(dispatch, ...args),
+    writeComment: (targetId, content) => writeProfileComment(dispatch, targetId, content),
+    modifyFoldComments: (id, fold) => modifyFoldProfileComments(dispatch, id, fold),
+    deleteComment: (commentId, targetId) => deleteProfileComment(dispatch, commentId, targetId),
+    editComment: (commentId, targetId, newContent) => editProfileComment(dispatch, commentId, targetId, newContent)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatcherToProps)(ProfileCommentBox);

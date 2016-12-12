@@ -29,12 +29,16 @@ export function modifyFoldProfileComments(dispatch, id, fold) {
   });
 }
 
-export function writeProfileComment(dispatch, comment) {
-  DataCon.postDataToServer(Url.getUrl('/profile_comments'), 'POST', comment).then(res => {
+export function writeProfileComment(dispatch, profileId, content) {
+  const data = {
+    profileId,
+    content
+  };
+  DataCon.postDataToServer(Url.getUrl('/profile_comments'), 'POST', data).then(res => {
     dispatch({
       type: types.WRITE_PROFILE_COMMENT,
       comment: res,
-      profileId: comment.profileId
+      profileId
     });
   }).catch(console.error);
 }

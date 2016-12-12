@@ -1,21 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteComment, editComment} from '../../../actions/dispatchers';
 import CommentItem from './CommentItem';
 
 /*
   props
   - comment
-  - articleId
+  - id
+  - deleteComment
+  - editComment
 */
 const CommentItemContainer = React.createClass({
   handleDelete() {
-    this.props.deleteComment(this.props.comment.id, this.props.articleId);
+    this.props.deleteComment(this.props.comment.id, this.props.id);
   },
 
   handleEdit(newContent) {
-    this.props.editComment(this.props.comment.id, this.props.articleId, newContent);
+    this.props.editComment(this.props.comment.id, this.props.id, newContent);
   },
 
   render() {
@@ -38,15 +39,4 @@ const mapStateToProps = function (state) {
   };
 };
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    deleteComment: (commentId, articleId) => {
-      deleteComment(dispatch, commentId, articleId);
-    },
-    editComment: (commentId, articleId, newContent) => {
-      editComment(dispatch, commentId, articleId, newContent);
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommentItemContainer);
+export default connect(mapStateToProps)(CommentItemContainer);

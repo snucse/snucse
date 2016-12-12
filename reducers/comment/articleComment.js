@@ -81,11 +81,11 @@ function editComment(state, action) {
   const {articleId, comment} = action;
   // 찾아서 대체 // map 사용
   const nestedComments = updateItemInArray(
-      state.comments[articleId],
-      'id',
-      comment.id,
-      () => comment
-      );
+    state.comments[articleId],
+    'id',
+    comment.id,
+    () => comment
+  );
   return updateComments(state, articleId, nestedComments);
 }
 

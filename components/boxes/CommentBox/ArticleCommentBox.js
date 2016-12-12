@@ -1,52 +1,44 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadComments, setLastComment} from '../../../actions/dispatchers';
-import '../../../stylesheets/comment-box.styl';
-import CommentList from './CommentList';
-import CommentFormContainer from './CommentFormContainer';
+import {loadComments, setLastComment, writeComment, modifyFoldComments, editComment, deleteComment} from '../../../actions/dispatchers';
+import CommentBox from './CommentBox';
 
-/*
-  props
-  - articleId
-  - isAddable
-*/
-const CommentBox = React.createClass({
-  componentDidMount() {
-    if (this.props.lastComment) {
-      this.props.setLastComment(this.props.articleId, this.props.lastComment, this.props.commentCount);
-    } else {
-      this.props.loadComments(this.props.articleId);
-    }
-  },
-
-  componentWillReceiveProps(props) {
-    if (this.props.lastComment) {
-      this.props.setLastComment(props.articleId, props.lastComment, props.commentCount);
-    } else if (this.props.articleId !== props.articleId) {
-      this.props.loadComments(props.articleId);
-    }
-  },
-
+const ArticleCommentBox = React.createClass({
   render() {
-    const commentForm = this.props.isAddable ?
-      <CommentFormContainer articleId={this.props.articleId}/> :
-      null;
     return (
-      <section className="comment-wrapper">
-        <CommentList articleId={this.props.articleId}/>
-        {commentForm}
-      </section>
+      <CommentBox
+        id={this.props.articleId}
+        lastComment={this.props.lastComment}
+        commentCount={this.props.commentCount}
+        isAddable={this.props.isAddable}
+        loadComments={this.props.loadComments}
+        setLastComment={this.props.setLastComment}
+        writeComment={this.props.writeComment}
+        modifyFoldComments={this.props.modifyFoldComments}
+        commentsInfo={this.props.commentsInfo}
+        editComment={this.props.editComment}
+        deleteComment={this.props.deleteComment}
+        />
     );
-    // fixme fake_data should be replaced with store.comment.comments[this.props.articleId]
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
+const mapStateToProps = function (state) {
   return {
-    loadComments: articleId => loadComments(dispatch, articleId),
-    setLastComment: (...args) => setLastComment(dispatch, ...args)
+    commentsInfo: state.comment.article
   };
 };
 
-export default connect(null, mapDispatchToProps)(CommentBox);
+const mapDispatcherToProps = function (dispatch) {
+  return {
+    loadComments: id => loadComments(dispatch, id),
+    setLastComment: (...args) => setLastComment(dispatch, ...args),
+    writeComment: (targetId, content) => writeComment(dispatch, targetId, content),
+    modifyFoldComments: (id, fold) => modifyFoldComments(dispatch, id, fold),
+    deleteComment: (commentId, targetId) => deleteComment(dispatch, commentId, targetId),
+    editComment: (commentId, targetId, newContent) => editComment(dispatch, commentId, targetId, newContent)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatcherToProps)(ArticleCommentBox);
