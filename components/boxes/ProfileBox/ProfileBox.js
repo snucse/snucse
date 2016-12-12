@@ -11,9 +11,9 @@ const ProfileBox = React.createClass({
     const mine = (admin && userId === admin.id);
     return (
       <div className="profile-box">
+        <ProfileAdminContainer id={id} admin={admin} mine={mine}/>
         <ProfileNameContainer id={id} name={name} mine={mine}/>
         <ProfileDescContainer id={id} desc={description} mine={mine}/>
-        <ProfileAdminContainer id={id} admin={admin} mine={mine}/>
       </div>
     );
   }

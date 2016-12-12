@@ -47,9 +47,7 @@ const ProfileContent = React.createClass({
       return (
         <div className={classname}>
           {content}
-          <div className={`${classname}-editbox`}>
-            <button onClick={this.handleEnableEditMode}>수정</button>
-          </div>
+          <button onClick={this.handleEnableEditMode}>수정</button>
         </div>
       );
     }
@@ -57,9 +55,7 @@ const ProfileContent = React.createClass({
     return (
       <div className={classname}>
         <input onChange={this.handleChange} defaultValue={this.props.content}/>
-        <div className={`${classname}-editbox`}>
-          <button onClick={this.handleClickEdit}>확인</button>
-        </div>
+        <button onClick={this.handleClickEdit}>확인</button>
       </div>
     );
   }
