@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import ProfileNameContainer from './ProfileNameContainer';
 import ProfileDescContainer from './ProfileDescContainer';
+import ProfileAdminContainer from './ProfileAdminContainer';
 
 const ProfileBox = React.createClass({
   render() {
@@ -12,6 +13,7 @@ const ProfileBox = React.createClass({
       <div className="profile-box">
         <ProfileNameContainer id={id} name={name} mine={mine}/>
         <ProfileDescContainer id={id} desc={description} mine={mine}/>
+        <ProfileAdminContainer id={id} admin={admin} mine={mine}/>
       </div>
     );
   }

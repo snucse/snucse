@@ -1,10 +1,9 @@
 import CommentBox from './CommentBox';
 import DelEditBox from './DelEditBox';
-import ProfileBox from './ProfileBox';
 
 export * from './TagBox';
+export * from './ProfileBox';
 export {
   CommentBox,
-  DelEditBox,
-  ProfileBox
+  DelEditBox
 };

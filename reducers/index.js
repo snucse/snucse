@@ -2,6 +2,7 @@ import userInfo from './userInfo';
 import articleList from './articleList';
 import feeds from './feeds';
 import profile from './profile';
+import profileAdmin from './profileAdmin';
 import comment from './comment';
 import tag from './tag';
 import me from './me';
@@ -12,6 +13,7 @@ import me from './me';
 
 const reducers = {
   profile,
+  profileAdmin,
   articleList,
   feeds,
   comment,

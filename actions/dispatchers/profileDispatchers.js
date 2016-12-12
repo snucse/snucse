@@ -63,3 +63,28 @@ export function editProfileDesc(dispatch, id, newDesc) {
     });
   }).catch(console.error);
 }
+
+export function initProfileAdminError(dispatch) {
+  dispatch({
+    type: types.PROFILE_ERROR_INIT
+  });
+}
+
+export function changeAdmin(dispatch, id, newId) {
+  DataCon.postDataToServer(Url.getUrl(`/profiles/${id}/transfer`), 'POST', {
+    adminId: newId
+  }).then(() => {
+    loadProfileDetail(dispatch, id);
+  }).catch(err => {
+    console.log(err);
+    if (err.status === 401) {
+      dispatch({
+        type: types.PROFILE_ERROR_NOT_ADMIN
+      });
+    } else {
+      dispatch({
+        type: types.PROFILE_ERROR_INVALID_ID
+      });
+    }
+  });
+}
