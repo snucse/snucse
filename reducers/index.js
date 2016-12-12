@@ -1,6 +1,7 @@
 import userInfo from './userInfo';
 import articleList from './articleList';
 import feeds from './feeds';
+import article from './article';
 import profile from './profile';
 import comment from './comment';
 import tag from './tag';
@@ -11,6 +12,7 @@ import me from './me';
 // define other reducers
 
 const reducers = {
+  article,
   profile,
   articleList,
   feeds,
