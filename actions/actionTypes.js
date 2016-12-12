@@ -1,8 +1,8 @@
 // action types related with user id
 export const LOAD_USER_INFO = 'LOAD_USER_INFO';
 
-// action types related with Article.js
-export const LOAD_ARTICLE = 'LOAD_ARTICLE';
+// action types related with ArticleList
+export const LOAD_ARTICLES = 'LOAD_ARTICLES';
 export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
 export const ON_LOADING_ARTICLE = 'ON_LOADING_ARTICLE';
 
@@ -41,3 +41,6 @@ export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';
 export const LOAD_ALL_PROFILES = 'LOAD_ALL_PROFILES';
 export const LOAD_PROFILE_DETAIL = 'LOAD_PROFILE_DETAIL';
 export const UPDATE_FOLLOWING_STATE = 'UPDATE_FOLLOWING_STATE';
+
+// action types related with article view
+export const LOAD_ARTICLE = 'LOAD_ARTICLE';
