@@ -7,7 +7,7 @@ import {FileBox} from './boxes';
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
     const url = Url.getUrl('/articles');
-    DataCon.postDataToServer(url, 'POST', data);
+    DataCon.postFormDataToServer(url, 'POST', data);
   },
 
   render() {
@@ -65,10 +65,16 @@ const ArticleForm = React.createClass({
     const profileId = this.props.id;
     const content = this.state.content.trim();
     const title = this.state.title.trim();
+    const files = [];
+    for (const fileId in this.state.files) {
+      if (Object.hasOwnProperty.call(this.state.files, fileId)) {
+        files.push(this.state.files[fileId]);
+      }
+    }
     if (!content || !title) {
       return;
     }
-    this.props.onArticleSubmit({title, content, profileIds: profileId});
+    this.props.onArticleSubmit({title, content, profileIds: profileId, files});
     browserHistory.push(`/${profileId}`);
   },
 
