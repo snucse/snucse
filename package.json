@@ -60,6 +60,7 @@
       "no-eq-null": "off",
       "no-alert": "warn",
       "xo/filename-case": "off",
+      "react/forbid-component-props": "off",
       "react/prop-types": "off",
       "filenames/match-exported": "error"
     },
