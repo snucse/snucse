@@ -88,10 +88,10 @@ const CommentItem = React.createClass({
       const buttons = [];
       const id = this.props.comment.id;
       if (this.props.isDeletable) {
-        buttons.push(<button onClick={this.handleClickDelete} key={`delete-button-${id}`}>삭제</button>);
+        buttons.push(<button className="comment-delete-button" onClick={this.handleClickDelete} key={`delete-button-${id}`}>삭제</button>);
       }
       if (this.props.isEditable) {
-        buttons.push(<button onClick={this.handleEditEnable} key={`edit-button-${id}`}>수정</button>);
+        buttons.push(<button className="comment-edit-button" onClick={this.handleEditEnable} key={`edit-button-${id}`}>수정</button>);
       }
       controller = (
         <div className="comment-controller">
@@ -104,14 +104,16 @@ const CommentItem = React.createClass({
     const {writer, createdAt} = this.props.comment;
     return (
       <li className="comment-item">
-        <div className="comment-information">
-          <img src={writer.profileImageUrl}/>
-          <a>{writer.name}</a>
-          {createdAt.date} {createdAt.time} {edited}
+        <div className="comment-writer-container">
+          <img className="comment-writer-image" src={writer.profileImageUri}/>
         </div>
-        {contentWrapper}
-        {editBox}
-        {controller}
+        <div className="comment-main">
+          <small className="comment-date">{createdAt.date} {createdAt.time} {edited}</small>
+          <h5 className="comment-writer-name">{writer.name}</h5>
+          {contentWrapper}
+          {editBox}
+          {controller}
+        </div>
       </li>
     );
   }

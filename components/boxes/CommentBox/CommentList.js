@@ -74,7 +74,7 @@ const CommentList = React.createClass({
       .map(this.renderComment);
     let showMoreButton = null;
     if ((!this.props.commentsInfo.loaded[this.props.id] || isFold) && commentsNum > commentsNumToShow) {
-      showMoreButton = <button onClick={this.handleClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>;
+      showMoreButton = <button className="comment-show-more-button" onClick={this.handleClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>;
     }
     return (
       <div>

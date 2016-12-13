@@ -30,24 +30,29 @@ const FeedArticle = React.createClass({
     */
     const mine = (this.props.userId === article.writer.id);
     return (
-      <div className="article-wrap">
-        <h3 className="article-title">Title: {article.title} Profile: {article.profiles[0].name}</h3>
-        <h4 className="article-author">writer: {article.writer.username}</h4>
-        <h4 className="article-date"> date: {date}</h4>
-        <FileBox files={article.files}/>
-        <div className="article-content">
-          {result}
+      <li className="feed-article">
+        <div className="article-writer-container">
+          <img className="article-writer-image" src={article.writer.profileImageUri}/>
+          <h5 className="article-writer-name">{article.writer.name}</h5>
         </div>
-        <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
-        <ArticleTagBox articleId={article.id}/>
-        <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
-        <ArticleCommentBox
-          articleId={article.id}
-          lastComment={article.lastComment}
-          commentCount={article.commentCount}
-          isAddable
-          />
-      </div>
+        <div className="article-main">
+          <small className="article-date">{date}</small>
+          <h5 className="article-title">{article.title}<small className="article-profiles">{article.profiles[0].name}</small></h5>
+          <FileBox files={article.files}/>
+          <div className="article-content">
+            {result}
+          </div>
+          <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
+          <ArticleTagBox articleId={article.id}/>
+          <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
+          <ArticleCommentBox
+            articleId={article.id}
+            lastComment={article.lastComment}
+            commentCount={article.commentCount}
+            isAddable
+            />
+        </div>
+      </li>
     );
   }
 });

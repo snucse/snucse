@@ -48,7 +48,7 @@ const CommentBox = React.createClass({
       <CommentFormContainer id={this.props.id} writeComment={this.props.writeComment}/> :
       null;
     return (
-      <section className="comment-wrapper">
+      <div className="comment-container">
         <CommentList
           id={this.props.id}
           loadComments={this.props.loadComments}
@@ -59,7 +59,7 @@ const CommentBox = React.createClass({
           renderRecommendBox={this.props.renderRecommendBox}
           />
         {commentForm}
-      </section>
+      </div>
     );
   }
 });

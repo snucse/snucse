@@ -1,23 +1,62 @@
-.comment-wrapper
-  clear: both
-
-.comment-list
-  margin: 0
-  padding: 0
-
+@import "mixin.styl"
+@import "variable.styl"
+.comment-show-more-button
+  background transparent
+  border 0
+  color link-color
+  cursor pointer
+  padding 2px 5px
 .comment-item
-  margin: 5px
-  padding: 5px
-  border: 1px solid
-  list-style: none
-
-.comment-information > img
-  width: 32px
-  height: 32px
-  vertical-align: -50%
-
-.comment-content
-  clear: both
-
+  margin-top 15px
+.comment-writer-container
+  display table-cell
+  vertical-align top
+  padding-right 10px
+.comment-writer-image
+  display block
+  width 40px
+  height 40px
+  border-radius 100%
+  margin-right 5px
+.comment-main
+  display table-cell
+  vertical-align top
+  width 10000px
+.comment-date
+  float right
+  color article-date-color
+  font-size 12px
+.comment-writer-name
+  font-size 14px
+  font-weight 600
+  margin-bottom 5px
 .comment-controller
-  text-align: right
+  text-align right
+.comment-edit-button
+  button()
+.comment-edit-button:hover
+  button-hover()
+.comment-delete-button
+  button()
+.comment-delete-button:hover
+  button-hover()
+.comment-form
+  margin-top 5px
+.comment-input
+  width 92%
+  height 36px
+  font-size 14px
+  line-height 1.6
+  padding 6px 12px
+  border 1px solid box-border-color
+  border-radius 4px
+  color input-text-color
+  vertical-align middle
+.comment-submit-button
+  button()
+  margin 0
+  margin-left 5px
+  padding 3px 8px
+  height 36px
+  border-radius 4px
+  vertical-align middle

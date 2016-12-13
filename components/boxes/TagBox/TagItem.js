@@ -9,8 +9,8 @@ const TagItem = React.createClass({
   render() {
     return this.props.accessible ? (
       <li className="tag-item">
-        <Link to={`/tags/${this.props.tag.tag}`}>{this.props.tag.tag}</Link>
-        <button onClick={this.handleClickDelete} className="delete-button">×</button>
+        <Link className="tag-item-name" to={`/tags/${this.props.tag.tag}`}>{this.props.tag.tag}</Link>
+        <button className="tag-item-delete-button" onClick={this.handleClickDelete}>×</button>
       </li>
     ) : (
       <li className="tag-item">
