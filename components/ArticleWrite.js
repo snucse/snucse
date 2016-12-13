@@ -23,13 +23,37 @@ const ArticleWrite = React.createClass({
 
 const ArticleForm = React.createClass({
   getInitialState() {
-    return {title: '', content: ''};
+    return {
+      title: '',
+      content: '',
+      files: {} // pairs of (fileId, file obj)
+    };
   },
+
   handleContentChange(e) {
     this.setState({content: e.target.value});
   },
   handleTitleChange(e) {
     this.setState({title: e.target.value});
+  },
+  handleFileChange(fileId, newFile) {
+    this.setState({
+      files: {
+        ...this.state.files,
+        [fileId]: newFile
+      }
+    });
+  },
+  handleFileDelete(fileId) {
+    const newFiles = {};
+    for (const oldFileId in this.state.files) {
+      if (oldFileId != fileId) {
+        newFiles[oldFileId] = this.state.files[oldFileId];
+      }
+    }
+    this.setState({
+      files: newFiles
+    });
   },
 
   handleSubmit(e) {
@@ -54,7 +78,7 @@ const ArticleForm = React.createClass({
         <form name="article" onSubmit={this.handleSubmit}>
           Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
           Content: <textarea rows="4" id="content" name="content" placeholder="Say something..." value={this.state.content} onChange={this.handleContentChange}/><br/>
-          Files: <FileBox id={this.props.id}/><br/>
+          Files: <FileBox id={this.props.id} onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/><br/>
           <button type="submit">글쓰기</button>
         </form>
       </div>

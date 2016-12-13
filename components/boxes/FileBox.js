@@ -2,70 +2,72 @@ import React from 'react';
 
 const FileForm = React.createClass({
   render() {
-    return <input type="file" id={this.props.id} onChange={this.props.onChange}/>;
+    return <input type="file" onChange={this.props.onChange}/>;
   }
 });
 
 const FileDelBox = React.createClass({
   render() {
-    return <button type="button" id={this.props.id} onClick={this.props.onClick}>삭제</button>;
+    return <button type="button" onClick={this.props.onClick}>삭제</button>;
   }
 });
+
+/*
+ * props
+ * - id
+ * - onFileChange
+ * - onFileDelete
+ */
 
 const FileBox = React.createClass({
   getInitialState() {
     return {
       index: 0,
-      files: {}, // pairs of (id, file obj)
-      ids: []
+      fileIds: []
     };
   },
 
   handleChangeCache: {},
   handleClickCache: {},
 
-  handleChange(id) {
-    if (!(id in this.handleChangeCache)) {
+  handleChange(fileId) {
+    if (!(fileId in this.handleChangeCache)) {
       const handler = e => {
-        this.setState({
-          files: {
-            ...this.state.files,
-            [id]: e.target.files[0]
-          }
-        });
+        this.props.onFileChange(fileId, e.target.files[0]);
       };
-      this.handleChangeCache[id] = handler;
+      this.handleChangeCache[fileId] = handler;
       return handler;
     }
-    return this.handleChangeCache[id];
+    return this.handleChangeCache[fileId];
   },
 
-  handleClick(id) {
-    if (!(id in this.handleClickCache)) {
+  handleClick(fileId) {
+    if (!(fileId in this.handleClickCache)) {
       const handler = () => {
+        this.props.onFileDelete(fileId);
         this.setState({
-          ids: this.state.ids.filter(oldId => oldId !== id)
+          fileIds: this.state.fileIds.filter(oldFileId => oldFileId !== fileId)
         });
       };
-      this.handleClickCache[id] = handler;
+      this.handleClickCache[fileId] = handler;
       return handler;
     }
-    return this.handleClickCache[id];
+    return this.handleClickCache[fileId];
   },
 
   handleAdd() {
     this.setState({
       index: this.state.index + 1,
-      ids: this.state.ids.concat(this.state.index)
+      fileIds: this.state.fileIds.concat(this.state.index)
     });
   },
 
   render() {
-    const fileForms = this.state.ids.map(id => {
+    const fileForms = this.state.fileIds.map(fileId => {
       return (
-        <div className="file-form" key={`${this.props.id}-${id}`}>
-          <FileForm id={id} onChange={this.handleChange(id)}/>
-          <FileDelBox id={id} onClick={this.handleClick(id)}/>
+        <div className="file-form" key={`${this.props.id}-${fileId}`}>
+          <FileForm fileId={fileId} onChange={this.handleChange(fileId)}/>
+          <FileDelBox fileId={fileId} onClick={this.handleClick(fileId)}/>
         </div>
       );
     });
