@@ -2,18 +2,25 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
 
+import {FileBox} from './boxes';
+
 const ArticleEdit = React.createClass({
   loadArticleFromServer() {
     const {articleId} = this.props.params;
     const url = Url.getUrl(`/articles/${articleId}`);
     DataCon.loadDataFromServer(url).then(data => {
-      const {title, content} = data;
-      this.setState({title, content});
+      const {title, content, files} = data;
+
+      const alives = {};
+      for (let i = 0; i < files.length; i++) {
+        alives[files[i].id] = true;
+      }
+      this.setState({title, content, files, alives});
     }).catch(console.error);
   },
 
   getInitialState() {
-    return {title: '', content: ''};
+    return {title: '', content: '', files: [], alives: {}};
   },
 
   componentDidMount() {
@@ -23,7 +30,7 @@ const ArticleEdit = React.createClass({
   submitEdit(data) {
     const {articleId} = this.props.params;
     const url = Url.getUrl(`/articles/${articleId}`);
-    DataCon.postDataToServer(url, 'PUT', data);
+    DataCon.postFormDataToServer(url, 'PUT', data);
   },
 
   handleTitleChange(e) {
@@ -34,13 +41,27 @@ const ArticleEdit = React.createClass({
     this.setState({content: e.target.value});
   },
 
+  handleAliveChange(fileId) {
+    this.setState({
+      alives: {
+        ...this.state.alives,
+        [fileId]: !this.state.alives[fileId]
+      }
+    });
+  },
+
   handleEdit(e) {
     e.preventDefault();
     const title = this.state.title.trim();
     const content = this.state.content.trim();
-    // TODO
-    const userId = 1;
-    this.submitEdit({title, content, currentUserId: userId});
+    const fileIds = this.state.files.map(file => file.id)
+      .filter(id => this.state.alives[id]);
+
+    this.submitEdit({
+      title,
+      content,
+      fileIds
+    });
     this.setState({title: '', content: ''});
     browserHistory.push('/');
   },
@@ -51,6 +72,7 @@ const ArticleEdit = React.createClass({
         <form onSubmit={this.handleEdit}>
           <input type="text" id="title" name="title" value={this.state.title} onChange={this.handleTitleChange}/>
           <textarea rows="5" id="content" name="content" value={this.state.content} onChange={this.handleContentChange}/>
+          <FileBox files={this.state.files} alives={this.state.alives} editable onAliveChange={this.handleAliveChange}/>
           <input type="submit" value="수정"/>
         </form>
       </div>

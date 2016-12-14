@@ -75,7 +75,7 @@ const FileUploadBox = React.createClass({
     });
 
     return (
-      <div className="file-box">
+      <div className="file-upload-box">
         {fileForms}
         <button type="button" onClick={this.handleAdd}>파일 추가</button>
       </div>
