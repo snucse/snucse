@@ -21,6 +21,8 @@ const FileDelBox = React.createClass({
 
 const FileBox = React.createClass({
   getInitialState() {
+    this.handleChangeCache = {};
+    this.handleClickCache = {};
     return {
       index: 0,
       fileIds: []
