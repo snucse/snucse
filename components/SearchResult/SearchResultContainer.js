@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import isEqual from 'deep-equal';
 
 import {loadSearchResult} from '../../actions/dispatchers';
 import SearchResultView from './SearchResultView';
@@ -14,10 +15,7 @@ const SearchResultContainer = React.createClass({
   },
 
   componentWillReceiveProps(props) {
-    if (props.location.query.query !== this.props.location.query.query ||
-      props.location.query.category !== this.props.location.query.category ||
-      props.location.query.page !== this.props.location.query.page) {
-      // fixme 더 좋은 방법 없나, obj 째로 비교하는
+    if (!isEqual(props.location.query, this.props.location.query)) {
       window.scrollTo(0, 0);
       this.loadSearchResult(props.location.query);
     }
