@@ -1,10 +1,10 @@
 import CommentBox from './CommentBox';
 import DelEditBox from './DelEditBox';
-import FileBox from './FileBox';
+import FileUploadBox from './FileUploadBox';
 
 export * from './TagBox';
 export {
   CommentBox,
   DelEditBox,
-  FileBox
+  FileUploadBox
 };

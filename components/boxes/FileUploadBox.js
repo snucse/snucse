@@ -19,7 +19,7 @@ const FileDelBox = React.createClass({
  * - onFileDelete
  */
 
-const FileBox = React.createClass({
+const FileUploadBox = React.createClass({
   getInitialState() {
     this.handleChangeCache = {};
     this.handleClickCache = {};
@@ -83,4 +83,4 @@ const FileBox = React.createClass({
   }
 });
 
-export default FileBox;
+export default FileUploadBox;

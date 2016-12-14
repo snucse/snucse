@@ -2,7 +2,7 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
 
-import {FileBox} from './boxes';
+import {FileUploadBox} from './boxes';
 
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
@@ -84,7 +84,7 @@ const ArticleForm = React.createClass({
         <form name="article" onSubmit={this.handleSubmit}>
           Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
           Content: <textarea rows="4" id="content" name="content" placeholder="Say something..." value={this.state.content} onChange={this.handleContentChange}/><br/>
-          Files: <FileBox id={this.props.id} onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/><br/>
+          Files: <FileUploadBox id={this.props.id} onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/><br/>
           <button type="submit">글쓰기</button>
         </form>
       </div>
