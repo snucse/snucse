@@ -1,7 +1,7 @@
-import {LOAD_COMMENT, SET_LAST_COMMENT, MODIFY_FOLD_COMMENT, WRITE_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../actions/actionTypes';
-import {updateObject, updateItemInArray, createReducer} from './common';
+import {LOAD_COMMENT, SET_LAST_COMMENT, MODIFY_FOLD_COMMENT, WRITE_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../../actions/actionTypes';
+import {updateObject, updateItemInArray, createReducer} from '../common';
 
-const COMMENT_INITIAL_STATE = {
+const ARTICLE_COMMENT_INITIAL_STATE = {
   comments: {
     /*
     articleId: [
@@ -81,11 +81,11 @@ function editComment(state, action) {
   const {articleId, comment} = action;
   // 찾아서 대체 // map 사용
   const nestedComments = updateItemInArray(
-      state.comments[articleId],
-      'id',
-      comment.id,
-      () => comment
-      );
+    state.comments[articleId],
+    'id',
+    comment.id,
+    () => comment
+  );
   return updateObject(state, {
     comments: updateComments(state, articleId, nestedComments)
   });
@@ -104,7 +104,7 @@ function deleteComment(state, action) {
   });
 }
 
-export default createReducer(COMMENT_INITIAL_STATE, {
+export default createReducer(ARTICLE_COMMENT_INITIAL_STATE, {
   [LOAD_COMMENT]: loadComment,
   [SET_LAST_COMMENT]: setLastComment,
   [MODIFY_FOLD_COMMENT]: modifyFoldComment,
