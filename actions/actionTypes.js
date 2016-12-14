@@ -20,6 +20,14 @@ export const WRITE_COMMENT = 'WRITE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
+// action types related with profile comment
+export const LOAD_PROFILE_COMMENT = 'LOAD_PROFILE_COMMENT';
+export const SET_LAST_PROFILE_COMMENT = 'SET_LAST_PROFILE_COMMENT';
+export const MODIFY_FOLD_PROFILE_COMMENT = 'MODIFY_FOLD_PROFILE_COMMENT';
+export const WRITE_PROFILE_COMMENT = 'WRITE_PROFILE_COMMENT';
+export const EDIT_PROFILE_COMMENT = 'EDIT_PROFILE_COMMENT';
+export const DELETE_PROFILE_COMMENT = 'DELETE_PROFILE_COMMENT';
+
 // action types related with tag
 export const LOAD_ARTICLES_TAG = 'LOAD_ARTICLES_TAG';
 export const LOAD_PROFILE_TAG = 'LOAD_PROFILE_TAG';
@@ -34,3 +42,6 @@ export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';
 export const LOAD_ALL_PROFILES = 'LOAD_ALL_PROFILES';
 export const LOAD_PROFILE_DETAIL = 'LOAD_PROFILE_DETAIL';
 export const UPDATE_FOLLOWING_STATE = 'UPDATE_FOLLOWING_STATE';
+
+// action types related with article view
+export const LOAD_ARTICLE = 'LOAD_ARTICLE';

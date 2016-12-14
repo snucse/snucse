@@ -55,6 +55,13 @@ const CommentItem = React.createClass({
       newContent: this.props.comment.content,
       isEditMode: false
     };
+    // fixme erase state newContent! 난 안 할래
+  },
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      newContent: props.comment.content
+    });
   },
 
   render() {

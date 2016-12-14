@@ -24,7 +24,7 @@ const TagView = React.createClass({
       articles.map(article => {
         return (
           <tr key={article.id}>
-            <td>{article.title}</td>
+            <td><Link to={`/${article.id}`}>{article.title}</Link></td>
             <td>{article.writer.name} ({article.writer.username})</td>
             <td>{article.profiles[0].name}</td>
             <td>{article.createdAt.date} {article.createdAt.time}</td>
@@ -47,7 +47,7 @@ const TagView = React.createClass({
         <h3>{this.props.tagName}</h3>
         <p>
           <img src={creator.profileImageUrl}/>
-          태그 만든 사람 {creator.name}
+          태그 만든 사람 <Link to={`/${creator.username}`}>{creator.name}</Link>
         </p>
         <h4>연관 태그</h4>
         <section>
@@ -84,9 +84,7 @@ const TagView = React.createClass({
         </section>
       </div>
     );
-    // fixme user page link 만들기
-    // fixme article page link 만들기
-    // fixme css flex 쓰세요
+    // fixme layout 작업시 table 버리고 css flex 쓰세요
   }
 });
 

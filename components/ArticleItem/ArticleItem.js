@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {DelEditBox, ArticleTagBox, ArticleCommentBox} from '../boxes';
+import {DelEditBox, ArticleTagBox, CommentBox} from '../boxes';
 
-const FeedArticle = React.createClass({
+const ArticleItem = React.createClass({
   render() {
     const {article} = this.props;
 
@@ -33,7 +33,7 @@ const FeedArticle = React.createClass({
         </div>
         <DelEditBox mine={mine} articleId={article.id}/>
         <ArticleTagBox articleId={article.id}/>
-        <ArticleCommentBox
+        <CommentBox
           articleId={article.id}
           lastComment={article.lastComment}
           commentCount={article.commentCount}
@@ -50,4 +50,4 @@ const mapStateToProps = function (state) {
   };
 };
 
-export default connect(mapStateToProps)(FeedArticle);
+export default connect(mapStateToProps)(ArticleItem);
