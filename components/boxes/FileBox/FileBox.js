@@ -5,9 +5,9 @@ import FileItemContainer from './FileItemContainer';
 /*
  * props
  * - files: array of file
- * - alives: map(fileId -> alive)
+ * - alives: map(fileId -> alive) (iff editable)
  * - editable
- * - onAliveChange(fileId)
+ * - onAliveChange(fileId) (iff editable)
  */
 
 const FileBox = React.createClass({
@@ -19,7 +19,7 @@ const FileBox = React.createClass({
           file={file}
           onAliveChange={this.props.onAliveChange}
           editable={this.props.editable}
-          alive={this.props.alives[file.id]}
+          alive={this.props.editable ? this.props.alives[file.id] : true}
           />
       );
     });
