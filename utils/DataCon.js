@@ -39,14 +39,17 @@ const DataCon = {
     const headers = {
       Authorization: `Token token=${token}`
     };
-    if (data != null) {
-      headers['Content-Type'] = 'multipart/form-data';
-    }
 
     const formData = new FormData();
     for (const key in data) {
       if (Object.hasOwnProperty.call(data, key)) {
-        formData.append(key, data[key]);
+        if (Array.isArray(data[key])) {
+          for (let i = 0; i < data[key].length; i++) {
+            formData.append(`${key}[]`, data[key][i]);
+          }
+        } else {
+          formData.append(key, data[key]);
+        }
       }
     }
 
