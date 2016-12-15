@@ -1,0 +1,89 @@
+@import "mixin.styl"
+@import "variable.styl"
+#tag-info-container
+  box()
+#tag-title
+  font-size 16px
+  font-weight 600
+  margin-bottom 10px
+#tag-title-description
+  margin-left 5px
+  font-size 14px
+  font-weight normal
+#tag-info-related-tag-title
+  box-title()
+#related-tag-container
+  min-height 30px
+  margin-bottom 10px
+#related-tag-list
+  display inline-block
+  height 30px
+  margin-top 5px
+#tag-info-article-title
+  box-title()
+#tag-info-article-empty
+  margin-bottom 10px
+.tag-info-article-container
+  float left
+  width 50%
+  padding 0 15px
+.tag-info-article
+  box()
+.tag-info-article-writer-container
+  display table-cell
+  vertical-align top
+  padding-right 10px
+.tag-info-article-writer-image
+  display block
+  margin auto
+  width 50px
+  height 50px
+  border-radius 100%
+  margin-right 5px
+.tag-info-article-writer-name
+  font-size 14px
+  font-weight 600
+  text-align center
+  width 50px
+  overflow hidden
+  text-overflow ellipsis
+.tag-info-article-main
+  display table-cell
+  vertical-align top
+  width 10000px
+.tag-info-article-date
+  float right
+  color article-date-color
+  font-size 12px
+.tag-info-article-title
+  font-size 14px
+  font-weight 600
+.tag-info-article-profiles
+  color article-profiles-color
+.tag-info-article-content
+  word-break break-all
+  height 3.2em
+  overflow hidden
+  text-overflow ellipsis
+#tag-info-article-list:after
+  clearfix()
+#tag-info-profile-title
+  box-title()
+#tag-info-article-empty
+  margin-bottom 10px
+.tag-info-profile-container
+  float left
+  width 33.333333%
+  padding 0 15px
+.tag-info-profile
+  box()
+.tag-info-profile-name
+  font-size 14px
+  font-weight 600
+.tag-info-profile-description
+  word-break break-all
+  height 3.2em
+  overflow hidden
+  text-overflow ellipsis
+#tag-info-profile-list:after
+  clearfix()

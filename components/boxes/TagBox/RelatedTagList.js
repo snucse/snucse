@@ -9,7 +9,7 @@ const RelatedTagList = React.createClass({
       return <RelatedTagItemContainer targetTagName={this.props.targetTagName} tag={tag} key={tag.tag}/>;
     });
     return (
-      <ul>
+      <ul id="related-tag-list">
         {tagItems}
       </ul>
     );

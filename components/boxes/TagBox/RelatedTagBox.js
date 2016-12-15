@@ -6,7 +6,7 @@ import RelatedTagFormContainer from './RelatedTagFormContainer';
 const RelatedTagBox = React.createClass({
   render() {
     return (
-      <div className="tag-wrapper">
+      <div id="related-tag-container">
         <RelatedTagList targetTagName={this.props.targetTagName} tags={this.props.relatedTags}/>
         <RelatedTagFormContainer targetTagName={this.props.targetTagName}/>
       </div>
