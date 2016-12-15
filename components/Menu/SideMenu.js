@@ -22,7 +22,13 @@ const SideMenu = React.createClass({
 
       default:
         return (
-          <aside id="sidemenu-container"/>
+          <aside id="sidemenu-container">
+            <section id="following-profiles-box">
+              <h5 id="following-profiles-title">팔로우 중인 프로필</h5>
+              <FollowingProfileList/>
+            </section>
+            <TagCloud/>
+          </aside>
         );
     }
   }
