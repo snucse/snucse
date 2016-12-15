@@ -34,7 +34,7 @@ const FileItemContainer = React.createClass({
 
     return (
       <div className="file-item-container">
-        <FileItem name={file.name}/>
+        <FileItem name={file.name} path={file.path}/>
         {fileEditBox}
       </div>
     );

@@ -4,7 +4,7 @@ const FileItem = React.createClass({
   render() {
     return (
       <div className="file-item">
-        {this.props.name}
+        <a href={this.props.path}>{this.props.name}</a>
       </div>
     );
   }
