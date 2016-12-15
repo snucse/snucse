@@ -3,8 +3,8 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
-import '../stylesheets/tagbox.styl';
-import {UserLevel, connectModals} from '../utils';
+import '../stylesheets/profile.styl';
+import {UserLevel} from '../utils';
 
 import {ProfileTagBox, ProfileCommentBox} from './boxes';
 import Feed from './Feed';
@@ -41,8 +41,12 @@ const Profile = React.createClass({
           <div className="profile-desc">{description}</div>
           {adminLink}
         </div>
-        <div className="menu-of-profile">
+        <div id="profile-information">
           <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
+          <h3 id="profile-name">{this.props.name}</h3>
+          <div id="profile-description">
+            {this.props.description}
+          </div>
           <ProfileTagBox profileId={id}/>
           <ProfileCommentBox profileId={id} isAddable/>
         </div>
@@ -52,33 +56,29 @@ const Profile = React.createClass({
   }
 });
 
-const FollowBox = connectModals(React.createClass({
+const FollowBox = React.createClass({
   handleFollow() {
-    this.props.confirmModal('알림', '팔로우 하시겠습니까?', () => {
-      this.props.onFollowChanged(true);
-    });
+    this.props.onFollowChanged(true);
   },
 
   handleUnfollow() {
-    this.props.confirmModal('알림', '팔로우를 취소하시겠습니까?', () => {
-      this.props.onFollowChanged(false);
-    });
+    this.props.onFollowChanged(false);
   },
 
   render() {
     switch (this.props.userLevel) {
       case UserLevel.REGULAR:
         return this.props.following ? (
-          <p onClick={this.handleUnfollow}>팔로우 취소</p>
+          <button id="follow-button" onClick={this.handleUnfollow}>팔로우 취소</button>
         ) : (
-          <p onClick={this.handleFollow}>팔로우</p>
+          <button id="follow-button" onClick={this.handleFollow}>팔로우</button>
         );
 
       default:
         return null;
     }
   }
-}));
+});
 
 const mapStateToProps = function (state) {
   const {following, name, description, admin} = state.profile.current;
