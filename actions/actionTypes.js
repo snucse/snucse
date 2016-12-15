@@ -17,7 +17,7 @@ export const CHANGE_NAME = 'CHANGE_NAME';
 export const CHANGE_DESC = 'CHANGE_DESC';
 
 // action types related with comment
-export const LOAD_COMMENT = 'LOAD_COMMENT';
+export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const SET_LAST_COMMENT = 'SET_LAST_COMMENT';
 export const MODIFY_FOLD_COMMENT = 'MODIFY_FOLD_COMMENT';
 export const WRITE_COMMENT = 'WRITE_COMMENT';
