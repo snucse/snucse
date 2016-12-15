@@ -6,7 +6,7 @@ import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../a
 import '../stylesheets/tagbox.styl';
 import {UserLevel} from '../utils';
 import ArticleList from './ArticleList';
-import {ProfileTagBox, ProfileBox} from './boxes';
+import {ProfileTagBox, ProfileBox, ProfileCommentBox} from './boxes';
 
 const Profile = React.createClass({
   handleFollowChanged(following) {
@@ -35,6 +35,7 @@ const Profile = React.createClass({
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
           <ProfileTagBox profileId={id}/>
+          <ProfileCommentBox profileId={id} isAddable/>
         </div>
         <ArticleList id={id}/>
       </div>

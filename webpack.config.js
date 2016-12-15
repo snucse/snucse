@@ -57,11 +57,12 @@ module.exports = {
     host: '0.0.0.0',
     port: 12321,
     historyApiFallback: true,
-    proxy: {
-      '/api': {
+    proxy: [
+      {
+        context: ['/api', '/files'],
         target: 'http://snucse.snucse.org:30000',
         secure: false
       }
-    }
+    ]
   }
 };
