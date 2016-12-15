@@ -1,18 +1,26 @@
 import React from 'react';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 
-// import dispatcher
-import RecommendBox from './RecommendBox';
+import {recommendArticle} from '../../../actions/dispatchers';
+import RecommendBoxContainer from './RecommendBoxContainer';
 
 const ArticleRecommendBox = React.createClass({
-  handleRecommend() {
-  },
-
   render() {
-    return <RecommendBox onRecommend={this.handleRecommend} count={1}/>;
+    return (
+      <RecommendBoxContainer
+        id={this.props.articleId}
+        recommend={this.props.recommendArticle}
+        count={this.props.count}
+        />
+    );
   }
 });
 
 // map dispatch, prop
+const mapDispatchToProps = function (dispatch) {
+  return {
+    recommendArticle: id => recommendArticle(dispatch, id)
+  };
+};
 
-export default ArticleRecommendBox;
+export default connect(null, mapDispatchToProps)(ArticleRecommendBox);

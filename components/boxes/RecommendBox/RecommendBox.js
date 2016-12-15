@@ -8,7 +8,7 @@ const RecommendBox = React.createClass({
   render() {
     return (
       <div className="recommend-box">
-        <button className="recommend" onClick={this.handleRecommend()}>추천</button>
+        <button className="recommend" onClick={this.handleRecommend}>추천</button>
         <span className="recommend-count">{`(${this.props.count})`}</span>
       </div>
     );

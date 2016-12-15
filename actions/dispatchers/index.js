@@ -7,3 +7,4 @@ export * from './profileCommentDispatchers';
 export * from './articleDispatchers';
 export * from './articleListDispatchers';
 export * from './feedDispatchers';
+export * from './recommendDispatchers';
