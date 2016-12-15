@@ -2,13 +2,13 @@ import React from 'react';
 
 const FileForm = React.createClass({
   render() {
-    return <input type="file" onChange={this.props.onChange}/>;
+    return <input type="file" name={this.props.fileId} onChange={this.props.onChange}/>;
   }
 });
 
 const FileDelBox = React.createClass({
   render() {
-    return <button type="button" onClick={this.props.onClick}>삭제</button>;
+    return <button type="button" name={this.props.fileId} onClick={this.props.onClick}>삭제</button>;
   }
 });
 
@@ -21,40 +21,22 @@ const FileDelBox = React.createClass({
 
 const FileUploadBox = React.createClass({
   getInitialState() {
-    this.handleChangeCache = {};
-    this.handleClickCache = {};
     return {
       index: 0,
       fileIds: []
     };
   },
 
-  handleChangeCache: {},
-  handleClickCache: {},
-
-  handleChange(fileId) {
-    if (!(fileId in this.handleChangeCache)) {
-      const handler = e => {
-        this.props.onFileChange(fileId, e.target.files[0]);
-      };
-      this.handleChangeCache[fileId] = handler;
-      return handler;
-    }
-    return this.handleChangeCache[fileId];
+  handleChange(e) {
+    this.props.onFileChange(e.target.name, e.target.files[0]);
   },
 
-  handleClick(fileId) {
-    if (!(fileId in this.handleClickCache)) {
-      const handler = () => {
-        this.props.onFileDelete(fileId);
-        this.setState({
-          fileIds: this.state.fileIds.filter(oldFileId => oldFileId !== fileId)
-        });
-      };
-      this.handleClickCache[fileId] = handler;
-      return handler;
-    }
-    return this.handleClickCache[fileId];
+  handleClick(e) {
+    const fileId = Number(e.target.name);
+    this.props.onFileDelete(fileId);
+    this.setState({
+      fileIds: this.state.fileIds.filter(oldFileId => oldFileId !== fileId)
+    });
   },
 
   handleAdd() {
@@ -68,8 +50,8 @@ const FileUploadBox = React.createClass({
     const fileForms = this.state.fileIds.map(fileId => {
       return (
         <div className="file-form" key={`${this.props.id}-${fileId}`}>
-          <FileForm fileId={fileId} onChange={this.handleChange(fileId)}/>
-          <FileDelBox fileId={fileId} onClick={this.handleClick(fileId)}/>
+          <FileForm fileId={fileId} onChange={this.handleChange}/>
+          <FileDelBox fileId={fileId} onClick={this.handleClick}/>
         </div>
       );
     });
