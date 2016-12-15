@@ -1,4 +1,4 @@
-import {LOAD_FEED, LOAD_FEED_RESET} from '../actions/actionTypes';
+import {LOAD_FEED, LOAD_FEED_RESET, UPDATE_SINGLE_FEED} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
 const FEEDS_INITIAL_STATE = {
@@ -72,7 +72,21 @@ function loadFeed(state, action) {
   });
 }
 
+function updateSingleFeed(state, action) {
+  const {feed} = action;
+  const {id} = feed;
+  if (id in state.byId) {
+    // already exists; update
+    return updateObject(state, {
+      byId: {...state.byId, [id]: feed}
+    });
+  }
+  // does not exist; do nothing
+  return state;
+}
+
 export default createReducer(FEEDS_INITIAL_STATE, {
   [LOAD_FEED]: loadFeed,
-  [LOAD_FEED_RESET]: loadFeedReset
+  [LOAD_FEED_RESET]: loadFeedReset,
+  [UPDATE_SINGLE_FEED]: updateSingleFeed
 });

@@ -46,3 +46,10 @@ export function loadFeed(dispatch, options) {
     loadArticlesTag(dispatch, articles, reset);
   }).catch(console.error);
 }
+
+export function updateSingleFeed(dispatch, feed) {
+  dispatch({
+    type: types.UPDATE_SINGLE_FEED,
+    feed
+  });
+}

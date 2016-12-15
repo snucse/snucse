@@ -4,6 +4,7 @@ export const LOAD_USER_INFO = 'LOAD_USER_INFO';
 // action types related with feeds
 export const LOAD_FEED = 'LOAD_FEED';
 export const LOAD_FEED_RESET = 'LOAD_FEED_RESET';
+export const UPDATE_SINGLE_FEED = 'UPDATE_SINGLE_FEED';
 export const LOADING_FEED_STARTED = 'LOADING_FEED_STARTED';
 export const LOADING_FEED_FINISHED = 'LOADING_FEED_FINISHED';
 
