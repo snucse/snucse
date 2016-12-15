@@ -7,7 +7,8 @@ import {FileUploadBox} from './boxes';
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
     const url = Url.getUrl('/articles');
-    DataCon.postFormDataToServer(url, 'POST', data);
+    DataCon.postFormDataToServer(url, 'POST', data)
+      .catch(console.error);
   },
 
   render() {

@@ -30,7 +30,8 @@ const ArticleEdit = React.createClass({
   submitEdit(data) {
     const {articleId} = this.props.params;
     const url = Url.getUrl(`/articles/${articleId}`);
-    DataCon.postFormDataToServer(url, 'PUT', data);
+    DataCon.postFormDataToServer(url, 'PUT', data)
+      .catch(console.error);
   },
 
   handleTitleChange(e) {
