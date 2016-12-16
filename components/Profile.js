@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
 import {UserLevel} from '../utils';
-import ArticleList from './ArticleList';
+import Feed from './Feed';
 import {ProfileTagBox, ProfileCommentBox} from './boxes';
 
 const Profile = React.createClass({
@@ -34,7 +34,7 @@ const Profile = React.createClass({
           <ProfileTagBox profileId={id}/>
           <ProfileCommentBox profileId={id} isAddable/>
         </div>
-        <ArticleList id={id}/>
+        <Feed profileId={id}/>
       </div>
     );
   }
