@@ -1,7 +1,5 @@
 import React from 'react';
 
-import {CommentRecommendBox} from '../../boxes';
-
 /*
   props
   - isEditable
@@ -10,6 +8,7 @@ import {CommentRecommendBox} from '../../boxes';
 
   - onDelete
   - onEdit
+  - recommendBox
 
   state
   - newContent
@@ -92,7 +91,7 @@ const CommentItem = React.createClass({
       controller = (
         <div className="comment-controller">
           {buttons}
-          <CommentRecommendBox commentId={id}/>
+          {this.props.recommendBox}
         </div>
       );
     }

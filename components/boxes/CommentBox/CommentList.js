@@ -12,6 +12,7 @@ const FOLD_COMMENT_LIMIT = 1;
   - deleteComment
   - editComment
   - commentsInfo
+  - renderRecommendBox
 */
 const CommentList = React.createClass({
   loadComments(id) {
@@ -44,6 +45,7 @@ const CommentList = React.createClass({
   },
 
   renderComment(comment) {
+    const recommendBox = this.props.renderRecommendBox(comment);
     return (
       <CommentItemContainer
         writer={comment.writer.id}
@@ -52,6 +54,7 @@ const CommentList = React.createClass({
         id={this.props.id}
         deleteComment={this.props.deleteComment}
         editComment={this.props.editComment}
+        recommendBox={recommendBox}
         />
     );
   },

@@ -2,9 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {loadComments, setLastComment, writeComment, modifyFoldComments, editComment, deleteComment} from '../../../actions/dispatchers';
+import {CommentRecommendBox} from '../';
 import CommentBox from './CommentBox';
 
 const ArticleCommentBox = React.createClass({
+  renderRecommendBox(comment) {
+    return <CommentRecommendBox commentId={comment.id}/>;
+  },
+
   render() {
     return (
       <CommentBox
@@ -19,6 +24,7 @@ const ArticleCommentBox = React.createClass({
         commentsInfo={this.props.commentsInfo}
         editComment={this.props.editComment}
         deleteComment={this.props.deleteComment}
+        renderRecommendBox={this.renderRecommendBox}
         />
     );
   }

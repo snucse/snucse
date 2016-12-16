@@ -18,9 +18,11 @@ import CommentFormContainer from './CommentFormContainer';
   - List
     - modifyFoldComments
     - commentsInfo
+    - renderRecommendBox
   - ItemContainer
     - editComment
     - deleteComment
+    - recommendBox
 */
 const CommentBox = React.createClass({
   componentDidMount() {
@@ -54,6 +56,7 @@ const CommentBox = React.createClass({
           deleteComment={this.props.deleteComment}
           editComment={this.props.editComment}
           commentsInfo={this.props.commentsInfo}
+          renderRecommendBox={this.props.renderRecommendBox}
           />
         {commentForm}
       </section>
