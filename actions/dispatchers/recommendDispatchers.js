@@ -18,3 +18,12 @@ export function recommendComment(dispatch, id) {
     });
   }).catch(console.error);
 }
+
+export function recommendProfileComment(dispatch, id) {
+  DataCon.postDataToServer(Url.getUrl(`/profile_comments/${id}/recommend`), 'POST').then(comment => {
+    dispatch({
+      type: types.TODO,
+      comment
+    });
+  }).catch(console.error);
+}
