@@ -9,8 +9,8 @@ const ProfileImageSettingBox = React.createClass({
     };
   },
 
-  handleFileChange(file) {
-    this.setState({file});
+  handleFileChange(e) {
+    this.setState({file: e.target.files[0]});
   },
 
   handleSubmit() {
@@ -22,7 +22,7 @@ const ProfileImageSettingBox = React.createClass({
     }
 
     const url = Url.getUrl('/users/profile_image');
-    DataCon.postDataFormToServer(url, 'POST', {image: file})
+    DataCon.postFormDataToServer(url, 'POST', {image: file})
       .then(() => {
         alert('변경되었습니다.');
         // TODO: reload profile images
