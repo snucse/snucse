@@ -23,7 +23,7 @@ export function loadFeed(dispatch, options) {
   // options.profileId가 있으면 프로필 글 목록을 불러옴
   const endpoint = profileId ? 'articles' : 'feeds';
   const url = Url.getUrl(`/${endpoint}`, params);
-  DataCon.postDataToServer(url).then(data => {
+  DataCon.loadDataFromServer(url).then(data => {
     // 프로필 글 목록이라면 type: 'article'을 추가함
     const feeds = profileId ? data.articles.map(item => {
       return {...item, type: 'article'};
