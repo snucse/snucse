@@ -9,6 +9,7 @@ import ArticleEdit from './ArticleEdit';
 import ClassManager from './ClassManager';
 import Login from './Login';
 import SignUp from './SignUp';
+import Settings from './Settings';
 
 export {
   Menu,
@@ -21,5 +22,6 @@ export {
   ArticleEdit,
   ClassManager,
   Login,
-  SignUp
+  SignUp,
+  Settings
 };
