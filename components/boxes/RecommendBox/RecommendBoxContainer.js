@@ -8,7 +8,7 @@ const RecommendBoxContainer = React.createClass({
   },
 
   render() {
-    return <RecommendBox onRecommend={this.handleRecommend} count={this.props.count || 1}/>;
+    return <RecommendBox onRecommend={this.handleRecommend} count={this.props.count}/>;
   }
 });
 

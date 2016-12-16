@@ -7,7 +7,7 @@ import CommentBox from './CommentBox';
 
 const ArticleCommentBox = React.createClass({
   renderRecommendBox(comment) {
-    return <CommentRecommendBox commentId={comment.id}/>;
+    return <CommentRecommendBox commentId={comment.id} count={comment.recommendationCount}/>;
   },
 
   render() {

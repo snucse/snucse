@@ -7,7 +7,7 @@ import CommentBox from './CommentBox';
 
 const ProfileCommentBox = React.createClass({
   renderRecommendBox(comment) {
-    return <ProfileCommentRecommendBox commentId={comment.id}/>;
+    return <ProfileCommentRecommendBox commentId={comment.id} count={comment.recommendationCount}/>;
   },
 
   render() {
