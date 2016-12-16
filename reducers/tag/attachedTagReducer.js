@@ -25,7 +25,7 @@ function loadArticlesTag(state, action) {
   const articles = tagList.length === 0 ? {} : tagList.reduce((prev, curr) => {
     return updateObject(prev, curr);
   });
-  return updateObject(state, {articles});
+  return updateObject(state, {articles: updateObject(state.articles, articles)});
 }
 
 function loadProfileTag(state, action) {
