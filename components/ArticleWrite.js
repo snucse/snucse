@@ -1,6 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
+import MarkdownEditor from './MarkdownEditor';
 
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
@@ -23,8 +24,8 @@ const ArticleForm = React.createClass({
   getInitialState() {
     return {title: '', content: ''};
   },
-  handleContentChange(e) {
-    this.setState({content: e.target.value});
+  handleContentChange(value) {
+    this.setState({content: value});
   },
   handleTitleChange(e) {
     this.setState({title: e.target.value});
@@ -51,7 +52,7 @@ const ArticleForm = React.createClass({
       <div className="comment-form">
         <form name="article" onSubmit={this.handleSubmit}>
           Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
-          Content: <textarea rows="4" id="content" name="content" placeholder="Say something..." value={this.state.content} onChange={this.handleContentChange}/><br/>
+          <MarkdownEditor onChange={this.handleContentChange}/><br/>
           <button type="submit">글쓰기</button>
         </form>
       </div>
