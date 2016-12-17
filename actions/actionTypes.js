@@ -1,15 +1,10 @@
 // action types related with user id
 export const LOAD_USER_INFO = 'LOAD_USER_INFO';
 
-// action types related with ArticleList
-export const LOAD_ARTICLES = 'LOAD_ARTICLES';
-export const SCROLL_ARTICLE_LIST_END = 'SCROLL_ARTICLE_LIST_END';
-export const ON_LOADING_ARTICLE = 'ON_LOADING_ARTICLE';
-
 // action types related with feeds
 export const LOAD_FEED = 'LOAD_FEED';
-export const LOADING_FEED_STARTED = 'LOADING_FEED_STARTED';
-export const LOADING_FEED_FINISHED = 'LOADING_FEED_FINISHED';
+export const LOAD_FEED_RESET = 'LOAD_FEED_RESET';
+export const UPDATE_SINGLE_FEED = 'UPDATE_SINGLE_FEED';
 
 // action types related with ProfileMake.js
 export const CHANGE_ID = 'CHANGE_ID';
