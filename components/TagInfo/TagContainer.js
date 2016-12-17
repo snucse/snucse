@@ -13,7 +13,9 @@ const TagContainer = React.createClass({
   },
 
   componentWillReceiveProps(props) {
-    if (props.tagName !== this.props.tagName && this.props.userLevel === UserLevel.REGULAR) {
+    if ((props.userLevel !== this.props.userLevel ||
+        props.tagName !== this.props.tagName) &&
+        props.userLevel === UserLevel.REGULAR) {
       this.props.loadTagInformation(props.tagName);
     }
   },

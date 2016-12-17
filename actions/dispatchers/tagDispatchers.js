@@ -1,17 +1,19 @@
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
 
-export function loadArticlesTag(dispatch, articles) {
+export function loadArticlesTag(dispatch, articles, reset = false) {
   dispatch({
     type: types.LOAD_ARTICLES_TAG,
-    articles
+    articles,
+    reset
   });
 }
 
 export function loadArticleTag(dispatch, article) {
   dispatch({
     type: types.LOAD_ARTICLES_TAG,
-    articles: [article]
+    articles: [article],
+    reset: false
   });
 }
 
