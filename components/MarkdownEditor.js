@@ -5,6 +5,21 @@ import 'simplemde/dist/simplemde.min.css';
 import '../stylesheets/markdown-editor.styl';
 
 const MarkdownEditor = React.createClass({
+  getInitialState() {
+    return {
+      value: ''
+    };
+  },
+  componentDidMount() {
+    if (this.props.value && this.props.value !== this.state.value && this.simplemde != null) {
+      this.simplemde.value(this.props.value);
+    }
+  },
+  componentWillReceiveProps(props) {
+    if (props.value && props.value !== this.state.value && this.simplemde != null) {
+      this.simplemde.value(props.value);
+    }
+  },
   attachSimpleMde(ref) {
     if (ref == null && this.simplemde != null) {
       this.simplemde = null;
@@ -15,7 +30,10 @@ const MarkdownEditor = React.createClass({
       status: false,
       spellChecker: false
     });
-    this.simplemde.codemirror.on('change', () => {
+    if (this.props.value) {
+      simplemde.value(this.props.value);
+    }
+    simplemde.codemirror.on('change', () => {
       if (this.simplemde === simplemde) {
         const value = simplemde.value();
         this.setState({value});
@@ -26,7 +44,9 @@ const MarkdownEditor = React.createClass({
     });
   },
   render() {
-    return <textarea className="markdown-editor" ref={this.attachSimpleMde}/>;
+    return (
+      <textarea className="markdown-editor" ref={this.attachSimpleMde}/>
+    );
   }
 });
 

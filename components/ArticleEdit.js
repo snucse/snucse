@@ -1,6 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
+import MarkdownEditor from './MarkdownEditor';
 
 const ArticleEdit = React.createClass({
   loadArticleFromServer() {
@@ -30,8 +31,8 @@ const ArticleEdit = React.createClass({
     this.setState({title: e.target.value});
   },
 
-  handleContentChange(e) {
-    this.setState({content: e.target.value});
+  handleContentChange(value) {
+    this.setState({content: value});
   },
 
   handleEdit(e) {
@@ -49,8 +50,8 @@ const ArticleEdit = React.createClass({
     return (
       <div>
         <form onSubmit={this.handleEdit}>
-          <input type="text" id="title" name="title" value={this.state.title} onChange={this.handleTitleChange}/>
-          <textarea rows="5" id="content" name="content" value={this.state.content} onChange={this.handleContentChange}/>
+          <input type="text" id="title" name="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
+          <MarkdownEditor value={this.state.content} onChange={this.handleContentChange}/><br/>
           <input type="submit" value="수정"/>
         </form>
       </div>
