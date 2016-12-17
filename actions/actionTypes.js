@@ -42,5 +42,10 @@ export const LOAD_ALL_PROFILES = 'LOAD_ALL_PROFILES';
 export const LOAD_PROFILE_DETAIL = 'LOAD_PROFILE_DETAIL';
 export const UPDATE_FOLLOWING_STATE = 'UPDATE_FOLLOWING_STATE';
 
+// action types related with profile admin page
+export const PROFILE_ERROR_INIT = 'PROFILE_ERROR_INIT';
+export const PROFILE_ERROR_NOT_ADMIN = 'PROFILE_ERROR_NOT_ADMIN';
+export const PROFILE_ERROR_INVALID_ID = 'PROFILE_ERROR_INVALID_ID';
+
 // action types related with article view
 export const LOAD_ARTICLE = 'LOAD_ARTICLE';
