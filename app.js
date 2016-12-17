@@ -1,3 +1,6 @@
+// Map, Set과 String.prototype.includes 등을 사용할 수 있게 함
+import 'core-js/shim';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, browserHistory, IndexRoute} from 'react-router';

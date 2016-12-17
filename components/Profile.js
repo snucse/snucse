@@ -5,8 +5,9 @@ import {connect} from 'react-redux';
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
 import {UserLevel} from '../utils';
-import ArticleList from './ArticleList';
+
 import {ProfileTagBox, ProfileBox, ProfileCommentBox} from './boxes';
+import Feed from './Feed';
 
 const Profile = React.createClass({
   handleFollowChanged(following) {
@@ -37,7 +38,7 @@ const Profile = React.createClass({
           <ProfileTagBox profileId={id}/>
           <ProfileCommentBox profileId={id} isAddable/>
         </div>
-        <ArticleList id={id}/>
+        <Feed profileId={id}/>
       </div>
     );
   }
