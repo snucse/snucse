@@ -28,7 +28,7 @@ function loadArticlesTag(state, action) {
   if (action.reset) {
     return updateObject(state, {articles});
   }
-  return updateObject(state, {...state.articles, ...articles});
+  return updateObject(state, {articles: {...state.articles, ...articles}});
 }
 
 function loadProfileTag(state, action) {

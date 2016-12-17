@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {DelEditBox, ArticleTagBox, CommentBox} from '../boxes';
+import {DelEditBox, ArticleTagBox, ArticleCommentBox} from '../boxes';
 
 const ArticleItem = React.createClass({
   render() {
@@ -35,7 +35,7 @@ const ArticleItem = React.createClass({
         </div>
         <DelEditBox mine={mine} articleId={article.id}/>
         <ArticleTagBox articleId={article.id}/>
-        <CommentBox
+        <ArticleCommentBox
           articleId={article.id}
           lastComment={article.lastComment}
           commentCount={article.commentCount}
