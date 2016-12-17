@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {loadAllProfiles} from '../actions/dispatchers';
-import {UserLevel} from '../utils';
+import {loadAllProfiles} from '../../actions/dispatchers';
+import {UserLevel} from '../../utils';
 import ProfileMakeForm from './ProfileMakeForm';
 
 const ProfileList = React.createClass({
