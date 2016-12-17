@@ -33,10 +33,10 @@ const CommentBox = React.createClass({
 
   componentWillReceiveProps(props) {
     if (this.props.id !== props.id) {
-      if (this.props.lastComment) {
-        this.props.setLastComment(props.id, props.lastComment, props.commentCount);
+      if (props.lastComment) {
+        props.setLastComment(props.id, props.lastComment, props.commentCount);
       } else {
-        this.props.loadComments(props.id);
+        props.loadComments(props.id);
       }
     }
   },
