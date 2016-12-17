@@ -14,6 +14,7 @@ const ProfileNameContainer = React.createClass({
   render() {
     return (
       <ProfileContent
+        id={this.props.id}
         content={this.props.name}
         onEdit={this.handleEdit}
         mine={this.props.mine}

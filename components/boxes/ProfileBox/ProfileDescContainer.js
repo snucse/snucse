@@ -14,6 +14,7 @@ const ProfileDescContainer = React.createClass({
   render() {
     return (
       <ProfileContent
+        id={this.props.id}
         content={this.props.desc}
         onEdit={this.handleEdit}
         mine={this.props.mine}

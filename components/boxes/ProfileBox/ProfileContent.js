@@ -8,9 +8,13 @@ const ProfileContent = React.createClass({
   },
 
   componentWillReceiveProps(props) {
-    this.setState({
-      content: props.content
-    });
+    if (this.props.id !== props.id) {
+      // reload contents
+      this.setState({
+        content: props.content,
+        isEditMode: false
+      });
+    }
   },
 
   handleEnableEditMode() {
