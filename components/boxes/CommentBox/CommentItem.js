@@ -66,9 +66,12 @@ const CommentItem = React.createClass({
   },
 
   render() {
+    const edited = null;
+    /*
     const edited = this.props.comment.createdAt.updated ?
       <span className="comment-edited">수정됨</span> :
       null;
+    */
     const editBox = this.props.isEditable && this.state.isEditMode ?
       <div className="comment-editbox">
         <input onChange={this.handleEdit} defaultValue={this.state.newContent}/>

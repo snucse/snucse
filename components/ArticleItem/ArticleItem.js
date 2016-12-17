@@ -17,11 +17,13 @@ const ArticleItem = React.createClass({
       result.push(<br key={brId}/>);
     }
     moment.locale('kr');
-    const timeAndDate = `${article.createdAt.date}T${article.createdAt.time}`;
-    let date = `${moment(article.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(article.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+    // const timeAndDate = `${article.createdAt.date}T${article.createdAt.time}`;
+    const date = `${moment(article.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(article.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+    /*
     if (article.createdAt.updated === true) {
       date += `(수정됨)${moment(timeAndDate).fromNow()}`;
     }
+    */
     const mine = (this.props.userId === article.writer.id);
     return (
       <div className="article-wrap">
