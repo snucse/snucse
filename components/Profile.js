@@ -5,15 +5,16 @@ import {connect} from 'react-redux';
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
 import {UserLevel} from '../utils';
+
+import {ProfileTagBox, ProfileBox, ProfileCommentBox} from './boxes';
 import Feed from './Feed';
-import {ProfileTagBox, ProfileCommentBox} from './boxes';
 
 const Profile = React.createClass({
   handleFollowChanged(following) {
     this.props.updateFollowingState(this.props.id, following);
   },
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.loadProfileDetail(this.props.id);
   },
 
@@ -28,6 +29,9 @@ const Profile = React.createClass({
     const {id} = this.props;
     return (
       <div>
+        <div className="profile-detail">
+          <ProfileBox id={id}/>
+        </div>
         <div className="menu-of-profile">
           <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>

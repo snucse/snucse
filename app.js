@@ -14,6 +14,7 @@ import {
   Others,
   Message,
   ProfileList,
+  ProfileAdmin,
   Main,
   TagInfo,
   ArticleWrite,
@@ -42,6 +43,7 @@ ReactDOM.render(
         <Route path="others" component={Others}/>
         <Route path="profiles" component={ProfileList}/>
         <Route path="profiles/:id/write" component={ArticleWrite}/>
+        <Route path="profiles/:id/admin" component={ProfileAdmin}/>
         <Route path="search" component={SearchResult}/>
         <Route path=":id" component={ClassManager}/>
         <Route path=":articleId/edit" component={ArticleEdit}/>
