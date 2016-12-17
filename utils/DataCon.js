@@ -14,10 +14,12 @@ const DataCon = {
       headers['Content-Type'] = 'application/json';
     }
     const options = {
-      method,
-      headers,
-      body: data == null ? undefined : JSON.stringify(data)
+      method: method || 'GET',
+      headers
     };
+    if (data != null) {
+      options.body = JSON.stringify(data);
+    }
     return fetch(url, options).then(res => {
       if (!res.ok) {
         throw res;
