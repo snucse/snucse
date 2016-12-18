@@ -18,7 +18,7 @@ const ProfileEditBoxContainer = React.createClass({
   submitEdit(data) {
     const url = Url.getUrl(`/profiles/${this.props.id}`);
     DataCon.postDataToServer(url, 'PUT', data)
-      .then(this.props.updateFollowingList());
+      .then(() => this.props.updateFollowingList());
   },
 
   handleEdit(data) {
