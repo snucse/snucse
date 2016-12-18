@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {FileBox, DelEditBox, ArticleTagBox, ArticleCommentBox} from '../boxes';
+import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const ArticleItem = React.createClass({
   render() {
@@ -17,11 +17,13 @@ const ArticleItem = React.createClass({
       result.push(<br key={brId}/>);
     }
     moment.locale('kr');
-    const timeAndDate = `${article.createdAt.date}T${article.createdAt.time}`;
-    let date = `${moment(article.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(article.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+    // const timeAndDate = `${article.createdAt.date}T${article.createdAt.time}`;
+    const date = `${moment(article.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(article.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+    /*
     if (article.createdAt.updated === true) {
       date += `(수정됨)${moment(timeAndDate).fromNow()}`;
     }
+    */
     const mine = (this.props.userId === article.writer.id);
     return (
       <div className="article-wrap">
@@ -34,6 +36,7 @@ const ArticleItem = React.createClass({
         </div>
         <DelEditBox mine={mine} articleId={article.id}/>
         <ArticleTagBox articleId={article.id}/>
+        <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
         <ArticleCommentBox
           articleId={article.id}
           lastComment={article.lastComment}

@@ -12,7 +12,7 @@ export const CHANGE_NAME = 'CHANGE_NAME';
 export const CHANGE_DESC = 'CHANGE_DESC';
 
 // action types related with comment
-export const LOAD_COMMENT = 'LOAD_COMMENT';
+export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const SET_LAST_COMMENT = 'SET_LAST_COMMENT';
 export const MODIFY_FOLD_COMMENT = 'MODIFY_FOLD_COMMENT';
 export const WRITE_COMMENT = 'WRITE_COMMENT';
@@ -41,6 +41,11 @@ export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';
 export const LOAD_ALL_PROFILES = 'LOAD_ALL_PROFILES';
 export const LOAD_PROFILE_DETAIL = 'LOAD_PROFILE_DETAIL';
 export const UPDATE_FOLLOWING_STATE = 'UPDATE_FOLLOWING_STATE';
+
+// action types related with profile admin page
+export const PROFILE_ERROR_INIT = 'PROFILE_ERROR_INIT';
+export const PROFILE_ERROR_NOT_ADMIN = 'PROFILE_ERROR_NOT_ADMIN';
+export const PROFILE_ERROR_INVALID_ID = 'PROFILE_ERROR_INVALID_ID';
 
 // action types related with article view
 export const LOAD_ARTICLE = 'LOAD_ARTICLE';
