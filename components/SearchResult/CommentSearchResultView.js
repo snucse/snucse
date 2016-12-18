@@ -5,8 +5,9 @@ import SearchResultLinks from './SearchResultLinks';
 
 const CommentSearchResultView = React.createClass({
   render() {
-    const {query, num, result} = this.props;
+    const {query, result} = this.props;
     const page = Number(this.props.page) || 0;
+    const num = Number(this.props.num) || 10;
     const commentResults = result.comments.data.map(comment => {
       return <CommentSearchResult comment={comment} key={`${query}-${comment.id}`}/>;
     });

@@ -5,8 +5,9 @@ import SearchResultLinks from './SearchResultLinks';
 
 const ArticleSearchResultView = React.createClass({
   render() {
-    const {query, num, result} = this.props;
+    const {query, result} = this.props;
     const page = Number(this.props.page) || 0;
+    const num = Number(this.props.num) || 10;
     const articleResults = result.articles.data.map(article => {
       return <ArticleSearchResult article={article} key={`${query}-${article.id}`}/>;
     });

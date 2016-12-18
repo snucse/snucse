@@ -5,8 +5,9 @@ import SearchResultLinks from './SearchResultLinks';
 
 const TagSearchResultView = React.createClass({
   render() {
-    const {query, num, result} = this.props;
+    const {query, result} = this.props;
     const page = Number(this.props.page) || 0;
+    const num = Number(this.props.num) || 10;
     const tagResults = result.tags.data.map(tag => {
       return <TagSearchResult tag={tag} key={`${query}-${tag.tag}`}/>;
     });

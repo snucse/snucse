@@ -7,9 +7,8 @@ const SearchResultLinks = React.createClass({
   },
 
   render() {
-    const {category, query, page, count} = this.props;
+    const {category, query, page, count, num} = this.props;
     const linkStep = 10;
-    const num = Number(this.props.num) || 10;
     const first = Math.max(0, Math.floor(page / linkStep) * linkStep);
     const last = Math.min(Math.floor((count - 1) / num) + 1,
       (Math.floor(page / linkStep) + 1) * linkStep);

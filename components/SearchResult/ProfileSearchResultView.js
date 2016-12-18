@@ -5,8 +5,9 @@ import SearchResultLinks from './SearchResultLinks';
 
 const ProfileSearchResultView = React.createClass({
   render() {
-    const {query, num, result} = this.props;
+    const {query, result} = this.props;
     const page = Number(this.props.page) || 0;
+    const num = Number(this.props.num) || 10;
     const profileResults = result.profiles.data.map(profile => {
       return <ProfileSearchResult profile={profile} key={`${query}-${profile.id}`}/>;
     });
