@@ -67,7 +67,7 @@ const Editor = React.createClass({
     return (
       <div>
         {editor}<br/>
-        글쓰기 모드: <EditorModeForm value={this.state.mode} onChange={this.handleModeChange}/>
+        글쓰기 모드: <EditorModeForm mode={this.state.mode} onChange={this.handleModeChange}/>
       </div>
     );
   }
