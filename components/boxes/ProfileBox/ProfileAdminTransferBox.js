@@ -3,10 +3,15 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 
 import {initProfileAdminError, loadProfileDetail, changeAdmin} from '../../../actions/dispatchers';
-import ProfileAdminForm from './ProfileAdminForm';
-import ProfileAdminError from './ProfileAdminError';
+import ProfileAdminTransferForm from './ProfileAdminTransferForm';
+import ProfileAdminTransferError from './ProfileAdminTransferError';
 
-const ProfileAdminBox = React.createClass({
+/*
+ * props
+ * - id
+ */
+
+const ProfileAdminTransferBox = React.createClass({
   componentDidMount() {
     this.props.initProfileAdminError();
     this.props.loadProfileDetail(this.props.id);
@@ -44,8 +49,8 @@ const ProfileAdminBox = React.createClass({
 
     return (
       <div className="profile-admin">
-        <ProfileAdminForm onClickSubmit={this.handleClickSubmit}/>
-        <ProfileAdminError notAdmin={notAdmin} invalidId={invalidId}/>
+        <ProfileAdminTransferForm onClickSubmit={this.handleClickSubmit}/>
+        <ProfileAdminTransferError notAdmin={notAdmin} invalidId={invalidId}/>
       </div>
     );
   }
@@ -69,4 +74,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileAdminBox);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileAdminTransferBox);
