@@ -16,7 +16,7 @@ const SignUp = React.createClass({
 const formNames = ['username', 'password', 'password2', 'name', 'birthday', 'bsNumber', 'phoneNumber'];
 const birthReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 const bsNumReg = /^[0-9]{4}-[0-9]{5}$/;
-const phoneNumReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+const phoneNumReg = /^(02)|([0-9]{3})-[0-9]{3,4}-[0-9]{4}$/;
 
 const SignUpForm = React.createClass({
   handleSignUp(e) {
