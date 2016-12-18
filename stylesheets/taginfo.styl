@@ -2,26 +2,33 @@
 @import "variable.styl"
 #tag-info-container
   box()
+#tag-description
+  float right
 #tag-title
   font-size 16px
   font-weight 600
-  margin-bottom 10px
-#tag-title-description
-  margin-left 5px
-  font-size 14px
-  font-weight normal
+  padding-bottom 10px
+  border-bottom 1px solid box-border-color
+  margin-bottom 14px
 #tag-info-related-tag-title
   box-title()
 #related-tag-container
-  min-height 30px
   margin-bottom 10px
+#related-tag-container:before
+  content "\25B6"
 #related-tag-list
+  margin-left 10px
   display inline-block
-  height 30px
-  margin-top 5px
+  height 25px
+#related-tag-list:before
+  content " "
+  display inline-block
 #tag-info-article-title
   box-title()
+#tag-info-article-list
+  margin 0 -15px
 #tag-info-article-empty
+  margin-left 15px
   margin-bottom 10px
 .tag-info-article-container
   float left
@@ -29,6 +36,32 @@
   padding 0 15px
 .tag-info-article
   box()
+  padding 10px 15px
+.tag-info-article-date
+  float right
+  color article-date-color
+  font-size 12px
+.tag-info-article-header
+  font-size 16px
+  font-weight 600
+  margin-bottom 5px
+  white-space nowrap
+.tag-info-article-title
+  display inline-block
+  vertical-align middle
+  max-width 210px
+  overflow hidden
+  text-overflow ellipsis
+.tag-info-article-profiles
+  display inline-block
+  vertical-align middle
+  margin-top 5px
+  color article-profiles-color
+  max-width 70px
+  overflow hidden
+  text-overflow ellipsis
+  font-size 12px
+  font-weight normal
 .tag-info-article-writer-container
   display table-cell
   vertical-align top
@@ -51,15 +84,6 @@
   display table-cell
   vertical-align top
   width 10000px
-.tag-info-article-date
-  float right
-  color article-date-color
-  font-size 12px
-.tag-info-article-title
-  font-size 14px
-  font-weight 600
-.tag-info-article-profiles
-  color article-profiles-color
 .tag-info-article-content
   word-break break-all
   height 3.2em
@@ -69,7 +93,10 @@
   clearfix()
 #tag-info-profile-title
   box-title()
-#tag-info-article-empty
+#tag-info-profile-list
+  margin 0 -15px
+#tag-info-profile-empty
+  margin-left 15px
   margin-bottom 10px
 .tag-info-profile-container
   float left
@@ -77,9 +104,11 @@
   padding 0 15px
 .tag-info-profile
   box()
+  padding 10px 15px
 .tag-info-profile-name
-  font-size 14px
+  font-size 16px
   font-weight 600
+  margin-bottom 5px
 .tag-info-profile-description
   word-break break-all
   height 3.2em

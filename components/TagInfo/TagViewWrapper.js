@@ -23,14 +23,13 @@ const TagView = React.createClass({
         return (
           <li key={article.id} className="tag-info-article-container">
             <div className="tag-info-article">
+              <small className="tag-info-article-date">{article.createdAt.date} {article.createdAt.time}</small>
+              <h5 className="tag-info-article-header"><Link className="tag-info-article-title" to={`/${article.id}`}>{article.title}</Link><span className="tag-info-article-profiles">{article.profiles[0].name}</span></h5>
               <div className="tag-info-article-writer-container">
                 <img className="tag-info-article-writer-image" src={article.writer.profileImageUri}/>
                 <h5 className="tag-info-article-writer-name">{article.writer.name}</h5>
               </div>
               <div className="tag-info-article-main">
-                <small className="tag-info-article-date">{article.createdAt.date} {article.createdAt.time}</small>
-                <h5 className="tag-info-article-title"><Link to={`/${article.id}`}>{article.title}</Link></h5>
-                <span className="tag-info-article-profiles">{article.profiles[0].name}</span>
                 <div className="tag-info-article-content">
                   {article.content}
                 </div>
@@ -55,7 +54,8 @@ const TagView = React.createClass({
       });
     return (
       <div id="tag-info-container">
-        <h3 id="tag-title">{this.props.tagName}<small id="tag-title-description">만든이 <Link id="tag-creator-name" to={`/${creator.username}`}>{creator.name}</Link></small></h3>
+        <small id="tag-description">만든이 {creator.name}</small>
+        <h3 id="tag-title">{this.props.tagName}</h3>
         <h4 id="tag-info-related-tag-title">연관 태그</h4>
         <section>
           <RelatedTagBox targetTagName={this.props.tagName} relatedTags={relatedTags}/>
