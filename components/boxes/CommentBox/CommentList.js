@@ -7,10 +7,12 @@ const FOLD_COMMENT_LIMIT = 1;
 /*
   props
   - id
+  - isChild
   - loadComments
   - modifyFoldComments
-  - deleteComment
+  - writeComment
   - editComment
+  - deleteComment
   - commentsInfo
   - renderRecommendBox
 */
@@ -53,6 +55,7 @@ const CommentList = React.createClass({
         comment={comment}
         key={comment.id}
         id={this.props.id}
+        writeComment={this.props.writeComment}
         deleteComment={this.props.deleteComment}
         editComment={this.props.editComment}
         recommendBox={recommendBox}

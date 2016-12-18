@@ -20,6 +20,7 @@ import CommentFormContainer from './CommentFormContainer';
     - commentsInfo
     - renderRecommendBox
   - ItemContainer
+    - writeComment
     - editComment
     - deleteComment
     - recommendBox
@@ -55,6 +56,7 @@ const CommentBox = React.createClass({
             id={this.props.id}
             loadComments={this.props.loadComments}
             modifyFoldComments={this.props.modifyFoldComments}
+            writeComment={this.props.writeComment}
             deleteComment={this.props.deleteComment}
             editComment={this.props.editComment}
             commentsInfo={this.props.commentsInfo}
