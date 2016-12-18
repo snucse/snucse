@@ -1,5 +1,4 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
 import Editor from './Editor';
 
 import {FileUploadBox} from './boxes';
