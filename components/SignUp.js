@@ -1,15 +1,24 @@
 import React from 'react';
 
-import {Link, browserHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 import {DataCon, Url, genRefCallback, connectModals} from '../utils';
 import Modal from './Modal';
+
+import '../stylesheets/login.styl';
 
 const SignUp = React.createClass({
   render() {
     return (
-      <div>
-        <Link to="/login">로그인</Link>
-        <SignUpForm/>
+      <div id="login-background">
+        <div id="signup-box-container">
+          <h2 id="signup-box-title">SNUCSE</h2>
+          <div id="signup-box">
+            <div id="signup-box-header">
+              컴퓨터공학부 학사, 석사, 박사과정에 재학 중이거나 이수한 학생,<br/>부전공, 복수전공자 그리고 교직원에게만 계정이 발급됩니다.<br/>스누씨에는 <a href="https://www.snucse.org/Privacy.aspx" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>이 적용됩니다. 동의하지 않으시는 분은 가입을 중단해 주십시오.
+            </div>
+            <SignUpForm/>
+          </div>
+        </div>
         <Modal/>
       </div>
     );
@@ -40,7 +49,8 @@ const SignUpForm = connectModals(React.createClass({
   },
 
   renderInput(refName, placeholder, type = 'text') {
-    return <input type={type} placeholder={placeholder} ref={genRefCallback(this, refName)}/>;
+    const id = `signup-${refName}-input`;
+    return <input id={id} className="signup-form-input" type={type} placeholder={placeholder} ref={genRefCallback(this, refName)}/>;
   },
 
   validateForm() {
@@ -103,16 +113,38 @@ const SignUpForm = connectModals(React.createClass({
 
   render() {
     return (
-      <form>
-        가입<br/>
-        아이디: {this.renderInput('username', 'id')}<br/>
-        비밀번호: {this.renderInput('password', '******', 'password')}<br/>
-        비밀번호 확인: {this.renderInput('password2', '******', 'password')}<br/>
-        이름: {this.renderInput('name', '홍길동')}<br/>
-        생년월일: {this.renderInput('birthday', '1900-01-01', 'date')}<br/>
-        학번: {this.renderInput('bsNumber', '2017-10000')}<br/>
-        휴대전화/연락처: {this.renderInput('phoneNumber', '010-1234-5678')}<br/>
-        <button onClick={this.handleSignUp}>가입</button>
+      <form id="signup-form">
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-username-input">아이디</label>
+          {this.renderInput('username', 'ID')}
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-password-input">비밀번호</label>
+          {this.renderInput('password', '******', 'password')}
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-password2-input">비밀번호 확인</label>
+          {this.renderInput('password2', '******', 'password')}
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-name-input">이름</label>
+          {this.renderInput('name', '홍길동')}
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-birthday-input">생년월일</label>
+          {this.renderInput('birthday', '1998-01-01', 'date')}
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-bsNumber-input">학번</label>
+          {this.renderInput('bsNumber', '2017-10000')}
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-phoneNumber-input">휴대전화/연락처</label>
+          {this.renderInput('phoneNumber', '010-1234-5678')}
+        </div>
+        <div id="signup-button-container">
+          <button id="signup-button" onClick={this.handleSignUp}>가입 신청</button>
+        </div>
       </form>
     );
   }
