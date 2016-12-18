@@ -6,3 +6,4 @@ export * from './commentDispatchers';
 export * from './profileCommentDispatchers';
 export * from './articleDispatchers';
 export * from './feedDispatchers';
+export * from './recommendDispatchers';

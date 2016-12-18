@@ -9,6 +9,7 @@ import CommentItem from './CommentItem';
   - id
   - deleteComment
   - editComment
+  - recommendBox
 */
 const CommentItemContainer = React.createClass({
   handleDelete() {
@@ -28,6 +29,7 @@ const CommentItemContainer = React.createClass({
         isDeletable={mine}
         onDelete={this.handleDelete}
         onEdit={this.handleEdit}
+        recommendBox={this.props.recommendBox}
         />
     );
   }
