@@ -36,11 +36,20 @@ export function writeComment(dispatch, articleId, content, parentCommentId) {
     parentCommentId
   };
   DataCon.postDataToServer(Url.getUrl('/comments'), 'POST', data).then(res => {
-    dispatch({
-      type: types.WRITE_COMMENT,
-      comment: res,
-      articleId
-    });
+    if (parentCommentId) {
+      dispatch({
+        type: types.WRITE_COMMENT,
+        comment: res,
+        articleId
+      });
+    } else {
+      dispatch({
+        type: types.REPLY_COMMENT,
+        comment: res,
+        articleId,
+        commentId: parentCommentId
+      });
+    }
   }).catch(console.error);
 }
 
