@@ -1,8 +1,8 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
-import {DataCon, Url, genRefCallback} from '../utils';
-import {updateFollowingList} from '../actions/dispatchers';
+import {DataCon, Url, genRefCallback} from '../../utils';
+import {updateFollowingList} from '../../actions/dispatchers';
 
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
 

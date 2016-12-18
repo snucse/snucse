@@ -2,6 +2,7 @@ import Menu from './Menu';
 import Others from './Others';
 import Message from './Message';
 import ProfileList from './ProfileList';
+import ProfileAdmin from './ProfileAdmin';
 import Main from './Main';
 import TagInfo from './TagInfo';
 import ArticleWrite from './ArticleWrite';
@@ -16,6 +17,7 @@ export {
   Others,
   Message,
   ProfileList,
+  ProfileAdmin,
   Main,
   TagInfo,
   ArticleWrite,

@@ -5,7 +5,7 @@ export function loadComments(dispatch, articleId) {
   const url = Url.getUrl('/comments', {articleId});
   DataCon.loadDataFromServer(url).then(data => {
     dispatch({
-      type: types.LOAD_COMMENT,
+      type: types.LOAD_COMMENTS,
       comments: data.comments,
       articleId
     });

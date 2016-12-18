@@ -1,3 +1,6 @@
+// Map, Set과 String.prototype.includes 등을 사용할 수 있게 함
+import 'core-js/shim';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, browserHistory, IndexRoute} from 'react-router';
@@ -11,6 +14,7 @@ import {
   Others,
   Message,
   ProfileList,
+  ProfileAdmin,
   Main,
   TagInfo,
   ArticleWrite,
@@ -40,6 +44,7 @@ ReactDOM.render(
         <Route path="profiles" component={ProfileList}/>
         <Route path="profiles/:id/write" component={ArticleWrite}/>
         <Route path="settings" component={Settings}/>
+        <Route path="profiles/:id/admin" component={ProfileAdmin}/>
         <Route path=":id" component={ClassManager}/>
         <Route path=":articleId/edit" component={ArticleEdit}/>
       </Route>
