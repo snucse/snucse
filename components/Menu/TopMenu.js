@@ -3,17 +3,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
 import {UserLevel} from '../../utils';
-
-const SearchBox = React.createClass({
-  render() {
-    return (
-      <li><form method="POST">
-        <input type="text" name="search" placeholder="snucse검색"/>
-        <input type="submit" value="검색"/>
-      </form></li>
-    );
-  }
-});
+import {SearchForm} from '../boxes';
 
 const TopMenu = React.createClass({
   handleLogout() {
@@ -27,12 +17,24 @@ const TopMenu = React.createClass({
         return (
           <div className="top-menu">
             <ul>
-              <li><Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link></li>
-              <SearchBox/>
-              <li><Link to="/message"><span className="menulink">쪽지</span></Link></li>
-              <li><Link to="/others"><span className="menulink">기타</span></Link></li>
-              <li><Link to="/settings"><span className="menulink">설정</span></Link></li>
-              <li><a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a></li>
+              <li>
+                <Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link>
+              </li>
+              <li>
+                <SearchForm/>
+              </li>
+              <li>
+                <Link to="/message"><span className="menulink">쪽지</span></Link>
+              </li>
+              <li>
+                <Link to="/others"><span className="menulink">기타</span></Link>
+              </li>
+              <li>
+                <Link to="/settings"><span className="menulink">설정</span></Link>
+              </li>
+              <li>
+                <a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a>
+              </li>
             </ul>
           </div>
         );
@@ -41,11 +43,21 @@ const TopMenu = React.createClass({
         return (
           <div className="top-menu">
             <ul>
-              <li><Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link></li>
-              <li><Link to="/message"><span className="menulink">쪽지</span></Link></li>
-              <li><Link to="/others"><span className="menulink">기타</span></Link></li>
-              <li><Link to="/settings"><span className="menulink">설정</span></Link></li>
-              <li><a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a></li>
+              <li>
+                <Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link>
+              </li>
+              <li>
+                <Link to="/message"><span className="menulink">쪽지</span></Link>
+              </li>
+              <li>
+                <Link to="/others"><span className="menulink">기타</span></Link>
+              </li>
+              <li>
+                <Link to="/settings"><span className="menulink">설정</span></Link>
+              </li>
+              <li>
+                <a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a>
+              </li>
             </ul>
           </div>
         );

@@ -35,6 +35,9 @@ export const LOAD_TAGCLOUD = 'LOAD_TAGCLOUD';
 export const INITIALIZE_CANDIDATE_TAGS = 'INITIALIZE_CANDIDATE_TAGS';
 export const LOAD_CANDIDATE_TAGS = 'LOAD_CANDIDATE_TAGS';
 
+// action types related with search
+export const LOAD_SEARCH_RESULT = 'LOAD_SEARCH_RESULT';
+
 // action types related with updates
 export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';
 
