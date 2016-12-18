@@ -21,7 +21,8 @@ import {
   ArticleEdit,
   ClassManager,
   Login,
-  SignUp
+  SignUp,
+  Settings
 } from './components';
 
 import reducers from './reducers';
@@ -42,6 +43,7 @@ ReactDOM.render(
         <Route path="others" component={Others}/>
         <Route path="profiles" component={ProfileList}/>
         <Route path="profiles/:id/write" component={ArticleWrite}/>
+        <Route path="settings" component={Settings}/>
         <Route path="profiles/:id/admin" component={ProfileAdmin}/>
         <Route path=":id" component={ClassManager}/>
         <Route path=":articleId/edit" component={ArticleEdit}/>

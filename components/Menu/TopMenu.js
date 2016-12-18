@@ -31,6 +31,7 @@ const TopMenu = React.createClass({
               <SearchBox/>
               <li><Link to="/message"><span className="menulink">쪽지</span></Link></li>
               <li><Link to="/others"><span className="menulink">기타</span></Link></li>
+              <li><Link to="/settings"><span className="menulink">설정</span></Link></li>
               <li><a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a></li>
             </ul>
           </div>
@@ -43,6 +44,7 @@ const TopMenu = React.createClass({
               <li><Link to="/"><img src="http://www.snucse.org/image/logo.png"/></Link></li>
               <li><Link to="/message"><span className="menulink">쪽지</span></Link></li>
               <li><Link to="/others"><span className="menulink">기타</span></Link></li>
+              <li><Link to="/settings"><span className="menulink">설정</span></Link></li>
               <li><a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a></li>
             </ul>
           </div>
