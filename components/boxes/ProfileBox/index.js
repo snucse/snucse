@@ -1,7 +1,7 @@
-import ProfileBox from './ProfileBox';
+import ProfileBoxContainer from './ProfileBoxContainer';
 import ProfileAdminBox from './ProfileAdminBox';
 
 export {
-  ProfileBox,
+  ProfileBoxContainer,
   ProfileAdminBox
 };
