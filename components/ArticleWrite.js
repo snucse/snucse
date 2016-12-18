@@ -3,10 +3,13 @@ import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
 import Editor from './Editor';
 
+import {FileUploadBox} from './boxes';
+
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
     const url = Url.getUrl('/articles');
-    DataCon.postDataToServer(url, 'POST', data);
+    DataCon.postFormDataToServer(url, 'POST', data)
+      .catch(console.error);
   },
 
   render() {
@@ -22,8 +25,14 @@ const ArticleWrite = React.createClass({
 
 const ArticleForm = React.createClass({
   getInitialState() {
-    return {title: '', content: '', renderingMode: 'text'};
+    return {
+      title: '',
+      content: '',
+      renderingMode: 'text',
+      files: {} // pairs of (fileId, file obj)
+    };
   },
+
   handleContentChange(value) {
     this.setState({content: value});
   },
@@ -33,6 +42,25 @@ const ArticleForm = React.createClass({
   handleTitleChange(e) {
     this.setState({title: e.target.value});
   },
+  handleFileChange(fileId, newFile) {
+    this.setState({
+      files: {
+        ...this.state.files,
+        [fileId]: newFile
+      }
+    });
+  },
+  handleFileDelete(fileId) {
+    const newFiles = {};
+    for (const oldFileId in this.state.files) {
+      if (oldFileId != fileId) {
+        newFiles[oldFileId] = this.state.files[oldFileId];
+      }
+    }
+    this.setState({
+      files: newFiles
+    });
+  },
 
   handleSubmit(e) {
     e.preventDefault();
@@ -40,13 +68,19 @@ const ArticleForm = React.createClass({
     const content = this.state.content.trim();
     const title = this.state.title.trim();
     const renderingMode = this.state.renderingMode;
+    const files = [];
+    for (const fileId in this.state.files) {
+      if (Object.hasOwnProperty.call(this.state.files, fileId)) {
+        files.push(this.state.files[fileId]);
+      }
+    }
     if (!content || !title) {
       return;
     }
     if (!confirm('전송하시겠습니까?')) {
       return;
     }
-    this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId});
+    this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
     browserHistory.push(`/${profileId}`);
   },
 
@@ -56,6 +90,7 @@ const ArticleForm = React.createClass({
         <form name="article" onSubmit={this.handleSubmit}>
           Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
           <Editor onChange={this.handleContentChange} onModeChange={this.handleModeChange}/><br/>
+          Files: <FileUploadBox id={this.props.id} onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/><br/>
           <button type="submit">글쓰기</button>
         </form>
       </div>

@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "deep-equal": "^1.0.1",
     "core-js": "^2.4.1",
     "immutable": "^3.8.1",
     "js-cookie": "^2.1.3",

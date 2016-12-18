@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {DelEditBox, ArticleTagBox, ArticleCommentBox} from '../boxes';
+import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const FeedArticle = React.createClass({
   render() {
@@ -17,22 +17,26 @@ const FeedArticle = React.createClass({
       result.push(<br key={brId}/>);
     }
     moment.locale('kr');
-    const timeAndDate = `${article.createdAt.date}T${article.createdAt.time}`;
-    let date = `${moment(article.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(article.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+    // const timeAndDate = `${article.createdAt.date}T${article.createdAt.time}`;
+    const date = `${moment(article.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(article.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
+    /*
     if (article.createdAt.updated === true) {
       date += `(수정됨)${moment(timeAndDate).fromNow()}`;
     }
+    */
     const mine = (this.props.userId === article.writer.id);
     return (
       <div className="article-wrap">
         <h3 className="article-title">Title: {article.title} Profile: {article.profiles[0].name}</h3>
         <h4 className="article-author">writer: {article.writer.username}</h4>
         <h4 className="article-date"> date: {date}</h4>
+        <FileBox files={article.files}/>
         <div className="article-content">
           {result}
         </div>
         <DelEditBox mine={mine} articleId={article.id}/>
         <ArticleTagBox articleId={article.id}/>
+        <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
         <ArticleCommentBox
           articleId={article.id}
           lastComment={article.lastComment}

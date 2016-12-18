@@ -1,4 +1,4 @@
-import {LOAD_COMMENT, SET_LAST_COMMENT, MODIFY_FOLD_COMMENT, WRITE_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../../actions/actionTypes';
+import {LOAD_COMMENTS, SET_LAST_COMMENT, MODIFY_FOLD_COMMENT, WRITE_COMMENT, EDIT_COMMENT, DELETE_COMMENT} from '../../actions/actionTypes';
 import {updateObject, updateItemInArray, createReducer} from '../common';
 
 const ARTICLE_COMMENT_INITIAL_STATE = {
@@ -31,7 +31,7 @@ function updateFold(state, articleId, newFold) {
   return updateObject(state.fold, {[articleId]: newFold});
 }
 
-function loadComment(state, action) {
+function loadComments(state, action) {
   const {articleId, comments} = action;
 
   let ret = updateObject(state, {
@@ -105,7 +105,7 @@ function deleteComment(state, action) {
 }
 
 export default createReducer(ARTICLE_COMMENT_INITIAL_STATE, {
-  [LOAD_COMMENT]: loadComment,
+  [LOAD_COMMENTS]: loadComments,
   [SET_LAST_COMMENT]: setLastComment,
   [MODIFY_FOLD_COMMENT]: modifyFoldComment,
   [WRITE_COMMENT]: writeComment,
