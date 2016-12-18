@@ -6,6 +6,7 @@ export function recommendArticle(dispatch, id) {
   DataCon.postDataToServer(Url.getUrl(`/articles/${id}/recommend`), 'POST').then(article => {
     updateSingleFeed(dispatch, {...article, type: 'article'});
   }).catch(console.error);
+  // todo handle multiple recommendation
 }
 
 export function recommendComment(dispatch, id) {
@@ -16,6 +17,7 @@ export function recommendComment(dispatch, id) {
       comment
     });
   }).catch(console.error);
+  // todo handle multiple recommendation
 }
 
 export function recommendProfileComment(dispatch, id) {
