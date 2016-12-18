@@ -5,13 +5,22 @@ import {DataCon, Url, genRefCallback, connectModals} from '../utils';
 import Modal from './Modal';
 import '../stylesheets/modalbox.styl';
 
+import '../stylesheets/login.styl';
+
 const Login = React.createClass({
   render() {
     return (
-      <div>
-        <Link to="/">메인으로</Link><br/>
-        <LoginForm/>
-        <Link to="/sign-up">가입하기</Link>
+      <div id="login-background">
+        <div id="login-box-container">
+          <h2 id="login-box-title">SNUCSE Login</h2>
+          <div id="login-box">
+            <h3 id="login-box-header">Welcome! :D</h3>
+            <LoginForm/>
+            <section id="login-box-footer">
+              <Link className="login-box-footer-link" to="/sign-up">가입 신청하기</Link>
+            </section>
+          </div>
+        </div>
         <Modal/>
       </div>
     );
@@ -39,11 +48,20 @@ const LoginForm = connectModals(React.createClass({
   },
   render() {
     return (
-      <form id="login" onSubmit={this.handleLogin}>
-        로그인<br/>
-        아이디: <input type="text" autoFocus ref={genRefCallback(this, 'id')}/><br/>
-        비밀번호: <input type="password" ref={genRefCallback(this, 'password')}/><br/>
-        <button>로그인</button>
+      <form id="login-form" onSubmit={this.handleLogin}>
+        <div id="login-input-container">
+          <div className="login-form-group">
+            <label className="login-form-label" htmlFor="login-username-input">아이디</label>
+            <input id="login-username-input" className="login-form-input" type="text" autoFocus ref={genRefCallback(this, 'id')}/>
+          </div>
+          <div className="login-form-group">
+            <label className="login-form-label" htmlFor="login-password-input">비밀번호</label>
+            <input id="login-password-input" className="login-form-input" type="password" ref={genRefCallback(this, 'password')}/>
+          </div>
+        </div>
+        <div id="login-button-container">
+          <button id="login-button">로그인</button>
+        </div>
       </form>
     );
   }
