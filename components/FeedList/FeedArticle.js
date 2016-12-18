@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
+import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const FeedArticle = React.createClass({
   render() {
@@ -30,6 +30,7 @@ const FeedArticle = React.createClass({
         <h3 className="article-title">Title: {article.title} Profile: {article.profiles[0].name}</h3>
         <h4 className="article-author">writer: {article.writer.username}</h4>
         <h4 className="article-date"> date: {date}</h4>
+        <FileBox files={article.files}/>
         <div className="article-content">
           {result}
         </div>
