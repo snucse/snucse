@@ -8,6 +8,7 @@ import React from 'react';
 
   - onDelete
   - onEdit
+  - recommendBox
 
   state
   - newContent
@@ -65,9 +66,12 @@ const CommentItem = React.createClass({
   },
 
   render() {
+    const edited = null;
+    /*
     const edited = this.props.comment.createdAt.updated ?
       <span className="comment-edited">수정됨</span> :
       null;
+    */
     const editBox = this.props.isEditable && this.state.isEditMode ?
       <div className="comment-editbox">
         <input onChange={this.handleEdit} defaultValue={this.state.newContent}/>
@@ -87,7 +91,12 @@ const CommentItem = React.createClass({
       if (this.props.isEditable) {
         buttons.push(<button onClick={this.handleEditEnable} key={`edit-button-${id}`}>수정</button>);
       }
-      controller = <div className="comment-controller">{buttons}</div>;
+      controller = (
+        <div className="comment-controller">
+          {buttons}
+          {this.props.recommendBox}
+        </div>
+      );
     }
     // todo link to user profile?
     const {writer, createdAt} = this.props.comment;

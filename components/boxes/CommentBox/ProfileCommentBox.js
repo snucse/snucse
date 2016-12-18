@@ -2,9 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {loadProfileComments, setLastProfileComment, writeProfileComment, modifyFoldProfileComments, editProfileComment, deleteProfileComment} from '../../../actions/dispatchers';
+import {ProfileCommentRecommendBox} from '../';
 import CommentBox from './CommentBox';
 
 const ProfileCommentBox = React.createClass({
+  renderRecommendBox(comment) {
+    return <ProfileCommentRecommendBox commentId={comment.id} count={comment.recommendationCount}/>;
+  },
+
   render() {
     return (
       <CommentBox
@@ -19,6 +24,7 @@ const ProfileCommentBox = React.createClass({
         commentsInfo={this.props.commentsInfo}
         editComment={this.props.editComment}
         deleteComment={this.props.deleteComment}
+        renderRecommendBox={this.renderRecommendBox}
         />
     );
   }
