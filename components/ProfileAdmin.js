@@ -22,7 +22,7 @@ const ProfileAdmin = React.createClass({
     return (
       <div className="profile-admin">
         <ProfileAdminTransferContainer id={id} admin={admin} mine={mine}/>
-        <ProfileEditBoxContainer id={id} name={name} desc={description} mine={mine}/>
+        <ProfileEditBoxContainer id={id} name={name} description={description} mine={mine}/>
       </div>
     );
   }
