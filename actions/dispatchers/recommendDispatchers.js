@@ -26,6 +26,7 @@ export function recommendComment(dispatch, id) {
       articleId: comment.articleId,
       comment
     });
+    // todo reply
   }).catch(err => {
     if (err.status === 400) {
       alertModal(dispatch, '알림', '이미 추천하셨습니다. 추천은 하루에 한번만 가능합니다.');
@@ -42,6 +43,7 @@ export function recommendProfileComment(dispatch, id) {
       profileId: comment.profileId,
       comment
     });
+    // todo reply
   }).catch(err => {
     if (err.status === 400) {
       alertModal(dispatch, '알림', '이미 추천하셨습니다. 추천은 하루에 한번만 가능합니다.');
