@@ -8,9 +8,9 @@ import React from 'react';
  * - onEdit
  */
 
-const ProfileBox = React.createClass({
+const ProfileEditBox = React.createClass({
   getInitialState() {
-    return {name: '', desc: ''};
+    return {};
   },
 
   handleNameChange(e) {
@@ -36,4 +36,4 @@ const ProfileBox = React.createClass({
   }
 });
 
-export default ProfileBox;
+export default ProfileEditBox;

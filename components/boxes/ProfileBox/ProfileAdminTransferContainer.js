@@ -1,7 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-const ProfileAdminContainer = React.createClass({
+/*
+ * props
+ * - id
+ * - admin
+ * - mine
+ */
+
+const ProfileAdminTransferContainer = React.createClass({
   render() {
     const {id, admin, mine} = this.props;
     if (!admin) {
@@ -9,7 +16,7 @@ const ProfileAdminContainer = React.createClass({
     }
 
     const adminLink = (mine === true) ? (
-      <Link to={`/profiles/${id}/admin`}>관리자 변경</Link>
+      <Link to={`/profiles/${id}/transfer_admin`}>관리자 변경</Link>
     ) : (
       null
     );
@@ -23,4 +30,4 @@ const ProfileAdminContainer = React.createClass({
   }
 });
 
-export default ProfileAdminContainer;
+export default ProfileAdminTransferContainer;

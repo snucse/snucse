@@ -15,6 +15,7 @@ import {
   Message,
   ProfileList,
   ProfileAdmin,
+  ProfileAdminTransfer,
   Main,
   TagInfo,
   ArticleWrite,
@@ -43,6 +44,7 @@ ReactDOM.render(
         <Route path="profiles" component={ProfileList}/>
         <Route path="profiles/:id/write" component={ArticleWrite}/>
         <Route path="profiles/:id/admin" component={ProfileAdmin}/>
+        <Route path="profiles/:id/transfer_admin" component={ProfileAdminTransfer}/>
         <Route path=":id" component={ClassManager}/>
         <Route path=":articleId/edit" component={ArticleEdit}/>
       </Route>

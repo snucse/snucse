@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfileAdminForm = React.createClass({
+const ProfileAdminTransferForm = React.createClass({
   getInitialState() {
     return {
       newId: ''
@@ -19,7 +19,7 @@ const ProfileAdminForm = React.createClass({
 
   render() {
     return (
-      <div className="profile-admin-form">
+      <div className="profile-admin-transfer-form">
         새로운 관리자 ID: <input onChange={this.handleChange}/>
         <button onClick={this.handleClickSubmit}>변경</button>
       </div>
@@ -27,4 +27,4 @@ const ProfileAdminForm = React.createClass({
   }
 });
 
-export default ProfileAdminForm;
+export default ProfileAdminTransferForm;
