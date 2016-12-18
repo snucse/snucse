@@ -12,6 +12,10 @@ const SideMenu = React.createClass({
       case UserLevel.REGULAR:
         return (
           <aside id="sidemenu-container">
+            <section id="user-box">
+              <img id="user-image" src={this.props.profileImage}/>
+              <h5 id="user-name">{this.props.name} ({this.props.username})</h5>
+            </section>
             <section id="following-profiles-box">
               <h5 id="following-profiles-title">팔로우 중인 프로필<Link id="all-profiles-link" to="/profiles">전체 프로필 보기</Link></h5>
               <FollowingProfileList/>
@@ -23,6 +27,10 @@ const SideMenu = React.createClass({
       default:
         return (
           <aside id="sidemenu-container">
+            <section id="user-box">
+              <img id="user-image" src={this.props.profileImage}/>
+              <h5 id="user-name">{this.props.name} ({this.props.username})</h5>
+            </section>
             <section id="following-profiles-box">
               <h5 id="following-profiles-title">팔로우 중인 프로필</h5>
               <FollowingProfileList/>
@@ -36,7 +44,10 @@ const SideMenu = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    userLevel: state.userInfo.userLevel
+    userLevel: state.userInfo.userLevel,
+    name: state.userInfo.name,
+    username: state.userInfo.username,
+    profileImage: state.userInfo.profileImageUri
   };
 }
 

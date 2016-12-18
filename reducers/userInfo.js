@@ -7,10 +7,13 @@ const USER_INFO_INITIAL_STATE = {
 };
 
 function loadUserInfo(state, action) {
-  const {userId, userLevel} = action;
+  const {userId, userLevel, name, username, profileImageUri} = action;
   return updateObject(state, {
     userId,
-    userLevel
+    userLevel,
+    name,
+    username,
+    profileImageUri
   });
 }
 

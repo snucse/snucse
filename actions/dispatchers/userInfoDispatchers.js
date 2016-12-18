@@ -7,7 +7,10 @@ export function loadUserInfo(dispatch) {
     dispatch({
       type: types.LOAD_USER_INFO,
       userId: data.id,
-      userLevel: data.level
+      userLevel: data.level,
+      name: data.name,
+      username: data.username,
+      profileImageUri: data.profileImageUri
     });
     return data.level;
   }).then(() => {
