@@ -5,11 +5,12 @@ import CommentForm from './CommentForm';
 /*
   props
   - id
+  - parentCommentId
   - writeComment
 */
 const CommentFormContainer = React.createClass({
   handleWrite(content) {
-    this.props.writeComment(this.props.id, content);
+    this.props.writeComment(this.props.id, content, this.props.parentCommentId);
   },
 
   render() {

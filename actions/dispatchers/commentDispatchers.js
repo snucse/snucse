@@ -29,10 +29,11 @@ export function modifyFoldComments(dispatch, id, fold) {
   });
 }
 
-export function writeComment(dispatch, articleId, content) {
+export function writeComment(dispatch, articleId, content, parentCommentId) {
   const data = {
     articleId,
-    content
+    content,
+    parentCommentId
   };
   DataCon.postDataToServer(Url.getUrl('/comments'), 'POST', data).then(res => {
     dispatch({

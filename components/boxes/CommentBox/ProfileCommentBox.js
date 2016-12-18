@@ -40,7 +40,7 @@ const mapDispatcherToProps = function (dispatch) {
   return {
     loadComments: id => loadProfileComments(dispatch, id),
     setLastComment: (...args) => setLastProfileComment(dispatch, ...args),
-    writeComment: (targetId, content) => writeProfileComment(dispatch, targetId, content),
+    writeComment: (targetId, content, parentCommentId) => writeProfileComment(dispatch, targetId, content, parentCommentId),
     modifyFoldComments: (id, fold) => modifyFoldProfileComments(dispatch, id, fold),
     deleteComment: (commentId, targetId) => deleteProfileComment(dispatch, commentId, targetId),
     editComment: (commentId, targetId, newContent) => editProfileComment(dispatch, commentId, targetId, newContent)
