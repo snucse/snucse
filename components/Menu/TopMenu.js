@@ -30,6 +30,9 @@ const TopMenu = React.createClass({
                 <Link to="/others"><span className="menulink">기타</span></Link>
               </li>
               <li>
+                <Link to="/settings"><span className="menulink">설정</span></Link>
+              </li>
+              <li>
                 <a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a>
               </li>
             </ul>
@@ -48,6 +51,9 @@ const TopMenu = React.createClass({
               </li>
               <li>
                 <Link to="/others"><span className="menulink">기타</span></Link>
+              </li>
+              <li>
+                <Link to="/settings"><span className="menulink">설정</span></Link>
               </li>
               <li>
                 <a className="menulink" href="#" onClick={this.handleLogout}>로그아웃</a>

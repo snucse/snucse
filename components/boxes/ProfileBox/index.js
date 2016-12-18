@@ -1,7 +1,9 @@
-import ProfileBox from './ProfileBox';
-import ProfileAdminBox from './ProfileAdminBox';
+import ProfileEditBoxContainer from './ProfileEditBoxContainer';
+import ProfileAdminTransferContainer from './ProfileAdminTransferContainer';
+import ProfileAdminTransferBox from './ProfileAdminTransferBox';
 
 export {
-  ProfileBox,
-  ProfileAdminBox
+  ProfileEditBoxContainer,
+  ProfileAdminTransferContainer,
+  ProfileAdminTransferBox
 };
