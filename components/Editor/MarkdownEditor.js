@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleMDE from 'simplemde';
 
 import 'simplemde/dist/simplemde.min.css';
-import '../stylesheets/markdown-editor.styl';
+import '../../stylesheets/markdown-editor.styl';
 
 const MarkdownEditor = React.createClass({
   getInitialState() {
@@ -20,9 +20,18 @@ const MarkdownEditor = React.createClass({
       this.simplemde.value(props.value);
     }
   },
-  attachSimpleMde(ref) {
-    if (ref == null && this.simplemde != null) {
+  componentWillUnmount() {
+    if (this.simplemde != null) {
+      this.simplemde.toTextArea();
       this.simplemde = null;
+    }
+  },
+  attachSimpleMde(ref) {
+    if (ref == null) {
+      if (this.simplemde != null) {
+        this.simplemde.toTextArea();
+        this.simplemde = null;
+      }
       return;
     }
     const simplemde = this.simplemde = new SimpleMDE({

@@ -1,7 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
-import MarkdownEditor from './MarkdownEditor';
+import Editor from './Editor';
 
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
@@ -22,10 +22,13 @@ const ArticleWrite = React.createClass({
 
 const ArticleForm = React.createClass({
   getInitialState() {
-    return {title: '', content: ''};
+    return {title: '', content: '', renderingMode: 'text'};
   },
   handleContentChange(value) {
     this.setState({content: value});
+  },
+  handleModeChange(renderingMode) {
+    this.setState({renderingMode});
   },
   handleTitleChange(e) {
     this.setState({title: e.target.value});
@@ -33,17 +36,17 @@ const ArticleForm = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    if (!confirm('전송하시겠습니까?')) {
-      return;
-    }
-    // const currentUserId = 1;
     const profileId = this.props.id;
     const content = this.state.content.trim();
     const title = this.state.title.trim();
+    const renderingMode = this.state.renderingMode;
     if (!content || !title) {
       return;
     }
-    this.props.onArticleSubmit({title, content, profileIds: profileId});
+    if (!confirm('전송하시겠습니까?')) {
+      return;
+    }
+    this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId});
     browserHistory.push(`/${profileId}`);
   },
 
@@ -52,7 +55,7 @@ const ArticleForm = React.createClass({
       <div className="comment-form">
         <form name="article" onSubmit={this.handleSubmit}>
           Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
-          <MarkdownEditor onChange={this.handleContentChange}/><br/>
+          <Editor onChange={this.handleContentChange} onModeChange={this.handleModeChange}/><br/>
           <button type="submit">글쓰기</button>
         </form>
       </div>

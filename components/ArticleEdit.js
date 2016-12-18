@@ -1,20 +1,20 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
-import MarkdownEditor from './MarkdownEditor';
+import Editor from './Editor';
 
 const ArticleEdit = React.createClass({
   loadArticleFromServer() {
     const {articleId} = this.props.params;
     const url = Url.getUrl(`/articles/${articleId}`);
     DataCon.loadDataFromServer(url).then(data => {
-      const {title, content} = data;
-      this.setState({title, content});
+      const {title, content, renderingMode} = data;
+      this.setState({title, content, renderingMode});
     }).catch(console.error);
   },
 
   getInitialState() {
-    return {title: '', content: ''};
+    return {title: '', content: '', renderingMode: 'text'};
   },
 
   componentDidMount() {
@@ -35,14 +35,19 @@ const ArticleEdit = React.createClass({
     this.setState({content: value});
   },
 
+  handleModeChange(renderingMode) {
+    this.setState({renderingMode});
+  },
+
   handleEdit(e) {
     e.preventDefault();
     const title = this.state.title.trim();
     const content = this.state.content.trim();
+    const renderingMode = this.state.renderingMode;
     // TODO
     const userId = 1;
-    this.submitEdit({title, content, currentUserId: userId});
-    this.setState({title: '', content: ''});
+    this.submitEdit({title, content, renderingMode, currentUserId: userId});
+    this.setState({title: '', content: '', renderingMode: 'text'});
     browserHistory.push('/');
   },
 
@@ -51,7 +56,7 @@ const ArticleEdit = React.createClass({
       <div>
         <form onSubmit={this.handleEdit}>
           <input type="text" id="title" name="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
-          <MarkdownEditor value={this.state.content} onChange={this.handleContentChange}/><br/>
+          <Editor mode={this.state.renderingMode} value={this.state.content} onChange={this.handleContentChange} onModeChange={this.handleModeChange}/><br/>
           <input type="submit" value="수정"/>
         </form>
       </div>
