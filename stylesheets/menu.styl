@@ -1,7 +1,7 @@
 @import "mixin.styl"
 @import "variable.styl"
 #header
-  background-color header-color
+  background header-color
 #header-container
   width 1230px
   margin auto
@@ -35,21 +35,26 @@
   clearfix()
 #main-container
   padding-top 30px
-  width 1230px
+  width 1260px
   margin auto
 #sidemenu-container
   float left
-  width 25%
+  width 280px
   padding 0 15px
 #following-profiles-box
   box()
 #following-profiles-title
   box-title()
+  margin-top 5px
+  padding-bottom 10px
+  border-bottom 1px solid box-border-color
 #all-profiles-link
   margin-left 5px
   font-size 10px
   font-weight normal
   line-height 1
+#following-profiles-list
+  margin-left 5px
 #tag-cloud-box
   box()
 #tag-cloud-title
@@ -59,7 +64,7 @@
   margin 0 5px
 #main
   float left
-  width 75%
-  padding 0 15px
+  width 980px
+  padding 0 15px 0 30px
 #main-container:after
   clearfix()

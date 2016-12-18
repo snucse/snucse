@@ -1,44 +1,48 @@
 @import "mixin.styl"
 @import "variable.styl"
 .feed-article
-  padding 20px
+  padding 15px 20px
   margin-bottom -1px
   background-color box-background-color
   border 1px solid box-border-color
-.article-writer-container
-  display table-cell
-  vertical-align top
-  padding-right 10px
-.article-writer-image
-  display block
-  width 60px
-  height 60px
-  border-radius 100%
-  margin-right 5px
-.article-writer-name
-  font-size 14px
-  font-weight 600
-  text-align center
-.article-main
-  display table-cell
-  vertical-align top
-  width 10000px
 .article-date
   float right
   color article-date-color
   font-size 12px
 .article-title
-  font-size 14px
+  font-size 16px
   font-weight 600
-  margin-bottom 5px
+  margin-bottom 15px
 .article-profiles
   margin-left 5px
+  font-size 12px
   font-weight normal
   color article-profiles-color
+.article-writer-container
+  float left
+  width 60px
+.article-writer-image
+  display block
+  width 60px
+  height 60px
+  border-radius 100%
+.article-writer-name
+  font-size 14px
+  font-weight 600
+  text-align center
+.article-divider
+  float left
+  width 1px
+  height 60px
+  margin 10px 20px 10px 15px
+  background-color box-border-color
+.article-controller
+  float right
+.article-main
+  float left
+  width 795px
 .article-content
   word-break break-all
-.article-controller
-  text-align right
 .article-delete-button
   button()
 .article-delete-button:hover
@@ -48,4 +52,4 @@
 .article-edit-button:hover
   button-hover()
 .feed-load-more
-  padding 5px
+  padding 10px 0

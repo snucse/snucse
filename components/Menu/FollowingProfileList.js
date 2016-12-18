@@ -11,7 +11,7 @@ const FollowingProfileList = React.createClass({
     });
 
     return (
-      <ul>
+      <ul id="following-profiles-list">
         {profiles}
       </ul>
     );
