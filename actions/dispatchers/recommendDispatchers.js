@@ -5,6 +5,11 @@ import {updateSingleFeed} from '.';
 export function recommendArticle(dispatch, id) {
   DataCon.postDataToServer(Url.getUrl(`/articles/${id}/recommend`), 'POST').then(article => {
     updateSingleFeed(dispatch, {...article, type: 'article'});
+    dispatch({
+      type: types.LOAD_ARTICLE,
+      article,
+      isError: false
+    });
   }).catch(console.error);
   // todo handle multiple recommendation
 }
