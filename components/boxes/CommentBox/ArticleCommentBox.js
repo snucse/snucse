@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadComments, setLastComment, writeComment, modifyFoldComments, editComment, deleteComment} from '../../../actions/dispatchers';
+import {loadComments, loadCommentReplies, setLastComment, writeComment, modifyFoldComments, editComment, deleteComment} from '../../../actions/dispatchers';
 import {CommentRecommendBox} from '../';
 import CommentBox from './CommentBox';
 
@@ -17,13 +17,18 @@ const ArticleCommentBox = React.createClass({
         lastComment={this.props.lastComment}
         commentCount={this.props.commentCount}
         isAddable={this.props.isAddable}
+
         loadComments={this.props.loadComments}
+        loadReplies={this.props.loadReplies}
         setLastComment={this.props.setLastComment}
         writeComment={this.props.writeComment}
         modifyFoldComments={this.props.modifyFoldComments}
-        commentsInfo={this.props.commentsInfo}
         editComment={this.props.editComment}
         deleteComment={this.props.deleteComment}
+
+        commentsInfo={this.props.commentsInfo}
+        repliesInfo={this.props.repliesInfo}
+
         renderRecommendBox={this.renderRecommendBox}
         />
     );
@@ -32,18 +37,20 @@ const ArticleCommentBox = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    commentsInfo: state.comment.article
+    commentsInfo: state.comment.article,
+    repliesInfo: state.comment.articleReply
   };
 };
 
 const mapDispatcherToProps = function (dispatch) {
   return {
     loadComments: id => loadComments(dispatch, id),
+    loadReplies: id => loadCommentReplies(dispatch, id),
     setLastComment: (...args) => setLastComment(dispatch, ...args),
     writeComment: (targetId, content, parentCommentId) => writeComment(dispatch, targetId, content, parentCommentId),
-    modifyFoldComments: (id, fold) => modifyFoldComments(dispatch, id, fold),
-    deleteComment: (commentId, targetId) => deleteComment(dispatch, commentId, targetId),
-    editComment: (commentId, targetId, newContent) => editComment(dispatch, commentId, targetId, newContent)
+    modifyFoldComments: (id, fold, isChild) => modifyFoldComments(dispatch, id, fold, isChild),
+    editComment: (commentId, targetId, newContent, isChild) => editComment(dispatch, commentId, targetId, newContent, isChild),
+    deleteComment: (commentId, targetId, isChild) => deleteComment(dispatch, commentId, targetId, isChild)
   };
 };
 
