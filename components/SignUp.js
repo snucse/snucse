@@ -93,7 +93,7 @@ const SignUpForm = React.createClass({
         이름: {this.renderInput('name', '홍길동')}<br/>
         생년월일: {this.renderInput('birthday', '1900-01-01', 'date')}<br/>
         학번: {this.renderInput('bsNumber', '2017-10000')}<br/>
-        휴대전화: {this.renderInput('phoneNumber', '010-1234-5678')}<br/>
+        휴대전화/연락처: {this.renderInput('phoneNumber', '010-1234-5678')}<br/>
         <button onClick={this.handleSignUp}>가입</button>
       </form>
     );
