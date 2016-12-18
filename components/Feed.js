@@ -26,7 +26,12 @@ const Feed = React.createClass({
   handleArticleSubmit(data) {
     const url = Url.getUrl('/articles');
     DataCon.postFormDataToServer(url, 'POST', data)
-      .catch(console.error);
+      .then(article => {
+        this.props.loadFeed({
+          sinceId: article.id - 1,
+          limit: 1
+        });
+      }).catch(console.error);
   },
 
   render() {
