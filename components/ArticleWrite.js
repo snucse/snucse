@@ -9,8 +9,13 @@ import {FileUploadBox} from './boxes';
  * - id
  */
 const ArticleWrite = React.createClass({
+  getInitialState() {
+    return {index: 0};
+  },
+
   handleArticleSubmit(data) {
     this.props.onArticleSubmit(data);
+    this.setState({index: this.state.index + 1});
   },
 
   render() {
@@ -18,7 +23,7 @@ const ArticleWrite = React.createClass({
     return (
       <div className="article-box">
         <h3>글쓰기</h3>
-        <ArticleForm onArticleSubmit={this.handleArticleSubmit} id={id}/>
+        <ArticleForm onArticleSubmit={this.handleArticleSubmit} id={id} key={this.state.index}/>
       </div>
     );
   }
