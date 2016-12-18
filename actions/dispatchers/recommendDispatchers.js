@@ -33,4 +33,5 @@ export function recommendProfileComment(dispatch, id) {
       comment
     });
   }).catch(console.error);
+  // todo handle multiple recommendation
 }
