@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import moment from 'moment';
 
 import '../../stylesheets/taginfo.styl';
 import {RelatedTagBox} from '../boxes';
@@ -20,10 +21,12 @@ const TagView = React.createClass({
     const articlesView = articles.length === 0 ?
       <li id="tag-info-article-empty">관련 글이 없습니다.</li> :
       articles.map(article => {
+        moment.locale('ko');
+        const date = moment(article.createdAt);
         return (
           <li key={article.id} className="tag-info-article-container">
             <div className="tag-info-article">
-              <small className="tag-info-article-date">{article.createdAt.date} {article.createdAt.time}</small>
+              <small className="tag-info-article-date" title={date.format('LLL')}>{date.fromNow()}</small>
               <h5 className="tag-info-article-header"><Link className="tag-info-article-title" to={`/${article.id}`}>{article.title}</Link><span className="tag-info-article-profiles">{article.profiles[0].name}</span></h5>
               <div className="tag-info-article-writer-container">
                 <img className="tag-info-article-writer-image" src={article.writer.profileImageUri}/>

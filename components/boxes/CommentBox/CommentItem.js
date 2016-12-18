@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import {connectModals} from '../../../utils';
 
@@ -68,12 +69,6 @@ const CommentItem = React.createClass({
   },
 
   render() {
-    const edited = null;
-    /*
-    const edited = this.props.comment.createdAt.updated ?
-      <span className="comment-edited">수정됨</span> :
-      null;
-    */
     const editBox = this.props.isEditable && this.state.isEditMode ?
       <div className="comment-editbox">
         <input onChange={this.handleEdit} defaultValue={this.state.newContent}/>
@@ -102,13 +97,15 @@ const CommentItem = React.createClass({
     }
     // todo link to user profile?
     const {writer, createdAt} = this.props.comment;
+    moment.locale('ko');
+    const date = moment(createdAt);
     return (
       <li className="comment-item">
         <div className="comment-writer-container">
           <img className="comment-writer-image" src={writer.profileImageUri}/>
         </div>
         <div className="comment-main">
-          <small className="comment-date">{createdAt.date} {createdAt.time} {edited}</small>
+          <small className="comment-date" title={date.format('LLL')}>{date.fromNow()}</small>
           <h5 className="comment-writer-name">{writer.name}</h5>
           {contentWrapper}
           {editBox}

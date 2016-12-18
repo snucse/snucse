@@ -21,18 +21,12 @@ const FeedArticle = React.createClass({
       result.push(temp[i]);
       result.push(<br key={brId}/>);
     }
-    moment.locale('kr');
-    // const timeAndDate = `${article.createdAt.date}T${article.createdAt.time}`;
-    const date = `${moment(article.createdAt.date, 'YYYYMMDD').format('MMM Do YYYY')}, ${moment(article.createdAt.time, 'HH:mm:ss').format('a hh:mm')}`;
-    /*
-    if (article.createdAt.updated === true) {
-      date += `(수정됨)${moment(timeAndDate).fromNow()}`;
-    }
-    */
+    moment.locale('ko');
+    const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
     return (
       <li className="feed-article">
-        <small className="article-date">{date}</small>
+        <small className="article-date" title={date.format('LLL')}>{date.fromNow()}</small>
         <h5 className="article-title"><Link to={`/${article.id}`}>{article.title}</Link><small className="article-profiles">{article.profiles[0].name}</small></h5>
         <div className="article-writer-container">
           <img className="article-writer-image" src={article.writer.profileImageUri}/>
