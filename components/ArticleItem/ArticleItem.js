@@ -6,6 +6,8 @@ import moment from 'moment';
 import {Url, DataCon} from '../../utils';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
+import '../../stylesheets/article.styl';
+
 const ArticleItem = React.createClass({
   handleArticleDelete(articleId) {
     const url = Url.getUrl(`/articles/${articleId}`);
@@ -36,15 +38,21 @@ const ArticleItem = React.createClass({
     */
     const mine = (this.props.userId === article.writer.id);
     return (
-      <div className="article-wrap">
-        <h3 className="article-title">Title: {article.title} Profile: {article.profiles[0].name}</h3>
-        <h4 className="article-author">writer: {article.writer.username}</h4>
-        <h4 className="article-date"> date: {date}</h4>
-        <FileBox files={article.files}/>
-        <div className="article-content">
-          {result}
+      <div className="feed-article">
+        <small className="article-date">{date}</small>
+        <h5 className="article-title">{article.title}<small className="article-profiles">{article.profiles[0].name}</small></h5>
+        <div className="article-writer-container">
+          <img className="article-writer-image" src={article.writer.profileImageUri}/>
+          <h5 className="article-writer-name">{article.writer.name}</h5>
         </div>
-        <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
+        <div className="article-divider"/>
+        <div className="article-main">
+          <FileBox files={article.files}/>
+          <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
+          <div className="article-content">
+            {result}
+          </div>
+        </div>
         <ArticleTagBox articleId={article.id}/>
         <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
         <ArticleCommentBox
