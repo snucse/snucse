@@ -4,6 +4,17 @@ import {browserHistory} from 'react-router';
 import {genRefCallback} from '../../../utils';
 
 export default React.createClass({
+  handleKeyDown(event) {
+    if (event.keyCode == 13) {
+      this.handleSearch();
+      event.preventDefault();
+    }
+  },
+
+  handleClickSearchButton() {
+    this.handleSearch();
+  },
+
   handleSearch() {
     // this.props.onSearch(this._content.value);
     /*
@@ -26,8 +37,8 @@ export default React.createClass({
     // condition boxes will be enabled by its props
     return (
       <form>
-        <input ref={genRefCallback(this, '_content')} name="query"/>
-        <input onClick={this.handleSearch} type="button" value="검색"/>
+        <input onKeyDown={this.handleKeyDown} ref={genRefCallback(this, '_content')} name="query"/>
+        <input onClick={this.handleClickSearchButton} type="button" value="검색"/>
       </form>
     );
   }
