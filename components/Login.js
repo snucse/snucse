@@ -26,8 +26,7 @@ const LoginForm = React.createClass({
     }).catch(err => {
       if (err.statusCode === 403) {
         alert('아이디 혹은 비밀번호를 확인해 주세요.');
-      }
-      else if (err.statusCode === 419) {
+      } else if (err.statusCode === 419) {
         alert('회원가입 대기중입니다.');
       }
     });
