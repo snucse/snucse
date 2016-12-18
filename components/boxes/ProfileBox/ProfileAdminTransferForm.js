@@ -19,9 +19,12 @@ const ProfileAdminTransferForm = React.createClass({
 
   render() {
     return (
-      <div className="profile-admin-transfer-form">
-        새로운 관리자 ID: <input onChange={this.handleChange}/>
-        <button onClick={this.handleClickSubmit}>변경</button>
+      <div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="update-profile-form-admin-input">새로운 관리자 ID</label>
+          <input id="update-profile-form-admin-input" className="form-input" onChange={this.handleChange}/>
+        </div>
+        <button id="update-profile-button" onClick={this.handleClickSubmit}>변경</button>
       </div>
     );
   }

@@ -1,13 +1,49 @@
 @import "mixin.styl"
 #profile-information
   padding 20px
-  margin-bottom -1px
   background-color box-background-color
   border 1px solid box-border-color
-#profile-name
-  font-size 16px
-  font-weight 600
-  margin-bottom 10px
+#profile-admin-button
+  button()
+  float right
+#profile-admin-button:hover
+  text-decoration none
 #follow-button
   button()
   float right
+#profile-name
+  font-size 16px
+  font-weight 600
+  padding-bottom 10px
+  border-bottom 1px solid box-border-color
+  margin-bottom 14px
+#profile-admin
+  box()
+  padding 20px
+#profile-admin-title
+  font-size 16px
+  font-weight 600
+  padding-bottom 10px
+  border-bottom 1px solid box-border-color
+  margin-bottom 14px
+#profile-admin-transfer-label
+  width 16.666667%
+  padding 0 15px
+  text-align right
+  display inline-block
+  font-weight 700
+  vertical-align top
+#profile-admin-transfer-button
+  button()
+#profile-admin-transfer-button:hover
+  text-decoration none
+#update-profile-form-description-input
+  height auto
+#update-profile-button
+  button()
+  padding 3px 8px
+  height 36px
+  border-radius 4px
+  vertical-align middle
+#update-profile-button:hover
+  button-hover()

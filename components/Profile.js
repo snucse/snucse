@@ -28,24 +28,19 @@ const Profile = React.createClass({
   render() {
     const {id, userId, admin, name, description} = this.props;
     const mine = admin && userId === admin.id;
-    const adminLink = mine ? (
-      <Link to={`/profiles/${id}/admin`}>프로필 설정</Link>
+    const rightButton = mine ? (
+      <Link id="profile-admin-button" to={`/profiles/${id}/admin`}>프로필 설정</Link>
     ) : (
-      null
+      <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
     );
 
     return (
       <div>
-        <div className="profile-detail">
-          <div className="profile-name">{name}</div>
-          <div className="profile-desc">{description}</div>
-          {adminLink}
-        </div>
         <div id="profile-information">
-          <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
-          <h3 id="profile-name">{this.props.name}</h3>
+          {rightButton}
+          <h3 id="profile-name">{name}</h3>
           <div id="profile-description">
-            {this.props.description}
+            {description}
           </div>
           <ProfileTagBox profileId={id}/>
           <ProfileCommentBox profileId={id} isAddable/>
