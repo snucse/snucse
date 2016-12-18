@@ -1,19 +1,21 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
-import {DataCon, Url} from '../utils';
 import Editor from './Editor';
 
 import {FileUploadBox} from './boxes';
 
+/*
+ * props
+ * - onArticleSubmit
+ * - id
+ */
 const ArticleWrite = React.createClass({
   handleArticleSubmit(data) {
-    const url = Url.getUrl('/articles');
-    DataCon.postFormDataToServer(url, 'POST', data)
-      .catch(console.error);
+    this.props.onArticleSubmit(data);
   },
 
   render() {
-    const {id} = this.props.params;
+    const {id} = this.props;
     return (
       <div className="article-box">
         <h3>글쓰기</h3>
@@ -81,7 +83,6 @@ const ArticleForm = React.createClass({
       return;
     }
     this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
-    browserHistory.push(`/${profileId}`);
   },
 
   render() {

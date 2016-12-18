@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {DataCon, Url} from '../utils';
 import {loadFeed} from '../actions/dispatchers';
 import FeedList from './FeedList';
+import ArticleWrite from './ArticleWrite';
 
 const Feed = React.createClass({
   componentDidMount() {
@@ -19,6 +21,12 @@ const Feed = React.createClass({
 
   handleLoadMore(options) {
     this.props.loadFeed({...options, profileId: this.props.profileId});
+  },
+
+  handleArticleSubmit(data) {
+    const url = Url.getUrl('/articles');
+    DataCon.postFormDataToServer(url, 'POST', data)
+      .catch(console.error);
   },
 
   render() {
@@ -62,8 +70,14 @@ const Feed = React.createClass({
       }
     }
     // total O(n + m)
+
+    const articleWrite = this.props.profileId ? <ArticleWrite id={this.props.profileId} onArticleSubmit={this.handleArticleSubmit}/> : null;
+
     return (
-      <FeedList feeds={feeds} onLoadMore={this.handleLoadMore}/>
+      <div className="feed">
+        {articleWrite}
+        <FeedList feeds={feeds} onLoadMore={this.handleLoadMore}/>
+      </div>
     );
   }
 });
