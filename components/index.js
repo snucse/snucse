@@ -8,7 +8,7 @@ import Main from './Main';
 import TagInfo from './TagInfo';
 import ArticleWrite from './ArticleWrite';
 import ArticleEdit from './ArticleEdit';
-import SearchResult from './SearchResult';
+import SearchResult from './SearchResultContainer';
 import ClassManager from './ClassManager';
 import Login from './Login';
 import SignUp from './SignUp';

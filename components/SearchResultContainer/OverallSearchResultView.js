@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 
 import {ArticleSearchResult, CommentSearchResult, ProfileSearchResult, TagSearchResult} from './SearchResultItems';
 
-const SearchResultView = React.createClass({
+const OverallSearchResultView = React.createClass({
   render() {
     const {query, result} = this.props;
     const articleResults = result.articles.data.map(article => {
@@ -57,4 +57,4 @@ const SearchResultView = React.createClass({
   }
 });
 
-export default SearchResultView;
+export default OverallSearchResultView;
