@@ -1,6 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
+import Editor from './Editor';
 
 import {FileUploadBox} from './boxes';
 
@@ -27,12 +28,16 @@ const ArticleForm = React.createClass({
     return {
       title: '',
       content: '',
+      renderingMode: 'text',
       files: {} // pairs of (fileId, file obj)
     };
   },
 
-  handleContentChange(e) {
-    this.setState({content: e.target.value});
+  handleContentChange(value) {
+    this.setState({content: value});
+  },
+  handleModeChange(renderingMode) {
+    this.setState({renderingMode});
   },
   handleTitleChange(e) {
     this.setState({title: e.target.value});
@@ -59,13 +64,10 @@ const ArticleForm = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    if (!confirm('전송하시겠습니까?')) {
-      return;
-    }
-    // const currentUserId = 1;
     const profileId = this.props.id;
     const content = this.state.content.trim();
     const title = this.state.title.trim();
+    const renderingMode = this.state.renderingMode;
     const files = [];
     for (const fileId in this.state.files) {
       if (Object.hasOwnProperty.call(this.state.files, fileId)) {
@@ -75,7 +77,10 @@ const ArticleForm = React.createClass({
     if (!content || !title) {
       return;
     }
-    this.props.onArticleSubmit({title, content, profileIds: profileId, files});
+    if (!confirm('전송하시겠습니까?')) {
+      return;
+    }
+    this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
     browserHistory.push(`/${profileId}`);
   },
 
@@ -84,7 +89,7 @@ const ArticleForm = React.createClass({
       <div className="comment-form">
         <form name="article" onSubmit={this.handleSubmit}>
           Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
-          Content: <textarea rows="4" id="content" name="content" placeholder="Say something..." value={this.state.content} onChange={this.handleContentChange}/><br/>
+          <Editor onChange={this.handleContentChange} onModeChange={this.handleModeChange}/><br/>
           Files: <FileUploadBox id={this.props.id} onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/><br/>
           <button type="submit">글쓰기</button>
         </form>

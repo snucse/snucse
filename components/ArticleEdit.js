@@ -1,6 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../utils';
+import Editor from './Editor';
 
 import {FileBox, FileUploadBox} from './boxes';
 
@@ -9,18 +10,25 @@ const ArticleEdit = React.createClass({
     const {articleId} = this.props.params;
     const url = Url.getUrl(`/articles/${articleId}`);
     DataCon.loadDataFromServer(url).then(data => {
-      const {title, content, files} = data;
+      const {title, content, renderingMode, files} = data;
 
       const alives = {};
       for (let i = 0; i < files.length; i++) {
         alives[files[i].id] = true;
       }
-      this.setState({title, content, files, alives});
+      this.setState({title, content, renderingMode, files, alives});
     }).catch(console.error);
   },
 
   getInitialState() {
-    return {title: '', content: '', files: [], alives: {}, newFiles: {}};
+    return {
+      title: '',
+      content: '',
+      renderingMode: 'text',
+      files: [],
+      alives: {},
+      newFiles: {}
+    };
   },
 
   componentDidMount() {
@@ -38,8 +46,12 @@ const ArticleEdit = React.createClass({
     this.setState({title: e.target.value});
   },
 
-  handleContentChange(e) {
-    this.setState({content: e.target.value});
+  handleContentChange(value) {
+    this.setState({content: value});
+  },
+
+  handleModeChange(renderingMode) {
+    this.setState({renderingMode});
   },
 
   handleAliveChange(fileId) {
@@ -76,6 +88,7 @@ const ArticleEdit = React.createClass({
     e.preventDefault();
     const title = this.state.title.trim();
     const content = this.state.content.trim();
+    const renderingMode = this.state.renderingMode;
     const fileIds = this.state.files.map(file => file.id)
       .filter(id => this.state.alives[id]);
     const files = [];
@@ -88,10 +101,11 @@ const ArticleEdit = React.createClass({
     this.submitEdit({
       title,
       content,
+      renderingMode,
       fileIds,
       files
     });
-    this.setState({title: '', content: ''});
+    this.setState({title: '', content: '', renderingMode: 'text'});
     browserHistory.push('/');
   },
 
@@ -99,8 +113,8 @@ const ArticleEdit = React.createClass({
     return (
       <div>
         <form onSubmit={this.handleEdit}>
-          <input type="text" id="title" name="title" value={this.state.title} onChange={this.handleTitleChange}/>
-          <textarea rows="5" id="content" name="content" value={this.state.content} onChange={this.handleContentChange}/>
+          <input type="text" id="title" name="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
+          <Editor mode={this.state.renderingMode} value={this.state.content} onChange={this.handleContentChange} onModeChange={this.handleModeChange}/><br/>
           <FileBox files={this.state.files} alives={this.state.alives} editable onAliveChange={this.handleAliveChange}/>
           <FileUploadBox onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/>
           <input type="submit" value="수정"/>
