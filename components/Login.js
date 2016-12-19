@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
 import {DataCon, Url, genRefCallback} from '../utils';
+import Modal from './Modal';
 
 const Login = React.createClass({
   render() {
@@ -9,6 +10,7 @@ const Login = React.createClass({
         <Link to="/">메인으로</Link><br/>
         <LoginForm/>
         <Link to="/sign-up">가입하기</Link>
+        <Modal/>
       </div>
     );
   }
