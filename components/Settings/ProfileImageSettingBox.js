@@ -1,6 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import {DataCon, Url} from '../../utils';
+import {alertModal} from '../../actions/dispatchers';
 
 const ProfileImageSettingBox = React.createClass({
   getInitialState() {
@@ -17,14 +19,14 @@ const ProfileImageSettingBox = React.createClass({
     const {file} = this.state;
 
     if (!file) {
-      alert('파일을 선택해주세요.');
+      this.props.alertModal('알림', '파일을 선택해주세요.');
       return;
     }
 
     const url = Url.getUrl('/users/profile_image');
     DataCon.postFormDataToServer(url, 'POST', {image: file})
       .then(() => {
-        alert('변경되었습니다.');
+        this.props.alertModal('알림', '변경되었습니다.');
         // TODO: reload profile images
       });
   },
@@ -39,4 +41,10 @@ const ProfileImageSettingBox = React.createClass({
   }
 });
 
-export default ProfileImageSettingBox;
+const mapDispatchToProps = function (dispatch) {
+  return {
+    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ProfileImageSettingBox);
