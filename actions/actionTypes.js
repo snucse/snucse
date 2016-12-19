@@ -50,5 +50,11 @@ export const PROFILE_ERROR_INIT = 'PROFILE_ERROR_INIT';
 export const PROFILE_ERROR_NOT_ADMIN = 'PROFILE_ERROR_NOT_ADMIN';
 export const PROFILE_ERROR_INVALID_ID = 'PROFILE_ERROR_INVALID_ID';
 
+// action types related with modal
+export const INITIALIZE_MODAL = 'INITIALIZE_MODAL';
+export const DISABLE_MODAL = 'DISABLE_MODAL';
+export const ENABLE_MODAL = 'ENABLE_MODAL';
+export const SET_MODAL = 'SET_MODAL';
+
 // action types related with article view
 export const LOAD_ARTICLE = 'LOAD_ARTICLE';

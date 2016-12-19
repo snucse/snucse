@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {DataCon, Url} from '../../utils';
+import {DataCon, Url, connectModals} from '../../utils';
 
 const ProfileImageSettingBox = React.createClass({
   getInitialState() {
@@ -17,14 +17,14 @@ const ProfileImageSettingBox = React.createClass({
     const {file} = this.state;
 
     if (!file) {
-      alert('파일을 선택해주세요.');
+      this.props.alertModal('알림', '파일을 선택해주세요.');
       return;
     }
 
     const url = Url.getUrl('/users/profile_image');
     DataCon.postFormDataToServer(url, 'POST', {image: file})
       .then(() => {
-        alert('변경되었습니다.');
+        this.props.alertModal('알림', '변경되었습니다.');
         // TODO: reload profile images
       });
   },
@@ -39,4 +39,4 @@ const ProfileImageSettingBox = React.createClass({
   }
 });
 
-export default ProfileImageSettingBox;
+export default connectModals(ProfileImageSettingBox);

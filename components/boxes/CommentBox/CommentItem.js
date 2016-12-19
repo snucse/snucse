@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {connectModals} from '../../../utils';
+
 /*
   props
   - isEditable
@@ -16,9 +18,9 @@ import React from 'react';
 */
 const CommentItem = React.createClass({
   handleClickDelete() {
-    if (confirm('정말로 삭제하시겠습니까?')) {
+    this.props.confirmModal('알림', '정말로 삭제하시겠습니까?', () => {
       this.props.onDelete();
-    }
+    });
   },
 
   handleClickEdit() {
@@ -27,9 +29,9 @@ const CommentItem = React.createClass({
   },
 
   handleClickCancel() {
-    if (confirm('작성중인 내용이 지워집니다. 계속하시겠습니까?')) {
+    this.props.confirmModal('알림', '작성중인 내용이 지워집니다. 계속하시겠습니까?', () => {
       this.handleEditDisable();
-    }
+    });
   },
 
   handleEditDisable() {
@@ -115,4 +117,4 @@ const CommentItem = React.createClass({
   }
 });
 
-export default CommentItem;
+export default connectModals(CommentItem);

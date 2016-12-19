@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import {loadUserInfo} from '../../actions/dispatchers';
 import '../../stylesheets/menu.styl';
+import Modal from '../Modal';
 
 import TopMenu from './TopMenu';
 import SideMenu from './SideMenu';
@@ -22,6 +23,7 @@ const Menu = React.createClass({
         <div className="content">
           {this.props.children}
         </div>
+        <Modal/>
       </div>
     );
   }

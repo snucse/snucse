@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
-import {UserLevel} from '../utils';
+import {UserLevel, connectModals} from '../utils';
 
 import {ProfileTagBox, ProfileCommentBox} from './boxes';
 import Feed from './Feed';
@@ -52,17 +52,17 @@ const Profile = React.createClass({
   }
 });
 
-const FollowBox = React.createClass({
+const FollowBox = connectModals(React.createClass({
   handleFollow() {
-    if (confirm('팔로우 하시겠습니까?')) {
+    this.props.confirmModal('알림', '팔로우 하시겠습니까?', () => {
       this.props.onFollowChanged(true);
-    }
+    });
   },
 
   handleUnfollow() {
-    if (confirm('팔로우를 취소하시겠습니까?')) {
+    this.props.confirmModal('알림', '팔로우를 취소하시겠습니까?', () => {
       this.props.onFollowChanged(false);
-    }
+    });
   },
 
   render() {
@@ -78,7 +78,7 @@ const FollowBox = React.createClass({
         return null;
     }
   }
-});
+}));
 
 const mapStateToProps = function (state) {
   const {following, name, description, admin} = state.profile.current;

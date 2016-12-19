@@ -1,9 +1,9 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 
-import {genRefCallback} from '../../../utils';
+import {genRefCallback, connectModals} from '../../../utils';
 
-export default React.createClass({
+const SearchForm = React.createClass({
   handleSubmit(event) {
     event.preventDefault();
     // this.props.onSearch(this._content.value);
@@ -16,7 +16,7 @@ export default React.createClass({
     */
     const query = this._content.value;
     if (query.length < 2) {
-      alert('두 글자 이상 입력해주세요');
+      this.props.alertModal('알림', '두 글자 이상 입력해주세요');
       return;
     }
     browserHistory.push(`/search?query=${query}`);
@@ -33,3 +33,5 @@ export default React.createClass({
     );
   }
 });
+
+export default connectModals(SearchForm);

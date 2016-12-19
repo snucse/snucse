@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
-import {DataCon, Url, genRefCallback} from '../utils';
+
+import {DataCon, Url, genRefCallback, connectModals} from '../utils';
+import Modal from './Modal';
+import '../stylesheets/modalbox.styl';
 
 const Login = React.createClass({
   render() {
@@ -9,12 +12,13 @@ const Login = React.createClass({
         <Link to="/">메인으로</Link><br/>
         <LoginForm/>
         <Link to="/sign-up">가입하기</Link>
+        <Modal/>
       </div>
     );
   }
 });
 
-const LoginForm = React.createClass({
+const LoginForm = connectModals(React.createClass({
   handleLogin(event) {
     event.preventDefault();
     const username = this.id.value.trim();
@@ -26,10 +30,10 @@ const LoginForm = React.createClass({
       browserHistory.push('/');
     }).catch(err => {
       if (err.status === 403) {
-        alert('아이디 혹은 비밀번호를 확인해 주세요.');
+        this.props.alertModal('알림', '아이디 혹은 비밀번호를 확인해 주세요.');
         this.password.value = '';
       } else if (err.status === 419) {
-        alert('회원가입 대기중입니다.');
+        this.props.alertModal('알림', '회원가입 대기중입니다.');
       }
     });
   },
@@ -43,6 +47,6 @@ const LoginForm = React.createClass({
       </form>
     );
   }
-});
+}));
 
 export default Login;

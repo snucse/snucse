@@ -1,6 +1,7 @@
 import React from 'react';
-import Editor from './Editor';
 
+import {connectModals} from '../utils';
+import Editor from './Editor';
 import {FileUploadBox} from './boxes';
 
 /*
@@ -29,7 +30,7 @@ const ArticleWrite = React.createClass({
   }
 });
 
-const ArticleForm = React.createClass({
+const ArticleForm = connectModals(React.createClass({
   getInitialState() {
     return {
       title: '',
@@ -83,10 +84,25 @@ const ArticleForm = React.createClass({
     if (!content || !title) {
       return;
     }
-    if (!confirm('전송하시겠습니까?')) {
-      return;
-    }
-    this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
+
+    this.props.makeCustomModal('confirm', '알림', '글을 작성하시겠습니까?',
+      [
+        {
+          label: '네',
+          callback: () => {
+            this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
+            this.props.cancelModal();
+          }
+        },
+        {
+          label: '아니오',
+          callback: () => {
+            this.props.cancelModal();
+          }
+        }
+      ],
+      {closable: false}
+    );
   },
 
   render() {
@@ -101,6 +117,6 @@ const ArticleForm = React.createClass({
       </div>
     );
   }
-});
+}));
 
 export default ArticleWrite;

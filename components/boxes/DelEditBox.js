@@ -1,6 +1,8 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 
+import {connectModals} from '../../utils';
+
 const DelEditBox = React.createClass({
   updateArticle(articleId) {
     browserHistory.push(`/${articleId}/edit`);
@@ -11,10 +13,9 @@ const DelEditBox = React.createClass({
   },
 
   handleArticleDelete() {
-    const check = confirm('이 글을 삭제하시겠습니까?');
-    if (check === true) {
+    this.props.confirmModal('알림', '이 글을 삭제하시겠습니까?', () => {
       this.props.onArticleDelete(this.props.articleId);
-    }
+    });
   },
 
   render() {
@@ -29,4 +30,4 @@ const DelEditBox = React.createClass({
   }
 });
 
-export default DelEditBox;
+export default connectModals(DelEditBox);

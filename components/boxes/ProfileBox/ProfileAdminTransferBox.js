@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 
-import {initProfileAdminError, loadProfileDetail, changeAdmin} from '../../../actions/dispatchers';
+import {connectModals} from '../../../utils';
+import {loadProfileDetail, changeAdmin} from '../../../actions/dispatchers';
 import ProfileAdminTransferForm from './ProfileAdminTransferForm';
-import ProfileAdminTransferError from './ProfileAdminTransferError';
 
 /*
  * props
@@ -13,25 +13,23 @@ import ProfileAdminTransferError from './ProfileAdminTransferError';
 
 const ProfileAdminTransferBox = React.createClass({
   componentDidMount() {
-    this.props.initProfileAdminError();
     this.props.loadProfileDetail(this.props.id);
   },
 
   componentWillReceiveProps(props) {
     if (this.props.id !== props.id) {
-      this.props.initProfileAdminError();
       this.props.loadProfileDetail(props.id);
     }
   },
 
   handleClickSubmit(newId) {
-    if (confirm('관리자를 변경하시겠습니까?')) {
+    this.props.confirmModal('알림', '관리자를 변경하시겠습니까?', () => {
       this.props.changeAdmin(this.props.id, newId);
-    }
+    });
   },
 
   render() {
-    const {admin, userId, notAdmin, invalidId} = this.props;
+    const {admin, userId} = this.props;
     if (!admin) {
       return <div className="profile-admin">Loading...</div>;
     }
@@ -50,28 +48,23 @@ const ProfileAdminTransferBox = React.createClass({
     return (
       <div className="profile-admin">
         <ProfileAdminTransferForm onClickSubmit={this.handleClickSubmit}/>
-        <ProfileAdminTransferError notAdmin={notAdmin} invalidId={invalidId}/>
       </div>
     );
   }
 });
 
 const mapStateToProps = function (state) {
-  const {notAdmin, invalidId} = state.profileAdmin;
   return {
     userId: state.userInfo.userId,
-    admin: state.profile.current.admin,
-    notAdmin,
-    invalidId
+    admin: state.profile.current.admin
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    initProfileAdminError: () => initProfileAdminError(dispatch),
     loadProfileDetail: id => loadProfileDetail(dispatch, id),
     changeAdmin: (id, newId) => changeAdmin(dispatch, id, newId)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileAdminTransferBox);
+export default connectModals(connect(mapStateToProps, mapDispatchToProps)(ProfileAdminTransferBox));
