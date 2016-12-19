@@ -15,7 +15,8 @@ const Login = React.createClass({
 });
 
 const LoginForm = React.createClass({
-  handleLogin() {
+  handleLogin(event) {
+    event.preventDefault();
     const username = this.id.value.trim();
     const password = this.password.value;
     DataCon.postDataToServer(Url.getUrl('/users/sign_in'), 'POST', {
@@ -26,6 +27,7 @@ const LoginForm = React.createClass({
     }).catch(err => {
       if (err.status === 403) {
         alert('아이디 혹은 비밀번호를 확인해 주세요.');
+        this.password.value = '';
       } else if (err.status === 419) {
         alert('회원가입 대기중입니다.');
       }
@@ -33,11 +35,11 @@ const LoginForm = React.createClass({
   },
   render() {
     return (
-      <form id="login">
+      <form id="login" onSubmit={this.handleLogin}>
         로그인<br/>
         아이디: <input type="text" autoFocus ref={genRefCallback(this, 'id')}/><br/>
         비밀번호: <input type="password" ref={genRefCallback(this, 'password')}/><br/>
-        <input type="button" value="로그인" onClick={this.handleLogin}/>
+        <button>로그인</button>
       </form>
     );
   }
