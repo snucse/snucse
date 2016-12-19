@@ -13,14 +13,6 @@ const FeedArticle = React.createClass({
   render() {
     const {article} = this.props;
 
-    const temp = article.content.split('\n');
-    const n = temp.length;
-    const result = [];
-    for (let i = 0; i < n; i++) {
-      const brId = `article-br-${article.id}-${i}`;
-      result.push(temp[i]);
-      result.push(<br key={brId}/>);
-    }
     moment.locale('ko');
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
@@ -36,9 +28,7 @@ const FeedArticle = React.createClass({
         <div className="article-main">
           <FileBox files={article.files}/>
           <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
-          <div className="article-content">
-            {result}
-          </div>
+          <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
         </div>
         <ArticleTagBox articleId={article.id}/>
         <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>

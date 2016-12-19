@@ -64,6 +64,7 @@
       "no-alert": "warn",
       "xo/filename-case": "off",
       "react/forbid-component-props": "off",
+      "react/no-danger": "off",
       "react/prop-types": "off",
       "filenames/match-exported": "error"
     },
