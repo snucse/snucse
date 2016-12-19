@@ -1,7 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Link, browserHistory} from 'react-router';
+
 import {DataCon, Url, genRefCallback} from '../utils';
+import {alertModal} from '../actions/dispatchers';
 import Modal from './Modal';
+import '../stylesheets/modalbox.styl';
 
 const Login = React.createClass({
   render() {
@@ -16,7 +20,13 @@ const Login = React.createClass({
   }
 });
 
-const LoginForm = React.createClass({
+const mapDispatchToProps = function (dispatch) {
+  return {
+    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
+  };
+};
+
+const LoginForm = connect(null, mapDispatchToProps)(React.createClass({
   handleLogin(event) {
     event.preventDefault();
     const username = this.id.value.trim();
@@ -28,10 +38,10 @@ const LoginForm = React.createClass({
       browserHistory.push('/');
     }).catch(err => {
       if (err.status === 403) {
-        alert('아이디 혹은 비밀번호를 확인해 주세요.');
+        this.props.alertModal('알림', '아이디 혹은 비밀번호를 확인해 주세요.');
         this.password.value = '';
       } else if (err.status === 419) {
-        alert('회원가입 대기중입니다.');
+        this.props.alertModal('알림', '회원가입 대기중입니다.');
       }
     });
   },
@@ -45,6 +55,6 @@ const LoginForm = React.createClass({
       </form>
     );
   }
-});
+}));
 
 export default Login;
