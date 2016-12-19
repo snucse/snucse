@@ -30,7 +30,7 @@ const Modal = React.createClass({
     });
     const classes = classnames({
       modal: true,
-      [`modal-${this.props.modalInfo.type}`]: this.props.modalInfo.type !== undefined
+      [`modal-${this.props.modalInfo.type}`]: Boolean(this.props.modalInfo.type)
     });
     return this.props.enabled ? (
       <div className="modal-wrapper" onClick={this.handleClickWrapper}>
