@@ -1,5 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
+
+import {confirmModal} from '../../actions/dispatchers';
 
 const DelEditBox = React.createClass({
   updateArticle(articleId) {
@@ -11,10 +14,9 @@ const DelEditBox = React.createClass({
   },
 
   handleArticleDelete() {
-    const check = confirm('이 글을 삭제하시겠습니까?');
-    if (check === true) {
+    this.props.confirmModal('알림', '이 글을 삭제하시겠습니까?', () => {
       this.props.onArticleDelete(this.props.articleId);
-    }
+    });
   },
 
   render() {
@@ -29,4 +31,11 @@ const DelEditBox = React.createClass({
   }
 });
 
-export default DelEditBox;
+const mapDispatchToProps = function (dispatch) {
+  return {
+    confirmModal: (title, message, positiveCallback, negativeCallback) =>
+      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
+  };
+};
+
+export default connect(null, mapDispatchToProps)(DelEditBox);
