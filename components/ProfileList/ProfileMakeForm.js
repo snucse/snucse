@@ -2,7 +2,7 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {DataCon, Url, genRefCallback} from '../../utils';
-import {updateFollowingList} from '../../actions/dispatchers';
+import {updateFollowingList, alertModal} from '../../actions/dispatchers';
 
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
 
@@ -17,18 +17,18 @@ const ProfileMakeForm = React.createClass({
     };
 
     if (!reg.test(trimmed.id)) {
-      alert('ID는 정규식 "^[a-zA-Z_][a-zA-Z0-9_]+$"에 맞아야 합니다.');
+      this.props.alertModal('알림', 'ID는 정규식 "^[a-zA-Z_][a-zA-Z0-9_]+$"에 맞아야 합니다.');
       return false;
     }
 
     if (trimmed.name === '' || trimmed.description === '') {
-      alert('양식을 모두 채워주세요.');
+      this.props.alertModal('알림', '양식을 모두 채워주세요.');
       return false;
     }
 
     const url = Url.getUrl('/profiles');
     DataCon.postDataToServer(url, 'POST', trimmed).then(() => {
-      alert('프로필 생성에 성공하였습니다.');
+      this.props.alertModal('알림', '프로필 생성에 성공하였습니다.');
       this.props.updateFollowingList();
       browserHistory.push(`/${trimmed.id}`);
     }).catch(console.error); // TODO: 중복 id등의 예외처리
@@ -59,7 +59,8 @@ const ProfileMakeForm = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    updateFollowingList: () => updateFollowingList(dispatch)
+    updateFollowingList: () => updateFollowingList(dispatch),
+    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
   };
 };
 
