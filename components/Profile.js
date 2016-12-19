@@ -42,7 +42,6 @@ const Profile = React.createClass({
           {adminLink}
         </div>
         <div className="menu-of-profile">
-          <Link to={`/profiles/${id}/write`}>글쓰기</Link>
           <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
           <ProfileTagBox profileId={id}/>
           <ProfileCommentBox profileId={id} isAddable/>

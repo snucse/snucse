@@ -17,7 +17,7 @@ const FeedItem = React.createClass({
     const {type} = this.props;
     switch (type) {
       case 'article':
-        return <FeedArticle article={this.props.data}/>;
+        return <FeedArticle article={this.props.data} onArticleDelete={this.props.onArticleDelete}/>;
       case 'loadmore':
         return <FeedLoadMore onLoadMore={this.handleLoadMore} options={this.props.data.options}/>;
       default:

@@ -1,10 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
 import moment from 'moment';
 
+import {Url, DataCon} from '../../utils';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const ArticleItem = React.createClass({
+  handleArticleDelete(articleId) {
+    const url = Url.getUrl(`/articles/${articleId}`);
+    DataCon.postDataToServer(url, 'DELETE')
+      .then(() => {
+        browserHistory.goBack();
+      }).catch(console.error);
+  },
+
   render() {
     const {article} = this.props;
 
@@ -34,7 +44,7 @@ const ArticleItem = React.createClass({
         <div className="article-content">
           {result}
         </div>
-        <DelEditBox mine={mine} articleId={article.id}/>
+        <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
         <ArticleTagBox articleId={article.id}/>
         <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
         <ArticleCommentBox

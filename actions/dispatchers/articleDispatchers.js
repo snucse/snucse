@@ -1,5 +1,6 @@
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
+import {loadArticleTag} from './tagDispatchers';
 
 export function loadArticle(dispatch, articleId) {
   DataCon.loadDataFromServer(Url.getUrl(`/articles/${articleId}`)).then(article => {
@@ -8,6 +9,9 @@ export function loadArticle(dispatch, articleId) {
       article,
       isError: false
     });
+    return article;
+  }).then(article => {
+    loadArticleTag(dispatch, article);
   }).catch(err => {
     console.log(err);
     dispatch({
