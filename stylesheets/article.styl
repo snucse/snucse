@@ -38,7 +38,7 @@
   background-color box-border-color
 .article-controller
   float right
-.article-main
+.article-content-container
   float left
   width 795px
 .article-content
@@ -51,5 +51,16 @@
   button()
 .article-edit-button:hover
   button-hover()
+.article-main:after
+  clearfix()
+.recommend-container
+  text-align right
+  margin-top -28px
+.recommend-button
+  button()
+.recommend-count:before
+  content "("
+.recommend-count:after
+  content ")"
 .feed-load-more
   padding 10px 0

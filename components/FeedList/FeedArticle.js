@@ -20,18 +20,20 @@ const FeedArticle = React.createClass({
       <li className="feed-article">
         <small className="article-date" title={date.format('LLL')}>{date.fromNow()}</small>
         <h5 className="article-title"><Link to={`/${article.id}`}>{article.title}</Link><small className="article-profiles">{article.profiles[0].name}</small></h5>
-        <div className="article-writer-container">
-          <img className="article-writer-image" src={article.writer.profileImageUri}/>
-          <h5 className="article-writer-name">{article.writer.name}</h5>
-        </div>
-        <div className="article-divider"/>
         <div className="article-main">
-          <FileBox files={article.files}/>
-          <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
-          <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
+          <div className="article-writer-container">
+            <img className="article-writer-image" src={article.writer.profileImageUri}/>
+            <h5 className="article-writer-name">{article.writer.name}</h5>
+          </div>
+          <div className="article-divider"/>
+          <div className="article-content-container">
+            <FileBox files={article.files}/>
+            <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
+            <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
+          </div>
         </div>
-        <ArticleTagBox articleId={article.id}/>
         <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
+        <ArticleTagBox articleId={article.id}/>
         <ArticleCommentBox
           articleId={article.id}
           lastComment={article.lastComment}

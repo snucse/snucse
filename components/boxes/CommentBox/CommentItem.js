@@ -91,7 +91,6 @@ const CommentItem = React.createClass({
       controller = (
         <div className="comment-controller">
           {buttons}
-          {this.props.recommendBox}
         </div>
       );
     }
@@ -109,6 +108,7 @@ const CommentItem = React.createClass({
           <h5 className="comment-writer-name">{writer.name}</h5>
           {contentWrapper}
           {editBox}
+          {this.props.recommendBox}
           {controller}
         </div>
       </li>
