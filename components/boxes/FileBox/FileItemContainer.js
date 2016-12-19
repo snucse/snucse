@@ -15,7 +15,7 @@ import FileItem from './FileItem';
 
 const FileEditBox = React.createClass({
   render() {
-    return <button type="button" onClick={this.props.onClick}>{this.props.alive ? '제거' : '복구'}</button>;
+    return <button className="file-edit-button" type="button" onClick={this.props.onClick}>{this.props.alive ? '제거' : '복구'}</button>;
   }
 });
 
