@@ -1,9 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {Link, browserHistory} from 'react-router';
 
-import {DataCon, Url, genRefCallback} from '../utils';
-import {alertModal} from '../actions/dispatchers';
+import {DataCon, Url, genRefCallback, connectModals} from '../utils';
 import Modal from './Modal';
 import '../stylesheets/modalbox.styl';
 
@@ -20,13 +18,7 @@ const Login = React.createClass({
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
-  };
-};
-
-const LoginForm = connect(null, mapDispatchToProps)(React.createClass({
+const LoginForm = connectModals(React.createClass({
   handleLogin(event) {
     event.preventDefault();
     const username = this.id.value.trim();

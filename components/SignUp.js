@@ -1,9 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
 import {Link, browserHistory} from 'react-router';
-import {DataCon, Url, genRefCallback} from '../utils';
-import {alertModal} from '../actions/dispatchers';
+import {DataCon, Url, genRefCallback, connectModals} from '../utils';
 import Modal from './Modal';
 
 const SignUp = React.createClass({
@@ -23,13 +21,7 @@ const birthReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 const bsNumReg = /^[0-9]{4}-[0-9]{5}$/;
 const phoneNumReg = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
-  };
-};
-
-const SignUpForm = connect(null, mapDispatchToProps)(React.createClass({
+const SignUpForm = connectModals(React.createClass({
   handleSignUp(e) {
     e.preventDefault();
     const values = this.validateForm();

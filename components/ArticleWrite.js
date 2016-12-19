@@ -1,7 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
-import {confirmModal} from '../actions/dispatchers';
+import {connectModals} from '../utils';
 import Editor from './Editor';
 import {FileUploadBox} from './boxes';
 
@@ -31,14 +30,7 @@ const ArticleWrite = React.createClass({
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    confirmModal: (title, message, positiveCallback, negativeCallback) =>
-      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
-  };
-};
-
-const ArticleForm = connect(null, mapDispatchToProps)(React.createClass({
+const ArticleForm = connectModals(React.createClass({
   getInitialState() {
     return {
       title: '',

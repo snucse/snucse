@@ -1,7 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
-import {confirmModal} from '../../../actions/dispatchers';
+import {connectModals} from '../../../utils';
 
 /*
   props
@@ -118,11 +117,4 @@ const CommentItem = React.createClass({
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    confirmModal: (title, message, positiveCallback, negativeCallback) =>
-      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
-  };
-};
-
-export default connect(null, mapDispatchToProps)(CommentItem);
+export default connectModals(CommentItem);

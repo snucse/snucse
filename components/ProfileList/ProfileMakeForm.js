@@ -1,8 +1,8 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
-import {DataCon, Url, genRefCallback} from '../../utils';
-import {updateFollowingList, alertModal} from '../../actions/dispatchers';
+import {DataCon, Url, genRefCallback, connectModals} from '../../utils';
+import {updateFollowingList} from '../../actions/dispatchers';
 
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
 
@@ -59,9 +59,8 @@ const ProfileMakeForm = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    updateFollowingList: () => updateFollowingList(dispatch),
-    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
+    updateFollowingList: () => updateFollowingList(dispatch)
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProfileMakeForm);
+export default connectModals(connect(null, mapDispatchToProps)(ProfileMakeForm));

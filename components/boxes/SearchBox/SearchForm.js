@@ -1,9 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 
-import {genRefCallback} from '../../../utils';
-import {alertModal} from '../../../actions/dispatchers';
+import {genRefCallback, connectModals} from '../../../utils';
 
 const SearchForm = React.createClass({
   handleSubmit(event) {
@@ -36,10 +34,4 @@ const SearchForm = React.createClass({
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
-  };
-};
-
-export default connect(null, mapDispatchToProps)(SearchForm);
+export default connectModals(SearchForm);

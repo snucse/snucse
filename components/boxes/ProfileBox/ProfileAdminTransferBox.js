@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 
-import {loadProfileDetail, changeAdmin, confirmModal} from '../../../actions/dispatchers';
+import {connectModals} from '../../../utils';
+import {loadProfileDetail, changeAdmin} from '../../../actions/dispatchers';
 import ProfileAdminTransferForm from './ProfileAdminTransferForm';
 
 /*
@@ -62,10 +63,8 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     loadProfileDetail: id => loadProfileDetail(dispatch, id),
-    changeAdmin: (id, newId) => changeAdmin(dispatch, id, newId),
-    confirmModal: (title, message, positiveCallback, negativeCallback) =>
-      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
+    changeAdmin: (id, newId) => changeAdmin(dispatch, id, newId)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileAdminTransferBox);
+export default connectModals(connect(mapStateToProps, mapDispatchToProps)(ProfileAdminTransferBox));

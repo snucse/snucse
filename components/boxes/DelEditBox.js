@@ -1,8 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 
-import {confirmModal} from '../../actions/dispatchers';
+import {connectModals} from '../../utils';
 
 const DelEditBox = React.createClass({
   updateArticle(articleId) {
@@ -31,11 +30,4 @@ const DelEditBox = React.createClass({
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    confirmModal: (title, message, positiveCallback, negativeCallback) =>
-      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
-  };
-};
-
-export default connect(null, mapDispatchToProps)(DelEditBox);
+export default connectModals(DelEditBox);

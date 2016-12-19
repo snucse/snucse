@@ -1,8 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
-import {DataCon, Url} from '../../utils';
-import {alertModal} from '../../actions/dispatchers';
+import {DataCon, Url, connectModals} from '../../utils';
 
 const ProfileImageSettingBox = React.createClass({
   getInitialState() {
@@ -41,10 +39,4 @@ const ProfileImageSettingBox = React.createClass({
   }
 });
 
-const mapDispatchToProps = function (dispatch) {
-  return {
-    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
-  };
-};
-
-export default connect(null, mapDispatchToProps)(ProfileImageSettingBox);
+export default connectModals(ProfileImageSettingBox);

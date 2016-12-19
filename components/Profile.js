@@ -2,9 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-import {updateFollowingList, loadProfileDetail, updateFollowingState, confirmModal} from '../actions/dispatchers';
+import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
-import {UserLevel} from '../utils';
+import {UserLevel, connectModals} from '../utils';
 
 import {ProfileTagBox, ProfileCommentBox} from './boxes';
 import Feed from './Feed';
@@ -52,14 +52,7 @@ const Profile = React.createClass({
   }
 });
 
-const mapDispatchToFollowBoxProps = function (dispatch) {
-  return {
-    confirmModal: (title, message, positiveCallback, negativeCallback) =>
-      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
-  };
-};
-
-const FollowBox = connect(null, mapDispatchToFollowBoxProps)(React.createClass({
+const FollowBox = connectModals(React.createClass({
   handleFollow() {
     this.props.confirmModal('알림', '팔로우 하시겠습니까?', () => {
       this.props.onFollowChanged(true);
