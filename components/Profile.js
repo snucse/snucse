@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
+import {updateFollowingList, loadProfileDetail, updateFollowingState, confirmModal} from '../actions/dispatchers';
 import '../stylesheets/tagbox.styl';
 import {UserLevel} from '../utils';
 
@@ -52,17 +52,24 @@ const Profile = React.createClass({
   }
 });
 
-const FollowBox = React.createClass({
+const mapDispatchToFollowBoxProps = function (dispatch) {
+  return {
+    confirmModal: (title, message, positiveCallback, negativeCallback) =>
+      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
+  };
+};
+
+const FollowBox = connect(null, mapDispatchToFollowBoxProps)(React.createClass({
   handleFollow() {
-    if (confirm('팔로우 하시겠습니까?')) {
+    this.props.confirmModal('알림', '팔로우 하시겠습니까?', () => {
       this.props.onFollowChanged(true);
-    }
+    });
   },
 
   handleUnfollow() {
-    if (confirm('팔로우를 취소하시겠습니까?')) {
+    this.props.confirmModal('알림', '팔로우를 취소하시겠습니까?', () => {
       this.props.onFollowChanged(false);
-    }
+    });
   },
 
   render() {
@@ -78,7 +85,7 @@ const FollowBox = React.createClass({
         return null;
     }
   }
-});
+}));
 
 const mapStateToProps = function (state) {
   const {following, name, description, admin} = state.profile.current;
