@@ -18,7 +18,8 @@ const TagForm = React.createClass({
     }
   },
 
-  handleClickAdd() {
+  handleSubmit(event) {
+    event.preventDefault();
     this.addTag();
   },
 
@@ -38,10 +39,6 @@ const TagForm = React.createClass({
   },
 
   handleKeyDownInput(event) {
-    if (event.keyCode == 13) {
-      this.addTag();
-      return;
-    }
     const candidates = this.props.candidateTags || [];
     if (candidates.length === 0) {
       return;
@@ -92,7 +89,8 @@ const TagForm = React.createClass({
     this.setState({isEditMode: true});
   },
 
-  handleClickHideForm() {
+  handleClickHideForm(event) {
+    event.preventDefault();
     this.props.onInitialCandidateTags();
     this.setState({
       isEditMode: false,
@@ -137,14 +135,14 @@ const TagForm = React.createClass({
             {candidateTagListItems}
           </ul> : null;
         const form = this.state.isEditMode ?
-          <form className="tag-form">
+          <form className="tag-form" onSubmit={this.handleSubmit}>
             <input
               ref={genRefCallback(this, '_content')}
               onChange={this.handleChangeInput}
               onKeyDown={this.handleKeyDownInput}
               />
-            <input onClick={this.handleClickAdd} type="button" value="추가"/>
-            <input onClick={this.handleClickHideForm} type="button" value="취소"/>
+            <button>추가</button>
+            <button onClick={this.handleClickHideForm}>취소</button>
             {candidateTagList}
           </form> :
           null;
