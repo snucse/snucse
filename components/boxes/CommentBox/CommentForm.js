@@ -9,7 +9,8 @@ import {genRefCallback} from '../../../utils';
   - content
 */
 const CommentForm = React.createClass({
-  handleClickWrite() {
+  handleSubmit(event) {
+    event.preventDefault();
     if ((this._content || false) && this._content.value !== '') {
       this.props.onWrite(this._content.value);
       this._content.value = '';
@@ -17,11 +18,10 @@ const CommentForm = React.createClass({
   },
 
   render() {
-    // button 모양이지만 onsubmit 이벤트를 일으키지 않기 위해 input type button을 사용함
     return (
-      <form className="comment-form" ref={genRefCallback(this, 'refForm')}>
+      <form className="comment-form" onSubmit={this.handleSubmit}>
         <input ref={genRefCallback(this, '_content')}/>
-        <input onClick={this.handleClickWrite} type="button" value="확인"/>
+        <button>확인</button>
       </form>
     );
   }
