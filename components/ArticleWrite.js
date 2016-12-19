@@ -85,9 +85,24 @@ const ArticleForm = connectModals(React.createClass({
       return;
     }
 
-    this.props.confirmModal('알림', '글을 작성하시겠습니까?', () => {
-      this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
-    });
+    this.props.makeCustomModal('confirm', '알림', '글을 작성하시겠습니까?',
+      [
+        {
+          label: '네',
+          callback: () => {
+            this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
+            this.props.cancelModal();
+          }
+        },
+        {
+          label: '아니오',
+          callback: () => {
+            this.props.cancelModal();
+          }
+        }
+      ],
+      {closable: false}
+    );
   },
 
   render() {
