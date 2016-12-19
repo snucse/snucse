@@ -6,8 +6,7 @@ const MODAL_INITIAL_STATE = {
     type: '',
     title: '',
     message: '',
-    buttons: [],
-    callbacks: []
+    buttons: []
   },
   enabled: false,
   closable: true // modal 이외부분 누르면 꺼지게
@@ -26,14 +25,13 @@ function enableModal(state) {
 }
 
 function setModal(state, action) {
-  const {modalType, title, message, buttons, callbacks, options} = action;
+  const {modalType, title, message, buttons, options} = action;
   const {closable} = options || {};
   const modalInfo = {
     type: modalType,
     title,
     message,
-    buttons: buttons || [],
-    callbacks: callbacks || []
+    buttons: buttons || []
   };
   return updateObject(state, {
     modalInfo,

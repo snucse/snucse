@@ -17,16 +17,10 @@ const Modal = React.createClass({
     event.stopPropagation();
   },
 
-  handleClickButton(index) {
-    if (typeof this.props.modalInfo.callbacks[index] === 'function') {
-      return this.props.modalInfo.callbacks[index];
-    }
-    return null;
-  },
-
   render() {
     const buttons = this.props.modalInfo.buttons.map((button, i) => {
-      return <button onClick={this.handleClickButton(i)} key={`modal-button-${button}-${i}`}>{button}</button>;
+      const handleClick = button.callback;
+      return <button onClick={handleClick} key={`modal-button-${button.label}-${i}`}>{button.label}</button>;
     });
     const classes = classnames({
       modal: true,

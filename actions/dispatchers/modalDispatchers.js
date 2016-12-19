@@ -18,8 +18,7 @@ export function normalModal(dispatch, title, message, callback) {
     modalType: 'normal',
     title,
     message,
-    buttons: ['확인'],
-    callbacks: [callbackWrapper]
+    buttons: [{label: '확인', callback: callbackWrapper}]
   });
 }
 
@@ -41,8 +40,10 @@ export function confirmModal(dispatch, title, message, positiveCallback, negativ
     modalType: 'confirm',
     title,
     message,
-    buttons: ['확인', '취소'],
-    callbacks: [positiveCallbackWrapper, negativeCallbackWrapper],
+    buttons: [
+      {label: '확인', callback: positiveCallbackWrapper},
+      {label: '취소', callback: negativeCallbackWrapper}
+    ],
     options: {closable: false} // '취소'를 눌러야만 하게끔
   });
 }
@@ -59,19 +60,23 @@ export function alertModal(dispatch, title, message, callback) {
     modalType: 'alert',
     title,
     message,
-    buttons: ['확인'],
-    callbacks: [callbackWrapper]
+    buttons: [{label: '확인', callback: callbackWrapper}]
   });
 }
 
-export function makeCustomModal(dispatch, modalType, title, message, buttons, callbacks, options) {
+export function makeCustomModal(dispatch, modalType, title, message, buttons, options) {
+  /*
+    buttons = [
+      { label: string, callback: function },
+      { ... },
+    ]
+  */
   dispatch({
     type: types.SET_MODAL,
     modalType,
     title,
     message,
     buttons,
-    callbacks,
     options
   });
 }
