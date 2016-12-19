@@ -1,6 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import {Link, browserHistory} from 'react-router';
 import {DataCon, Url, genRefCallback} from '../utils';
+import {alertModal} from '../actions/dispatchers';
+import Modal from './Modal';
 
 const SignUp = React.createClass({
   render() {
@@ -8,6 +12,7 @@ const SignUp = React.createClass({
       <div>
         <Link to="/login">로그인</Link>
         <SignUpForm/>
+        <Modal/>
       </div>
     );
   }
@@ -18,7 +23,13 @@ const birthReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 const bsNumReg = /^[0-9]{4}-[0-9]{5}$/;
 const phoneNumReg = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
 
-const SignUpForm = React.createClass({
+const mapDispatchToProps = function (dispatch) {
+  return {
+    alertModal: (title, message, callback) => alertModal(dispatch, title, message, callback)
+  };
+};
+
+const SignUpForm = connect(null, mapDispatchToProps)(React.createClass({
   handleSignUp(e) {
     e.preventDefault();
     const values = this.validateForm();
@@ -28,11 +39,11 @@ const SignUpForm = React.createClass({
 
     DataCon.postDataToServer(Url.getUrl('/users/sign_up'), 'POST', values)
       .then(() => {
-        alert('가입에 성공하였습니다.');
+        this.props.alertModal('알림', '가입에 성공하였습니다.');
         browserHistory.push('/login');
       }).catch(() => {
         // TODO: 에러 발생 조건에 뭐가 있는지 확인하기
-        alert('가입에 실패했습니다.');
+        this.props.alertModal('알림', '가입에 실패했습니다.');
       });
   },
 
@@ -46,37 +57,52 @@ const SignUpForm = React.createClass({
     }, {});
 
     if (values.username.length === 0) {
-      alert('아이디를 입력해주세요.');
+      console.log(this);
+      this.props.alertModal('알림', '아이디를 입력해주세요.', () => {
+        this.username.focus();
+      });
       return null;
     }
 
     if (values.password.length === 0) {
-      alert('비밀번호를 입력해주세요.');
+      this.props.alertModal('알림', '비밀번호를 입력해주세요.', () => {
+        this.password.focus();
+      });
       return null;
     }
 
     if (values.password !== values.password2) {
-      alert('비밀번호를 확인해주세요.');
+      this.props.alertModal('알림', '비밀번호를 확인해주세요.', () => {
+        this.password2.focus();
+      });
       return null;
     }
 
     if (values.name.length === 0) {
-      alert('이름을 입력해주세요.');
+      this.props.alertModal('알림', '이름을 입력해주세요.', () => {
+        this.name.focus();
+      });
       return null;
     }
 
     if (!(birthReg.test(values.birthday))) {
-      alert('생년월일을 정확히 입력해주세요. e.g.) 1900-01-01');
+      this.props.alertModal('알림', '생년월일을 정확히 입력해주세요. e.g.) 1900-01-01', () => {
+        this.birthday.focus();
+      });
       return null;
     }
 
     if (!(bsNumReg.test(values.bsNumber))) {
-      alert('학번을 정확히 입력해주세요. e.g.) 2017-10000');
+      this.props.alertModal('알림', '학번을 정확히 입력해주세요. e.g.) 2017-10000', () => {
+        this.bsNumber.focus();
+      });
       return null;
     }
 
     if (!(phoneNumReg.test(values.phoneNumber))) {
-      alert('전화번호를 정확히 입력해주세요. e.g.) 010-123-4567 또는 010-1234-5678');
+      this.props.alertModal('알림', '전화번호를 정확히 입력해주세요. e.g.) 010-123-4567 또는 010-1234-5678', () => {
+        this.phoneNumber.focus();
+      });
       return null;
     }
 
@@ -98,6 +124,6 @@ const SignUpForm = React.createClass({
       </form>
     );
   }
-});
+}));
 
 export default SignUp;
