@@ -5,6 +5,10 @@ import moment from 'moment';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const FeedArticle = React.createClass({
+  handleArticleDelete(articleId) {
+    this.props.onArticleDelete(articleId);
+  },
+
   render() {
     const {article} = this.props;
 
@@ -34,7 +38,7 @@ const FeedArticle = React.createClass({
         <div className="article-content">
           {result}
         </div>
-        <DelEditBox mine={mine} articleId={article.id}/>
+        <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
         <ArticleTagBox articleId={article.id}/>
         <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
         <ArticleCommentBox

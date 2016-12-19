@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {DataCon, Url} from '../utils';
-import {loadFeed} from '../actions/dispatchers';
+import {loadFeed, updateSingleFeed} from '../actions/dispatchers';
 import FeedList from './FeedList';
 import ArticleWrite from './ArticleWrite';
 
@@ -29,8 +29,16 @@ const Feed = React.createClass({
       .then(article => {
         this.props.loadFeed({
           sinceId: article.id - 1,
-          limit: 1
+          maxId: article.id
         });
+      }).catch(console.error);
+  },
+
+  handleArticleDelete(articleId) {
+    const url = Url.getUrl(`/articles/${articleId}`);
+    DataCon.postDataToServer(url, 'DELETE')
+      .then(() => {
+        this.props.updateSingleFeed({id: articleId});
       }).catch(console.error);
   },
 
@@ -81,7 +89,7 @@ const Feed = React.createClass({
     return (
       <div className="feed">
         {articleWrite}
-        <FeedList feeds={feeds} onLoadMore={this.handleLoadMore}/>
+        <FeedList feeds={feeds} onLoadMore={this.handleLoadMore} onArticleDelete={this.handleArticleDelete}/>
       </div>
     );
   }
@@ -93,7 +101,8 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadFeed: options => loadFeed(dispatch, options)
+    loadFeed: options => loadFeed(dispatch, options),
+    updateSingleFeed: feed => updateSingleFeed(dispatch, feed)
   };
 };
 

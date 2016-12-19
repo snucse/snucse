@@ -12,7 +12,7 @@ const FeedList = React.createClass({
   render() {
     const feedNodes = this.props.feeds.map(feed => {
       return (
-        <FeedItem type={feed.type} data={feed} onLoadMore={this.handleLoadMore} key={`feeditem-${feed.type}-${feed.id}`}/>
+        <FeedItem type={feed.type} data={feed} onLoadMore={this.handleLoadMore} onArticleDelete={this.props.onArticleDelete} key={`feeditem-${feed.type}-${feed.id}`}/>
       );
     });
     return (
