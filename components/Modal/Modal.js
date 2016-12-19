@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import classnames from 'classnames';
 
 import {cancelModal} from '../../actions/dispatchers';
 
@@ -27,9 +28,13 @@ const Modal = React.createClass({
     const buttons = this.props.modalInfo.buttons.map((button, i) => {
       return <button onClick={this.handleClickButton(i)} key={`modal-button-${button}-${i}`}>{button}</button>;
     });
+    const classes = classnames({
+      modal: true,
+      [`modal-${this.props.modalInfo.type}`]: this.props.modalInfo.type !== undefined
+    });
     return this.props.enabled ? (
       <div className="modal-wrapper" onClick={this.handleClickWrapper}>
-        <div className="modal" onClick={this.handleClickModal}>
+        <div className={classes} onClick={this.handleClickModal}>
           <h3>{this.props.modalInfo.title}</h3>
           <p>{this.props.modalInfo.message}</p>
           <ul className="button-wrapper">
