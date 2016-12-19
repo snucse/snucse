@@ -6,6 +6,7 @@ import profileAdmin from './profileAdmin';
 import comment from './comment';
 import tag from './tag';
 import me from './me';
+import modal from './modal';
 import search from './search';
 // import * as types from '../actions/actionTypes';
 // import other reducers
@@ -21,6 +22,7 @@ const reducers = {
   tag,
   userInfo,
   me,
+  modal,
   search
   // list up all reducers
 };
