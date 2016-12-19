@@ -1,6 +1,8 @@
 import React from 'react';
-import Editor from './Editor';
+import {connect} from 'react-redux';
 
+import {confirmModal} from '../actions/dispatchers';
+import Editor from './Editor';
 import {FileUploadBox} from './boxes';
 
 /*
@@ -29,7 +31,14 @@ const ArticleWrite = React.createClass({
   }
 });
 
-const ArticleForm = React.createClass({
+const mapDispatchToProps = function (dispatch) {
+  return {
+    confirmModal: (title, message, positiveCallback, negativeCallback) =>
+      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
+  };
+};
+
+const ArticleForm = connect(null, mapDispatchToProps)(React.createClass({
   getInitialState() {
     return {
       title: '',
@@ -83,10 +92,10 @@ const ArticleForm = React.createClass({
     if (!content || !title) {
       return;
     }
-    if (!confirm('전송하시겠습니까?')) {
-      return;
-    }
-    this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
+
+    this.props.confirmModal('알림', '글을 작성하시겠습니까?', () => {
+      this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
+    });
   },
 
   render() {
@@ -101,6 +110,6 @@ const ArticleForm = React.createClass({
       </div>
     );
   }
-});
+}));
 
 export default ArticleWrite;
