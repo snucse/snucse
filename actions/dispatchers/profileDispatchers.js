@@ -1,6 +1,6 @@
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
-import {loadProfileTag, updateFollowingList} from './';
+import {loadProfileTag, updateFollowingList, alertModal} from './';
 
 export function loadAllProfiles(dispatch) {
   DataCon.loadDataFromServer(Url.getUrl('/profiles')).then(data => {
@@ -64,12 +64,6 @@ export function editProfileDesc(dispatch, id, newDesc) {
   }).catch(console.error);
 }
 
-export function initProfileAdminError(dispatch) {
-  dispatch({
-    type: types.PROFILE_ERROR_INIT
-  });
-}
-
 export function changeAdmin(dispatch, id, newId) {
   DataCon.postDataToServer(Url.getUrl(`/profiles/${id}/transfer`), 'POST', {
     adminId: newId
@@ -78,13 +72,9 @@ export function changeAdmin(dispatch, id, newId) {
   }).catch(err => {
     console.log(err);
     if (err.status === 401) {
-      dispatch({
-        type: types.PROFILE_ERROR_NOT_ADMIN
-      });
+      alertModal(dispatch, '알림', '관리자가 아닙니다');
     } else {
-      dispatch({
-        type: types.PROFILE_ERROR_INVALID_ID
-      });
+      alertModal(dispatch, '알림', '해당하는 id를 찾을 수 없습니다.');
     }
   });
 }

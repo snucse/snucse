@@ -2,9 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 
-import {initProfileAdminError, loadProfileDetail, changeAdmin, confirmModal} from '../../../actions/dispatchers';
+import {loadProfileDetail, changeAdmin, confirmModal} from '../../../actions/dispatchers';
 import ProfileAdminTransferForm from './ProfileAdminTransferForm';
-import ProfileAdminTransferError from './ProfileAdminTransferError';
 
 /*
  * props
@@ -13,13 +12,11 @@ import ProfileAdminTransferError from './ProfileAdminTransferError';
 
 const ProfileAdminTransferBox = React.createClass({
   componentDidMount() {
-    this.props.initProfileAdminError();
     this.props.loadProfileDetail(this.props.id);
   },
 
   componentWillReceiveProps(props) {
     if (this.props.id !== props.id) {
-      this.props.initProfileAdminError();
       this.props.loadProfileDetail(props.id);
     }
   },
@@ -31,7 +28,7 @@ const ProfileAdminTransferBox = React.createClass({
   },
 
   render() {
-    const {admin, userId, notAdmin, invalidId} = this.props;
+    const {admin, userId} = this.props;
     if (!admin) {
       return <div className="profile-admin">Loading...</div>;
     }
@@ -50,25 +47,20 @@ const ProfileAdminTransferBox = React.createClass({
     return (
       <div className="profile-admin">
         <ProfileAdminTransferForm onClickSubmit={this.handleClickSubmit}/>
-        <ProfileAdminTransferError notAdmin={notAdmin} invalidId={invalidId}/>
       </div>
     );
   }
 });
 
 const mapStateToProps = function (state) {
-  const {notAdmin, invalidId} = state.profileAdmin;
   return {
     userId: state.userInfo.userId,
-    admin: state.profile.current.admin,
-    notAdmin,
-    invalidId
+    admin: state.profile.current.admin
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    initProfileAdminError: () => initProfileAdminError(dispatch),
     loadProfileDetail: id => loadProfileDetail(dispatch, id),
     changeAdmin: (id, newId) => changeAdmin(dispatch, id, newId),
     confirmModal: (title, message, positiveCallback, negativeCallback) =>
