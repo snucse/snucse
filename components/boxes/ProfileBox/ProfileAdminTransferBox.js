@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 
-import {initProfileAdminError, loadProfileDetail, changeAdmin} from '../../../actions/dispatchers';
+import {initProfileAdminError, loadProfileDetail, changeAdmin, confirmModal} from '../../../actions/dispatchers';
 import ProfileAdminTransferForm from './ProfileAdminTransferForm';
 import ProfileAdminTransferError from './ProfileAdminTransferError';
 
@@ -25,9 +25,9 @@ const ProfileAdminTransferBox = React.createClass({
   },
 
   handleClickSubmit(newId) {
-    if (confirm('관리자를 변경하시겠습니까?')) {
+    this.props.confirmModal('알림', '관리자를 변경하시겠습니까?', () => {
       this.props.changeAdmin(this.props.id, newId);
-    }
+    });
   },
 
   render() {
@@ -70,7 +70,9 @@ const mapDispatchToProps = function (dispatch) {
   return {
     initProfileAdminError: () => initProfileAdminError(dispatch),
     loadProfileDetail: id => loadProfileDetail(dispatch, id),
-    changeAdmin: (id, newId) => changeAdmin(dispatch, id, newId)
+    changeAdmin: (id, newId) => changeAdmin(dispatch, id, newId),
+    confirmModal: (title, message, positiveCallback, negativeCallback) =>
+      confirmModal(dispatch, title, message, positiveCallback, negativeCallback)
   };
 };
 
