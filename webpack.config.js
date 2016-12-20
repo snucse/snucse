@@ -60,7 +60,7 @@ module.exports = {
     proxy: [
       {
         context: ['/api', '/files'],
-        target: 'http://snucse.snucse.org:30000',
+        target: 'http://snucse.snucse.org:30100',
         secure: false
       }
     ]
