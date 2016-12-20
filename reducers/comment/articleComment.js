@@ -42,7 +42,7 @@ function loadComments(state, action) {
 
   if (!(articleId in state.fold)) {
     ret = updateObject(ret, {
-      fold: updateFold(state, articleId, true)
+      fold: updateFold(state, articleId, false)
     });
   }
 
