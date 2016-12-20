@@ -2034,6 +2034,10 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
+get-node-dimensions@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/get-node-dimensions/-/get-node-dimensions-1.2.2.tgz#7a71e8624cf9e1ab74599bb05b7e5116e995e45b"
+
 get-set-props@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/get-set-props/-/get-set-props-0.1.0.tgz#998475c178445686d0b32246da5df8dbcfbe8ea3"
@@ -3656,6 +3660,13 @@ react-dom@^15.3.1:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.2.tgz#c46b0aa5380d7b838e7a59c4a7beff2ed315531f"
 
+react-measure@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/react-measure/-/react-measure-1.4.5.tgz#4aa1565872e071a642971eb4d529628c000c8802"
+  dependencies:
+    get-node-dimensions "^1.2.0"
+    resize-observer-polyfill "1.3.1"
+
 react-redux@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-4.4.5.tgz#f509a2981be2252d10c629ef7c559347a4aec457"
@@ -3892,6 +3903,10 @@ require-uncached@^1.0.2:
 requires-port@1.0.x, requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+
+resize-observer-polyfill@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.3.1.tgz#4d87e372532c867520b8fcee6d7a27962f1ce3f8"
 
 resolve-cwd@^1.0.0:
   version "1.0.0"
