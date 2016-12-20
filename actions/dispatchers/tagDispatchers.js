@@ -115,14 +115,15 @@ export function breakTagRelationship(dispatch, targetTagName, tagName) {
   }).catch(console.error);
 }
 
-export function initializeCandidateTags(dispatch) {
-  dispatch({type: types.INITIALIZE_CANDIDATE_TAGS});
+export function initializeCandidateTags(dispatch, tagFormId) {
+  dispatch({type: types.INITIALIZE_CANDIDATE_TAGS, tagFormId});
 }
 
-export function loadCandidateTags(dispatch, query) {
+export function loadCandidateTags(dispatch, tagFormId, query) {
   DataCon.loadDataFromServer(Url.getUrl(`/tags?prefix=${query}`)).then(res => {
     dispatch({
       type: types.LOAD_CANDIDATE_TAGS,
+      tagFormId,
       tags: res.tags.slice(0, 10)
     });
     // fixme slice at the server
