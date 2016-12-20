@@ -37,7 +37,10 @@ const MarkdownEditor = React.createClass({
     const simplemde = this.simplemde = new SimpleMDE({
       element: ref,
       status: false,
-      spellChecker: false
+      spellChecker: false,
+      renderingConfig: {
+        singleLineBreaks: false
+      }
     });
     if (this.props.value) {
       simplemde.value(this.props.value);
