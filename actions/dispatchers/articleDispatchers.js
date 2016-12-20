@@ -3,6 +3,9 @@ import * as types from '../actionTypes';
 import {loadArticleTag} from './tagDispatchers';
 
 export function loadArticle(dispatch, articleId) {
+  dispatch({
+    type: types.CLEAR_ARTICLE_VIEW
+  });
   DataCon.loadDataFromServer(Url.getUrl(`/articles/${articleId}`)).then(article => {
     dispatch({
       type: types.LOAD_ARTICLE,
