@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import Measure from 'react-measure';
 import moment from 'moment';
 
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
@@ -10,10 +11,24 @@ const FeedArticle = React.createClass({
     this.props.onArticleDelete(articleId);
   },
 
+  handleMeasure(dimensions) {
+    this.setState({
+      height: dimensions.height
+    });
+  },
+
+  getInitialState() {
+    return {
+      width: -1,
+      height: -1
+    };
+  },
+
   render() {
     const {article} = this.props;
 
     moment.locale('ko');
+    const {height} = this.state;
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
     return (
@@ -29,7 +44,10 @@ const FeedArticle = React.createClass({
           <div className="article-content-container">
             <FileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
-            <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
+            <Measure onMeasure={this.handleMeasure}>
+              <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
+            </Measure>
+            {(height >= 224) ? <span className="article-content-ellipsis">...</span> : null}
           </div>
         </div>
         <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
