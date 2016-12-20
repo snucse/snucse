@@ -107,6 +107,10 @@ const TagForm = React.createClass({
     };
   },
 
+  componentWillMount() {
+    this.clickCandidateTagFuncs = {};
+  },
+
   render() {
     switch (this.props.userLevel) {
       case UserLevel.REGULAR: {
