@@ -29,7 +29,8 @@ const Feed = React.createClass({
       .then(article => {
         this.props.loadFeed({
           sinceId: article.id - 1,
-          maxId: article.id
+          maxId: article.id,
+          profileId: this.props.profileId
         });
       }).catch(console.error);
   },
