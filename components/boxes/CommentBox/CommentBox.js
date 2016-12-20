@@ -48,18 +48,21 @@ const CommentBox = React.createClass({
       <CommentFormContainer id={this.props.id} writeComment={this.props.writeComment}/> :
       null;
     return (
-      <section className="comment-wrapper">
-        <CommentList
-          id={this.props.id}
-          loadComments={this.props.loadComments}
-          modifyFoldComments={this.props.modifyFoldComments}
-          deleteComment={this.props.deleteComment}
-          editComment={this.props.editComment}
-          commentsInfo={this.props.commentsInfo}
-          renderRecommendBox={this.props.renderRecommendBox}
-          />
-        {commentForm}
-      </section>
+      <div className="comment-container">
+        <div className="comment-prefix"/>
+        <div className="comment-main-container">
+          <CommentList
+            id={this.props.id}
+            loadComments={this.props.loadComments}
+            modifyFoldComments={this.props.modifyFoldComments}
+            deleteComment={this.props.deleteComment}
+            editComment={this.props.editComment}
+            commentsInfo={this.props.commentsInfo}
+            renderRecommendBox={this.props.renderRecommendBox}
+            />
+          {commentForm}
+        </div>
+      </div>
     );
   }
 });

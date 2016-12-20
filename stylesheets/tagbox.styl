@@ -1,27 +1,73 @@
-.tag-wrapper
-  margin: 5px
-  padding: 5px
-  border: 1px solid
-  clear: both
-  ul
-    display: inline
-    margin: 0
-    padding: 0
-    li
-      display: inline
-
-.tag-form ul
-  display: block
-  width: 160px
-  border: 1px solid
-  li
-    display: list-item
-    list-style: none
-    &.selected,&:hover
-      cursor: pointer
-      background: gray
-      color: white
-
-.tag-form-wrapper
-  display: inline
-  margin-left: 10px
+@import "mixin.styl"
+@import "variable.styl"
+.tag-container
+  padding 15px 0
+.tag-container:before
+  padding-left 5px
+  content "\25B6"
+.tag-list
+  margin-left 10px
+  display inline-block
+  height 25px
+.tag-list:before
+  content " "
+  display inline-block
+.tag-item
+  display inline-block
+  background-color tag-item-color
+  border-radius 3px
+  margin 0
+  margin-right 6px
+  padding 3px 6px
+  line-height 18px
+.tag-item-name
+  margin-left 4px
+  font-size 12px
+  line-height 18px
+  color text-color
+.tag-item-delete-button
+  margin-top -2px
+  background transparent
+  border 0
+  color #666
+  margin-left 3px
+  opacity 0.45
+  padding 0
+  cursor pointer
+.tag-form-container
+  display inline-block
+.show-tag-form-button
+  button()
+  font-size 10px
+  line-height 12px
+.tag-form
+  display inline-block
+  position relative
+.tag-input
+  width 120px
+  height 30px
+  padding 5px 10px
+  font-size 12px
+  line-height 1.5
+  border-radius 3px
+  border 1px solid box-border-color
+  display inline-block
+  vertical-align middle
+  color input-text-color
+.autocomplete-tag-list
+  position absolute
+  top 30px
+  left 0
+  min-width 120px
+  max-width 240px
+  background-color box-background-color
+  border 1px solid box-border-color
+.autocomplete-tag-item
+  width 100%
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+  cursor pointer
+  font-size 12px
+  line-height 16px
+  padding 3px

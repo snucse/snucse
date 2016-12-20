@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {loadProfileDetail} from '../actions/dispatchers';
 import {ProfileAdminTransferContainer, ProfileEditBoxContainer} from './boxes';
 
+import '../stylesheets/profile.styl';
+
 const ProfileAdmin = React.createClass({
   componentDidMount() {
     this.props.loadProfileDetail(this.props.params.id);
@@ -20,7 +22,8 @@ const ProfileAdmin = React.createClass({
     const {name, description, admin, userId} = this.props;
     const mine = admin && (admin.id === userId);
     return (
-      <div className="profile-admin">
+      <div id="profile-admin">
+        <h5 id="profile-admin-title">프로필 관리</h5>
         <ProfileAdminTransferContainer id={id} admin={admin} mine={mine}/>
         <ProfileEditBoxContainer id={id} name={name} description={description} mine={mine}/>
       </div>

@@ -1,9 +1,8 @@
 import React from 'react';
 
 const editorModes = [
-  {type: 'text', description: '텍스트만'},
-  {type: 'md', description: 'Markdown'},
-  {type: 'html', description: 'HTML'}
+  {type: 'text', description: '텍스트'},
+  {type: 'md', description: 'Markdown'}
 ];
 
 const EditorModeForm = React.createClass({

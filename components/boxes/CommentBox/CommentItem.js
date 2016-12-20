@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import {connectModals} from '../../../utils';
 
@@ -68,12 +69,6 @@ const CommentItem = React.createClass({
   },
 
   render() {
-    const edited = null;
-    /*
-    const edited = this.props.comment.createdAt.updated ?
-      <span className="comment-edited">수정됨</span> :
-      null;
-    */
     const editBox = this.props.isEditable && this.state.isEditMode ?
       <div className="comment-editbox">
         <input onChange={this.handleEdit} defaultValue={this.state.newContent}/>
@@ -88,30 +83,34 @@ const CommentItem = React.createClass({
       const buttons = [];
       const id = this.props.comment.id;
       if (this.props.isDeletable) {
-        buttons.push(<button onClick={this.handleClickDelete} key={`delete-button-${id}`}>삭제</button>);
+        buttons.push(<button className="comment-delete-button" onClick={this.handleClickDelete} key={`delete-button-${id}`}>삭제</button>);
       }
       if (this.props.isEditable) {
-        buttons.push(<button onClick={this.handleEditEnable} key={`edit-button-${id}`}>수정</button>);
+        buttons.push(<button className="comment-edit-button" onClick={this.handleEditEnable} key={`edit-button-${id}`}>수정</button>);
       }
       controller = (
         <div className="comment-controller">
           {buttons}
-          {this.props.recommendBox}
         </div>
       );
     }
     // todo link to user profile?
     const {writer, createdAt} = this.props.comment;
+    moment.locale('ko');
+    const date = moment(createdAt);
     return (
       <li className="comment-item">
-        <div className="comment-information">
-          <img src={writer.profileImageUrl}/>
-          <a>{writer.name}</a>
-          {createdAt.date} {createdAt.time} {edited}
+        <div className="comment-writer-container">
+          <img className="comment-writer-image" src={writer.profileImageUri}/>
         </div>
-        {contentWrapper}
-        {editBox}
-        {controller}
+        <div className="comment-main">
+          <small className="comment-date" title={date.format('LLL')}>{date.fromNow()}</small>
+          <h5 className="comment-writer-name">{writer.name}</h5>
+          {contentWrapper}
+          {editBox}
+          {this.props.recommendBox}
+          {controller}
+        </div>
       </li>
     );
   }

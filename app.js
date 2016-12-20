@@ -7,6 +7,7 @@ import {Router, Route, browserHistory, IndexRoute} from 'react-router';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 
+import './stylesheets/reset.css';
 import './stylesheets/common.styl';
 
 import {

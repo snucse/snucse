@@ -1,12 +1,66 @@
-.article
-  padding: 10px
-
-.article-wrap
-  margin: 10px
-  padding: 10px
-  border: 1px solid
-  overflow: auto
-
-.delete-edit-box
-  float: right
-  font-weight: bold
+@import "mixin.styl"
+@import "variable.styl"
+.feed-article
+  padding 15px 20px
+  margin-bottom -1px
+  background-color article-background-color
+  border 1px solid box-border-color
+.article-date
+  float right
+  color article-date-color
+  font-size 12px
+.article-title
+  font-size 16px
+  font-weight 600
+  margin-bottom 15px
+.article-profiles
+  margin-left 5px
+  font-size 12px
+  font-weight normal
+  color article-profiles-color
+.article-writer-container
+  float left
+  width 60px
+.article-writer-image
+  display block
+  width 60px
+  height 60px
+  border-radius 100%
+.article-writer-name
+  font-size 14px
+  font-weight 600
+  text-align center
+.article-divider
+  float left
+  width 1px
+  height 60px
+  margin 10px 20px 10px 15px
+  background-color box-border-color
+.article-controller
+  float right
+.article-content-container
+  float left
+  width 795px
+.article-content
+  word-break break-all
+.article-delete-button
+  button()
+.article-delete-button:hover
+  button-hover()
+.article-edit-button
+  button()
+.article-edit-button:hover
+  button-hover()
+.article-main:after
+  clearfix()
+.recommend-container
+  text-align right
+  margin-top -28px
+.recommend-button
+  button()
+.recommend-count:before
+  content "("
+.recommend-count:after
+  content ")"
+.feed-load-more
+  padding 10px 0

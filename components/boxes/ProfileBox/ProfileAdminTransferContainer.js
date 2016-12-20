@@ -16,15 +16,15 @@ const ProfileAdminTransferContainer = React.createClass({
     }
 
     const adminLink = (mine === true) ? (
-      <Link to={`/profiles/${id}/transfer_admin`}>관리자 변경</Link>
+      <Link id="profile-admin-transfer-button" to={`/profiles/${id}/transfer_admin`}>관리자 변경</Link>
     ) : (
       null
     );
 
     return (
-      <div className="profile-admin">
-        관리자: {`${admin.name}(${admin.username})`}
-        {adminLink}
+      <div className="form-group">
+        <strong id="profile-admin-transfer-label">관리자 변경</strong>
+        관리자를 다른 사용자로 변경하면 버튼을 클릭하세요. {adminLink}
       </div>
     );
   }

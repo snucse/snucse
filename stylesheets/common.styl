@@ -1,10 +1,30 @@
-#tagcloud
-  h3
-    margin: 0
-  ul
-    margin: 0
-    padding: 0
-  .tag-item
-    display: inline
-    margin: 0px 5px
-  list-style: none
+@import "mixin.styl"
+@import "variable.styl"
+*
+  box-sizing border-box
+a
+  color link-color
+  text-decoration none
+a:hover,a:focus
+  color link-hover-color
+  text-decoration underline
+body
+  background-color background-color
+  font-family 'Roboto', 'Nanum Gothic', sans-serif
+  font-size 14px
+  line-height 1.6
+  color text-color
+.form-group
+  margin-bottom 15px
+.form-label
+  width 16.666667%
+  padding 7px 15px 0
+  text-align right
+  display inline-block
+  font-weight 700
+  vertical-align top
+.form-input
+  width 80%
+  input()
+textarea.form-input
+  height auto

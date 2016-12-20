@@ -8,7 +8,7 @@ const FileForm = React.createClass({
 
 const FileDelBox = React.createClass({
   render() {
-    return <button type="button" name={this.props.fileId} onClick={this.props.onClick}>삭제</button>;
+    return <button className="file-delete-button" type="button" name={this.props.fileId} onClick={this.props.onClick}>삭제</button>;
   }
 });
 
@@ -57,9 +57,9 @@ const FileUploadBox = React.createClass({
     });
 
     return (
-      <div className="file-upload-box">
+      <div id="file-form-container">
         {fileForms}
-        <button type="button" onClick={this.handleAdd}>파일 추가</button>
+        <button id="file-add-button" type="button" onClick={this.handleAdd}>파일 추가</button>
       </div>
     );
   }

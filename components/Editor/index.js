@@ -6,7 +6,7 @@ import EditorModeForm from './EditorModeForm';
 const Editor = React.createClass({
   getInitialState() {
     return {
-      mode: 'text',
+      mode: 'md',
       value: ''
     };
   },
@@ -55,7 +55,7 @@ const Editor = React.createClass({
     switch (this.state.mode) {
       case 'text':
       case 'html':
-        editor = <textarea value={this.state.value} className="simple-textarea" onChange={this.handleTextareaChange}/>;
+        editor = <textarea id="article-write-form-content-input" className="write-form-input" value={this.state.value} onChange={this.handleTextareaChange}/>;
         break;
       case 'md':
         editor = <MarkdownEditor value={this.state.value} onChange={this.handleContentChange}/>;
@@ -65,9 +65,11 @@ const Editor = React.createClass({
         break;
     }
     return (
-      <div>
-        {editor}<br/>
-        글쓰기 모드: <EditorModeForm mode={this.state.mode} onChange={this.handleModeChange}/>
+      <div id="article-editor-container">
+        <div id="article-editor-mode-container">
+          <EditorModeForm mode={this.state.mode} onChange={this.handleModeChange}/>
+        </div>
+        {editor}
       </div>
     );
   }

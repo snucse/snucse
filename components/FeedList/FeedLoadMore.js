@@ -61,7 +61,7 @@ const FeedLoadMore = React.createClass({
   render() {
     const message = this.state.loading ? 'Loading...' : 'Load more';
     return (
-      <div onClick={this.handleLoadMore} ref={this.handleRef}>{message}</div>
+      <li className="feed-load-more" onClick={this.handleLoadMore} ref={this.handleRef}>{message}</li>
     );
   }
 });

@@ -11,7 +11,7 @@ const ArticleTagList = React.createClass({
       return <ArticleTagItemContainer articleId={articleId} tag={tag} key={tag.tag}/>;
     });
     return (
-      <ul>
+      <ul className="tag-list">
         {tagItems}
       </ul>
     );

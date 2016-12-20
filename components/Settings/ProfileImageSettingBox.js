@@ -10,11 +10,7 @@ const ProfileImageSettingBox = React.createClass({
   },
 
   handleFileChange(e) {
-    this.setState({file: e.target.files[0]});
-  },
-
-  handleSubmit() {
-    const {file} = this.state;
+    const file = e.target.files[0];
 
     if (!file) {
       this.props.alertModal('알림', '파일을 선택해주세요.');
@@ -31,9 +27,14 @@ const ProfileImageSettingBox = React.createClass({
 
   render() {
     return (
-      <div className="profile-image-setting-box">
-        <input type="file" accept="image/*" onChange={this.handleFileChange}/>
-        <button type="button" onClick={this.handleSubmit}>변경하기</button>
+      <div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="settings-profile-image-input">프로필 사진</label>
+          <label id="settings-profile-image-input-container">
+            파일 선택
+            <input id="settings-profile-image-input" type="file" accept="image/*" onChange={this.handleFileChange}/>
+          </label>
+        </div>
       </div>
     );
   }

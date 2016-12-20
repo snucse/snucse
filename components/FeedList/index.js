@@ -16,9 +16,9 @@ const FeedList = React.createClass({
       );
     });
     return (
-      <div className="article">
+      <ul id="feed-list">
         {feedNodes}
-      </div>
+      </ul>
     );
   }
 });

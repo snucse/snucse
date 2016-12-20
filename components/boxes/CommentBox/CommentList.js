@@ -27,13 +27,14 @@ const CommentList = React.createClass({
     this.props.modifyFoldComments(id, false);
   },
 
+  // TODO: 근본적인 해결 하기
   componentDidMount() {
-    this.foldComments(this.props.id);
+    // this.foldComments(this.props.id);
   },
 
   componentWillReceiveProps(props) {
     if (this.props.id !== props.id) {
-      this.foldComments(props.id);
+      // this.foldComments(props.id);
     }
   },
 
@@ -74,7 +75,7 @@ const CommentList = React.createClass({
       .map(this.renderComment);
     let showMoreButton = null;
     if ((!this.props.commentsInfo.loaded[this.props.id] || isFold) && commentsNum > commentsNumToShow) {
-      showMoreButton = <button onClick={this.handleClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>;
+      showMoreButton = <button className="comment-show-more-button" onClick={this.handleClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>;
     }
     return (
       <div>

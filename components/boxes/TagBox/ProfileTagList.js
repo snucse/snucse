@@ -11,7 +11,7 @@ const ProfileTagList = React.createClass({
       return <ProfileTagItemContainer profileId={profileId} tag={tag} key={tag.tag}/>;
     });
     return (
-      <ul>
+      <ul className="tag-list">
         {tagItems}
       </ul>
     );

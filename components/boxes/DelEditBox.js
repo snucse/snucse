@@ -20,9 +20,9 @@ const DelEditBox = React.createClass({
 
   render() {
     return this.props.mine ? (
-      <div className="delete-edit-box">
-        <button onClick={this.handleArticleDelete}>삭제</button>
-        <button onClick={this.handleArticleUpdate}>수정</button>
+      <div className="article-controller">
+        <button className="article-delete-button" onClick={this.handleArticleDelete}>삭제</button>
+        <button className="article-edit-button" onClick={this.handleArticleUpdate}>수정</button>
       </div>
     ) : (
       <div/>

@@ -1,8 +1,9 @@
 import React from 'react';
 
-import {connectModals} from '../utils';
 import Editor from './Editor';
 import {FileUploadBox} from './boxes';
+
+import '../stylesheets/article-write.styl';
 
 /*
  * props
@@ -22,20 +23,20 @@ const ArticleWrite = React.createClass({
   render() {
     const {id} = this.props;
     return (
-      <div className="article-box">
-        <h3>글쓰기</h3>
+      <div id="article-write-box">
+        <h3 id="article-write-box-title">글쓰기</h3>
         <ArticleForm onArticleSubmit={this.handleArticleSubmit} id={id} key={this.state.index}/>
       </div>
     );
   }
 });
 
-const ArticleForm = connectModals(React.createClass({
+const ArticleForm = React.createClass({
   getInitialState() {
     return {
       title: '',
       content: '',
-      renderingMode: 'text',
+      renderingMode: 'md',
       files: {} // pairs of (fileId, file obj)
     };
   },
@@ -85,38 +86,32 @@ const ArticleForm = connectModals(React.createClass({
       return;
     }
 
-    this.props.makeCustomModal('confirm', '알림', '글을 작성하시겠습니까?',
-      [
-        {
-          label: '네',
-          callback: () => {
-            this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
-            this.props.cancelModal();
-          }
-        },
-        {
-          label: '아니오',
-          callback: () => {
-            this.props.cancelModal();
-          }
-        }
-      ],
-      {closable: false}
-    );
+    this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
   },
 
   render() {
     return (
-      <div className="comment-form">
-        <form name="article" onSubmit={this.handleSubmit}>
-          Title: <input type="text" id="title" name="title" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
-          <Editor onChange={this.handleContentChange} onModeChange={this.handleModeChange}/><br/>
-          Files: <FileUploadBox id={this.props.id} onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/><br/>
-          <button type="submit">글쓰기</button>
-        </form>
-      </div>
+      <form id="article-write-form" onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <label className="write-form-label" htmlFor="article-write-form-title-input">제목</label>
+          <input id="article-write-form-title-input" className="write-form-input" type="text" name="title" value={this.state.title} onChange={this.handleTitleChange}/>
+        </div>
+        <div className="form-group">
+          <label className="write-form-label" htmlFor="article-write-form-content-input">내용</label>
+          <Editor onChange={this.handleContentChange} onModeChange={this.handleModeChange}/>
+        </div>
+        <div className="form-group">
+          <label className="write-form-label">파일</label>
+          <div id="file-container">
+            <FileUploadBox id={this.props.id} onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/>
+          </div>
+        </div>
+        <div id="article-write-button-wrapper">
+          <button id="article-write-button" type="submit">글쓰기</button>
+        </div>
+      </form>
     );
   }
-}));
+});
 
 export default ArticleWrite;

@@ -6,11 +6,11 @@ export const ArticleSearchResult = React.createClass({
   render() {
     const {profiles, id, title, content, writer, createdAt} = this.props.article;
     const primaryProfile = profiles[0];
-    moment.locale('kr');
-    const date = `${moment(createdAt.date, 'YYYYMMDD').format('YYYY-MM-DD')}`;
+    moment.locale('ko');
+    const date = moment(createdAt);
     return (
       <article className="search-item article-search-item">
-        <Link to={`/${id}`}>{`${title}`}</Link> <time>{date}</time>
+        <Link to={`/${id}`}>{`${title}`}</Link> <time title={date.format('LLL')}>{date.fromNow()}</time>
         <br/>
         <p>{content.substring(0, 200)} {content.length > 200 ? '...' : ''}</p>
         <Link to={`/${primaryProfile.id}`}>{primaryProfile.name}</Link> | <Link to={`/${writer.username}`}>{`${writer.name}`}</Link>

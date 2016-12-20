@@ -5,6 +5,8 @@ import Editor from './Editor';
 
 import {FileBox, FileUploadBox} from './boxes';
 
+import '../stylesheets/article-write.styl';
+
 const ArticleEdit = React.createClass({
   loadArticleFromServer() {
     const {articleId} = this.props.params;
@@ -111,13 +113,27 @@ const ArticleEdit = React.createClass({
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleEdit}>
-          <input type="text" id="title" name="title" value={this.state.title} onChange={this.handleTitleChange}/><br/>
-          <Editor mode={this.state.renderingMode} value={this.state.content} onChange={this.handleContentChange} onModeChange={this.handleModeChange}/><br/>
-          <FileBox files={this.state.files} alives={this.state.alives} editable onAliveChange={this.handleAliveChange}/>
-          <FileUploadBox onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/>
-          <input type="submit" value="수정"/>
+      <div id="article-edit-box">
+        <h3 id="article-edit-box-title">글 수정</h3>
+        <form id="article-edit-form" onSubmit={this.handleEdit}>
+          <div className="form-group">
+            <label className="write-form-label" htmlFor="article-edit-form-title-input">제목</label>
+            <input id="article-edit-form-title-input" className="write-form-input" type="text" name="title" value={this.state.title} onChange={this.handleTitleChange}/>
+          </div>
+          <div className="form-group">
+            <label className="write-form-label" htmlFor="article-edit-form-content-input">내용</label>
+            <Editor mode={this.state.renderingMode} value={this.state.content} onChange={this.handleContentChange} onModeChange={this.handleModeChange}/>
+          </div>
+          <div className="form-group">
+            <label className="write-form-label">파일</label>
+            <div id="file-container">
+              <FileBox files={this.state.files} alives={this.state.alives} editable onAliveChange={this.handleAliveChange}/>
+              <FileUploadBox onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/>
+            </div>
+          </div>
+          <div id="article-edit-button-wrapper">
+            <button id="article-edit-button" type="submit">수정</button>
+          </div>
         </form>
       </div>
     );

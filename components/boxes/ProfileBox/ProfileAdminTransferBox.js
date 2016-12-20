@@ -38,7 +38,7 @@ const ProfileAdminTransferBox = React.createClass({
 
     if (!mine) {
       return (
-        <div className="profile-admin">
+        <div id="profile-admin">
           관리자가 아닙니다.
           <Link to={`/${this.props.id}`}>프로필로 돌아가기</Link>
         </div>
@@ -46,7 +46,8 @@ const ProfileAdminTransferBox = React.createClass({
     }
 
     return (
-      <div className="profile-admin">
+      <div id="profile-admin">
+        <h5 id="profile-admin-title">프로필 관리자 변경</h5>
         <ProfileAdminTransferForm onClickSubmit={this.handleClickSubmit}/>
       </div>
     );

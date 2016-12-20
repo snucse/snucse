@@ -5,6 +5,8 @@ import {loadAllProfiles} from '../../actions/dispatchers';
 import {UserLevel} from '../../utils';
 import ProfileMakeForm from './ProfileMakeForm';
 
+import '../../stylesheets/profile-list.styl';
+
 const ProfileList = React.createClass({
   componentDidMount() {
     if (this.props.userLevel === UserLevel.REGULAR) {
@@ -23,16 +25,19 @@ const ProfileList = React.createClass({
       case UserLevel.REGULAR: {
         const profileList = this.props.profileList.map(profile => {
           return (
-            <div key={profile.id} className="profile">
+            <li key={profile.id}>
               <Link to={`/${profile.id}`}>{profile.name}</Link>
-            </div>
+            </li>
           );
         });
         return (
-          <div className="profile-container">
+          <div>
             <ProfileMakeForm/>
-            <div className="profiles">
-              {profileList}
+            <div id="profile-list-box">
+              <h5 id="profile-list-title">전체 프로필 목록</h5>
+              <ul id="profile-list">
+                {profileList}
+              </ul>
             </div>
           </div>
         );

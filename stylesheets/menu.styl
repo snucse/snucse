@@ -1,39 +1,87 @@
-.top-menu
-  position: fixed
-  z-index: 999
-  top: 0
-  left: 0
-  right: 0
-  height: 4em
-  background-color: #2d2d2d
-  display: inline
-  li
-    line-height: 2em
-    list-style: none
-    color: white
-    float: left
-    vertical-align: middle
-    text-align: center
-
-.menulink
-  text-decoration: none
-  display: block
-  width: 4em
-  color: white
-  &:hover
-    color: red
-    background-color: #4d4d4d
-
-.side-menu
-  position: fixed
-  width: 10em
-  left: 0
-  top: 4em
-  bottom: 0
-  overflow: auto
-  background-color: #cfc
-
-.content
-  position: absolute
-  top: 4em
-  left: 10em
+@import "mixin.styl"
+@import "variable.styl"
+#header
+  background header-color
+#header-container
+  width 1260px
+  margin auto
+#logo-container
+  float left
+#logo
+  float left
+  padding 15px
+  height 50px
+  font-size 20px
+  line-height 20px
+  color header-text-color
+#logo:hover
+  text-decoration none
+#logout-link
+  float right
+  padding 15px
+  height 50px
+  font-size 14px
+  line-height 20px
+  color alpha(header-text-color, 0.7)
+#search-form
+  display none // temporarily disabled
+  float right
+  margin 7px 15px
+#search-form-input
+  input()
+  border-color header-input-border-color
+  display inline-block
+  width 180px
+#header:after
+  clearfix()
+#main-container
+  padding-top 30px
+  width 1260px
+  margin auto
+#sidemenu-container
+  float left
+  width 280px
+  padding 0 15px
+#user-box
+  box()
+  background-color article-background-color
+#user-image
+  width 60px
+  height 60px
+  border-radius 100%
+  vertical-align middle
+#user-name
+  display inline
+  margin-left 5px
+#settings-link
+  margin-left 5px
+  font-size 10px
+  font-weight normal
+  line-height 1
+#following-profiles-box
+  box()
+#following-profiles-title
+  box-title()
+  margin-top 5px
+  padding-bottom 10px
+  border-bottom 1px solid box-border-color
+#all-profiles-link
+  margin-left 5px
+  font-size 10px
+  font-weight normal
+  line-height 1
+#following-profiles-list
+  margin-left 5px
+#tag-cloud-box
+  box()
+#tag-cloud-title
+  box-title()
+.tag-cloud-tag-item
+  display inline
+  margin 0 5px
+#main
+  float left
+  width 980px
+  padding 0 15px 0 30px
+#main-container:after
+  clearfix()

@@ -36,21 +36,38 @@ const ProfileMakeForm = React.createClass({
 
   render() {
     return (
-      <div className="profile-form">
+      <div id="create-profile-form-box">
+        <h5 id="create-profile-form-title">새 프로필 만들기</h5>
         <form onSubmit={this.handleSubmit}>
-          ID: <input
-            type="text" name="id"
-            ref={genRefCallback(this, 'formId')}
-            /> <br/>
-          이름: <input
-            type="text" name="name"
-            ref={genRefCallback(this, 'formName')}
-            /> <br/>
-          설명: <input
-            type="text" name="description"
-            ref={genRefCallback(this, 'formDesc')}
-            /> <br/>
-          <input type="submit" value="그룹 만들기"/>
+          <div className="form-group">
+            <label className="form-label" htmlFor="create-profile-form-id-input">ID</label>
+            <input
+              id="create-profile-form-id-input"
+              className="form-input"
+              type="text" name="id"
+              ref={genRefCallback(this, 'formId')}
+              />
+          </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="create-profile-form-name-input">이름</label>
+            <input
+              id="create-profile-form-name-input"
+              className="form-input"
+              type="text" name="name"
+              ref={genRefCallback(this, 'formName')}
+              />
+          </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="create-profile-form-description-input">설명</label>
+            <textarea
+              id="create-profile-form-description-input"
+              className="form-input"
+              name="description"
+              rows={3}
+              ref={genRefCallback(this, 'formDesc')}
+              />
+          </div>
+          <input id="create-profile-button" type="submit" value="그룹 만들기"/>
         </form>
       </div>
     );

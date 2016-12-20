@@ -107,6 +107,10 @@ const TagForm = React.createClass({
     };
   },
 
+  componentWillMount() {
+    this.clickCandidateTagFuncs = {};
+  },
+
   render() {
     switch (this.props.userLevel) {
       case UserLevel.REGULAR: {
@@ -137,18 +141,18 @@ const TagForm = React.createClass({
         const form = this.state.isEditMode ?
           <form className="tag-form" onSubmit={this.handleSubmit}>
             <input
+              className="tag-input"
               ref={genRefCallback(this, '_content')}
               onChange={this.handleChangeInput}
               onKeyDown={this.handleKeyDownInput}
+              placeholder="태그 입력"
               />
-            <button>추가</button>
-            <button onClick={this.handleClickHideForm}>취소</button>
             {candidateTagList}
           </form> :
           null;
         return (
-          <section className="tag-form-wrapper">
-            <button onClick={this.handleClickShowForm}>태그추가</button>
+          <section className="tag-form-container">
+            <button className="show-tag-form-button" onClick={this.handleClickShowForm}>태그추가</button>
             {form}
           </section>
         );

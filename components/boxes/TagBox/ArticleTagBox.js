@@ -6,7 +6,7 @@ import ArticleTagFormContainer from './ArticleTagFormContainer';
 const ArticleTagBox = React.createClass({
   render() {
     return (
-      <div className="tag-wrapper">
+      <div className="tag-container">
         <ArticleTagList articleId={this.props.articleId}/>
         <ArticleTagFormContainer articleId={this.props.articleId}/>
       </div>

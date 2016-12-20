@@ -6,7 +6,7 @@ import ProfileTagFormContainer from './ProfileTagFormContainer';
 const ProfileTagBox = React.createClass({
   render() {
     return (
-      <div className="tag-wrapper">
+      <div className="tag-container">
         <ProfileTagList profileId={this.props.profileId}/>
         <ProfileTagFormContainer profileId={this.props.profileId}/>
       </div>
