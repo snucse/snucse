@@ -1,6 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-import {DataCon, Url, connectModals} from '../../utils';
+import {connectModals} from '../../utils';
+import {updateProfileImage} from '../../actions/dispatchers';
 
 const ProfileImageSettingBox = React.createClass({
   getInitialState() {
@@ -17,12 +19,9 @@ const ProfileImageSettingBox = React.createClass({
       return;
     }
 
-    const url = Url.getUrl('/users/profile_image');
-    DataCon.postFormDataToServer(url, 'POST', {image: file})
-      .then(() => {
-        this.props.alertModal('알림', '변경되었습니다.');
-        // TODO: reload profile images
-      });
+    this.props.updateProfileImage(file).then(() => {
+      this.props.alertModal('알림', '변경되었습니다.');
+    });
   },
 
   render() {
@@ -40,4 +39,10 @@ const ProfileImageSettingBox = React.createClass({
   }
 });
 
-export default connectModals(ProfileImageSettingBox);
+const mapDispatchToProps = function (dispatch) {
+  return {
+    updateProfileImage: image => updateProfileImage(dispatch, image)
+  };
+};
+
+export default connectModals(connect(null, mapDispatchToProps)(ProfileImageSettingBox));
