@@ -2,15 +2,25 @@ import {INITIALIZE_CANDIDATE_TAGS, LOAD_CANDIDATE_TAGS} from '../../actions/acti
 import {updateObject, createReducer} from '../common';
 
 const CANDIDATE_TAGS_INITIAL_STATE = {
-  tags: []
+  byTagFormId: {}
 };
 
-function initializeCandidateTags(candidateTagsState) {
-  return updateObject(candidateTagsState, {tags: []});
+function initializeCandidateTags(candidateTagsState, action) {
+  return updateObject(candidateTagsState, {
+    byTagFormId: {
+      ...candidateTagsState.byTagFormId,
+      [action.tagFormId]: []
+    }
+  });
 }
 
 function loadCandidateTags(candidateTagsState, action) {
-  return updateObject(candidateTagsState, {tags: action.tags});
+  return updateObject(candidateTagsState, {
+    byTagFormId: {
+      ...candidateTagsState.byTagFormId,
+      [action.tagFormId]: action.tags
+    }
+  });
 }
 
 export default createReducer(CANDIDATE_TAGS_INITIAL_STATE, {
