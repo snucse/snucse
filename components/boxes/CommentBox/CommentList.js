@@ -27,13 +27,14 @@ const CommentList = React.createClass({
     this.props.modifyFoldComments(id, false);
   },
 
+  // TODO: 근본적인 해결 하기
   componentDidMount() {
-    this.foldComments(this.props.id);
+    // this.foldComments(this.props.id);
   },
 
   componentWillReceiveProps(props) {
     if (this.props.id !== props.id) {
-      this.foldComments(props.id);
+      // this.foldComments(props.id);
     }
   },
 
