@@ -1,4 +1,4 @@
-import {LOAD_ARTICLE} from '../actions/actionTypes';
+import {LOAD_ARTICLE, CLEAR_ARTICLE_VIEW} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
 const ARTICLE_INITIAL_STATE = {
@@ -10,6 +10,11 @@ function loadArticle(state, action) {
   return updateObject(state, {article: action.article, isError: action.isError});
 }
 
+function clearArticleView(state) {
+  return updateObject(state, {article: null, isError: false});
+}
+
 export default createReducer(ARTICLE_INITIAL_STATE, {
-  [LOAD_ARTICLE]: loadArticle
+  [LOAD_ARTICLE]: loadArticle,
+  [CLEAR_ARTICLE_VIEW]: clearArticleView
 });
