@@ -9,7 +9,7 @@ const TagItem = React.createClass({
   render() {
     return this.props.accessible ? (
       <li className="tag-item">
-        <Link className="tag-item-name" to={{pathname: '/tag', query: {tag: this.props.tag.tag}}}>{this.props.tag.tag}</Link>
+        <Link className="tag-item-name" to={{pathname: '/tags', query: {tag: this.props.tag.tag}}}>{this.props.tag.tag}</Link>
         <button className="tag-item-delete-button" onClick={this.handleClickDelete}>×</button>
       </li>
     ) : (
