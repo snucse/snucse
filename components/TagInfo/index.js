@@ -4,7 +4,7 @@ import TagContainer from './TagContainer';
 
 const TagInfo = React.createClass({
   render() {
-    return <TagContainer tagName={this.props.params.tagName}/>;
+    return <TagContainer tagName={this.props.location.query.tag}/>;
   }
 });
 

@@ -11,7 +11,7 @@ const TagCloud = React.createClass({
         case UserLevel.REGULAR:
           return (
             <li className="tag-cloud-tag-item" key={tag.tag}>
-              <Link to={`/tags/${tag.tag}`}>{tag.tag}</Link>
+              <Link to={{pathname: '/tags', query: {tag: tag.tag}}}>{tag.tag}</Link>
             </li>
           );
         default:
