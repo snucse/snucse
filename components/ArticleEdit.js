@@ -1,6 +1,6 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
-import {DataCon, Url} from '../utils';
+import {DataCon, Url, connectModals} from '../utils';
 import Editor from './Editor';
 
 import {FileBox, FileUploadBox} from './boxes';
@@ -129,7 +129,10 @@ const ArticleEdit = React.createClass({
     }
 
     if (this.state.valid === false) {
-      return <p>권한이 없습니다.</p>;
+      this.props.alertModal('알림', '권한이 없습니다.', () => {
+        browserHistory.goBack();
+      });
+      return null;
     }
 
     return (
@@ -160,4 +163,4 @@ const ArticleEdit = React.createClass({
   }
 });
 
-export default ArticleEdit;
+export default connectModals(ArticleEdit);
