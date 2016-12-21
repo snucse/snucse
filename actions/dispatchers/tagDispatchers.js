@@ -120,7 +120,7 @@ export function initializeCandidateTags(dispatch, tagFormId) {
 }
 
 export function loadCandidateTags(dispatch, tagFormId, query) {
-  DataCon.loadDataFromServer(Url.getUrl(`/tags?prefix=${query}`)).then(res => {
+  DataCon.loadDataFromServer(Url.getUrl(`/tags`, {prefix: query})).then(res => {
     dispatch({
       type: types.LOAD_CANDIDATE_TAGS,
       tagFormId,
