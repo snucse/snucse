@@ -1,8 +1,9 @@
 import React from 'react';
+import moment from 'moment';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
-import moment from 'moment';
 
+import Realtime from '../Realtime';
 import {Url, DataCon} from '../../utils';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
@@ -20,12 +21,13 @@ const ArticleItem = React.createClass({
   render() {
     const {article} = this.props;
 
-    moment.locale('ko');
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
     return (
       <div className="feed-article">
-        <small className="article-date" title={date.format('LLL')}>{date.fromNow()}</small>
+        <small className="article-date" title={date.format('LLL')}>
+          <Realtime updateInterval={1000} from={date}/>
+        </small>
         <h5 className="article-title">{article.title}<small className="article-profiles">{article.profiles[0].name}</small></h5>
         <div className="article-main">
           <div className="article-writer-container">

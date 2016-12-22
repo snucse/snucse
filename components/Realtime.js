@@ -15,16 +15,18 @@ const Realtime = React.createClass({
     };
   },
 
-  updateNow() {
-    moment.locale('ko');
-    this.setState({
-      fromNow: this.props.from.fromNow()
-    });
-  },
-
   componentDidMount() {
+    const updateNow = () => {
+      console.log(this.state);
+      moment.locale('ko');
+      this.setState({
+        fromNow: this.props.from.fromNow()
+      });
+    };
+
+    const updater = setInterval(updateNow, this.props.updateInterval || 10000);
     this.setState({
-      updater: setInterval(this.updateNow, this.props.updateInterval)
+      updater
     });
   },
 
@@ -34,18 +36,19 @@ const Realtime = React.createClass({
 
   componentWillReceiveProps(props) {
     if (this.props.timestamp !== props.timestamp) {
-      this.updateNow();
+      this.state.updateNow();
     }
   },
 
   render() {
-    moment.locale('ko');
     return <div className="time">{this.state.fromNow}</div>;
   }
 });
 
 const mapStateToProps = function (state) {
-  timestamp: state.realtime.timestamp
+  return {
+    timestamp: state.realtime.timestamp
+  };
 };
 
 export default connect(mapStateToProps)(Realtime);
