@@ -126,6 +126,7 @@ const ArticleEdit = React.createClass({
   render() {
     if (!('valid' in this.state)) {
       return <p>Loading...</p>;
+      // TODO add loading component
     }
 
     if (this.state.valid === false) {
