@@ -4,7 +4,7 @@ export default {
     if (typeof params === 'object') {
       for (const key of Object.keys(params)) {
         if (params[key] !== undefined) {
-          query.push(`${key}=${params[key]}`);
+          query.push(`${key}=${encodeURIComponent(params[key])}`);
         }
       }
     }

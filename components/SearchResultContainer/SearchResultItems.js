@@ -53,7 +53,7 @@ export const TagSearchResult = React.createClass({
     const {tag} = this.props.tag;
     return (
       <article className="search-item tag-search-item">
-        <Link to={`/tags/${tag}`}>{tag}</Link>
+        <Link to={{pathname: '/tags', query: {tag}}}>{tag}</Link>
       </article>
     );
   }
