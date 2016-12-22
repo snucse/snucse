@@ -8,6 +8,7 @@ import tag from './tag';
 import me from './me';
 import modal from './modal';
 import search from './search';
+import realtime from './realtime';
 // import * as types from '../actions/actionTypes';
 // import other reducers
 
@@ -23,7 +24,8 @@ const reducers = {
   userInfo,
   me,
   modal,
-  search
+  search,
+  realtime
   // list up all reducers
 };
 
