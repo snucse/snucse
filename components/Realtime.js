@@ -26,6 +26,7 @@ const Realtime = React.createClass({
 
     const updater = setInterval(updateNow, this.props.updateInterval || 10000);
     this.setState({
+      updateNow,
       updater
     });
   },
@@ -36,7 +37,7 @@ const Realtime = React.createClass({
 
   componentWillReceiveProps(props) {
     if (this.props.timestamp !== props.timestamp) {
-      this.state.updateNow();
+      this.state.updateNow(); // for force update?
     }
   },
 
