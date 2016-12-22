@@ -13,6 +13,7 @@ import ClassManager from './ClassManager';
 import Login from './Login';
 import SignUp from './SignUp';
 import Settings from './Settings';
+import TimeManager from './TimeManager';
 
 export {
   Menu,
@@ -29,5 +30,6 @@ export {
   ClassManager,
   Login,
   SignUp,
-  Settings
+  Settings,
+  TimeManager
 };

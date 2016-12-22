@@ -2,7 +2,7 @@ import {UPDATE_TIMES} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
 const REALTIME_INITIAL_STATE = {
-  timestamp: 0
+  timestamp: Date.now()
 };
 
 function updateTimes(state, action) {
