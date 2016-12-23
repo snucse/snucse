@@ -8,7 +8,7 @@ const TimeManager = React.createClass({
   },
 
   componentDidMount() {
-    setInterval(this.props.updateTimes, 1000);
+    setInterval(this.props.updateTimes, 1000 * 30);
   }
 });
 

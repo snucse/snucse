@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {DataCon, Url} from '../utils';
-import {loadFeed, updateSingleFeed} from '../actions/dispatchers';
+import {loadFeed, updateSingleFeed, updateTimes} from '../actions/dispatchers';
 import FeedList from './FeedList';
 import ArticleWrite from './ArticleWrite';
 
@@ -21,6 +21,7 @@ const Feed = React.createClass({
 
   handleLoadMore(options) {
     this.props.loadFeed({...options, profileId: this.props.profileId});
+    this.props.updateTimes();
   },
 
   handleArticleSubmit(data) {
@@ -103,7 +104,8 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     loadFeed: options => loadFeed(dispatch, options),
-    updateSingleFeed: feed => updateSingleFeed(dispatch, feed)
+    updateSingleFeed: feed => updateSingleFeed(dispatch, feed),
+    updateTimes: () => updateTimes(dispatch)
   };
 };
 
