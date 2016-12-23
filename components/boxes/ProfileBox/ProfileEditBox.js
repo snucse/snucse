@@ -22,7 +22,15 @@ const ProfileEditBox = React.createClass({
   },
 
   handleClick() {
-    this.props.onEdit(this.state);
+    const {name, description} = this.state;
+    const data = {};
+    if (name !== undefined) {
+      data.name = name.trim();
+    }
+    if (description !== undefined) {
+      data.description = description.trim();
+    }
+    this.props.onEdit(data);
   },
 
   render() {
