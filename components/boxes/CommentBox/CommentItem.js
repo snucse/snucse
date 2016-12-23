@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
+import Realtime from '../../Realtime';
 import {connectModals} from '../../../utils';
 
 /*
@@ -104,7 +105,9 @@ const CommentItem = React.createClass({
           <img className="comment-writer-image" src={writer.profileImageUri}/>
         </div>
         <div className="comment-main">
-          <small className="comment-date" title={date.format('LLL')}>{date.fromNow()}</small>
+          <small className="comment-date" title={date.format('LLL')}>
+            <Realtime from={date}/>
+          </small>
           <h5 className="comment-writer-name">{writer.name}</h5>
           {contentWrapper}
           {editBox}

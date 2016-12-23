@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import {connect} from 'react-redux';
 
 /*
@@ -9,7 +8,6 @@ import {connect} from 'react-redux';
 
 const Realtime = React.createClass({
   render() {
-    moment.locale('ko');
     const {timestamp, from} = this.props;
     return <div className="time">{from.from(timestamp)}</div>;
   }

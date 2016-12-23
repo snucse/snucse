@@ -19,6 +19,7 @@ const ArticleItem = React.createClass({
   },
 
   render() {
+    moment.locale('ko');
     const {article} = this.props;
 
     const date = moment(article.createdAt);
@@ -26,7 +27,7 @@ const ArticleItem = React.createClass({
     return (
       <div className="feed-article">
         <small className="article-date" title={date.format('LLL')}>
-          <Realtime updateInterval={1000} from={date}/>
+          <Realtime from={date}/>
         </small>
         <h5 className="article-title">{article.title}<small className="article-profiles">{article.profiles[0].name}</small></h5>
         <div className="article-main">
