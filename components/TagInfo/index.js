@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {connectModals} from '../../utils';
 import TagContainer from './TagContainer';
 
 const TagInfo = React.createClass({
@@ -9,4 +8,4 @@ const TagInfo = React.createClass({
   }
 });
 
-export default connectModals(TagInfo);
+export default TagInfo;

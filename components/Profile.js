@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/profile.styl';
-import {UserLevel, connectModals} from '../utils';
+import {UserLevel} from '../utils';
 
 import {ProfileTagBox, ProfileCommentBox} from './boxes';
 import Feed from './Feed';
@@ -106,4 +106,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connectModals(connect(mapStateToProps, mapDispatchToProps)(Profile));
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
