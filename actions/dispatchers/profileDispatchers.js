@@ -1,3 +1,4 @@
+import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
 import {loadProfileTag, updateFollowingList, alertModal} from './';
@@ -12,6 +13,9 @@ export function loadAllProfiles(dispatch) {
 }
 
 export function loadProfileDetail(dispatch, id) {
+  dispatch({
+    type: types.CLEAR_PROFILE_DETAIL
+  });
   DataCon.loadDataFromServer(Url.getUrl(`/profiles/${id}`)).then(current => {
     dispatch({
       type: types.LOAD_PROFILE_DETAIL,
@@ -21,7 +25,15 @@ export function loadProfileDetail(dispatch, id) {
   }).then(current => {
     const {id, tags} = current;
     loadProfileTag(dispatch, id, tags);
-  }).catch(console.error);
+  }).catch(err => {
+    console.log(err);
+    dispatch({
+      type: types.ERR_PROFILE_DETAIL
+    });
+    alertModal(dispatch, '알림', '존재하지 않는 프로필입니다.', () => {
+      browserHistory.goBack();
+    });
+  });
 }
 
 export function updateFollowingState(dispatch, id, following) {
