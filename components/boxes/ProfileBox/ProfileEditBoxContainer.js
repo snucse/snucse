@@ -23,7 +23,6 @@ const ProfileEditBoxContainer = React.createClass({
   },
 
   handleEdit(data) {
-    console.log(data);
     if (data.name === '' || data.description === '') {
       this.props.alertModal('알림', '이름과 설명을 모두 입력해주세요.');
       return;
