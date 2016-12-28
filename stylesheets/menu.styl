@@ -2,6 +2,7 @@
 @import "variable.styl"
 #header
   background header-color
+  min-width 1260px
 #header-container
   width 1260px
   margin auto
@@ -85,3 +86,19 @@
   padding 0 15px 0 30px
 #main-container:after
   clearfix()
+@media (max-width: 768px)
+  #header
+    min-width auto
+  #header-container
+    width auto
+  #main-container
+    width auto
+  #sidemenu-container
+    float none
+    width auto
+  #tag-cloud-box
+    display none
+  #main
+    float none
+    width auto
+    padding 0 15px
