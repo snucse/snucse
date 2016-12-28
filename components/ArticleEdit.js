@@ -94,12 +94,16 @@ const ArticleEdit = React.createClass({
     const fileIds = this.state.files.map(file => file.id)
       .filter(id => this.state.alives[id]);
     const files = [];
-
     for (const fileId in this.state.newFiles) {
       if (Object.hasOwnProperty.call(this.state.newFiles, fileId)) {
         files.push(this.state.newFiles[fileId]);
       }
     }
+    if (!content || !title) {
+      // TODO: renderingMode도 검사
+      return;
+    }
+
     this.submitEdit({
       title,
       content,
