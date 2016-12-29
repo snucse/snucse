@@ -31,7 +31,9 @@ const ProfileMakeForm = React.createClass({
       this.props.alertModal('알림', '프로필 생성에 성공하였습니다.');
       this.props.updateFollowingList();
       browserHistory.push(`/${trimmed.id}`);
-    }).catch(console.error); // TODO: 중복 id등의 예외처리
+    }).catch(() => {
+      this.props.alertModal('알림', 'ID가 중복되었습니다.');
+    });
   },
 
   render() {

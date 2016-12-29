@@ -26,13 +26,22 @@ const Profile = React.createClass({
   },
 
   render() {
-    const {id, userId, admin, name, description} = this.props;
+    const {loading, id, userId, admin, name, description} = this.props;
     const mine = admin && userId === admin.id;
     const rightButton = mine ? (
       <Link id="profile-admin-button" to={`/profiles/${id}/admin`}>프로필 설정</Link>
     ) : (
       <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
     );
+
+    if (loading) {
+      return <p>Loading...</p>;
+      // TODO insert loading component
+    }
+
+    if (!loading && !admin) {
+      return null;
+    }
 
     return (
       <div>
@@ -76,9 +85,10 @@ const FollowBox = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {following, name, description, admin} = state.profile.current;
+  const {loading, following, name, description, admin} = state.profile.current;
   const {userLevel, userId} = state.userInfo;
   return {
+    loading,
     following,
     userLevel,
     name,

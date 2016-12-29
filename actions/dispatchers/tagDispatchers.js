@@ -1,5 +1,7 @@
+import {browserHistory} from 'react-router';
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
+import {alertModal} from './modalDispatchers';
 
 export function loadArticlesTag(dispatch, articles, reset = false) {
   dispatch({
@@ -66,18 +68,24 @@ export function deleteTagToProfile(dispatch, profileId, tagName) {
 }
 
 export function loadTagInformation(dispatch, tagName) {
-  DataCon.loadDataFromServer(Url.getUrl('/tags/show', {tag: tagName})).then(tagInformation => {
-    dispatch({
-      type: types.LOAD_TAG_INFORMATION,
-      tagInformation
+  if (tagName) {
+    DataCon.loadDataFromServer(Url.getUrl('/tags/show', {tag: tagName})).then(tagInformation => {
+      dispatch({
+        type: types.LOAD_TAG_INFORMATION,
+        tagInformation
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: types.LOAD_TAG_INFORMATION,
+        tagInformation: null
+      });
     });
-  }).catch(err => {
-    console.error(err);
-    dispatch({
-      type: types.LOAD_TAG_INFORMATION,
-      tagInformation: null
+  } else {
+    alertModal(dispatch, '알림', '정상적이지 않은 접근입니다.', () => {
+      browserHistory.goBack();
     });
-  });
+  }
 }
 
 export function loadTagCloud(dispatch) {

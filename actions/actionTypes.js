@@ -40,10 +40,13 @@ export const LOAD_SEARCH_RESULT = 'LOAD_SEARCH_RESULT';
 
 // action types related with updates
 export const UPDATE_FOLLOWING = 'UPDATE_FOLLOWING';
-
 export const LOAD_ALL_PROFILES = 'LOAD_ALL_PROFILES';
-export const LOAD_PROFILE_DETAIL = 'LOAD_PROFILE_DETAIL';
 export const UPDATE_FOLLOWING_STATE = 'UPDATE_FOLLOWING_STATE';
+
+// action types related with profile details
+export const LOAD_PROFILE_DETAIL = 'LOAD_PROFILE_DETAIL';
+export const CLEAR_PROFILE_DETAIL = 'CLEAR_PROFILE_DETAIL';
+export const ERR_PROFILE_DETAIL = 'ERR_PROFILE_DETAIL';
 
 // action types related with profile admin page
 export const PROFILE_ERROR_INIT = 'PROFILE_ERROR_INIT';
