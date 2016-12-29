@@ -20,7 +20,9 @@ const CommentForm = React.createClass({
   render() {
     return (
       <form className="comment-form" onSubmit={this.handleSubmit}>
-        <input className="comment-input" ref={genRefCallback(this, '_content')}/>
+        <div className="comment-input-container">
+          <input className="comment-input" ref={genRefCallback(this, '_content')}/>
+        </div>
         <button className="comment-submit-button">확인</button>
       </form>
     );
