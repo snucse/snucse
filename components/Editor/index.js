@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {Client} from '../../utils';
 import MarkdownEditor from './MarkdownEditor';
 import EditorModeForm from './EditorModeForm';
 
@@ -12,6 +13,10 @@ const Editor = React.createClass({
   },
   componentDidMount() {
     this.updateFromProps(this.props);
+    if (Client.isMobile()) {
+      const mode = 'text';
+      this.setState({mode});
+    }
   },
   componentWillReceiveProps(props) {
     this.updateFromProps(props);
