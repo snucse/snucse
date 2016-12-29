@@ -24,12 +24,15 @@ const CommentItem = React.createClass({
     });
   },
 
-  handleClickEdit() {
+  handleSubmit(event) {
+    event.preventDefault();
     this.props.onEdit(this.state.newContent);
     this.handleEditDisable();
   },
 
-  handleClickCancel() {
+  handleClickCancel(event) {
+    event.preventDefault();
+    event.stopPropagation();
     this.props.confirmModal('알림', '작성중인 내용이 지워집니다. 계속하시겠습니까?', () => {
       this.handleEditDisable();
     });
@@ -70,11 +73,11 @@ const CommentItem = React.createClass({
 
   render() {
     const editBox = this.props.isEditable && this.state.isEditMode ?
-      <div className="comment-editbox">
+      <form className="comment-editbox" onSubmit={this.handleSubmit}>
         <input onChange={this.handleEdit} defaultValue={this.state.newContent}/>
-        <button onClick={this.handleClickEdit}>수정</button>
+        <button>수정</button>
         <button onClick={this.handleClickCancel}>취소</button>
-      </div> :
+      </form> :
       null;
     let contentWrapper = null;
     let controller = null;
