@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import Editor from './Editor';
 import {FileUploadBox} from './boxes';
@@ -31,7 +32,7 @@ const ArticleWrite = React.createClass({
   }
 });
 
-const ArticleForm = React.createClass({
+const ArticleFormProto = React.createClass({
   getInitialState() {
     return {
       title: '',
@@ -69,10 +70,15 @@ const ArticleForm = React.createClass({
       files: newFiles
     });
   },
+  handleProfileChange(e) {
+    this.setState({
+      id: e.target.value
+    });
+  },
 
   handleSubmit(e) {
     e.preventDefault();
-    const profileId = this.props.id;
+    const profileId = this.state.id ? this.state.id : this.props.id;
     const content = this.state.content.trim();
     const title = this.state.title.trim();
     const renderingMode = this.state.renderingMode;
@@ -90,8 +96,18 @@ const ArticleForm = React.createClass({
   },
 
   render() {
+    const profileSelector = this.props.id ? null : (
+      <select defaultValue="" onChange={this.handleProfileChange}>
+        <option value="" disabled>-- 프로필 선택 --</option>
+        {this.props.following.map(profile => (
+          <option value={profile.id} key={profile.id}>{profile.name}</option>
+        ))}
+      </select>
+    );
+
     return (
       <form id="article-write-form" onSubmit={this.handleSubmit}>
+        {profileSelector}
         <div className="form-group">
           <label className="write-form-label" htmlFor="article-write-form-title-input">제목</label>
           <input id="article-write-form-title-input" className="write-form-input" type="text" name="title" value={this.state.title} onChange={this.handleTitleChange}/>
@@ -113,5 +129,13 @@ const ArticleForm = React.createClass({
     );
   }
 });
+
+const mapStateToProps = function (state) {
+  return {
+    following: state.me.following
+  };
+};
+
+const ArticleForm = connect(mapStateToProps)(ArticleFormProto);
 
 export default ArticleWrite;
