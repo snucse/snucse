@@ -25,12 +25,13 @@ const Feed = React.createClass({
 
   handleArticleSubmit(data) {
     const url = Url.getUrl('/articles');
+    const profileId = this.props.profileId ? this.props.profileId : data.profileId;
     DataCon.postFormDataToServer(url, 'POST', data)
       .then(article => {
         this.props.loadFeed({
           sinceId: article.id - 1,
           maxId: article.id,
-          profileId: this.props.profileId
+          profileId
         });
       }).catch(console.error);
   },
@@ -85,7 +86,7 @@ const Feed = React.createClass({
     }
     // total O(n + m)
 
-    const articleWrite = this.props.profileId ? <ArticleWrite id={this.props.profileId} onArticleSubmit={this.handleArticleSubmit}/> : null;
+    const articleWrite = <ArticleWrite id={this.props.profileId} onArticleSubmit={this.handleArticleSubmit}/>;
 
     return (
       <div className="feed">
