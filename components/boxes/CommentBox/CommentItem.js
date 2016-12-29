@@ -74,10 +74,12 @@ const CommentItem = React.createClass({
 
   render() {
     const editBox = this.props.isEditable && this.state.isEditMode ?
-      <form className="comment-editbox" onSubmit={this.handleSubmit}>
-        <input onChange={this.handleEdit} defaultValue={this.state.newContent}/>
-        <button>수정</button>
-        <button onClick={this.handleClickCancel}>취소</button>
+      <form className="comment-edit-form" onSubmit={this.handleSubmit}>
+        <div className="comment-edit-input-container">
+          <input className="comment-edit-input" onChange={this.handleEdit} defaultValue={this.state.newContent}/>
+        </div>
+        <button className="comment-edit-submit-button">수정</button>
+        <button className="comment-edit-cancel-button" onClick={this.handleClickCancel}>취소</button>
       </form> :
       null;
     let contentWrapper = null;
