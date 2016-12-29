@@ -1,6 +1,6 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
-import {DataCon, Url} from '../utils';
+import {DataCon, Url, connectModals} from '../utils';
 import Editor from './Editor';
 
 import {FileBox, FileUploadBox} from './boxes';
@@ -11,14 +11,26 @@ const ArticleEdit = React.createClass({
   loadArticleFromServer() {
     const {articleId} = this.props.params;
     const url = Url.getUrl(`/articles/${articleId}`);
-    DataCon.loadDataFromServer(url).then(data => {
-      const {title, content, renderingMode, files} = data;
+    DataCon.loadDataFromServer(Url.getUrl('/users/me')).then(data => {
+      return data.id;
+    }).then(userId => {
+      DataCon.loadDataFromServer(url).then(data => {
+        const writerId = data.writer.id;
 
-      const alives = {};
-      for (let i = 0; i < files.length; i++) {
-        alives[files[i].id] = true;
-      }
-      this.setState({title, content, renderingMode, files, alives});
+        if (userId === writerId) {
+          const {title, content, renderingMode, files} = data;
+
+          const alives = {};
+          for (let i = 0; i < files.length; i++) {
+            alives[files[i].id] = true;
+          }
+          this.setState({valid: true, title, content, renderingMode, files, alives});
+        } else {
+          this.setState({valid: false});
+        }
+      }).catch(err => {
+        throw err;
+      });
     }).catch(console.error);
   },
 
@@ -116,6 +128,18 @@ const ArticleEdit = React.createClass({
   },
 
   render() {
+    if (!('valid' in this.state)) {
+      return <p>Loading...</p>;
+      // TODO add loading component
+    }
+
+    if (this.state.valid === false) {
+      this.props.alertModal('알림', '권한이 없습니다.', () => {
+        browserHistory.goBack();
+      });
+      return null;
+    }
+
     return (
       <div id="article-edit-box">
         <h3 id="article-edit-box-title">글 수정</h3>
@@ -144,4 +168,4 @@ const ArticleEdit = React.createClass({
   }
 });
 
-export default ArticleEdit;
+export default connectModals(ArticleEdit);
