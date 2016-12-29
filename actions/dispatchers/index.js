@@ -10,3 +10,4 @@ export * from './modalDispatchers';
 export * from './searchDispatchers';
 export * from './recommendDispatchers';
 export * from './settingsDispatchers';
+export * from './realtimeDispatchers';

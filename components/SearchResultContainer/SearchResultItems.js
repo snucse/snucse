@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import moment from 'moment';
 
+import Realtime from '../Realtime';
+
 export const ArticleSearchResult = React.createClass({
   render() {
     const {profiles, id, title, content, writer, createdAt} = this.props.article;
@@ -10,7 +12,10 @@ export const ArticleSearchResult = React.createClass({
     const date = moment(createdAt);
     return (
       <article className="search-item article-search-item">
-        <Link to={`/${id}`}>{`${title}`}</Link> <time title={date.format('LLL')}>{date.fromNow()}</time>
+        <Link to={`/${id}`}>{`${title}`}</Link>
+        <time title={date.format('LLL')}>
+          <Realtime from={date}/>
+        </time>
         <br/>
         <p>{content.substring(0, 200)} {content.length > 200 ? '...' : ''}</p>
         <Link to={`/${primaryProfile.id}`}>{primaryProfile.name}</Link> | <Link to={`/${writer.username}`}>{`${writer.name}`}</Link>

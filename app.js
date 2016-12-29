@@ -25,7 +25,8 @@ import {
   ClassManager,
   Login,
   SignUp,
-  Settings
+  Settings,
+  TimeManager
 } from './components';
 
 import reducers from './reducers';
@@ -36,24 +37,26 @@ const store = createStore(combineReducers(reducers));
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/login" component={Login}/>
-      <Route path="/sign-up" component={SignUp}/>
-      <Route path="/" component={Menu} pollInterval={2000}>
-        <IndexRoute component={Main} pollInterval={2000}/>
-        <Route path="tags" component={TagInfo}/>
-        <Route path="message" component={Message}/>
-        <Route path="others" component={Others}/>
-        <Route path="profiles" component={ProfileList}/>
-        <Route path="profiles/:id/write" component={ArticleWrite}/>
-        <Route path="settings" component={Settings}/>
-        <Route path="profiles/:id/admin" component={ProfileAdmin}/>
-        <Route path="profiles/:id/transfer_admin" component={ProfileAdminTransfer}/>
-        <Route path="search" component={SearchResult}/>
-        <Route path=":id" component={ClassManager}/>
-        <Route path=":articleId/edit" component={ArticleEdit}/>
-      </Route>
-    </Router>
+    <TimeManager>
+      <Router history={browserHistory}>
+        <Route path="/login" component={Login}/>
+        <Route path="/sign-up" component={SignUp}/>
+        <Route path="/" component={Menu} pollInterval={2000}>
+          <IndexRoute component={Main} pollInterval={2000}/>
+          <Route path="tags" component={TagInfo}/>
+          <Route path="message" component={Message}/>
+          <Route path="others" component={Others}/>
+          <Route path="profiles" component={ProfileList}/>
+          <Route path="profiles/:id/write" component={ArticleWrite}/>
+          <Route path="settings" component={Settings}/>
+          <Route path="profiles/:id/admin" component={ProfileAdmin}/>
+          <Route path="profiles/:id/transfer_admin" component={ProfileAdminTransfer}/>
+          <Route path="search" component={SearchResult}/>
+          <Route path=":id" component={ClassManager}/>
+          <Route path=":articleId/edit" component={ArticleEdit}/>
+        </Route>
+      </Router>
+    </TimeManager>
   </Provider>,
   rootElement
 );

@@ -5,6 +5,7 @@ import Measure from 'react-measure';
 import moment from 'moment';
 import classnames from 'classnames';
 
+import Realtime from '../Realtime';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const FeedArticle = React.createClass({
@@ -47,7 +48,9 @@ const FeedArticle = React.createClass({
     }
     return (
       <li className="feed-article">
-        <small className="article-date" title={date.format('LLL')}>{date.fromNow()}</small>
+        <small className="article-date" title={date.format('LLL')}>
+          <Realtime from={date}/>
+        </small>
         <h5 className="article-title"><Link to={`/${article.id}`}>{article.title}</Link><small className="article-profiles">{article.profiles[0].name}</small></h5>
         <div className="article-main">
           <div className="article-writer-container">

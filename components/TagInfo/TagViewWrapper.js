@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import moment from 'moment';
 
 import '../../stylesheets/taginfo.styl';
+import Realtime from '../Realtime';
 import {RelatedTagBox} from '../boxes';
 
 const TagEmptyView = React.createClass({
@@ -26,7 +27,9 @@ const TagView = React.createClass({
         return (
           <li key={article.id} className="tag-info-article-container">
             <div className="tag-info-article">
-              <small className="tag-info-article-date" title={date.format('LLL')}>{date.fromNow()}</small>
+              <small className="tag-info-article-date" title={date.format('LLL')}>
+                <Realtime from={date}/>
+              </small>
               <h5 className="tag-info-article-header"><Link className="tag-info-article-title" to={`/${article.id}`}>{article.title}</Link><span className="tag-info-article-profiles">{article.profiles[0].name}</span></h5>
               <div className="tag-info-article-writer-container">
                 <img className="tag-info-article-writer-image" src={article.writer.profileImageUri}/>

@@ -62,3 +62,6 @@ export const SET_MODAL = 'SET_MODAL';
 // action types related with article view
 export const LOAD_ARTICLE = 'LOAD_ARTICLE';
 export const CLEAR_ARTICLE_VIEW = 'CLEAR_ARTICLE_VIEW';
+
+// action types related with realtime
+export const UPDATE_TIMES = 'UPDATE_TIMES';
