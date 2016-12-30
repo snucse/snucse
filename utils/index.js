@@ -3,6 +3,7 @@ import Url from './Url';
 import RefCallbackHelper from './RefCallbackHelper';
 import UserLevel from './UserLevel';
 import connectModals from './ModalBox';
+import Client from './Client';
 
 const genRefCallback = RefCallbackHelper.generate;
 
@@ -11,5 +12,6 @@ export {
   Url,
   genRefCallback,
   connectModals,
-  UserLevel
+  UserLevel,
+  Client
 };
