@@ -12,11 +12,11 @@ const Editor = React.createClass({
     };
   },
   componentDidMount() {
-    this.updateFromProps(this.props);
     if (Client.isMobile()) {
       const mode = 'text';
       this.setState({mode});
     }
+    this.updateFromProps(this.props);
   },
   componentWillReceiveProps(props) {
     this.updateFromProps(props);
