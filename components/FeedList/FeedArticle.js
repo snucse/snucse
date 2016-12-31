@@ -51,7 +51,7 @@ const FeedArticle = React.createClass({
         <small className="article-date" title={date.format('LLL')}>
           <Realtime from={date}/>
         </small>
-        <h5 className="article-title"><Link to={`/${article.id}`}>{article.title}</Link><small className="article-profiles">{article.profiles[0].name}</small></h5>
+        <h5 className="article-title"><Link to={`/${article.id}`}>{article.title}</Link><Link to={`/${article.profiles[0].id}`} className="article-profiles">{article.profiles[0].name}</Link></h5>
         <div className="article-main">
           <div className="article-writer-container">
             <img className="article-writer-image" src={article.writer.profileImageUri}/>

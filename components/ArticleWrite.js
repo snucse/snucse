@@ -97,12 +97,15 @@ const ArticleFormProto = React.createClass({
 
   render() {
     const profileSelector = this.props.id ? null : (
-      <select defaultValue="" onChange={this.handleProfileChange}>
-        <option value="" disabled>-- 프로필 선택 --</option>
-        {this.props.following.map(profile => (
-          <option value={profile.id} key={profile.id}>{profile.name}</option>
-        ))}
-      </select>
+      <div className="form-group">
+        <label className="write-form-label" htmlFor="article-write-form-profiles-input">프로필</label>
+        <select id="article-write-form-profiles-input" className="write-form-input" defaultValue="" onChange={this.handleProfileChange}>
+          <option value="" disabled>-- 프로필 선택 --</option>
+          {this.props.following.map(profile => (
+            <option value={profile.id} key={profile.id}>{profile.name}</option>
+          ))}
+        </select>
+      </div>
     );
 
     return (

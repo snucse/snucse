@@ -52,11 +52,15 @@ const LoginForm = connectModals(React.createClass({
         <div id="login-input-container">
           <div className="login-form-group">
             <label className="login-form-label" htmlFor="login-username-input">아이디</label>
-            <input id="login-username-input" className="login-form-input" type="text" autoFocus ref={genRefCallback(this, 'id')}/>
+            <div className="login-form-input-container">
+              <input id="login-username-input" className="login-form-input" type="text" autoFocus ref={genRefCallback(this, 'id')}/>
+            </div>
           </div>
           <div className="login-form-group">
             <label className="login-form-label" htmlFor="login-password-input">비밀번호</label>
-            <input id="login-password-input" className="login-form-input" type="password" ref={genRefCallback(this, 'password')}/>
+            <div className="login-form-input-container">
+              <input id="login-password-input" className="login-form-input" type="password" ref={genRefCallback(this, 'password')}/>
+            </div>
           </div>
         </div>
         <div id="login-button-container">
