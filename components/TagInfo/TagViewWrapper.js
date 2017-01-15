@@ -33,7 +33,7 @@ const TagView = React.createClass({
               <h5 className="tag-info-article-header"><Link className="tag-info-article-title" to={`/${article.id}`}>{article.title}</Link><span className="tag-info-article-profiles">{article.profiles[0].name}</span></h5>
               <div className="tag-info-article-writer-container">
                 <img className="tag-info-article-writer-image" src={article.writer.profileImageUri}/>
-                <h5 className="tag-info-article-writer-name">{article.writer.name}</h5>
+                <h5 className="tag-info-article-writer-name"><Link to={`/${article.writer.username}`}>{article.writer.name}</Link></h5>
               </div>
               <div className="tag-info-article-main">
                 <div className="tag-info-article-content">
