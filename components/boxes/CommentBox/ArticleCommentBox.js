@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadComments, loadCommentReplies, setLastComment, writeComment, modifyFoldComments, editComment, deleteComment} from '../../../actions/dispatchers';
+import {loadComments, loadReplies, setLastComment, writeComment, modifyFoldComments, editComment, deleteComment} from '../../../actions/dispatchers';
 import {CommentRecommendBox} from '../';
 import CommentBox from './CommentBox';
 
@@ -45,7 +45,7 @@ const mapStateToProps = function (state) {
 const mapDispatcherToProps = function (dispatch) {
   return {
     loadComments: id => loadComments(dispatch, id),
-    loadReplies: id => loadCommentReplies(dispatch, id),
+    loadReplies: id => loadReplies(dispatch, id),
     setLastComment: (...args) => setLastComment(dispatch, ...args),
     writeComment: (targetId, content, parentCommentId) => writeComment(dispatch, targetId, content, parentCommentId),
     modifyFoldComments: (id, fold, isChild) => modifyFoldComments(dispatch, id, fold, isChild),

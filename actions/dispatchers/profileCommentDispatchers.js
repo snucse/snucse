@@ -15,8 +15,8 @@ export function loadProfileComments(dispatch, profileId) {
 export function loadProfileCommentReplies(dispatch, parentCommentId) {
   DataCon.loadDataFromServer(Url.getUrl('/profile_comments/replies', {parentCommentId})).then(res => {
     dispatch({
-      type: types.LOAD_PROFILE_COMMENT_REPLIES,
-      replies: res.comments,
+      type: types.LOAD_PROFILE_COMMENT_REPLY,
+      comments: res.profileComments,
       parentCommentId
     });
   }).catch(console.error);

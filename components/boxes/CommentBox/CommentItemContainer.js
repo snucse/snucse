@@ -5,21 +5,6 @@ import CommentList from './CommentList';
 import CommentFormContainer from './CommentFormContainer';
 import CommentItem from './CommentItem';
 
-// fixme this is fake
-const REPLY_INITIAL_STATE = {
-  comments: {
-    /*
-    articleId: [
-      {},
-      {},
-    ]
-    */
-  },
-  count: {},
-  loaded: {},
-  fold: {}
-};
-
 /*
   props
   - comment
@@ -30,12 +15,18 @@ const REPLY_INITIAL_STATE = {
   - recommendBox
 */
 const CommentItemContainer = React.createClass({
+  componentDidMount() {
+    if (!this.props.isChild && this.props.comment.lastReply !== undefined) {
+      this.props.setLastComment(this.props.comment.id, this.props.comment.lastReply, this.props.comment.replyCount, true);
+    }
+  },
+
   handleDelete() {
-    this.props.deleteComment(this.props.comment.id, this.props.id);
+    this.props.deleteComment(this.props.comment.id, this.props.id, this.props.isChild);
   },
 
   handleEdit(newContent) {
-    this.props.editComment(this.props.comment.id, this.props.id, newContent);
+    this.props.editComment(this.props.comment.id, this.props.id, newContent, this.props.isChild);
   },
 
   render() {
@@ -43,7 +34,19 @@ const CommentItemContainer = React.createClass({
     let replyList = null;
     let replyForm = null;
     if (!this.props.isChild) {
-      replyList = <CommentList commentsInfo={REPLY_INITIAL_STATE} isChild/>;
+      replyList = (
+        <CommentList
+          id={this.props.comment.id}
+          loadComments={this.props.loadReplies}
+          modifyFoldComments={this.props.modifyFoldComments}
+          writeComment={this.props.writeComment}
+          deleteComment={this.props.deleteComment}
+          editComment={this.props.editComment}
+          commentsInfo={this.props.repliesInfo}
+          renderRecommendBox={this.props.renderRecommendBox}
+          isChild
+          />
+      );
       replyForm = (
         <CommentFormContainer
           id={this.props.id}

@@ -22,11 +22,11 @@ const CommentList = React.createClass({
   },
 
   foldComments(id) {
-    this.props.modifyFoldComments(id, true);
+    this.props.modifyFoldComments(id, true, this.props.isChild);
   },
 
   unfoldComments(id) {
-    this.props.modifyFoldComments(id, false);
+    this.props.modifyFoldComments(id, false, this.props.isChild);
   },
 
   // TODO: 근본적인 해결 하기
@@ -55,10 +55,16 @@ const CommentList = React.createClass({
         comment={comment}
         key={comment.id}
         id={this.props.id}
+        loadReplies={this.props.loadReplies}
+        setLastComment={this.props.setLastComment}
+        modifyFoldComments={this.props.modifyFoldComments}
         writeComment={this.props.writeComment}
         deleteComment={this.props.deleteComment}
         editComment={this.props.editComment}
+        repliesInfo={this.props.repliesInfo}
+        renderRecommendBox={this.props.renderRecommendBox}
         recommendBox={recommendBox}
+        isChild={this.props.isChild}
         />
     );
   },

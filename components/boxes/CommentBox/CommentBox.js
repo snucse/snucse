@@ -55,11 +55,14 @@ const CommentBox = React.createClass({
           <CommentList
             id={this.props.id}
             loadComments={this.props.loadComments}
+            loadReplies={this.props.loadReplies}
+            setLastComment={this.props.setLastComment}
             modifyFoldComments={this.props.modifyFoldComments}
             writeComment={this.props.writeComment}
             deleteComment={this.props.deleteComment}
             editComment={this.props.editComment}
             commentsInfo={this.props.commentsInfo}
+            repliesInfo={this.props.repliesInfo}
             renderRecommendBox={this.props.renderRecommendBox}
             />
           {commentForm}

@@ -15,8 +15,8 @@ export function loadComments(dispatch, articleId) {
 export function loadReplies(dispatch, parentCommentId) {
   DataCon.loadDataFromServer(Url.getUrl('/comments/replies', {parentCommentId})).then(res => {
     dispatch({
-      type: types.LOAD_COMMENT_REPLIES,
-      replies: res.comments,
+      type: types.LOAD_COMMENT_REPLY,
+      comments: res.comments,
       parentCommentId
     });
   }).catch(console.error);

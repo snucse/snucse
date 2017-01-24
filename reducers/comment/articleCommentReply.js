@@ -9,7 +9,7 @@ import {
 import {updateObject, updateItemInArray, createReducer} from '../common';
 
 const COMMENT_REPLY_INITIAL_STATE = {
-  replies: {
+  comments: {
     /*
     parentCommentId: [
       {},
@@ -23,7 +23,7 @@ const COMMENT_REPLY_INITIAL_STATE = {
 };
 
 function updateReplies(state, parentCommentId, newReplies) {
-  return updateObject(state.replies, {[parentCommentId]: newReplies});
+  return updateObject(state.comments, {[parentCommentId]: newReplies});
 }
 
 function updateCount(state, parentCommentId, newCount) {
@@ -39,11 +39,11 @@ function updateFold(state, parentCommentId, newFold) {
 }
 
 function loadReply(state, action) {
-  const {parentCommentId, replies} = action;
+  const {parentCommentId, comments} = action;
 
   let ret = updateObject(state, {
-    replies: updateReplies(state, parentCommentId, replies),
-    count: updateCount(state, parentCommentId, replies.length),
+    comments: updateReplies(state, parentCommentId, comments),
+    count: updateCount(state, parentCommentId, comments.length),
     loaded: updateLoaded(state, parentCommentId, true)
   });
 
@@ -59,7 +59,7 @@ function loadReply(state, action) {
 function setLastReply(state, action) {
   const {parentCommentId, comment, commentCount} = action;
   return updateObject(state, {
-    replies: updateReplies(state, parentCommentId, [comment]),
+    comments: updateReplies(state, parentCommentId, [comment]),
     count: updateCount(state, parentCommentId, commentCount),
     loaded: updateLoaded(state, parentCommentId, false),
     fold: updateFold(state, parentCommentId, false)
@@ -77,9 +77,9 @@ function writeReply(state, action) {
   const {parentCommentId, comment} = action;
   const loaded = state.loaded[parentCommentId];
   // 끝에 추가 // concat
-  const nestedReplies = state.replies[parentCommentId].concat([comment]);
+  const nestedReplies = state.comments[parentCommentId].concat([comment]);
   return updateObject(state, {
-    replies: updateReplies(state, parentCommentId, nestedReplies),
+    comments: updateReplies(state, parentCommentId, nestedReplies),
     count: updateCount(state, parentCommentId, loaded ? nestedReplies.length : state.count[parentCommentId] + 1)
   });
 }
@@ -88,13 +88,13 @@ function editReply(state, action) {
   const {parentCommentId, comment} = action;
   // 찾아서 대체 // map 사용
   const nestedReplies = updateItemInArray(
-    state.replies[parentCommentId],
+    state.comments[parentCommentId],
     'id',
     comment.id,
     () => comment
   );
   return updateObject(state, {
-    replies: updateReplies(state, parentCommentId, nestedReplies)
+    comments: updateReplies(state, parentCommentId, nestedReplies)
   });
 }
 
@@ -102,11 +102,11 @@ function deleteReply(state, action) {
   const {parentCommentId, commentId} = action;
   const loaded = state.loaded[parentCommentId];
   // 찾아서 삭제 // filter
-  const nestedReplies = state.replies[parentCommentId].filter(comment => {
+  const nestedReplies = state.comments[parentCommentId].filter(comment => {
     return comment.id !== commentId;
   });
   return updateObject(state, {
-    replies: updateReplies(state, parentCommentId, nestedReplies),
+    comments: updateReplies(state, parentCommentId, nestedReplies),
     count: updateCount(state, parentCommentId, loaded ? nestedReplies.length : state.count[parentCommentId] - 1)
   });
 }
