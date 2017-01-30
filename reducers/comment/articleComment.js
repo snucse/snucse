@@ -51,10 +51,18 @@ function loadComments(state, action) {
 
 function setLastComment(state, action) {
   const {articleId, comment, commentCount} = action;
+  if (comment !== null) {
+    return updateObject(state, {
+      comments: updateComments(state, articleId, [comment]),
+      count: updateCount(state, articleId, commentCount),
+      loaded: updateLoaded(state, articleId, false),
+      fold: updateFold(state, articleId, false)
+    });
+  }
   return updateObject(state, {
-    comments: updateComments(state, articleId, [comment]),
-    count: updateCount(state, articleId, commentCount),
-    loaded: updateLoaded(state, articleId, false),
+    comments: updateComments(state, articleId, []),
+    count: updateCount(state, articleId, 0),
+    loaded: updateLoaded(state, articleId, true),
     fold: updateFold(state, articleId, false)
   });
 }
@@ -70,7 +78,7 @@ function writeComment(state, action) {
   const {articleId, comment} = action;
   const loaded = state.loaded[articleId];
   // 끝에 추가 // concat
-  const nestedComments = state.comments[articleId].concat([comment]);
+  const nestedComments = (state.comments[articleId]).concat([comment]);
   return updateObject(state, {
     comments: updateComments(state, articleId, nestedComments),
     count: updateCount(state, articleId, loaded ? nestedComments.length : state.count[articleId] + 1)

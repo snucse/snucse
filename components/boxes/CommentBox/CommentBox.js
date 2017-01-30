@@ -27,20 +27,12 @@ import CommentFormContainer from './CommentFormContainer';
 */
 const CommentBox = React.createClass({
   componentDidMount() {
-    if (this.props.lastComment) {
-      this.props.setLastComment(this.props.id, this.props.lastComment, this.props.commentCount);
-    } else {
-      this.props.loadComments(this.props.id);
-    }
+    this.props.setLastComment(this.props.id, this.props.lastComment, this.props.commentCount);
   },
 
   componentWillReceiveProps(props) {
     if (this.props.id !== props.id) {
-      if (props.lastComment) {
-        props.setLastComment(props.id, props.lastComment, props.commentCount);
-      } else {
-        props.loadComments(props.id);
-      }
+      props.setLastComment(props.id, props.lastComment, props.commentCount);
     }
   },
 

@@ -16,7 +16,7 @@ import CommentItem from './CommentItem';
 */
 const CommentItemContainer = React.createClass({
   componentDidMount() {
-    if (!this.props.isChild && this.props.comment.lastReply !== undefined) {
+    if (!this.props.isChild) {
       this.props.setLastComment(this.props.comment.id, this.props.comment.lastReply, this.props.comment.replyCount, true);
     }
   },

@@ -58,10 +58,19 @@ function loadComment(state, action) {
 
 function setLastComment(state, action) {
   const {profileId, comment, commentCount} = action;
+  console.log(comment);
+  if (comment !== null) {
+    return updateObject(state, {
+      comments: updateComments(state, profileId, [comment]),
+      count: updateCount(state, profileId, commentCount),
+      loaded: updateLoaded(state, profileId, false),
+      fold: updateFold(state, profileId, false)
+    });
+  }
   return updateObject(state, {
-    comments: updateComments(state, profileId, [comment]),
-    count: updateCount(state, profileId, commentCount),
-    loaded: updateLoaded(state, profileId, false),
+    comments: updateComments(state, profileId, []),
+    count: updateCount(state, profileId, 0),
+    loaded: updateLoaded(state, profileId, true),
     fold: updateFold(state, profileId, false)
   });
 }

@@ -52,7 +52,12 @@ const Profile = React.createClass({
             {description}
           </div>
           <ProfileTagBox profileId={id}/>
-          <ProfileCommentBox profileId={id} isAddable/>
+          <ProfileCommentBox
+            profileId={id}
+            commentCount={this.props.commentCount}
+            lastComment={this.props.lastComment}
+            isAddable
+            />
         </div>
         <Feed profileId={id}/>
       </div>
@@ -85,15 +90,17 @@ const FollowBox = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {loading, following, name, description, admin} = state.profile.current;
+  const {loading, following, name, description, admin, commentCount, lastComment} = state.profile.current;
   const {userLevel, userId} = state.userInfo;
   return {
     loading,
     following,
-    userLevel,
     name,
     description,
     admin,
+    commentCount,
+    lastComment,
+    userLevel,
     userId
   };
 };

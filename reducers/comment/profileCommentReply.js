@@ -58,10 +58,18 @@ function loadReply(state, action) {
 
 function setLastReply(state, action) {
   const {parentCommentId, comment, commentCount} = action;
+  if (comment !== undefined) {
+    return updateObject(state, {
+      comments: updateReplies(state, parentCommentId, [comment]),
+      count: updateCount(state, parentCommentId, commentCount),
+      loaded: updateLoaded(state, parentCommentId, false),
+      fold: updateFold(state, parentCommentId, false)
+    });
+  }
   return updateObject(state, {
-    comments: updateReplies(state, parentCommentId, [comment]),
-    count: updateCount(state, parentCommentId, commentCount),
-    loaded: updateLoaded(state, parentCommentId, false),
+    comments: updateReplies(state, parentCommentId, []),
+    count: updateCount(state, parentCommentId, 0),
+    loaded: updateLoaded(state, parentCommentId, true),
     fold: updateFold(state, parentCommentId, false)
   });
 }
