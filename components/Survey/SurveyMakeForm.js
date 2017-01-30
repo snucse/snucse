@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SurveyMakeQuestionForm from './SurveyMakeQuestionForm';
+
 /*
  * props
  *  - onSurveyChange
@@ -12,10 +14,10 @@ import React from 'react';
  *    - startTime
  *    - endDate
  *    - endTime
- *    - content: map of (idx -> object)
+ *    - content: map of (questionId -> object)
  *      - question
  *      - type
- *      - choices: map of (idx -> string)
+ *      - choices: map of (choiceId -> text)
  */
 
 const SurveyMakeForm = React.createClass({
@@ -29,6 +31,54 @@ const SurveyMakeForm = React.createClass({
     return function (e) {
       this.props.onSurveyChange(inputName, e.target.checked);
     };
+  },
+
+  handleQuestionChange(questionId, question) {
+    const {survey} = this.props;
+    this.props.onSurveyChange('content', {
+      ...survey,
+      content: {
+        ...survey.content,
+        [questionId]: question
+      }
+    });
+  },
+
+  handleQuestionDelete(questionId) {
+    const {survey} = this.props;
+    const newContent = {};
+    for (const oldQuestionId in survey.content) {
+      if ({}.hasOwnProperty.call(survey.content, oldQuestionId)) {
+        if (oldQuestionId !== questionId) {
+          newContent[oldQuestionId] = survey.content[oldQuestionId];
+        }
+      }
+    }
+    this.props.onSurveyChange('content', {
+      ...survey,
+      content: newContent
+    });
+  },
+
+  handleQuestionAdd() {
+    const {survey} = this.props;
+    let maxId = -1;
+    for (const questionId in survey.content) {
+      if ({}.hasOwnProperty.call(survey.content, questionId)) {
+        maxId = Math.max(maxId, questionId);
+      }
+    }
+    this.props.onSurveyChange('content', {
+      ...survey,
+      content: {
+        ...survey.content,
+        [maxId + 1]: {
+          question: '',
+          type: 'select-one',
+          choices: {}
+        }
+      }
+    });
   },
 
   render() {
@@ -45,7 +95,7 @@ const SurveyMakeForm = React.createClass({
           <label className="survey-form-label">제목</label>
           <input className="survey-form-input" type="text" name="title" value={survey.title} onChange={this.handleTextChange('title')}/>
         </div>
-        <div onChange={handleTextChange('showResultType')}>
+        <div onChange={this.handleTextChange('showResultType')}>
           <label className="survey-form-label">결과 공개 범위</label>
           <input className="survey-form-input" type="radio" name="showResultType" value="public"/>전체 공개
           <input className="survey-form-input" type="radio" name="showResultType" value="voter"/>투표자에게 공개
@@ -65,7 +115,16 @@ const SurveyMakeForm = React.createClass({
           <input className="survey-form-input" type="date" name="endDate" placeholder="1900-01-01" value={survey.startDate} onChange={this.handleTextChange('startDate')}/>
           <input className="survey-form-input" type="time" step="1" name="endTime" placeholder="12:00:00" value={survey.startDate} onChange={this.handleTextChange('startTime')}/>
         </div>
+        <div>
+          <SurveyMakeQuestionForm
+            onQuestionChange={this.handleQuestionChange}
+            onQuestionDelete={this.handleQuestionDelete}
+            onQuestionAdd={this.handleQuestionAdd}
+            />
+        </div>
       </div>
     );
   }
 });
+
+export default SurveyMakeForm;
