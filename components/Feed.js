@@ -24,11 +24,20 @@ const Feed = React.createClass({
     this.props.updateTimes();
   },
 
-  handleArticleSubmit(data) {
+  handleArticleSubmit(data, survey) {
     const url = Url.getUrl('/articles');
     const profileId = this.props.profileId ? this.props.profileId : data.profileId;
     DataCon.postFormDataToServer(url, 'POST', data)
       .then(article => {
+        const surveyUrl = Url.getUrl('/surveys');
+        if (survey) {
+          DataCon.postDataToServer(surveyUrl, 'POST', {
+            ...survey,
+            articleId: article.id
+          });
+        }
+        return article;
+      }).then(article => {
         this.props.loadFeed({
           sinceId: article.id - 1,
           maxId: article.id,

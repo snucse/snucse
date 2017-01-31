@@ -3,7 +3,7 @@ import SurveyMakeChoiceForm from './SurveyMakeChoiceForm';
 
 const SurveyMakeQuestionDelBox = React.createClass({
   render() {
-    return <button className="survey-make-question-delete-button" type="button" name={this.props.questionId} onCLick={this.props.onClick}>질문 삭제</button>;
+    return <button className="survey-make-question-delete-button" type="button" name={this.props.questionId} onClick={this.props.onClick}>질문 삭제</button>;
   }
 });
 
@@ -51,12 +51,12 @@ const SurveyMakeQuestionForm = React.createClass({
   },
 
   handleChoiceDelete(questionId) {
-    const question = this.props.question[questionId];
+    const question = this.props.questions[questionId];
     return choiceId => {
       const newChoices = {};
       for (const oldChoiceId in question.choices) {
         if ({}.hasOwnProperty.call(question.choices, oldChoiceId)) {
-          if (oldChoiceId !== choiceId) {
+          if (oldChoiceId != choiceId) {
             newChoices[oldChoiceId] = question.choices[oldChoiceId];
           }
         }
@@ -69,7 +69,7 @@ const SurveyMakeQuestionForm = React.createClass({
   },
 
   handleChoiceAdd(questionId) {
-    const question = this.props.question[questionId];
+    const question = this.props.questions[questionId];
     return () => {
       let maxId = -1;
       for (const choiceId in question.choices) {

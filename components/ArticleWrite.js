@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Editor from './Editor';
-import {FileUploadBox} from './boxes';
+import {FileUploadBox, SurveyMakeForm} from './boxes';
 
 import '../stylesheets/article-write.styl';
 
@@ -38,7 +38,9 @@ const ArticleFormProto = React.createClass({
       title: '',
       content: '',
       renderingMode: 'md',
-      files: {} // pairs of (fileId, file obj)
+      files: {}, // pairs of (fileId, file obj)
+      hasSurvey: false,
+      survey: {}
     };
   },
 
@@ -75,6 +77,19 @@ const ArticleFormProto = React.createClass({
       id: e.target.value
     });
   },
+  handleSurveyChange(key, value) {
+    this.setState({
+      survey: {
+        ...this.state.survey,
+        [key]: value
+      }
+    });
+  },
+  handleSurveyToggle() {
+    this.setState({
+      hasSurvey: !this.state.hasSurvey
+    });
+  },
 
   handleSubmit(e) {
     e.preventDefault();
@@ -108,6 +123,13 @@ const ArticleFormProto = React.createClass({
       </div>
     );
 
+    const surveyMakeForm = this.state.hasSurvey ? (
+      <SurveyMakeForm
+        onSurveyChange={this.handleSurveyChange}
+        survey={this.state.survey}
+        />
+      ) : null;
+
     return (
       <form id="article-write-form" onSubmit={this.handleSubmit}>
         {profileSelector}
@@ -124,6 +146,13 @@ const ArticleFormProto = React.createClass({
           <div id="file-container">
             <FileUploadBox id={this.props.id} onFileChange={this.handleFileChange} onFileDelete={this.handleFileDelete}/>
           </div>
+        </div>
+        <div className="form-group">
+          <label className="write-form-label">설문조사</label>
+          <button type="button" onClick={this.handleSurveyToggle}>
+            {this.state.hasSurvey ? '설문조사 제거' : '설문조사 추가'}
+          </button>
+          {surveyMakeForm}
         </div>
         <div id="article-write-button-wrapper">
           <button id="article-write-button" type="submit">글쓰기</button>

@@ -22,13 +22,13 @@ import SurveyMakeQuestionForm from './SurveyMakeQuestionForm';
 
 const SurveyMakeForm = React.createClass({
   handleTextChange(inputName) {
-    return function (e) {
+    return e => {
       this.props.onSurveyChange(inputName, e.target.value);
     };
   },
 
   handleCheckboxChange(inputName) {
-    return function (e) {
+    return e => {
       this.props.onSurveyChange(inputName, e.target.checked);
     };
   },
@@ -36,11 +36,8 @@ const SurveyMakeForm = React.createClass({
   handleQuestionChange(questionId, question) {
     const {survey} = this.props;
     this.props.onSurveyChange('content', {
-      ...survey,
-      content: {
-        ...survey.content,
-        [questionId]: question
-      }
+      ...survey.content,
+      [questionId]: question
     });
   },
 
@@ -49,15 +46,12 @@ const SurveyMakeForm = React.createClass({
     const newContent = {};
     for (const oldQuestionId in survey.content) {
       if ({}.hasOwnProperty.call(survey.content, oldQuestionId)) {
-        if (oldQuestionId !== questionId) {
+        if (oldQuestionId != questionId) {
           newContent[oldQuestionId] = survey.content[oldQuestionId];
         }
       }
     }
-    this.props.onSurveyChange('content', {
-      ...survey,
-      content: newContent
-    });
+    this.props.onSurveyChange('content', newContent);
   },
 
   handleQuestionAdd() {
@@ -69,14 +63,11 @@ const SurveyMakeForm = React.createClass({
       }
     }
     this.props.onSurveyChange('content', {
-      ...survey,
-      content: {
-        ...survey.content,
-        [maxId + 1]: {
-          question: '',
-          type: 'select-one',
-          choices: {}
-        }
+      ...survey.content,
+      [maxId + 1]: {
+        question: '',
+        type: 'select-one',
+        choices: {}
       }
     });
   },
@@ -93,7 +84,7 @@ const SurveyMakeForm = React.createClass({
       <div className="survey-form">
         <div>
           <label className="survey-form-label">제목</label>
-          <input className="survey-form-input" type="text" name="title" value={survey.title} onChange={this.handleTextChange('title')}/>
+          <input className="survey-form-input" type="text" name="title" onChange={this.handleTextChange('title')}/>
         </div>
         <div onChange={this.handleTextChange('showResultType')}>
           <label className="survey-form-label">결과 공개 범위</label>
@@ -103,11 +94,11 @@ const SurveyMakeForm = React.createClass({
         </div>
         <div>
           <label className="survey-form-label">익명 설문조사</label>
-          <input className="survey-form-input" type="checkbox" name="isAnonymous" checked={survey.isAnonymous}/>익명
+          <input className="survey-form-input" type="checkbox" name="isAnonymous" onChange={this.handleCheckboxChange('isAnonymous')}/>익명
         </div>
         <div>
           <label className="survey-form-label">투표 시작 시각</label>
-          <input className="survey-form-input" type="checkbox" name="hasStartTime" checked={survey.hasStartTime}/>시작 시각 지정하기
+          <input className="survey-form-input" type="checkbox" name="hasStartTime" onChange={this.handleCheckboxChange('hasStartTime')}/>시작 시각 지정하기
           {startTimeForm}
         </div>
         <div>
@@ -120,6 +111,7 @@ const SurveyMakeForm = React.createClass({
             onQuestionChange={this.handleQuestionChange}
             onQuestionDelete={this.handleQuestionDelete}
             onQuestionAdd={this.handleQuestionAdd}
+            questions={survey.content}
             />
         </div>
       </div>

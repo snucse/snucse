@@ -6,6 +6,7 @@ export * from './CommentBox';
 export * from './TagBox';
 export * from './RecommendBox';
 export * from './ProfileBox';
+export * from './SurveyBox';
 export {
   DelEditBox
 };

@@ -2,7 +2,7 @@ import React from 'react';
 
 const SurveyMakeChoiceDelBox = React.createClass({
   render() {
-    return <button className="survey-make-choice-delete-button" type="button" name={this.props.choiceId} onCLick={this.props.onClick}>보기 삭제</button>;
+    return <button className="survey-make-choice-delete-button" type="button" name={this.props.choiceId} onClick={this.props.onClick}>보기 삭제</button>;
   }
 });
 
