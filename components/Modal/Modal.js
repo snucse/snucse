@@ -17,6 +17,23 @@ const Modal = React.createClass({
     event.stopPropagation();
   },
 
+  handleKeyDownInput(event) {
+    if (this.props.closable) {
+      if (event.keyCode === 27) {
+        this.props.cancelModal();
+      }
+    }
+    console.log(event.keyCode);
+  },
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDownInput);
+  },
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDownInput);
+  },
+
   render() {
     const buttons = this.props.modalInfo.buttons.map((button, i) => {
       const handleClick = button.callback;
@@ -26,7 +43,7 @@ const Modal = React.createClass({
       modal: true,
       [`modal-${this.props.modalInfo.type}`]: Boolean(this.props.modalInfo.type)
     });
-    return this.props.enabled ? (
+    return (
       <div className="modal-wrapper" onClick={this.handleClickWrapper}>
         <div className={classes} onClick={this.handleClickModal}>
           <h3>{this.props.modalInfo.title}</h3>
@@ -36,14 +53,13 @@ const Modal = React.createClass({
           </ul>
         </div>
       </div>
-    ) : null;
+    );
   }
 });
 
 const mapStateToProps = function (state) {
   return {
     modalInfo: state.modal.modalInfo,
-    enabled: state.modal.enabled,
     closable: state.modal.closable
   };
 };
