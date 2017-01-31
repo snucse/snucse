@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {connectModals} from '../utils';
 import Editor from './Editor';
 import {FileUploadBox, SurveyMakeForm} from './boxes';
 
@@ -16,8 +17,8 @@ const ArticleWrite = React.createClass({
     return {index: 0};
   },
 
-  handleArticleSubmit(data) {
-    this.props.onArticleSubmit(data);
+  handleArticleSubmit(data, survey) {
+    this.props.onArticleSubmit(data, survey);
     this.setState({index: this.state.index + 1});
   },
 
@@ -32,7 +33,10 @@ const ArticleWrite = React.createClass({
   }
 });
 
-const ArticleFormProto = React.createClass({
+const dateReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+const timeReg = /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/;
+
+const ArticleFormProto = connectModals(React.createClass({
   getInitialState() {
     return {
       title: '',
@@ -40,7 +44,9 @@ const ArticleFormProto = React.createClass({
       renderingMode: 'md',
       files: {}, // pairs of (fileId, file obj)
       hasSurvey: false,
-      survey: {}
+      survey: {
+        content: {}
+      }
     };
   },
 
@@ -91,6 +97,69 @@ const ArticleFormProto = React.createClass({
     });
   },
 
+  validateSurvey() {
+    const {survey} = this.state;
+    const title = survey.title ? survey.title.trim() : undefined;
+    if (!title) {
+      this.props.alertModal('알림', '설문조사 제목을 입력해주세요.');
+      return null;
+    }
+
+    if (!survey.showResultType) {
+      this.props.alertModal('알림', '설문조사 결과 공개 범위를 설정해주세요.');
+      return null;
+    }
+
+    if (survey.hasStartTime) {
+      if (!(dateReg.test(survey.startDate)) || !(timeReg.test(survey.startTime))) {
+        this.props.alertModal('알림', '설문조사 시작 시각을 올바르게 입력해주세요.');
+        return null;
+      }
+    }
+
+    if (!(dateReg.test(survey.endDate)) || !(timeReg.test(survey.endTime))) {
+      this.props.alertModal('알림', '설문조사 종료 시각을 올바르게 입력해주세요.');
+      return null;
+    }
+
+    const validQuestionIds = [];
+    Object.keys(survey.content).sort((i, j) => (i - j)).forEach(questionId => {
+      const {question, choices} = survey.content[questionId];
+      if (question.trim() && Object.keys(choices).some(choiceId => choices[choiceId].trim())) {
+        validQuestionIds.push(questionId);
+      }
+    });
+
+    if (validQuestionIds.length === 0) {
+      this.props.alertModal('알림', '설문조사에 올바른 질문 하나 이상을 추가해주세요.');
+      return null;
+    }
+
+    const content = validQuestionIds.map(questionId => {
+      const {question, type, choices} = survey.content[questionId];
+      return {
+        question,
+        type,
+        choices: Object.keys(choices)
+          .sort((i, j) => (i - j))
+          .filter(choiceId => choices[choiceId].trim())
+          .map(choiceId => choices[choiceId].trim())
+      };
+    });
+
+    const ret = {
+      title,
+      showResultType: survey.showResultType,
+      isAnonymous: survey.isAnonymous ? 'true' : 'false',
+      endTime: `${survey.endDate} ${survey.endTime}`,
+      content
+    };
+    if (survey.hasStartTime) {
+      ret.startTime = `${survey.startDate} ${survey.startTime}`;
+    }
+    return ret;
+  },
+
   handleSubmit(e) {
     e.preventDefault();
     const profileId = this.state.id ? this.state.id : this.props.id;
@@ -107,7 +176,15 @@ const ArticleFormProto = React.createClass({
       return;
     }
 
-    this.props.onArticleSubmit({title, content, renderingMode, profileIds: profileId, files});
+    const data = {title, content, renderingMode, profileIds: profileId, files};
+    if (this.state.hasSurvey) {
+      const survey = this.validateSurvey(this.state.survey);
+      if (survey) {
+        this.props.onArticleSubmit(data, survey);
+      }
+    } else {
+      this.props.onArticleSubmit(data);
+    }
   },
 
   render() {
@@ -160,7 +237,7 @@ const ArticleFormProto = React.createClass({
       </form>
     );
   }
-});
+}));
 
 const mapStateToProps = function (state) {
   return {

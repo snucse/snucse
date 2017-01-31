@@ -76,8 +76,8 @@ const SurveyMakeForm = React.createClass({
     const {survey} = this.props;
     const startTimeForm = survey.hasStartTime ? (
       <div>
-        <input className="survey-form-input" type="date" name="startDate" placeholder="1900-01-01" value={survey.startDate} onChange={this.handleTextChange('startDate')}/>
-        <input className="survey-form-input" type="time" step="1" name="startTime" placeholder="12:00:00" value={survey.startDate} onChange={this.handleTextChange('startTime')}/>
+        <input className="survey-form-input" type="date" name="startDate" placeholder="1900-01-01" onChange={this.handleTextChange('startDate')}/>
+        <input className="survey-form-input" type="time" step="1" name="startTime" placeholder="12:00:00" onChange={this.handleTextChange('startTime')}/>
       </div>
     ) : null;
     return (
@@ -103,8 +103,8 @@ const SurveyMakeForm = React.createClass({
         </div>
         <div>
           <label className="survey-form-label">투표 종료 시각</label>
-          <input className="survey-form-input" type="date" name="endDate" placeholder="1900-01-01" value={survey.startDate} onChange={this.handleTextChange('startDate')}/>
-          <input className="survey-form-input" type="time" step="1" name="endTime" placeholder="12:00:00" value={survey.startDate} onChange={this.handleTextChange('startTime')}/>
+          <input className="survey-form-input" type="date" name="endDate" placeholder="1900-01-01" onChange={this.handleTextChange('endDate')}/>
+          <input className="survey-form-input" type="time" step="1" name="endTime" placeholder="12:00:00" onChange={this.handleTextChange('endTime')}/>
         </div>
         <div>
           <SurveyMakeQuestionForm
