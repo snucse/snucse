@@ -81,30 +81,30 @@ const SurveyMakeForm = React.createClass({
       </div>
     ) : null;
     return (
-      <div className="survey-form">
+      <div className="survey-make-form">
         <div>
-          <label className="survey-form-label">제목</label>
-          <input className="survey-form-input" type="text" name="title" onChange={this.handleTextChange('title')}/>
+          <label className="survey-make-form-label">제목</label>
+          <input className="survey-make-form-input" type="text" name="title" onChange={this.handleTextChange('title')}/>
         </div>
         <div onChange={this.handleTextChange('showResultType')}>
-          <label className="survey-form-label">결과 공개 범위</label>
-          <input className="survey-form-input" type="radio" name="showResultType" value="public"/>전체 공개
-          <input className="survey-form-input" type="radio" name="showResultType" value="voter"/>투표자에게 공개
-          <input className="survey-form-input" type="radio" name="showResultType" value="finish"/>종료 후 공개
+          <label className="survey-make-form-label">결과 공개 범위</label>
+          <input className="survey-make-form-input" type="radio" name="showResultType" value="public"/>전체 공개
+          <input className="survey-make-form-input" type="radio" name="showResultType" value="voter"/>투표자에게 공개
+          <input className="survey-make-form-input" type="radio" name="showResultType" value="finish"/>종료 후 공개
         </div>
         <div>
-          <label className="survey-form-label">익명 설문조사</label>
-          <input className="survey-form-input" type="checkbox" name="isAnonymous" onChange={this.handleCheckboxChange('isAnonymous')}/>익명
+          <label className="survey-make-form-label">익명 설문조사</label>
+          <input className="survey-make-form-input" type="checkbox" name="isAnonymous" onChange={this.handleCheckboxChange('isAnonymous')}/>익명
         </div>
         <div>
-          <label className="survey-form-label">투표 시작 시각</label>
-          <input className="survey-form-input" type="checkbox" name="hasStartTime" onChange={this.handleCheckboxChange('hasStartTime')}/>시작 시각 지정하기
+          <label className="survey-make-form-label">투표 시작 시각</label>
+          <input className="survey-make-form-input" type="checkbox" name="hasStartTime" onChange={this.handleCheckboxChange('hasStartTime')}/>시작 시각 지정하기
           {startTimeForm}
         </div>
         <div>
-          <label className="survey-form-label">투표 종료 시각</label>
-          <input className="survey-form-input" type="date" name="endDate" placeholder="1900-01-01" onChange={this.handleTextChange('endDate')}/>
-          <input className="survey-form-input" type="time" step="1" name="endTime" placeholder="12:00:00" onChange={this.handleTextChange('endTime')}/>
+          <label className="survey-make-form-label">투표 종료 시각</label>
+          <input className="survey-make-form-input" type="date" name="endDate" placeholder="1900-01-01" onChange={this.handleTextChange('endDate')}/>
+          <input className="survey-make-form-input" type="time" step="1" name="endTime" placeholder="12:00:00" onChange={this.handleTextChange('endTime')}/>
         </div>
         <div>
           <SurveyMakeQuestionForm

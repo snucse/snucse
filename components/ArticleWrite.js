@@ -225,11 +225,13 @@ const ArticleFormProto = connectModals(React.createClass({
           </div>
         </div>
         <div className="form-group">
-          <label className="write-form-label">설문조사</label>
-          <button type="button" onClick={this.handleSurveyToggle}>
-            {this.state.hasSurvey ? '설문조사 제거' : '설문조사 추가'}
-          </button>
-          {surveyMakeForm}
+          <label className="write-form-label">설문<br/>조사</label>
+          <div id="survey-make-container">
+            <button type="button" onClick={this.handleSurveyToggle}>
+              {this.state.hasSurvey ? '설문조사 제거' : '설문조사 추가'}
+            </button>
+            {surveyMakeForm}
+          </div>
         </div>
         <div id="article-write-button-wrapper">
           <button id="article-write-button" type="submit">글쓰기</button>

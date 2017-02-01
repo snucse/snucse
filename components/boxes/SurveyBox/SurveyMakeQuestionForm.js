@@ -109,7 +109,7 @@ const SurveyMakeQuestionForm = React.createClass({
     const questionForms = questionIds.map(questionId => {
       return (
         <div className="survey-make-question-form" key={questionId}>
-          질문: <input type="text" name="question" onChange={this.handleQuestionChange(questionId)}/>
+          질문: <input type="text" onChange={this.handleQuestionChange(questionId)}/>
           중복 허용: <input type="checkbox" onChange={this.handleTypeChange(questionId)}/>
           답변: <SurveyMakeChoiceForm
             onChoiceChange={this.handleChoiceChange(questionId)}
