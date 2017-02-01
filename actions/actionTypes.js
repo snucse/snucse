@@ -65,3 +65,6 @@ export const CLEAR_ARTICLE_VIEW = 'CLEAR_ARTICLE_VIEW';
 
 // action types related with realtime
 export const UPDATE_TIMES = 'UPDATE_TIMES';
+
+// action types related with survey
+export const LOAD_SURVEY = 'LOAD_SURVEY';

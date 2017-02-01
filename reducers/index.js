@@ -9,6 +9,7 @@ import me from './me';
 import modal from './modal';
 import search from './search';
 import realtime from './realtime';
+import survey from './survey';
 // import * as types from '../actions/actionTypes';
 // import other reducers
 
@@ -25,7 +26,8 @@ const reducers = {
   me,
   modal,
   search,
-  realtime
+  realtime,
+  survey
   // list up all reducers
 };
 
