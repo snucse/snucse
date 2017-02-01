@@ -6,6 +6,7 @@ import {Link, browserHistory} from 'react-router';
 import Realtime from '../Realtime';
 import {Url, DataCon} from '../../utils';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
+import Survey from '../Survey';
 
 import '../../stylesheets/article.styl';
 
@@ -24,6 +25,7 @@ const ArticleItem = React.createClass({
 
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
+    const survey = article.surveyId ? <Survey surveyId={article.surveyId}/> : null;
     return (
       <div className="feed-article">
         <small className="article-date" title={date.format('LLL')}>
@@ -39,6 +41,7 @@ const ArticleItem = React.createClass({
           <div className="article-content-container">
             <FileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
+            {survey}
             <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
           </div>
         </div>

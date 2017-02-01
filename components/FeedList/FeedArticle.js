@@ -7,6 +7,7 @@ import classnames from 'classnames';
 
 import Realtime from '../Realtime';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
+import Survey from '../Survey';
 
 const FeedArticle = React.createClass({
   handleArticleDelete(articleId) {
@@ -46,6 +47,8 @@ const FeedArticle = React.createClass({
     } else if (shrinked) {
       ellipsis = <span onClick={this.handleEllipsisClick} className="feed-article-content-ellipsis">더 보기</span>;
     }
+    const survey = article.surveyId ? <Survey surveyId={article.surveyId}/> : null;
+
     return (
       <li className="feed-article">
         <small className="article-date" title={date.format('LLL')}>
@@ -61,6 +64,7 @@ const FeedArticle = React.createClass({
           <div className="article-content-container">
             <FileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
+            {survey}
             <Measure onMeasure={this.handleMeasure}>
               <div
                 className={classnames({
