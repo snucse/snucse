@@ -122,13 +122,12 @@ const ArticleFormProto = connectModals(React.createClass({
       return null;
     }
 
-    const validQuestionIds = [];
-    Object.keys(survey.content).sort((i, j) => (i - j)).forEach(questionId => {
-      const {question, choices} = survey.content[questionId];
-      if (question.trim() && Object.keys(choices).some(choiceId => choices[choiceId].trim())) {
-        validQuestionIds.push(questionId);
-      }
-    });
+    const validQuestionIds = Object.keys(survey.content)
+      .sort((i, j) => (i - j))
+      .filter(questionId => {
+        const {question, choices} = survey.content[questionId];
+        return question.trim() && Object.keys(choices).some(choiceId => choices[choiceId].trim());
+      });
 
     if (validQuestionIds.length === 0) {
       this.props.alertModal('알림', '설문조사에 올바른 질문 하나 이상을 추가해주세요.');
@@ -151,11 +150,11 @@ const ArticleFormProto = connectModals(React.createClass({
       title,
       showResultType: survey.showResultType,
       isAnonymous: survey.isAnonymous ? 'true' : 'false',
-      endTime: `${survey.endDate} ${survey.endTime}`,
-      content
+      endTime: `${survey.endDate.substr(0, 4)}=${survey.endDate.substr(5)} ${survey.endTime}`, // TODO: 확인 후 수정
+      content: JSON.stringify(content) // TODO: 확인 후 제거
     };
     if (survey.hasStartTime) {
-      ret.startTime = `${survey.startDate} ${survey.startTime}`;
+      ret.startTime = `${survey.startDate.substr(0, 4)}=${survey.startDate.substr(5)} ${survey.startTime}`; // TODO: 확인 후 수정
     }
     return ret;
   },
