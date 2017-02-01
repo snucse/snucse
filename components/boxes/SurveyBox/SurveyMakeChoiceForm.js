@@ -32,15 +32,7 @@ const SurveyMakeChoiceForm = React.createClass({
 
   render() {
     const {choices} = this.props;
-    const choiceIds = [];
-    for (const choiceId in choices) {
-      if ({}.hasOwnProperty.call(choices, choiceId)) {
-        choiceIds.push(choiceId);
-      }
-    }
-    choiceIds.sort((i, j) => i - j);
-
-    const choiceForms = choiceIds.map(choiceId => {
+    const choiceForms = Object.keys(choices).sort((i, j) => i - j).map(choiceId => {
       return (
         <div className="survey-make-choice-form" key={`${this.props.questionId}-${choiceId}`}>
           <input type="text" name={choiceId} onChange={this.handleChange}/>

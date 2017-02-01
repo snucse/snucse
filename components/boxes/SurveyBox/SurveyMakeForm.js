@@ -43,25 +43,19 @@ const SurveyMakeForm = React.createClass({
 
   handleQuestionDelete(questionId) {
     const {survey} = this.props;
-    const newContent = {};
-    for (const oldQuestionId in survey.content) {
-      if ({}.hasOwnProperty.call(survey.content, oldQuestionId)) {
-        if (oldQuestionId != questionId) {
-          newContent[oldQuestionId] = survey.content[oldQuestionId];
-        }
-      }
-    }
+    const newContent = Object.keys(survey.content)
+      .filter(oldQuestionId => oldQuestionId != questionId)
+      .reduce((s, e) => {
+        s[e] = survey.content[e];
+        return s;
+      }, {});
     this.props.onSurveyChange('content', newContent);
   },
 
   handleQuestionAdd() {
     const {survey} = this.props;
-    let maxId = -1;
-    for (const questionId in survey.content) {
-      if ({}.hasOwnProperty.call(survey.content, questionId)) {
-        maxId = Math.max(maxId, questionId);
-      }
-    }
+    const maxId = Object.keys(survey.content)
+      .reduce((s, e) => Math.max(s, e), -1);
     this.props.onSurveyChange('content', {
       ...survey.content,
       [maxId + 1]: {

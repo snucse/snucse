@@ -53,14 +53,12 @@ const SurveyMakeQuestionForm = React.createClass({
   handleChoiceDelete(questionId) {
     const question = this.props.questions[questionId];
     return choiceId => {
-      const newChoices = {};
-      for (const oldChoiceId in question.choices) {
-        if ({}.hasOwnProperty.call(question.choices, oldChoiceId)) {
-          if (oldChoiceId != choiceId) {
-            newChoices[oldChoiceId] = question.choices[oldChoiceId];
-          }
-        }
-      }
+      const newChoices = Object.keys(question.choices)
+        .filter(oldChoiceId => oldChoiceId != choiceId)
+        .reduce((s, e) => {
+          s[e] = question.choices[e];
+          return s;
+        }, {});
       this.props.onQuestionChange(questionId, {
         ...question,
         choices: newChoices
@@ -71,12 +69,8 @@ const SurveyMakeQuestionForm = React.createClass({
   handleChoiceAdd(questionId) {
     const question = this.props.questions[questionId];
     return () => {
-      let maxId = -1;
-      for (const choiceId in question.choices) {
-        if ({}.hasOwnProperty.call(question.choices, choiceId)) {
-          maxId = Math.max(maxId, choiceId);
-        }
-      }
+      const maxId = Object.keys(question.choices)
+        .reduce((s, e) => Math.max(s, e), -1);
       this.props.onQuestionChange(questionId, {
         ...question,
         choices: {
@@ -98,15 +92,7 @@ const SurveyMakeQuestionForm = React.createClass({
 
   render() {
     const {questions} = this.props;
-    const questionIds = [];
-    for (const questionId in questions) {
-      if ({}.hasOwnProperty.call(questions, questionId)) {
-        questionIds.push(questionId);
-      }
-    }
-    questionIds.sort((i, j) => i - j);
-
-    const questionForms = questionIds.map(questionId => {
+    const questionForms = Object.keys(questions).sort((i, j) => i - j).map(questionId => {
       return (
         <div className="survey-make-question-form" key={questionId}>
           질문: <input type="text" onChange={this.handleQuestionChange(questionId)}/>
