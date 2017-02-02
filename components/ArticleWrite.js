@@ -150,11 +150,11 @@ const ArticleFormProto = connectModals(React.createClass({
       title,
       showResultType: survey.showResultType,
       isAnonymous: survey.isAnonymous ? 'true' : 'false',
-      endTime: `${survey.endDate.substr(0, 4)}=${survey.endDate.substr(5)} ${survey.endTime}`, // TODO: 확인 후 수정
+      endTime: `${survey.endDate} ${survey.endTime}`,
       content: JSON.stringify(content) // TODO: 확인 후 제거
     };
     if (survey.hasStartTime) {
-      ret.startTime = `${survey.startDate.substr(0, 4)}=${survey.startDate.substr(5)} ${survey.startTime}`; // TODO: 확인 후 수정
+      ret.startTime = `${survey.startDate} ${survey.startTime}`;
     }
     return ret;
   },
