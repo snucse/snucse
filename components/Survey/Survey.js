@@ -9,23 +9,12 @@ import {loadSurvey} from '../../actions/dispatchers';
  */
 
 const Survey = React.createClass({
-  getInitialState() {
-    return {
-      opened: false
-    };
-  },
-
   handleFolderClick() {
-    new Promise(resolve => {
-      this.props.loadSurvey(this.props.surveyId);
-      resolve();
-    }).then(() => {
-      this.setState({opened: true});
-    }).catch(console.error);
+    this.props.loadSurvey(this.props.surveyId);
   },
 
   render() {
-    if (!this.state.opened) {
+    if (!this.props.opened) {
       return <div className="survey-container" onClick={this.handleFolderClick}>설문조사가 있습니다. 클릭해서 확인해주세요.</div>;
     }
 
@@ -34,8 +23,8 @@ const Survey = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {startTime, endTime, title, anonymous, voted, content} = state;
-  return {startTime, endTime, title, anonymous, voted, content};
+  const {opened, survey} = state.survey;
+  return {opened, survey};
 };
 
 const mapDispatchToProps = function (dispatch) {

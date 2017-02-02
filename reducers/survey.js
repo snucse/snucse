@@ -1,13 +1,19 @@
-import {LOAD_SURVEY} from '../actions/actionTypes';
+import {LOAD_SURVEY, OPEN_SURVEY} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
-const SURVEY_INITIAL_STATE = {};
+const SURVEY_INITIAL_STATE = {
+  opened: false
+};
 
 function loadSurvey(state, action) {
-  const {startTime, endTime, title, anonymous, voted, content} = action;
-  return updateObject(state, {startTime, endTime, title, anonymous, voted, content});
+  return updateObject(state, {survey: action.survey});
+}
+
+function openSurvey(state) {
+  return updateObject(state, {opened: true});
 }
 
 export default createReducer(SURVEY_INITIAL_STATE, {
-  [LOAD_SURVEY]: loadSurvey
+  [LOAD_SURVEY]: loadSurvey,
+  [OPEN_SURVEY]: openSurvey
 });

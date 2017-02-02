@@ -68,3 +68,4 @@ export const UPDATE_TIMES = 'UPDATE_TIMES';
 
 // action types related with survey
 export const LOAD_SURVEY = 'LOAD_SURVEY';
+export const OPEN_SURVEY = 'OPEN_SURVEY';

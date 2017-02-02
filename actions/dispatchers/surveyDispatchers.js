@@ -7,5 +7,9 @@ export function loadSurvey(dispatch, surveyId) {
       type: types.LOAD_SURVEY,
       survey
     });
+  }).then(() => {
+    dispatch({
+      type: types.OPEN_SURVEY
+    });
   }).catch(console.error);
 }
