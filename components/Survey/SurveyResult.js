@@ -14,16 +14,19 @@ const SurveyResult = React.createClass({
     const {content} = this.props;
     const questions = content.map((question, questionIndex) => {
       const voteCount = question.count.reduce((sum, elt) => sum + elt);
+      // TODO: 결과 정렬하기
       const choices = question.choices.map((choice, choiceIndex) => (
         <li key={`choice-${choiceIndex}`}>
-          <div>{choice}</div>
-          <div>{100 * question.count[choiceIndex] / voteCount}</div>
+          <div className="survey-result-choice">{choice}</div>
+          <div className="survey-result-choice-count">
+            {`${question.count[choiceIndex]}표 (${voteCount ? 100 * question.count[choiceIndex] / voteCount : 0}%)`}
+          </div>
         </li>
       ));
 
       return (
         <li key={`question-${questionIndex}`}>
-          <h4>{question.question}</h4>
+          <h3 className="survey-result-question">{`${questionIndex}. ${question.question}`}</h3>
           <ol className="survey-result-choices">
             {choices}
           </ol>

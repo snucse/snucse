@@ -7,7 +7,6 @@ import classnames from 'classnames';
 
 import Realtime from '../Realtime';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
-import Survey from '../Survey';
 
 const FeedArticle = React.createClass({
   handleArticleDelete(articleId) {

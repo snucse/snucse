@@ -56,21 +56,22 @@ const Survey = React.createClass({
     }[type];
     */
 
-    const surveyContent = (this.state.voting && canVote) ? (
+    const isVoting = this.state.voting && canVote;
+    const surveyContent = isVoting ? (
       <VoteForm surveyId={this.props.surveyId} content={content}/>
     ) : (
       <SurveyResult content={content}/>
     );
 
     const surveyButtons = [];
-    if (canVote) {
+    if (canVote && !isVoting) {
       surveyButtons.push(
         <button type="button" onClick={this.handleVoteClick} key="VOTE_BUTTON">
           투표하기
         </button>
       );
     }
-    if (canShowResult) {
+    if (canShowResult && isVoting) {
       surveyButtons.push(
         <button type="button" onClick={this.handleShowResultClick} key="SHOW_RESULT_BUTTON">
           결과 보기
