@@ -151,7 +151,7 @@ const ArticleFormProto = connectModals(React.createClass({
       showResultType: survey.showResultType,
       isAnonymous: survey.isAnonymous ? 'true' : 'false',
       endTime: `${survey.endDate} ${survey.endTime}`,
-      content: JSON.stringify(content) // TODO: 확인 후 제거
+      content
     };
     if (survey.hasStartTime) {
       ret.startTime = `${survey.startDate} ${survey.startTime}`;
