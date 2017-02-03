@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {connectModals, Url, DataCon} from '../../utils';
-import {loadServey} from '../../actions/dispatchers';
+import {loadSurvey} from '../../actions/dispatchers';
 
 /*
  * props
@@ -27,7 +27,7 @@ const VoteQuestionForm = React.createClass({
       const inputId = `${questionId}-${choiceId}`;
       return (
         <div className="vote-form-input" key={choiceId}>
-          <input id={inputId} type={inputType} onChange={this.onChange(choiceId)}/>
+          <input id={inputId} type={inputType} onChange={this.handleChange(choiceId)}/>
           <label htmlFor={inputId}>{choice}</label>
         </div>
       );
@@ -56,9 +56,9 @@ const VoteForm = connectModals(React.createClass({
     return (choiceId, checked) => {
       const newChosen = new Set(this.state.chosen[questionId]);
       if (checked) {
-        newChosen.add(checked);
+        newChosen.add(choiceId);
       } else {
-        newChosen.delete(checked);
+        newChosen.delete(choiceId);
       }
       this.setState({
         chosen: {
@@ -73,15 +73,16 @@ const VoteForm = connectModals(React.createClass({
     const chosen = this.props.content.reduce((sum, elt, idx) => {
       sum[idx] = new Set();
       return sum;
-    });
+    }, {});
     return {chosen};
   },
 
   validateForm() {
-    return Object.keys(this.state.chosen).every(elt => (elt.length > 0));
+    return Object.keys(this.state.chosen).every(elt => (this.state.chosen[elt].size > 0));
   },
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     if (!this.validateForm()) {
       this.props.alertModal('알림', '선택하지 않은 설문조사 항목이 있습니다.');
       return;
@@ -89,11 +90,11 @@ const VoteForm = connectModals(React.createClass({
 
     const content = Object.keys(this.state.chosen)
       .sort((i, j) => i - j)
-      .map(chosenSet => Array.from(chosenSet).sort((i, j) => i - j));
+      .map(chosenSet => Array.from(chosenSet).sort((i, j) => i - j).map(Number));
 
     const {surveyId} = this.props;
     const url = Url.getUrl(`/surveys/${surveyId}/vote`);
-    DataCon.postDataToServer(url, {content})
+    DataCon.postDataToServer(url, 'POST', {content: JSON.stringify(content)})
       .then(() => this.props.loadServey(surveyId))
       .catch(console.error); // TODO: 시간 지난 설문, 이미 참여한 투표 등의 예외 처리
   },
@@ -123,7 +124,7 @@ const VoteForm = connectModals(React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadServey: surveyId => loadServey(dispatch, surveyId)
+    loadSurvey: surveyId => loadSurvey(dispatch, surveyId)
   };
 };
 
