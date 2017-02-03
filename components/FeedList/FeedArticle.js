@@ -47,7 +47,9 @@ const FeedArticle = React.createClass({
     } else if (shrinked) {
       ellipsis = <span onClick={this.handleEllipsisClick} className="feed-article-content-ellipsis">더 보기</span>;
     }
-    const survey = article.surveyId ? <Survey surveyId={article.surveyId}/> : null;
+    const survey = article.surveyId ? (
+      <div className="survey-feed">설문조사가 있습니다. 글 제목을 클릭하면 설문에 참여하실 수 있습니다.</div>
+    ) : null;
 
     return (
       <li className="feed-article">
