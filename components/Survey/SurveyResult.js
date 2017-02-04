@@ -13,20 +13,25 @@ const SurveyResult = React.createClass({
   render() {
     const {content} = this.props;
     const questions = content.map((question, questionIndex) => {
+      // TODO: 투표자 수가 서버에서 제공되면 수정하기
       const voteCount = question.count.reduce((sum, elt) => sum + elt);
-      // TODO: 결과 정렬하기
-      const choices = question.choices.map((choice, choiceIndex) => (
-        <li key={`choice-${choiceIndex}`}>
-          <div className="survey-result-choice">{choice}</div>
+      const choices = question.choices.map((choice, choiceIndex) => ({
+        choice,
+        choiceIndex,
+        count: question.count[choiceIndex]
+      })).sort((elt1, elt2) => (elt2.count - elt1.count))
+      .map((elt, eltIndex) => (
+        <li key={`choice-${elt.choiceIndex}`}>
+          <div className="survey-result-choice">{`답변 ${eltIndex}. ${elt.choice}`}</div>
           <div className="survey-result-choice-count">
-            {`${question.count[choiceIndex]}표 (${voteCount ? 100 * question.count[choiceIndex] / voteCount : 0}%)`}
+            {`${elt.count}표 (${voteCount ? 100 * elt.count / voteCount : 0}%)`}
           </div>
         </li>
       ));
 
       return (
         <li key={`question-${questionIndex}`}>
-          <h3 className="survey-result-question">{`${questionIndex}. ${question.question}`}</h3>
+          <h3 className="survey-result-question">{`질문 ${questionIndex}. ${question.question}`}</h3>
           <ol className="survey-result-choices">
             {choices}
           </ol>
