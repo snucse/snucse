@@ -9,8 +9,8 @@ import Realtime from '../Realtime';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const FeedArticle = React.createClass({
-  handleArticleDelete(articleId) {
-    this.props.onArticleDelete(articleId);
+  handleArticleDelete(articleId, surveyId) {
+    this.props.onArticleDelete(articleId, surveyId);
   },
 
   handleMeasure(dimensions) {
