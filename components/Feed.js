@@ -46,12 +46,23 @@ const Feed = React.createClass({
       }).catch(console.error);
   },
 
-  handleArticleDelete(articleId) {
+  handleArticleDelete(articleId, surveyId) {
     const url = Url.getUrl(`/articles/${articleId}`);
-    DataCon.postDataToServer(url, 'DELETE')
-      .then(() => {
-        this.props.updateSingleFeed({id: articleId});
-      }).catch(console.error);
+    if (surveyId) {
+      const surveyUrl = Url.getUrl(`/surveys/${surveyId}`);
+      DataCon.postDataToServer(surveyUrl, 'DELETE')
+        .then(() => {
+          DataCon.postDataToServer(url, 'DELETE')
+            .then(() => {
+              this.props.updateSingleFeed({id: articleId});
+            });
+        }).catch(console.error);
+    } else {
+      DataCon.postDataToServer(url, 'DELETE')
+        .then(() => {
+          this.props.updateSingleFeed({id: articleId});
+        }).catch(console.error);
+    }
   },
 
   render() {

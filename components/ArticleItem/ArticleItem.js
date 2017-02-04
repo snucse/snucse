@@ -11,12 +11,20 @@ import Survey from '../Survey';
 import '../../stylesheets/article.styl';
 
 const ArticleItem = React.createClass({
-  handleArticleDelete(articleId) {
+  handleArticleDelete(articleId, surveyId) {
     const url = Url.getUrl(`/articles/${articleId}`);
-    DataCon.postDataToServer(url, 'DELETE')
-      .then(() => {
-        browserHistory.goBack();
-      }).catch(console.error);
+    if (surveyId) {
+      const surveyUrl = Url.getUrl(`/surveys/${surveyId}`);
+      DataCon.postDataToServer(surveyUrl, 'DELETE')
+        .then(() => {
+          DataCon.postDataToServer(url, 'DELETE');
+        }).catch(console.error);
+    } else {
+      DataCon.postDataToServer(url, 'DELETE')
+        .then(() => {
+          browserHistory.goBack();
+        }).catch(console.error);
+    }
   },
 
   render() {
@@ -40,7 +48,7 @@ const ArticleItem = React.createClass({
           <div className="article-divider"/>
           <div className="article-content-container">
             <FileBox files={article.files}/>
-            <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
+            <DelEditBox mine={mine} articleId={article.id} surveyId={article.surveyId} onArticleDelete={this.handleArticleDelete}/>
             {survey}
             <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
           </div>

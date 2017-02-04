@@ -14,7 +14,7 @@ const DelEditBox = React.createClass({
 
   handleArticleDelete() {
     this.props.confirmModal('알림', '이 글을 삭제하시겠습니까?', () => {
-      this.props.onArticleDelete(this.props.articleId);
+      this.props.onArticleDelete(this.props.articleId, this.props.surveyId);
     });
   },
 

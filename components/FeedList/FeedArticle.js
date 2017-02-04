@@ -64,7 +64,7 @@ const FeedArticle = React.createClass({
           <div className="article-divider"/>
           <div className="article-content-container">
             <FileBox files={article.files}/>
-            <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
+            <DelEditBox mine={mine} articleId={article.id} surveyId={article.surveyId} onArticleDelete={this.handleArticleDelete}/>
             {survey}
             <Measure onMeasure={this.handleMeasure}>
               <div
