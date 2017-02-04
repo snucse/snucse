@@ -55,7 +55,7 @@ const FeedArticle = React.createClass({
         <div className="article-main">
           <div className="article-writer-container">
             <img className="article-writer-image" src={article.writer.profileImageUri}/>
-            <h5 className="article-writer-name">{article.writer.name}</h5>
+            <h5 className="article-writer-name"><Link to={`/${article.writer.username}`}>{article.writer.name}</Link></h5>
           </div>
           <div className="article-divider"/>
           <div className="article-content-container">

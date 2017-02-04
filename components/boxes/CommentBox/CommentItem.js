@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import {Link} from 'react-router';
 
 import Realtime from '../../Realtime';
 import {connectModals} from '../../../utils';
@@ -113,7 +114,7 @@ const CommentItem = React.createClass({
           <small className="comment-date" title={date.format('LLL')}>
             <Realtime from={date}/>
           </small>
-          <h5 className="comment-writer-name">{writer.name}</h5>
+          <h5 className="comment-writer-name"><Link to={`/${writer.username}`}>{writer.name}</Link></h5>
           {contentWrapper}
           {editBox}
           {this.props.recommendBox}
