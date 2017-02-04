@@ -13,3 +13,9 @@ export function loadSurvey(dispatch, surveyId) {
     });
   }).catch(console.error);
 }
+
+export function closeSurvey(dispatch) {
+  dispatch({
+    type: types.CLOSE_SURVEY
+  });
+}

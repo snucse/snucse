@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {loadSurvey} from '../../actions/dispatchers';
+import {loadSurvey, closeSurvey} from '../../actions/dispatchers';
 import VoteForm from './VoteForm';
 import SurveyResult from './SurveyResult';
 
@@ -28,6 +28,13 @@ const Survey = React.createClass({
 
   handleShowResultClick() {
     this.setState({voting: false});
+  },
+
+  componentDidMount() {
+    const {survey, surveyId} = this.props;
+    if (survey && survey.id && surveyId != survey.id) {
+      this.props.closeSurvey();
+    }
   },
 
   render() {
@@ -100,7 +107,8 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadSurvey: surveyId => loadSurvey(dispatch, surveyId)
+    loadSurvey: surveyId => loadSurvey(dispatch, surveyId),
+    closeSurvey: () => closeSurvey(dispatch)
   };
 };
 
