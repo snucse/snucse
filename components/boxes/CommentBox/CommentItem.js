@@ -101,7 +101,7 @@ const CommentItem = React.createClass({
       const buttons = [];
       const id = this.props.comment.id;
       if (!this.props.isChild) {
-        buttons.push(<button onClick={this.handleClickReply} key={`reply-button-${id}`}>Reply</button>);
+        buttons.push(<button className="comment-reply-button" onClick={this.handleClickReply} key={`reply-button-${id}`}>답글</button>);
       }
       if (this.props.isDeletable) {
         buttons.push(<button className="comment-delete-button" onClick={this.handleClickDelete} key={`delete-button-${id}`}>삭제</button>);
