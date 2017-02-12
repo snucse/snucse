@@ -21,12 +21,19 @@ export function recommendArticle(dispatch, id) {
 
 export function recommendComment(dispatch, id) {
   DataCon.postDataToServer(Url.getUrl(`/comments/${id}/recommend`), 'POST').then(comment => {
-    dispatch({
-      type: types.EDIT_COMMENT,
-      articleId: comment.articleId,
-      comment
-    });
-    // todo reply
+    if (comment.parentCommentId === undefined) {
+      dispatch({
+        type: types.EDIT_COMMENT,
+        articleId: comment.articleId,
+        comment
+      });
+    } else {
+      dispatch({
+        type: types.EDIT_COMMENT_REPLY,
+        parentCommentId: comment.parentCommentId,
+        comment
+      });
+    }
   }).catch(err => {
     if (err.status === 400) {
       alertModal(dispatch, '알림', '이미 추천하셨습니다. 추천은 하루에 한번만 가능합니다.');
@@ -38,12 +45,19 @@ export function recommendComment(dispatch, id) {
 
 export function recommendProfileComment(dispatch, id) {
   DataCon.postDataToServer(Url.getUrl(`/profile_comments/${id}/recommend`), 'POST').then(comment => {
-    dispatch({
-      type: types.EDIT_PROFILE_COMMENT,
-      profileId: comment.profileId,
-      comment
-    });
-    // todo reply
+    if (comment.parentCommentId === undefined) {
+      dispatch({
+        type: types.EDIT_PROFILE_COMMENT,
+        profileId: comment.profileId,
+        comment
+      });
+    } else {
+      dispatch({
+        type: types.EDIT_PROFILE_COMMENT_REPLY,
+        parentCommentId: comment.parentCommentId,
+        comment
+      });
+    }
   }).catch(err => {
     if (err.status === 400) {
       alertModal(dispatch, '알림', '이미 추천하셨습니다. 추천은 하루에 한번만 가능합니다.');
