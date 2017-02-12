@@ -23,7 +23,6 @@ const Modal = React.createClass({
         this.props.cancelModal();
       }
     }
-    console.log(event.keyCode);
   },
 
   componentDidMount() {
