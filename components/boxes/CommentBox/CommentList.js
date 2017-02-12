@@ -87,7 +87,7 @@ const CommentList = React.createClass({
       showMoreButton = <button className="comment-show-more-button" onClick={this.handleClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>;
     }
     return (
-      <div>
+      <div className="comment-list-container">
         <div className="comment-list-controller">
           {showMoreButton}
         </div>
