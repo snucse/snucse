@@ -14,7 +14,7 @@ const Menu = React.createClass({
   },
 
   render() {
-    const modal = this.props.modalEnable ? <Modal/> : null;
+    const modal = this.props.modalEnabled ? <Modal/> : null;
     return (
       <div>
         <TopMenu/>
@@ -32,7 +32,7 @@ const Menu = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    modalEnable: state.modal.enabled
+    modalEnabled: state.modal.enabled
   };
 };
 
