@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+
 import {loadAllProfiles} from '../../actions/dispatchers';
 import {UserLevel} from '../../utils';
-import ProfileMakeForm from './ProfileMakeForm';
 
 import '../../stylesheets/profile-list.styl';
 
@@ -32,7 +32,9 @@ const ProfileList = React.createClass({
         });
         return (
           <div>
-            <ProfileMakeForm/>
+            <Link to="/profiles/add">
+              <button>새 프로필 만들기</button>
+            </Link>
             <div id="profile-list-box">
               <h5 id="profile-list-title">전체 프로필 목록</h5>
               <ul id="profile-list">
