@@ -5,6 +5,7 @@ import {DataCon, Url} from '../utils';
 import {loadFeed, updateSingleFeed, updateTimes} from '../actions/dispatchers';
 import FeedList from './FeedList';
 import ArticleWrite from './ArticleWrite';
+import ToTopButton from './ToTopButton';
 
 const Feed = React.createClass({
   componentDidMount() {
@@ -93,6 +94,7 @@ const Feed = React.createClass({
       <div className="feed">
         {articleWrite}
         <FeedList feeds={feeds} onLoadMore={this.handleLoadMore} onArticleDelete={this.handleArticleDelete}/>
+        <ToTopButton/>
       </div>
     );
   }
