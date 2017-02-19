@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Measure from 'react-measure';
 
-import {loadUserInfo} from '../../actions/dispatchers';
+import {loadUserInfo, updatesAppDimensions} from '../../actions/dispatchers';
 import '../../stylesheets/menu.styl';
 import Modal from '../Modal';
 
@@ -13,25 +14,32 @@ const Menu = React.createClass({
     this.props.loadUserInfo();
   },
 
+  handleMeasure(dimensions) {
+    this.props.updatesAppDimensions(dimensions);
+  },
+
   render() {
     return (
-      <div>
-        <TopMenu/>
-        <div id="main-container">
-          <SideMenu/>
-          <div id="main">
-            {this.props.children}
+      <Measure onMeasure={this.handleMeasure}>
+        <div>
+          <TopMenu/>
+          <div id="main-container">
+            <SideMenu/>
+            <div id="main">
+              {this.props.children}
+            </div>
           </div>
+          <Modal/>
         </div>
-        <Modal/>
-      </div>
+      </Measure>
     );
   }
 });
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadUserInfo: () => loadUserInfo(dispatch)
+    loadUserInfo: () => loadUserInfo(dispatch),
+    updatesAppDimensions: dimensions => updatesAppDimensions(dispatch, dimensions)
   };
 };
 

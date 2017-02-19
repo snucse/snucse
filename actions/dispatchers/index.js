@@ -8,6 +8,7 @@ export * from './articleDispatchers';
 export * from './feedDispatchers';
 export * from './modalDispatchers';
 export * from './searchDispatchers';
+export * from './appDimensionDispatchers';
 export * from './recommendDispatchers';
 export * from './settingsDispatchers';
 export * from './realtimeDispatchers';
