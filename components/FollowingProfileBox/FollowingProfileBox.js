@@ -3,6 +3,11 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
 const FollowingProfileBox = React.createClass({
+
+  propTypes: {
+    showAllProfileLink: React.PropTypes.bool
+  },
+
   render() {
     const profiles = this.props.me.following.map(profile => {
       return (
