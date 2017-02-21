@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {UserLevel} from '../../utils';
 import TagCloud from '../TagCloud';
-import FollowingProfileList from './FollowingProfileList';
+import FollowingProfileBox from '../FollowingProfileBox';
 
 const SideMenu = React.createClass({
   render() {
@@ -16,10 +16,7 @@ const SideMenu = React.createClass({
               <img id="user-image" src={this.props.profileImage}/>
               <h5 id="user-name">{this.props.name} ({this.props.username}) <Link id="settings-link" to="/settings">수정</Link></h5>
             </section>
-            <section id="following-profiles-box">
-              <h5 id="following-profiles-title">팔로우 중인 프로필<Link id="all-profiles-link" to="/profiles">전체 프로필 보기</Link></h5>
-              <FollowingProfileList/>
-            </section>
+            <FollowingProfileBox showAllProfileLink/>
             <TagCloud/>
           </aside>
         );
@@ -31,10 +28,7 @@ const SideMenu = React.createClass({
               <img id="user-image" src={this.props.profileImage}/>
               <h5 id="user-name">{this.props.name} ({this.props.username}) <Link id="settings-link" to="/settings">수정</Link></h5>
             </section>
-            <section id="following-profiles-box">
-              <h5 id="following-profiles-title">팔로우 중인 프로필</h5>
-              <FollowingProfileList/>
-            </section>
+            <FollowingProfileBox/>
             <TagCloud/>
           </aside>
         );
