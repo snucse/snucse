@@ -1,6 +1,8 @@
 import React from 'react';
 // 컴포넌트 혼자 쓰여도 됨
 
+import '../../stylesheets/to-top-button.styl';
+
 const ToTopButton = React.createClass({
 
   getInitialState() {
@@ -12,6 +14,7 @@ const ToTopButton = React.createClass({
   lastScrollY: 0,
   dismiss: null,
   scrollListener() {
+    const showSecond = 1000;
     const currentScrollY = window.scrollY;
     if (currentScrollY === 0) {
       clearInterval(this.dismiss);
@@ -30,7 +33,7 @@ const ToTopButton = React.createClass({
         this.setState({
           show: false
         });
-      }, 2000);
+      }, showSecond);
     } else {
       // down
     }
@@ -51,8 +54,10 @@ const ToTopButton = React.createClass({
 
   render() {
     const button = (
-      <div style={{position: 'fixed', left: '0px', bottom: '20px', textAlign: 'center', width: '100%', zIndex: 100}}>
-        <span onClick={this.handleClickTopButton} style={{cursor: 'pointer', fontSize: '25px'}}>^</span>
+      <div id="to-top-button-wrapper">
+        <div id="to-top-button" onClick={this.handleClickTopButton}>
+          <span id="to-top-button-content">^</span>
+        </div>
       </div>
     );
     return this.state.show ? button : null;
