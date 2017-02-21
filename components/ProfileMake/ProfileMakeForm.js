@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {DataCon, Url, genRefCallback, connectModals} from '../../utils';
 import {updateFollowingList} from '../../actions/dispatchers';
 
+import '../../stylesheets/profile-new.styl';
+
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
 
 const ProfileMakeForm = React.createClass({
