@@ -90,3 +90,47 @@ export function changeAdmin(dispatch, id, newId) {
     }
   });
 }
+
+export function starProfile(dispatch, id) {
+  DataCon.postDataToServer(Url.getUrl(`/profiles/${id}/star`), 'POST', {
+  }).then(() => {
+    updateFollowingList(dispatch);
+  }).catch(err => {
+    if (err.status === 400) {
+      alertModal(dispatch, '알림', '에러');
+    }
+  });
+}
+
+export function unstarProfile(dispatch, id) {
+  DataCon.postDataToServer(Url.getUrl(`/profiles/${id}/star`), 'DELETE', {
+  }).then(() => {
+    updateFollowingList(dispatch);
+  }).catch(err => {
+    if (err.status === 400) {
+      alertModal(dispatch, '알림', '에러');
+    }
+  });
+}
+
+export function setProfileAsTab(dispatch, id) {
+  DataCon.postDataToServer(Url.getUrl(`/profiles/${id}/tab`), 'POST', {
+  }).then(() => {
+    updateFollowingList(dispatch);
+  }).catch(err => {
+    if (err.status === 400) {
+      alertModal(dispatch, '알림', '에러');
+    }
+  });
+}
+
+export function unsetProfileAsTab(dispatch, id) {
+  DataCon.postDataToServer(Url.getUrl(`/profiles/${id}/tab`), 'DELETE', {
+  }).then(() => {
+    updateFollowingList(dispatch);
+  }).catch(err => {
+    if (err.status === 400) {
+      alertModal(dispatch, '알림', '에러');
+    }
+  });
+}
