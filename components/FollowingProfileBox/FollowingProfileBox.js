@@ -3,6 +3,13 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import classnames from 'classnames';
 
+import {
+  starProfile,
+  unstarProfile,
+  setProfileAsTab,
+  unsetProfileAsTab
+} from '../../actions/dispatchers';
+
 const FollowingProfileListItem = React.createClass({
 
   propTypes: {
@@ -12,11 +19,11 @@ const FollowingProfileListItem = React.createClass({
   },
 
   handleClickStar() {
-    this.props.onClickStar();
+    this.props.onClickStar(this.props.profile.id);
   },
 
   handleClickSetTab() {
-    this.props.onClickSetTab();
+    this.props.onClickSetTab(this.props.profile.id);
   },
 
   render() {
@@ -30,11 +37,11 @@ const FollowingProfileListItem = React.createClass({
       </span>
     );
     const tabClass = classnames({
-      tabbed: profile.tab
+      tabbed: profile.tab !== undefined
     });
     const setTabView = profile.star ? (
       <span onClick={this.handleClickSetTab} className={tabClass}>
-        {profile.tab ? '◎' : '○'}
+        {profile.tab === undefined ? '○' : '◎'}
       </span>
     ) : null;
     return (
@@ -73,11 +80,40 @@ const FollowingProfileListItemContainer = React.createClass({
   // 눌렀을 때 다른 일 하도록 부여
 // item에게 줌
 
-/*
-const Normal FollowingProfileListItemContainer
-const Star FollowingProfileListItemContainer
-const Tab FollowingProfileListItemContainer
-*/
+const mapDispatchToNormalProps = function (dispatch) {
+  return {
+    onClickStar: id => {
+      starProfile(dispatch, id);
+    },
+    onClickSetTab: () => {
+    }
+  };
+};
+
+const mapDispatchToStarProps = function (dispatch) {
+  return {
+    onClickStar: id => {
+      unstarProfile(dispatch, id);
+    },
+    onClickSetTab: id => {
+      setProfileAsTab(dispatch, id);
+    }
+  };
+};
+
+const mapDispatchToTabProps = function (dispatch) {
+  return {
+    onClickStar: () => {
+    },
+    onClickSetTab: id => {
+      unsetProfileAsTab(dispatch, id);
+    }
+  };
+};
+
+const NormalFollowingProfileListItemContainer = connect(null, mapDispatchToNormalProps)(FollowingProfileListItemContainer);
+const StarFollowingProfileListItemContainer = connect(null, mapDispatchToStarProps)(FollowingProfileListItemContainer);
+const TabFollowingProfileListItemContainer = connect(null, mapDispatchToTabProps)(FollowingProfileListItemContainer);
 
 const FollowingProfileBox = React.createClass({
 
@@ -87,9 +123,14 @@ const FollowingProfileBox = React.createClass({
 
   render() {
     const profiles = this.props.me.following.map(profile => {
-      return (
-        <FollowingProfileListItemContainer key={`${profile.id}${profile.name}`} profile={profile}/>
+      const itemView = profile.tab === undefined ? profile.star ? (
+        <StarFollowingProfileListItemContainer key={`${profile.id}${profile.name}`} profile={profile}/>
+      ) : (
+        <NormalFollowingProfileListItemContainer key={`${profile.id}${profile.name}`} profile={profile}/>
+      ) : (
+        <TabFollowingProfileListItemContainer key={`${profile.id}${profile.name}`} profile={profile}/>
       );
+      return itemView;
     });
     const allProfileLink = this.props.showAllProfileLink ?
       <Link id="all-profiles-link" to="/profiles">전체 프로필 보기</Link> :
