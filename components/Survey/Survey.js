@@ -44,7 +44,7 @@ const Survey = React.createClass({
 
     moment.locale('ko');
 
-    const {title, startTime, endTime, anonymous, voted, content} = this.props.survey;
+    const {title, startTime, endTime, anonymous, voted, content, showResultType} = this.props.survey;
     const {timestamp} = this.props;
     const surveyInterval = startTime ? (
       `${moment(startTime).format('LL LTS')}부터 ${moment(endTime).format('LL LTS')}까지`
@@ -54,14 +54,11 @@ const Survey = React.createClass({
     const surveyAnonymous = anonymous ? '익명 설문입니다.' : '익명 설문이 아닙니다.';
     const canVote = !voted && moment(endTime).isAfter(timestamp);
     const canShowResult = content[0].count;
-    // TODO: showResultType 조회가 가능해지면 수정
-    /*
     const surveyType = {
       voter: '응답자에게만 공개',
       public: '전체 공개',
       finish: '설문 종료 후 공개'
-    }[type];
-    */
+    }[showResultType];
 
     const isVoting = this.state.voting && canVote;
     const surveyContent = isVoting ? (
@@ -92,6 +89,8 @@ const Survey = React.createClass({
         <div className="survey-title">{`제목: ${title}`}</div>
         <div className="survey-interval">{`설문조사 기간: ${surveyInterval}`}</div>
         <div className="survey-anonymous">{`익명 설문: ${surveyAnonymous}`}</div>
+        <div className="survey-type">{`결과 공개 방식: ${surveyType}`}</div>
+        <br/>
         <div className="survey-content">{surveyContent}</div>
         <div className="survey-buttons">{surveyButtons}</div>
       </div>
