@@ -15,7 +15,20 @@ const FollowingProfileBox = React.createClass({
   },
 
   render() {
-    const profiles = this.props.me.following.map(profile => {
+    const profiles = this.props.me.following.sort((a, b) => {
+      if (a.tab !== undefined && b.tab !== undefined) {
+        return a.tab - b.tab;
+      } else if (a.tab !== undefined && b.tab == undefined) {
+        return -1;
+      } else if (a.tab == undefined && b.tab !== undefined) {
+        return 1;
+      } else if (a.star && !b.star) {
+        return -1;
+      } else if (!a.star && b.star) {
+        return 1;
+      }
+      return 0;
+    }).map(profile => {
       const itemView = profile.tab === undefined ? profile.star ? (
         <StarFollowingProfileListItemContainer key={`${profile.id}${profile.name}`} profile={profile}/>
       ) : (
