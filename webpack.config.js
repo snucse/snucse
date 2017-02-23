@@ -55,7 +55,7 @@ module.exports = {
   devServer: {
     contentBase: 'dist/',
     host: '0.0.0.0',
-    port: 12321,
+    port: 12323,
     historyApiFallback: true,
     proxy: [
       {

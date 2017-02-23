@@ -1,4 +1,5 @@
 import React from 'react';
+import {PieChart, Pie} from 'recharts';
 
 /*
  * props
@@ -28,10 +29,23 @@ const SurveyResult = React.createClass({
           </div>
         </li>
       ));
+      const pieData = voteCount ? (question.choices.map((choice, choiceIndex) => ({
+        name: choice,
+        value: question.count[choiceIndex]
+      }))) : null;
+      const pieChart = pieData ? (
+        <PieChart
+          width={300}
+          height={300}
+          >
+          <Pie data={pieData} isAnimationActive={false} label/>
+        </PieChart>
+      ) : null;
 
       return (
         <li key={`question-${questionIndex}`}>
           <h3 className="survey-result-question">{`질문 ${questionIndex}. ${question.question}`}</h3>
+          {pieChart}
           <ol className="survey-result-choices">
             {choices}
           </ol>
