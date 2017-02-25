@@ -5,6 +5,7 @@ import classnames from 'classnames';
 const FollowingProfileListItem = React.createClass({
 
   propTypes: {
+    hideControllers: React.PropTypes.bool,
     onClickSetTab: React.PropTypes.func,
     onClickStar: React.PropTypes.func,
     profile: React.PropTypes.object
@@ -23,7 +24,7 @@ const FollowingProfileListItem = React.createClass({
     const starClass = classnames({
       star: profile.star
     });
-    const starView = (
+    const starView = this.props.hideControllers ? null : (
       <span onClick={this.handleClickStar} className={starClass}>
         {profile.star ? '★' : '☆'}
       </span>
@@ -31,7 +32,7 @@ const FollowingProfileListItem = React.createClass({
     const tabClass = classnames({
       tabbed: profile.tab !== undefined
     });
-    const setTabView = profile.star ? (
+    const setTabView = (!this.props.hideControllers && profile.star) ? (
       <span onClick={this.handleClickSetTab} className={tabClass}>
         {profile.tab === undefined ? '○' : '◎'}
       </span>
