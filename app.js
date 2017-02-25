@@ -19,6 +19,7 @@ import {
   ProfileAdmin,
   ProfileAdminTransfer,
   Main,
+  Activity,
   TagInfo,
   ArticleWrite,
   ArticleEdit,
@@ -54,6 +55,7 @@ ReactDOM.render(
           <Route path="search" component={SearchResult}/>
           <Route path="settings" component={Settings}/>
           <Route path="tags" component={TagInfo}/>
+          <Route path="activities" component={Activity}/>
           <Route path=":id" component={ClassManager}/>
           <Route path=":articleId/edit" component={ArticleEdit}/>
         </Route>
