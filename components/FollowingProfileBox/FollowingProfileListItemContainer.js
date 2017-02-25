@@ -60,6 +60,17 @@ const mapDispatchToStarProps = function (dispatch) {
   };
 };
 
+// fixme 얘네 이름 추천 좀
+const mapDispatchToStar2Props = function (dispatch) {
+  return {
+    onClickStar: id => {
+      unstarProfile(dispatch, id);
+    },
+    onClickSetTab: () => {
+    }
+  };
+};
+
 const mapDispatchToTabProps = function (dispatch) {
   return {
     onClickStar: () => {
@@ -72,10 +83,12 @@ const mapDispatchToTabProps = function (dispatch) {
 
 const NormalFollowingProfileListItemContainer = connect(mapStateToProps, mapDispatchToNormalProps)(FollowingProfileListItemContainer);
 const StarFollowingProfileListItemContainer = connect(mapStateToProps, mapDispatchToStarProps)(FollowingProfileListItemContainer);
+const Star2FollowingProfileListItemContainer = connect(mapStateToProps, mapDispatchToStar2Props)(FollowingProfileListItemContainer);
 const TabFollowingProfileListItemContainer = connect(mapStateToProps, mapDispatchToTabProps)(FollowingProfileListItemContainer);
 
 export {
   NormalFollowingProfileListItemContainer,
   StarFollowingProfileListItemContainer,
+  Star2FollowingProfileListItemContainer,
   TabFollowingProfileListItemContainer
 };

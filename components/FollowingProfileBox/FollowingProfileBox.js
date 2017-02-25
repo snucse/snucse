@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {
   NormalFollowingProfileListItemContainer,
   StarFollowingProfileListItemContainer,
+  Star2FollowingProfileListItemContainer,
   TabFollowingProfileListItemContainer
 } from './FollowingProfileListItemContainer';
 
@@ -15,6 +16,10 @@ const FollowingProfileBox = React.createClass({
   },
 
   render() {
+    const fullTabNumber = 2;
+    const isTabFull = this.props.me.following.filter(profile => {
+      return profile.tab !== undefined;
+    }).length === fullTabNumber;
     const profiles = this.props.me.following.sort((a, b) => {
       if (a.tab !== undefined && b.tab !== undefined) {
         return a.tab - b.tab;
@@ -29,7 +34,9 @@ const FollowingProfileBox = React.createClass({
       }
       return 0;
     }).map(profile => {
-      const itemView = profile.tab === undefined ? profile.star ? (
+      const itemView = profile.tab === undefined ? profile.star ? isTabFull ? (
+        <Star2FollowingProfileListItemContainer key={`${profile.id}${profile.name}`} profile={profile}/>
+      ) : (
         <StarFollowingProfileListItemContainer key={`${profile.id}${profile.name}`} profile={profile}/>
       ) : (
         <NormalFollowingProfileListItemContainer key={`${profile.id}${profile.name}`} profile={profile}/>
