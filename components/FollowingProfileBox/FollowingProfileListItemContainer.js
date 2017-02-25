@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {UserLevel} from '../../utils';
+
 import {
   starProfile,
   unstarProfile,
@@ -18,8 +20,11 @@ const FollowingProfileListItemContainer = React.createClass({
   },
 
   render() {
+    const {userLevel} = this.props;
+    const isControllable = userLevel == UserLevel.REGULAR;
     return (
       <FollowingProfileListItem
+        hideControllers={!isControllable}
         onClickSetTab={this.props.onClickSetTab}
         onClickStar={this.props.onClickStar}
         profile={this.props.profile}
@@ -27,6 +32,12 @@ const FollowingProfileListItemContainer = React.createClass({
     );
   }
 });
+
+const mapStateToProps = function (state) {
+  return {
+    userLevel: state.userInfo.userLevel
+  };
+};
 
 const mapDispatchToNormalProps = function (dispatch) {
   return {
@@ -59,9 +70,9 @@ const mapDispatchToTabProps = function (dispatch) {
   };
 };
 
-const NormalFollowingProfileListItemContainer = connect(null, mapDispatchToNormalProps)(FollowingProfileListItemContainer);
-const StarFollowingProfileListItemContainer = connect(null, mapDispatchToStarProps)(FollowingProfileListItemContainer);
-const TabFollowingProfileListItemContainer = connect(null, mapDispatchToTabProps)(FollowingProfileListItemContainer);
+const NormalFollowingProfileListItemContainer = connect(mapStateToProps, mapDispatchToNormalProps)(FollowingProfileListItemContainer);
+const StarFollowingProfileListItemContainer = connect(mapStateToProps, mapDispatchToStarProps)(FollowingProfileListItemContainer);
+const TabFollowingProfileListItemContainer = connect(mapStateToProps, mapDispatchToTabProps)(FollowingProfileListItemContainer);
 
 export {
   NormalFollowingProfileListItemContainer,
