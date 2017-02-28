@@ -68,7 +68,7 @@ const FeedArticle = React.createClass({
                   'feed-article-content': true,
                   'feed-article-content-shrinked': shrinked
                 })}
-                dangerouslySetInnerHTML={{__html: article.renderedContent}}
+                dangerouslySetInnerHTML={{__html: article.feedContent}}
                 />
             </Measure>
             {ellipsis}
