@@ -2,6 +2,7 @@ import Menu from './Menu';
 import Others from './Others';
 import Message from './Message';
 import ProfileList from './ProfileList';
+import ProfileMake from './ProfileMake';
 import ProfileAdmin from './ProfileAdmin';
 import ProfileAdminTransfer from './ProfileAdminTransfer';
 import Main from './Main';
@@ -20,6 +21,7 @@ export {
   Others,
   Message,
   ProfileList,
+  ProfileMake,
   ProfileAdmin,
   ProfileAdminTransfer,
   Main,

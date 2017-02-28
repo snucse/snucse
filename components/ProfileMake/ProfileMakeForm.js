@@ -1,19 +1,43 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
+
 import {DataCon, Url, genRefCallback, connectModals} from '../../utils';
 import {updateFollowingList} from '../../actions/dispatchers';
+
+import Editor from '../Editor';
+import '../../stylesheets/profile-new.styl';
 
 const reg = /^[a-zA-Z_][a-zA-Z0-9_]+$/;
 
 const ProfileMakeForm = React.createClass({
+  getInitialState() {
+    return {
+      renderingMode: 'md',
+      description: ''
+    };
+  },
+
+  handleDescChange(value) {
+    this.setState({
+      description: value
+    });
+  },
+
+  handleModeChange(mode) {
+    this.setState({
+      renderingMode: mode
+    });
+  },
+
   handleSubmit(e) {
     e.preventDefault();
 
     const trimmed = {
       id: this.formId.value.trim(),
       name: this.formName.value.trim(),
-      description: this.formDesc.value.trim()
+      description: this.state.description,
+      renderingMode: this.state.renderingMode
     };
 
     if (!reg.test(trimmed.id)) {
@@ -61,13 +85,7 @@ const ProfileMakeForm = React.createClass({
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="create-profile-form-description-input">설명</label>
-            <textarea
-              id="create-profile-form-description-input"
-              className="form-input"
-              name="description"
-              rows={3}
-              ref={genRefCallback(this, 'formDesc')}
-              />
+            <Editor mode="md" onChange={this.handleDescChange} onModeChange={this.handleModeChange}/>
           </div>
           <input id="create-profile-button" type="submit" value="그룹 만들기"/>
         </form>

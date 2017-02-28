@@ -1,18 +1,22 @@
 @import "mixin.styl"
-#create-profile-form-box
-  box()
-  background-color article-background-color
-#create-profile-form-title
-  box-title()
-#create-profile-button
-  button()
-  padding 3px 8px
-  height 36px
-  border-radius 4px
-  vertical-align middle
-#create-profile-button:hover
-  button-hover()
+#profile-list
+  padding-left: 10px;
 #profile-list-box
   box()
+  padding 15px 20px
+#profile-new-page-link
+  float right
+  font-size 12px
+  font-weight: normal;
+  line-height: 32px;
 #profile-list-title
   box-title()
+  font-size: 20px;
+  margin: 14px 0px;
+  border-bottom: 1px solid black;
+  padding-bottom: 14px;
+.profile-list-item
+  margin 1px 0px
+@media (max-width: 768px)
+  #profile-list
+    padding-left: 1px;
