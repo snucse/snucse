@@ -11,6 +11,7 @@ import ProfileEditBox from './ProfileEditBox';
  * - id
  * - name
  * - description
+ * - renderingMode
  * - mine
  */
 
@@ -32,13 +33,13 @@ const ProfileEditBoxContainer = React.createClass({
   },
 
   render() {
-    const {id, mine, name, description} = this.props;
+    const {id, mine, name, description, renderingMode} = this.props;
     if (!mine) {
       return <p>관리자가 아닙니다.</p>;
     }
 
     return (
-      <ProfileEditBox id={id} name={name} description={description} onEdit={this.handleEdit}/>
+      <ProfileEditBox id={id} name={name} description={description} onEdit={this.handleEdit} renderingMode={renderingMode}/>
     );
   }
 });
