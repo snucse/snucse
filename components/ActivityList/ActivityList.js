@@ -38,16 +38,16 @@ const ActivityList = React.createClass({
       // to activity list item view
     });
     const view = this.props.isError ? (
-      <span>에러</span>
+      <span id="activity-list-error">에러</span>
     ) : this.props.loading ? (
-      <span>로딩 중</span>
+      <span id="activity-list-loading">로딩 중</span>
     ) : (
-      <ul>
+      <ul id="activity-list-wrapper">
         {listItemViews}
       </ul>
     );
     return (
-      <main>
+      <main id="activity-list">
         {view}
       </main>
     );

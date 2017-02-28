@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import '../../stylesheets/activity.styl';
+
 import {loadActivity, searchProfile} from '../../actions/dispatchers';
 import ActivityFilter from './ActivityFilter';
 import ActivityList from './ActivityList';
@@ -15,23 +17,25 @@ const ActivityContainer = React.createClass({
   render() {
     const {query} = this.props;
     return (
-      <div>
+      <div id="activity-wrapper">
         <ActivityFilter
           candidateProfiles={this.props.candidateProfiles}
           searchProfile={this.props.searchProfile}
           query={query}
           />
-        <ActivityList
-          loadActivity={this.props.loadActivity}
-          activities={this.props.activities}
-          loading={this.props.loading}
-          isError={this.props.isError}
-          query={query}
-          />
-        <ActivityPageNavigation
-          count={this.props.count}
-          query={query}
-          />
+        <div id="activity-sub-wrapper">
+          <ActivityList
+            loadActivity={this.props.loadActivity}
+            activities={this.props.activities}
+            loading={this.props.loading}
+            isError={this.props.isError}
+            query={query}
+            />
+          <ActivityPageNavigation
+            count={this.props.count}
+            query={query}
+            />
+        </div>
       </div>
     );
   }

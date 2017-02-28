@@ -129,7 +129,7 @@ const CandidateProfileItem = React.createClass({
 
   render() {
     return (
-      <div onClick={this.handleClickCandidateProfile}>
+      <div className="activity-filter-profile-candidate-item" onClick={this.handleClickCandidateProfile}>
         {this.props.profile.name} ({this.props.profile.id})
       </div>
     );
@@ -308,17 +308,19 @@ const ActivityFilter = React.createClass({
       );
     });
     const nav = this.state.opened ? (
-      <nav>
-        <ul>
+      <nav id="activity-filter-category-wrapper">
+        <ul id="activity-filter-main-category-wrapper">
           {mainCategoriesView}
         </ul>
-        <ul>
+        <ul id="activity-filter-sub-category-wrapper">
           {subCategoriesView}
         </ul>
       </nav>
     ) : null;
 
-    const profileAutocompleteItemViews = this.state.isSearching ? this.props.candidateProfiles.map(profile => {
+    const profileAutocompleteItemViews = this.props.candidateProfiles.length === 0 ? (
+      <span>검색 결과가 없습니다</span>
+    ) : this.props.candidateProfiles.map(profile => {
       return (
         <CandidateProfileItem
           onClickCandidateProfile={this.handleClickCandidateProfile}
@@ -326,16 +328,22 @@ const ActivityFilter = React.createClass({
           key={`profile-candidate-${profile.id}`}
           />
       );
-    }) : null;
+    });
+    const profileAutocompleteView = this.state.isSearching ? (
+      <ul id="activity-filter-profile-candidate-wrapper">
+        {profileAutocompleteItemViews}
+      </ul>
+    ) : null;
     const cancelButton = this.state.isProfileSelected ? (
-      <span onClick={this.handleClickCancleButton}>X</span>
+      <span id="activity-filter-profile-cancel-button" onClick={this.handleClickCancleButton}>X</span>
     ) : null;
 
     return (
-      <header>
-        <div>
-          <span onClick={this.handleClickToggleButton}>분류</span>
+      <header id="activity-header">
+        <div id="activity-filter">
+          <span id="activity-filter-type" onClick={this.handleClickToggleButton}>분류</span>
           <input
+            id="activity-filter-profile-input"
             placeholder="프로필"
             onFocus={this.handleFocusInput}
             onBlur={this.handleBlurInput}
@@ -343,9 +351,7 @@ const ActivityFilter = React.createClass({
             ref={genRefCallback(this, '_query')}
             />
           {cancelButton}
-          <ul>
-            {profileAutocompleteItemViews}
-          </ul>
+          {profileAutocompleteView}
         </div>
         {nav}
       </header>

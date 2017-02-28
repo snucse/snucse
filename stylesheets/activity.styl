@@ -1,0 +1,60 @@
+@import "mixin.styl"
+#activity-header
+  box()
+  position relative
+#activity-filter-type
+  button()
+#activity-filter-type:hover
+  button-hover()
+#activity-filter-profile-input
+  input()
+#activity-filter-profile-cancel-button
+  button()
+  margin-left: 10px;
+#activity-filter-profile-candidate-wrapper
+  box()
+  position absolute
+  left 53px
+  min-width: 200px;
+.activity-filter-profile-candidate-item
+  margin 2px 0px
+  cursor pointer
+.activity-filter-profile-candidate-item:hover
+  background-color rgba(0, 0, 0, 0.1)
+#activity-sub-wrapper
+  box()
+#activity-filter-category-wrapper
+  margin-top 5px
+#activity-filter-main-category-wrapper
+  margin-bottom 5px
+.activity-filter-main-category-item
+.activity-filter-sub-category-item
+  margin 0px 1px
+  padding 1px 2px
+.activity-filter-main-category-item:hover
+.activity-filter-sub-category-item:hover
+  background-color rgba(0, 0, 0, 0.1)
+  cursor pointer
+.activity-filter-main-category-item-selected
+.activity-filter-sub-category-item-selected
+  font-weight bold
+
+.activity-list-item
+  display flex
+  heigth 45px
+  padding 5px 0px
+  border-bottom 1px solid
+.activity-list-item:last-child
+  border-bottom none
+.activity-list-item-date
+  width 110px
+  margin-right 10px
+  text-align center
+.activity-list-item-link
+  line-height 45px
+
+#activity-page-wrapper
+  margin-top 15px
+  text-align center
+.activity-page
+  margin 0px 5px

@@ -19,7 +19,7 @@ const ActivityPageNavigation = React.createClass({
     }).reduce((p, c) => {
       return `${c}&${p}`;
     }, '');
-    return <Link to={`/activities?${paramsString}`} key={`activities-link-${page}`}>{ch}</Link>;
+    return <Link className="activity-page" to={`/activities?${paramsString}`} key={`activities-link-${page}`}>{ch}</Link>;
   },
 
   render() {
@@ -41,7 +41,7 @@ const ActivityPageNavigation = React.createClass({
     const backLink = last <= first + linkStep ? null :
       this.renderLink(query, first + linkStep, '>');
     return (
-      <footer>
+      <footer id="activity-page-wrapper">
         {frontLink}
         {links}
         {backLink}

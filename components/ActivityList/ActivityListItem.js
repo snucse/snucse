@@ -47,12 +47,12 @@ const ActivityListItem = React.createClass({
     moment.locale('ko');
     const date = moment(createdAt);
     return (
-      <li>
-        <div>
+      <li className="activity-list-item">
+        <div className="activity-list-item-date">
           {date.format('LLL')}
         </div>
-        <div>
-          <Link to={`/${target.id}`}>{messages[type][action](actor, target, this.props.activity)}</Link>
+        <div className="activity-list-item-link-wrapper">
+          <Link className="activity-list-item-link" to={`/${target.id}`}>{messages[type][action](actor, target, this.props.activity)}</Link>
         </div>
       </li>
     );
