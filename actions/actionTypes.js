@@ -78,6 +78,10 @@ export const LOAD_ACTIVITY = 'LOAD_ACTIVITY';
 export const LOAD_ACTIVITY_SUCCESS = 'LOAD_ACTIVITY_SUCCESS';
 export const LOAD_ACTIVITY_ERROR = 'LOAD_ACTIVITY_ERROR';
 
+// action types related with profile search
+export const SEARCH_PROFILE_WITH_PREFIX_INIT = 'SEARCH_PROFILE_WITH_PREFIX_INIT';
+export const SEARCH_PROFILE_WITH_PREFIX_COMPLETE = 'SEARCH_PROFILE_WITH_PREFIX_COMPLETE';
+
 // action types related with modal
 export const INITIALIZE_MODAL = 'INITIALIZE_MODAL';
 export const DISABLE_MODAL = 'DISABLE_MODAL';

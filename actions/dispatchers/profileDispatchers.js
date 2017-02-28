@@ -90,3 +90,21 @@ export function changeAdmin(dispatch, id, newId) {
     }
   });
 }
+
+export function searchProfile(dispatch, prefix, limit) {
+  dispatch({
+    type: types.SEARCH_PROFILE_WITH_PREFIX_INIT
+  });
+  DataCon.loadDataFromServer(Url.getUrl('/profiles/autocomplete', {prefix, limit})).then(response => {
+    dispatch({
+      type: types.SEARCH_PROFILE_WITH_PREFIX_COMPLETE,
+      profiles: response.profiles
+    });
+  }).catch(err => {
+    console.error(err);
+    dispatch({
+      type: types.SEARCH_PROFILE_WITH_PREFIX_COMPLETE,
+      profiles: []
+    });
+  });
+}
