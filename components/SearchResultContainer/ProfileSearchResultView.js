@@ -17,7 +17,9 @@ const ProfileSearchResultView = React.createClass({
         <form>서치 폼</form>
         <section>
           <h4>프로필</h4>
-          {profileResults}
+          <ul id="tag-info-profile-list">
+            {profileResults}
+          </ul>
           <footer>
             <SearchResultLinks category={'profile'} query={query} page={page} num={num} count={result.profiles.count}/>
           </footer>

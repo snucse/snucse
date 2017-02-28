@@ -19,7 +19,9 @@ const ArticleSearchResultView = React.createClass({
           <header>
             <h4>글</h4>
           </header>
-          {articleResults}
+          <ul id="tag-info-article-list">
+            {articleResults}
+          </ul>
           <footer>
             <SearchResultLinks category={'article'} query={query} page={page} num={num} count={result.articles.count}/>
           </footer>

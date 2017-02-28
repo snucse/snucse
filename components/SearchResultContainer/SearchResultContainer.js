@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import isEqual from 'deep-equal';
 
+import '../../stylesheets/search-result.styl';
 import {loadSearchResult} from '../../actions/dispatchers';
 import SearchResultView from './SearchResultView';
 

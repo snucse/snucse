@@ -11,15 +11,23 @@ export const ArticleSearchResult = React.createClass({
     moment.locale('ko');
     const date = moment(createdAt);
     return (
-      <article className="search-item article-search-item">
-        <Link to={`/${id}`}>{`${title}`}</Link>
-        <time title={date.format('LLL')}>
-          <Realtime from={date}/>
-        </time>
-        <br/>
-        <p>{content.substring(0, 200)} {content.length > 200 ? '...' : ''}</p>
-        <Link to={`/${primaryProfile.id}`}>{primaryProfile.name}</Link> | <Link to={`/${writer.username}`}>{`${writer.name}`}</Link>
-      </article>
+      <li className="tag-info-article-container">
+        <div className="tag-info-article">
+          <small className="tag-info-article-date" title={date.format('LLL')}>
+            <Realtime from={date}/>
+          </small>
+          <h5 className="tag-info-article-header"><Link className="tag-info-article-title" to={`/${id}`}>{title}</Link><span className="tag-info-article-profiles">{primaryProfile.name}</span></h5>
+          <div className="tag-info-article-writer-container">
+            <img className="tag-info-article-writer-image" src={writer.profileImageUri}/>
+            <h5 className="tag-info-article-writer-name"><Link to={`/${writer.username}`}>{writer.name}</Link></h5>
+          </div>
+          <div className="tag-info-article-main">
+            <div className="tag-info-article-content">
+              {content}
+            </div>
+          </div>
+        </div>
+      </li>
     );
   }
 });
@@ -42,13 +50,16 @@ export const CommentSearchResult = React.createClass({
 
 export const ProfileSearchResult = React.createClass({
   render() {
-    const {profile} = this.props;
-    const {name, description, id} = profile;
+    const {name, description, id} = this.props.profile;
     return (
-      <article className="search-item profile-search-item">
-        <Link to={`/${id}`}>{name}</Link>
-        <p>{description}</p>
-      </article>
+      <li className="tag-info-profile-container">
+        <div className="tag-info-profile">
+          <h5 className="tag-info-profile-name"><Link to={`/${id}`}>{name}</Link></h5>
+          <div className="tag-info-profile-description">
+            {description}
+          </div>
+        </div>
+      </li>
     );
   }
 });
