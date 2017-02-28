@@ -25,13 +25,13 @@ const messages = {
     update: (actor, profile) => `${actor.name}님이 ${profile.name} 프로필에 댓글을 달았습니다.`
   },
   ArticleTag: {
-    create: (actor, article) => `${actor.name}님이 ${article.title} 글에 태그를 달았습니다.`
+    create: (actor, article, activity) => `${actor.name}님이 ${article.title} 글에 ${activity.tag} 태그를 달았습니다.`
   },
   ProfileTag: {
-    create: (actor, profile) => `${actor.name}님이 ${profile.name} 프로필에 태그를 달았습니다.`
+    create: (actor, profile, activity) => `${actor.name}님이 ${profile.name} 프로필에 ${activity.tag} 태그를 달았습니다.`
   },
   ImageTag: {
-    create: (actor, article) => `${actor.name}님이 ${article.title} 글의 이미지에 태그를 달았습니다.`
+    create: (actor, article, activity) => `${actor.name}님이 ${article.title} 글의 이미지에 ${activity.tag} 태그를 달았습니다.`
   }
 };
 
@@ -52,7 +52,7 @@ const ActivityListItem = React.createClass({
           {date.format('LLL')}
         </div>
         <div>
-          <Link to={`/${target.id}`}>{messages[type][action](actor, target)}</Link>
+          <Link to={`/${target.id}`}>{messages[type][action](actor, target, this.props.activity)}</Link>
         </div>
       </li>
     );
