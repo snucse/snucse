@@ -2,6 +2,8 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import classnames from 'classnames';
 
+import {DataCon, Url, genRefCallback} from '../../utils';
+
 const filters = [
   {
     type: undefined,
@@ -114,9 +116,31 @@ const SubCategoryItem = React.createClass({
   }
 });
 
+const CandidateProfileItem = React.createClass({
+
+  propTypes: {
+    onClickCandidateProfile: React.PropTypes.func,
+    profile: React.PropTypes.object
+  },
+
+  handleClickCandidateProfile() {
+    this.props.onClickCandidateProfile(this.props.profile.id, this.props.profile.name);
+  },
+
+  render() {
+    return (
+      <div onClick={this.handleClickCandidateProfile}>
+        {this.props.profile.name} ({this.props.profile.id})
+      </div>
+    );
+  }
+});
+
 const ActivityFilter = React.createClass({
 
   propTypes: {
+    candidateProfiles: React.PropTypes.array,
+    searchProfile: React.PropTypes.func,
     query: React.PropTypes.object
   },
 
@@ -126,8 +150,25 @@ const ActivityFilter = React.createClass({
       opened: false,
       previousType: initialType,
       selectedType: initialType,
-      selectedAction: this.props.query.action || initialType.actions[0]
+      selectedAction: this.props.query.action || initialType.actions[0],
+
+      isSearching: false,
+      candidateProfileIndex: -1,
+      profileId: this.props.query.profileId,
+      timer: null,
+      isProfileSelected: this.props.query.profileId !== undefined
     };
+  },
+
+  componentDidMount() {
+    if (this.state.isProfileSelected) {
+      DataCon.loadDataFromServer(Url.getUrl(`/profiles/${this.props.query.profileId}`)).then(profile => {
+        this.setState({
+          selectedProfileName: profile.name
+        });
+        this._query.value = profile.name;
+      }).catch(console.error);
+    }
   },
 
   componentWillReceiveProps(props) {
@@ -137,6 +178,57 @@ const ActivityFilter = React.createClass({
       previousType: initialType,
       selectedType: initialType,
       selectedAction: props.query.filterAction || initialType.actions[0]
+    });
+  },
+
+  searchProfile() {
+    const query = this._query.value;
+    this.props.searchProfile(query);
+  },
+
+  handleFocusInput(event) {
+    event.target.value = '';
+  },
+
+  handleBlurInput(event) {
+    if (this.state.isProfileSelected) {
+      event.target.value = this.state.selectedProfileName;
+    }
+  },
+
+  handleChangeInput(event) {
+    if (event.target.value === '') {
+      this.setState({
+        isSearching: false,
+        candidateProfileIndex: -1
+      });
+      return;
+    }
+    if (this.state.timer) {
+      clearInterval(this.state.timer);
+      this.setState({timer: null});
+    }
+    this.setState({timer: setInterval(this.timerCallback, 300)});
+  },
+
+  timerCallback() {
+    clearInterval(this.state.timer);
+    this.props.searchProfile(this._query.value);
+    this.setState({
+      timer: null,
+      isSearching: true,
+      candidateProfileIndex: -1
+    });
+  },
+
+  handleClickCancleButton() {
+    this.setState({
+      profileId: undefined,
+      isProfileSelected: false,
+      selectedProfileName: undefined
+    }, () => {
+      this._query.value = '';
+      this.pushHistory();
     });
   },
 
@@ -158,11 +250,30 @@ const ActivityFilter = React.createClass({
       previousType: this.state.selectedType,
       selectedAction: action,
       opened: false
+    }, () => {
+      // push history
+      this.pushHistory();
     });
-    // push history
+  },
+
+  handleClickCandidateProfile(profileId, selectedProfileName) {
+    this.setState({
+      profileId,
+      selectedProfileName,
+      isSearching: false,
+      candidateProfileIndex: -1,
+      isProfileSelected: true
+    }, () => {
+      this._query.value = selectedProfileName;
+      this.pushHistory();
+    });
+  },
+
+  pushHistory() {
     const params = {};
     params.filterType = this.state.selectedType.type;
-    params.filterAction = action;
+    params.filterAction = this.state.selectedAction;
+    params.profileId = this.state.profileId;
     const paramsString = Object.keys(params).filter(key => {
       return params[key] !== undefined && params[key] !== null;
     }).map(key => {
@@ -196,7 +307,6 @@ const ActivityFilter = React.createClass({
           />
       );
     });
-
     const nav = this.state.opened ? (
       <nav>
         <ul>
@@ -208,12 +318,34 @@ const ActivityFilter = React.createClass({
       </nav>
     ) : null;
 
+    const profileAutocompleteItemViews = this.state.isSearching ? this.props.candidateProfiles.map(profile => {
+      return (
+        <CandidateProfileItem
+          onClickCandidateProfile={this.handleClickCandidateProfile}
+          profile={profile}
+          key={`profile-candidate-${profile.id}`}
+          />
+      );
+    }) : null;
+    const cancelButton = this.state.isProfileSelected ? (
+      <span onClick={this.handleClickCancleButton}>X</span>
+    ) : null;
+
     return (
       <header>
         <div>
           <span onClick={this.handleClickToggleButton}>분류</span>
-          <input placeholder="프로필"/>
-          <button>검색</button>
+          <input
+            placeholder="프로필"
+            onFocus={this.handleFocusInput}
+            onBlur={this.handleBlurInput}
+            onChange={this.handleChangeInput}
+            ref={genRefCallback(this, '_query')}
+            />
+          {cancelButton}
+          <ul>
+            {profileAutocompleteItemViews}
+          </ul>
         </div>
         {nav}
       </header>

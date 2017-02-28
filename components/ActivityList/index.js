@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadActivity} from '../../actions/dispatchers';
+import {loadActivity, searchProfile} from '../../actions/dispatchers';
 import ActivityFilter from './ActivityFilter';
 import ActivityList from './ActivityList';
 import ActivityPageNavigation from './ActivityPageNavigation';
@@ -16,7 +16,11 @@ const asdf = React.createClass({
     const {query} = this.props;
     return (
       <div>
-        <ActivityFilter query={query}/>
+        <ActivityFilter
+          candidateProfiles={this.props.candidateProfiles}
+          searchProfile={this.props.searchProfile}
+          query={query}
+          />
         <ActivityList
           loadActivity={this.props.loadActivity}
           activities={this.props.activities}
@@ -35,6 +39,7 @@ const asdf = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
+    candidateProfiles: state.activity.autoComplete.profiles,
     count: state.activity.count,
     activities: state.activity.activities,
     loading: state.activity.loading,
@@ -44,7 +49,8 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    loadActivity: options => loadActivity(dispatch, options)
+    loadActivity: options => loadActivity(dispatch, options),
+    searchProfile: (prefix, limit) => searchProfile(dispatch, prefix, limit)
   };
 };
 
