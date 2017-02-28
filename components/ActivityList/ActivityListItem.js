@@ -9,8 +9,8 @@ const messages = {
     },
   */
   Article: {
-    create: (actor, article) => `${actor.name}님이 ${article.title} 프로필을 생성했습니다.`,
-    update: (actor, article) => `${actor.name}님이 ${article.title} 프로필을 수정했습니다.`
+    create: (actor, article) => `${actor.name}님이 ${article.title} 글을 작성했습니다.`,
+    update: (actor, article) => `${actor.name}님이 ${article.title} 글을 수정했습니다.`
   },
   Profile: {
     create: (actor, profile) => `${actor.name}님이 ${profile.name} 프로필을 생성했습니다.`,
