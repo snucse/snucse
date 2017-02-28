@@ -13,8 +13,10 @@ import Editor from '../../Editor';
 
 const ProfileEditBox = React.createClass({
   getInitialState() {
+    const {description, renderingMode} = this.props;
     return {
-      renderingMode: this.props.renderingMode
+      description,
+      renderingMode
     };
   },
 
@@ -52,7 +54,7 @@ const ProfileEditBox = React.createClass({
         </div>
         <div className="form-group">
           <label className="form-label" htmlFor="update-profile-form-description-input">설명</label>
-          <Editor value={this.props.description} mode={this.props.renderingMode} onChange={this.handleDescChange} onModeChange={this.handleModeChange}/>
+          <Editor value={this.state.description} mode={this.state.renderingMode} onChange={this.handleDescChange} onModeChange={this.handleModeChange}/>
         </div>
         <input id="update-profile-button" type="button" value="프로필 수정" onClick={this.handleClick}/>
       </div>
