@@ -14,7 +14,7 @@ const APP_DIMENSIONS_INITIAL_STATE = {
   isMobile: false
 };
 
-function updatesAppDimensions(state, action) {
+function updateAppDimensions(state, action) {
   return updateObject(state, {dimensions: action.dimensions});
 }
 
@@ -23,6 +23,6 @@ function updatesIsMobile(state, action) {
 }
 
 export default createReducer(APP_DIMENSIONS_INITIAL_STATE, {
-  [UPDATE_APP_DIMENSIONS]: updatesAppDimensions,
+  [UPDATE_APP_DIMENSIONS]: updateAppDimensions,
   [UPDATE_MOBILE_STATE]: updatesIsMobile
 });

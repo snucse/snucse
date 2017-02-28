@@ -1,6 +1,6 @@
 import * as types from '../actionTypes';
 
-export function updatesAppDimensions(dispatch, dimensions) {
+export function updateAppDimensions(dispatch, dimensions) {
   dispatch({
     type: types.UPDATE_APP_DIMENSIONS,
     dimensions
