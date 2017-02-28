@@ -124,7 +124,7 @@ const ArticleEdit = React.createClass({
       files
     });
     this.setState({title: '', content: '', renderingMode: 'text'});
-    browserHistory.push('/');
+    browserHistory.goBack();
   },
 
   render() {
