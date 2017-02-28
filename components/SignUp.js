@@ -61,7 +61,6 @@ const SignUpForm = connectModals(React.createClass({
     }, {});
 
     if (values.username.length === 0) {
-      console.log(this);
       this.props.alertModal('알림', '아이디를 입력해주세요.', () => {
         this.username.focus();
       });
