@@ -6,7 +6,7 @@ import ActivityFilter from './ActivityFilter';
 import ActivityList from './ActivityList';
 import ActivityPageNavigation from './ActivityPageNavigation';
 
-const asdf = React.createClass({
+const ActivityContainer = React.createClass({
 
   propTypes: {
     query: React.PropTypes.object
@@ -54,4 +54,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(asdf);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityContainer);
