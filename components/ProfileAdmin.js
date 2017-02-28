@@ -32,11 +32,12 @@ const ProfileAdmin = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {name, description, admin} = state.profile.current;
+  const {name, description, renderingMode, admin} = state.profile.current;
   const {userId} = state.userInfo;
   return {
     name,
     description,
+    renderingMode,
     admin,
     userId
   };
