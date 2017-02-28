@@ -8,16 +8,16 @@ const ToTopButton = React.createClass({
   getInitialState() {
     return {
       show: false,
-      lastScrollY: 0
+      lastScrollY: 0,
+      dismiss: null
     };
   },
 
-  dismiss: null,
   scrollListener() {
     const showSecond = 1000;
     const currentScrollY = window.scrollY;
     if (currentScrollY === 0) {
-      clearInterval(this.dismiss);
+      clearInterval(this.state.dismiss); // ?
       this.setState({
         show: false
       });
@@ -26,14 +26,16 @@ const ToTopButton = React.createClass({
       this.setState({
         show: true
       });
-      if (this.dismiss !== null) {
-        clearInterval(this.dismiss);
+      if (this.state.dismiss !== null) {
+        clearInterval(this.state.dismiss);
       }
-      this.dismiss = setInterval(() => {
-        this.setState({
-          show: false
-        });
-      }, showSecond);
+      this.setState({
+        dismiss: setInterval(() => {
+          this.setState({
+            show: false
+          });
+        }, showSecond)
+      });
     } else {
       // down
     }
