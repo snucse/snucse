@@ -21,11 +21,11 @@ const OverallSearchResultView = React.createClass({
     return (
       <div>
         <form>서치 폼</form>
-        <div id="tag-info-container">
+        <div id="search-result-container">
           <h4 id="tag-title">{`'${query}'`} 검색 결과</h4>
           <section>
-            <h4 id="tag-info-article-title">글</h4>
-            <ul id="tag-info-article-list">
+            <h4 id="search-result-article-title">글</h4>
+            <ul id="search-result-article-list">
               {articleResults}
             </ul>
             <footer>
@@ -33,8 +33,8 @@ const OverallSearchResultView = React.createClass({
             </footer>
           </section>
           <section>
-            <h4 id="tag-info-comment-title">댓글</h4>
-            <ul id="tag-info-comment-lsit">
+            <h4 id="search-result-comment-title">댓글</h4>
+            <ul id="search-result-comment-list">
               {commentResults}
             </ul>
             <footer>
@@ -42,8 +42,8 @@ const OverallSearchResultView = React.createClass({
             </footer>
           </section>
           <section>
-            <h4 id="tag-info-profile-title">프로필</h4>
-            <ul id="tag-info-profile-list">
+            <h4 id="search-result-profile-title">프로필</h4>
+            <ul id="search-result-profile-list">
               {profileResults}
             </ul>
             <footer>
@@ -51,8 +51,8 @@ const OverallSearchResultView = React.createClass({
             </footer>
           </section>
           <section>
-            <h4 id="tag-info-tag-title">태그</h4>
-            <ul id="tag-info-tag-container">
+            <h4 id="search-result-tag-title">태그</h4>
+            <ul id="search-result-tag-container">
               {tagResults}
             </ul>
             <footer>

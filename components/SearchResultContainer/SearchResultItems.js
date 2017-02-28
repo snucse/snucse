@@ -11,18 +11,18 @@ export const ArticleSearchResult = React.createClass({
     moment.locale('ko');
     const date = moment(createdAt);
     return (
-      <li className="tag-info-article-container">
-        <div className="tag-info-article">
-          <small className="tag-info-article-date" title={date.format('LLL')}>
+      <li className="search-result-article-container">
+        <div className="search-result-article">
+          <small className="search-result-article-date" title={date.format('LLL')}>
             <Realtime from={date}/>
           </small>
-          <h5 className="tag-info-article-header"><Link className="tag-info-article-title" to={`/${id}`}>{title}</Link><span className="tag-info-article-profiles">{primaryProfile.name}</span></h5>
-          <div className="tag-info-article-writer-container">
-            <img className="tag-info-article-writer-image" src={writer.profileImageUri}/>
-            <h5 className="tag-info-article-writer-name"><Link to={`/${writer.username}`}>{writer.name}</Link></h5>
+          <h5 className="search-result-article-header"><Link className="search-result-article-title" to={`/${id}`}>{title}</Link><span className="search-result-article-profiles">{primaryProfile.name}</span></h5>
+          <div className="search-result-article-writer-container">
+            <img className="search-result-article-writer-image" src={writer.profileImageUri}/>
+            <h5 className="search-result-article-writer-name"><Link to={`/${writer.username}`}>{writer.name}</Link></h5>
           </div>
-          <div className="tag-info-article-main">
-            <div className="tag-info-article-content">
+          <div className="search-result-article-main">
+            <div className="search-result-article-content">
               {content}
             </div>
           </div>
@@ -34,16 +34,28 @@ export const ArticleSearchResult = React.createClass({
 
 export const CommentSearchResult = React.createClass({
   render() {
-    // const {comment} = this.props;
-    // const {title, writer, createdAt} = article;
+    const {content, writer, createdAt, recommendationCount, article, articleId} = this.props.comment;
+    const {title} = article;
+    moment.locale('ko');
+    const date = moment(createdAt);
     return (
-      <article className="search-item comment-search-item">
-        {JSON.stringify(this.props.comment)}<br/>
-        쓴 글로 가야하는데 쓴 글에 대한 정보가 없네요
-        <br/>
-        #링크를 사용할까
-        <br/>
-      </article>
+      <li className="search-result-comment-container">
+        <div className="search-result-comment">
+          <div className="search-result-comment-content">
+            {content}
+          </div>
+          <div className="search-result-comment-info">
+            <div className="search-result-comment-recommendation-count">{recommendationCount}</div>
+            <div className="search-result-comment-writer">{writer.name}</div>
+            <small className="search-result-comment-date" title={date.format('LLL')}>
+              <Realtime from={date}/>
+            </small>
+          </div>
+          <div className="search-result-comment-article">
+            <Link className="search-result-comment-article-link" to={`/${articleId}`}>{title}</Link>
+          </div>
+        </div>
+      </li>
     );
   }
 });
@@ -52,10 +64,10 @@ export const ProfileSearchResult = React.createClass({
   render() {
     const {name, description, id} = this.props.profile;
     return (
-      <li className="tag-info-profile-container">
-        <div className="tag-info-profile">
-          <h5 className="tag-info-profile-name"><Link to={`/${id}`}>{name}</Link></h5>
-          <div className="tag-info-profile-description">
+      <li className="search-result-profile-container">
+        <div className="search-result-profile">
+          <h5 className="search-result-profile-name"><Link to={`/${id}`}>{name}</Link></h5>
+          <div className="search-result-profile-description">
             {description}
           </div>
         </div>
