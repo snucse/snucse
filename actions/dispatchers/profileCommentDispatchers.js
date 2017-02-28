@@ -12,55 +12,74 @@ export function loadProfileComments(dispatch, profileId) {
   }).catch(console.error);
 }
 
-export function setLastProfileComment(dispatch, id, comment, commentCount) {
+export function loadProfileCommentReplies(dispatch, parentCommentId) {
+  DataCon.loadDataFromServer(Url.getUrl('/profile_comments/replies', {parentCommentId})).then(res => {
+    dispatch({
+      type: types.LOAD_PROFILE_COMMENT_REPLY,
+      comments: res.profileComments,
+      parentCommentId
+    });
+  }).catch(console.error);
+}
+
+export function setLastProfileComment(dispatch, id, comment, commentCount, isChild = false) {
   dispatch({
-    type: types.SET_LAST_PROFILE_COMMENT,
-    profileId: id,
+    type: isChild ? types.SET_LAST_PROFILE_COMMENT_REPLY : types.SET_LAST_PROFILE_COMMENT,
+    [isChild ? 'parentCommentId' : 'profileId']: id,
     comment,
     commentCount
   });
 }
 
-export function modifyFoldProfileComments(dispatch, id, fold) {
+export function modifyFoldProfileComments(dispatch, id, fold, isChild = false) {
   dispatch({
-    type: types.MODIFY_FOLD_PROFILE_COMMENT,
-    profileId: id,
+    type: isChild ? types.MODIFY_FOLD_PROFILE_COMMENT_REPLY : types.MODIFY_FOLD_PROFILE_COMMENT,
+    [isChild ? 'parentCommentId' : 'profileId']: id,
     fold
   });
 }
 
-export function writeProfileComment(dispatch, profileId, content) {
+export function writeProfileComment(dispatch, profileId, content, parentCommentId) {
   const data = {
     profileId,
-    content
+    content,
+    parentCommentId
   };
   DataCon.postDataToServer(Url.getUrl('/profile_comments'), 'POST', data).then(res => {
-    dispatch({
-      type: types.WRITE_PROFILE_COMMENT,
-      comment: res,
-      profileId
-    });
+    if (parentCommentId === undefined) {
+      dispatch({
+        type: types.WRITE_PROFILE_COMMENT,
+        comment: res,
+        profileId
+      });
+    } else {
+      dispatch({
+        type: types.WRITE_PROFILE_COMMENT_REPLY,
+        comment: res,
+        parentCommentId
+      });
+    }
   }).catch(console.error);
 }
 
-export function editProfileComment(dispatch, commentId, profileId, newContent) {
+export function editProfileComment(dispatch, commentId, id, newContent, isChild = false) {
   DataCon.postDataToServer(Url.getUrl(`/profile_comments/${commentId}`), 'PUT', {
     content: newContent
   }).then(comment => {
     dispatch({
-      type: types.EDIT_PROFILE_COMMENT,
+      type: isChild ? types.EDIT_PROFILE_COMMENT_REPLY : types.EDIT_PROFILE_COMMENT,
       comment,
-      profileId
+      [isChild ? 'parentCommentId' : 'profileId']: id
     });
   }).catch(console.error);
 }
 
-export function deleteProfileComment(dispatch, commentId, profileId) {
+export function deleteProfileComment(dispatch, commentId, id, isChild = false) {
   DataCon.postDataToServer(Url.getUrl(`/profile_comments/${commentId}`), 'DELETE').then(() => {
     dispatch({
-      type: types.DELETE_PROFILE_COMMENT,
+      type: isChild ? types.DELETE_PROFILE_COMMENT_REPLY : types.DELETE_PROFILE_COMMENT,
       commentId,
-      profileId
+      [isChild ? 'parentCommentId' : 'profileId']: id
     });
   }).catch(console.error);
 }

@@ -20,26 +20,19 @@ import CommentFormContainer from './CommentFormContainer';
     - commentsInfo
     - renderRecommendBox
   - ItemContainer
+    - writeComment
     - editComment
     - deleteComment
     - recommendBox
 */
 const CommentBox = React.createClass({
   componentDidMount() {
-    if (this.props.lastComment) {
-      this.props.setLastComment(this.props.id, this.props.lastComment, this.props.commentCount);
-    } else {
-      this.props.loadComments(this.props.id);
-    }
+    this.props.setLastComment(this.props.id, this.props.lastComment, this.props.commentCount);
   },
 
   componentWillReceiveProps(props) {
     if (this.props.id !== props.id) {
-      if (props.lastComment) {
-        props.setLastComment(props.id, props.lastComment, props.commentCount);
-      } else {
-        props.loadComments(props.id);
-      }
+      props.setLastComment(props.id, props.lastComment, props.commentCount);
     }
   },
 
@@ -54,10 +47,14 @@ const CommentBox = React.createClass({
           <CommentList
             id={this.props.id}
             loadComments={this.props.loadComments}
+            loadReplies={this.props.loadReplies}
+            setLastComment={this.props.setLastComment}
             modifyFoldComments={this.props.modifyFoldComments}
+            writeComment={this.props.writeComment}
             deleteComment={this.props.deleteComment}
             editComment={this.props.editComment}
             commentsInfo={this.props.commentsInfo}
+            repliesInfo={this.props.repliesInfo}
             renderRecommendBox={this.props.renderRecommendBox}
             />
           {commentForm}

@@ -7,10 +7,12 @@ const FOLD_COMMENT_LIMIT = 1;
 /*
   props
   - id
+  - isChild
   - loadComments
   - modifyFoldComments
-  - deleteComment
+  - writeComment
   - editComment
+  - deleteComment
   - commentsInfo
   - renderRecommendBox
 */
@@ -20,11 +22,11 @@ const CommentList = React.createClass({
   },
 
   foldComments(id) {
-    this.props.modifyFoldComments(id, true);
+    this.props.modifyFoldComments(id, true, this.props.isChild);
   },
 
   unfoldComments(id) {
-    this.props.modifyFoldComments(id, false);
+    this.props.modifyFoldComments(id, false, this.props.isChild);
   },
 
   // TODO: 근본적인 해결 하기
@@ -53,9 +55,16 @@ const CommentList = React.createClass({
         comment={comment}
         key={comment.id}
         id={this.props.id}
+        loadReplies={this.props.loadReplies}
+        setLastComment={this.props.setLastComment}
+        modifyFoldComments={this.props.modifyFoldComments}
+        writeComment={this.props.writeComment}
         deleteComment={this.props.deleteComment}
         editComment={this.props.editComment}
+        repliesInfo={this.props.repliesInfo}
+        renderRecommendBox={this.props.renderRecommendBox}
         recommendBox={recommendBox}
+        isChild={this.props.isChild}
         />
     );
   },
@@ -78,7 +87,7 @@ const CommentList = React.createClass({
       showMoreButton = <button className="comment-show-more-button" onClick={this.handleClickShowMore}>{commentsNum - commentsNumToShow}개 더 보기</button>;
     }
     return (
-      <div>
+      <div className="comment-list-container">
         <div className="comment-list-controller">
           {showMoreButton}
         </div>
