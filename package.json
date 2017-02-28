@@ -30,7 +30,7 @@
     "stylus": ">=0.52.4",
     "stylus-loader": "^2.3.1",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2",
+    "webpack-dev-server": "^1.16.3",
     "xo": "^0.16.0",
     "xo-loader": "^0.7.0"
   },

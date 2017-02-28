@@ -10,6 +10,8 @@ import {connectModals} from '../../../utils';
   - isEditable
   - isDeletable
   - comment
+  - replyList
+  - replyForm
 
   - onDelete
   - onEdit
@@ -18,8 +20,17 @@ import {connectModals} from '../../../utils';
   state
   - newContent
   - isEditMode
+  - replyForm
 */
 const CommentItem = React.createClass({
+  handleClickReply() {
+    this.setState({replyForm: true});
+  },
+
+  handleHideReplyForm() {
+    this.setState({replyForm: false});
+  },
+
   handleClickDelete() {
     this.props.confirmModal('알림', '정말로 삭제하시겠습니까?', () => {
       this.props.onDelete();
@@ -62,7 +73,8 @@ const CommentItem = React.createClass({
   getInitialState() {
     return {
       newContent: this.props.comment.content,
-      isEditMode: false
+      isEditMode: false,
+      replyForm: false
     };
     // fixme erase state newContent! 난 안 할래
   },
@@ -89,6 +101,9 @@ const CommentItem = React.createClass({
       contentWrapper = <div className="comment-content">{this.props.comment.content}</div>;
       const buttons = [];
       const id = this.props.comment.id;
+      if (!this.props.isChild) {
+        buttons.push(<button className="comment-reply-button" onClick={this.handleClickReply} key={`reply-button-${id}`}>답글</button>);
+      }
       if (this.props.isDeletable) {
         buttons.push(<button className="comment-delete-button" onClick={this.handleClickDelete} key={`delete-button-${id}`}>삭제</button>);
       }
@@ -98,6 +113,22 @@ const CommentItem = React.createClass({
       controller = (
         <div className="comment-controller">
           {buttons}
+        </div>
+      );
+    }
+    let replyBox = null;
+    if (!this.props.isChild) {
+      let replyForm = null;
+      let cancelReply = null;
+      if (this.state.replyForm) {
+        replyForm = this.props.replyForm;
+        cancelReply = <button onClick={this.handleHideReplyForm}>취소</button>;
+      }
+      replyBox = (
+        <div className="comment-reply">
+          {this.props.replyList}
+          {replyForm}
+          {cancelReply}
         </div>
       );
     }
@@ -120,6 +151,7 @@ const CommentItem = React.createClass({
           {this.props.recommendBox}
           {controller}
         </div>
+        {replyBox}
       </li>
     );
   }

@@ -1,0 +1,18 @@
+import {
+  LOAD_PROFILE_COMMENT_REPLY,
+  SET_LAST_PROFILE_COMMENT_REPLY,
+  MODIFY_FOLD_PROFILE_COMMENT_REPLY,
+  WRITE_PROFILE_COMMENT_REPLY,
+  EDIT_PROFILE_COMMENT_REPLY,
+  DELETE_PROFILE_COMMENT_REPLY
+} from '../../actions/actionTypes';
+import generateCommentReducers from './commentReducer';
+
+export default generateCommentReducers({
+  load: LOAD_PROFILE_COMMENT_REPLY,
+  setLast: SET_LAST_PROFILE_COMMENT_REPLY,
+  modifyFold: MODIFY_FOLD_PROFILE_COMMENT_REPLY,
+  write: WRITE_PROFILE_COMMENT_REPLY,
+  edit: EDIT_PROFILE_COMMENT_REPLY,
+  delete: DELETE_PROFILE_COMMENT_REPLY
+}, 'parentCommentId');
