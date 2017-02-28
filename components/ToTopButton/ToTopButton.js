@@ -7,11 +7,11 @@ const ToTopButton = React.createClass({
 
   getInitialState() {
     return {
-      show: false
+      show: false,
+      lastScrollY: 0
     };
   },
 
-  lastScrollY: 0,
   dismiss: null,
   scrollListener() {
     const showSecond = 1000;
@@ -21,7 +21,7 @@ const ToTopButton = React.createClass({
       this.setState({
         show: false
       });
-    } else if (this.lastScrollY > currentScrollY) {
+    } else if (this.state.lastScrollY > currentScrollY) {
       // up
       this.setState({
         show: true
@@ -37,7 +37,9 @@ const ToTopButton = React.createClass({
     } else {
       // down
     }
-    this.lastScrollY = currentScrollY;
+    this.setState({
+      lastScrollY: currentScrollY
+    });
   },
 
   componentDidMount() {
