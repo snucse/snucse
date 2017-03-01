@@ -26,7 +26,7 @@ const Profile = React.createClass({
   },
 
   render() {
-    const {loading, id, userId, admin, name, description} = this.props;
+    const {loading, id, userId, admin, name, renderedDescription} = this.props;
     const mine = admin && userId === admin.id;
     const rightButton = mine ? (
       <Link id="profile-admin-button" to={`/profiles/${id}/admin`}>프로필 설정</Link>
@@ -48,11 +48,14 @@ const Profile = React.createClass({
         <div id="profile-information">
           {rightButton}
           <h3 id="profile-name">{name}</h3>
-          <div id="profile-description">
-            {description}
-          </div>
+          <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
           <ProfileTagBox profileId={id}/>
-          <ProfileCommentBox profileId={id} isAddable/>
+          <ProfileCommentBox
+            profileId={id}
+            commentCount={this.props.commentCount}
+            lastComment={this.props.lastComment}
+            isAddable
+            />
         </div>
         <Feed profileId={id}/>
       </div>
@@ -85,15 +88,18 @@ const FollowBox = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {loading, following, name, description, admin} = state.profile.current;
+  const {loading, following, name, description, renderedDescription, admin, commentCount, lastComment} = state.profile.current;
   const {userLevel, userId} = state.userInfo;
   return {
     loading,
     following,
-    userLevel,
     name,
     description,
+    renderedDescription,
     admin,
+    commentCount,
+    lastComment,
+    userLevel,
     userId
   };
 };

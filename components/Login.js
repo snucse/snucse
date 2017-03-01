@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
+import {connect} from 'react-redux';
 
 import {DataCon, Url, genRefCallback, connectModals} from '../utils';
 import Modal from './Modal';
@@ -9,6 +10,7 @@ import '../stylesheets/login.styl';
 
 const Login = React.createClass({
   render() {
+    const modal = this.props.modalEnabled ? <Modal/> : null;
     return (
       <div id="login-background">
         <div id="login-box-container">
@@ -21,7 +23,7 @@ const Login = React.createClass({
             </section>
           </div>
         </div>
-        <Modal/>
+        {modal}
       </div>
     );
   }
@@ -71,4 +73,10 @@ const LoginForm = connectModals(React.createClass({
   }
 }));
 
-export default Login;
+const mapStateToProps = function (state) {
+  return {
+    modalEnabled: state.modal.enabled
+  };
+};
+
+export default connect(mapStateToProps)(Login);

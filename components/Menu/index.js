@@ -19,6 +19,7 @@ const Menu = React.createClass({
   },
 
   render() {
+    const modal = this.props.modalEnabled ? <Modal/> : null;
     return (
       <Measure onMeasure={this.handleMeasure}>
         <div>
@@ -29,12 +30,18 @@ const Menu = React.createClass({
               {this.props.children}
             </div>
           </div>
-          <Modal/>
+          {modal}
         </div>
       </Measure>
     );
   }
 });
+
+const mapStateToProps = function (state) {
+  return {
+    modalEnabled: state.modal.enabled
+  };
+};
 
 const mapDispatchToProps = function (dispatch) {
   return {
@@ -43,4 +50,4 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

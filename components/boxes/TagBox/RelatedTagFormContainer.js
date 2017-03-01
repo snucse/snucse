@@ -5,25 +5,30 @@ import {makeTagRelationship, loadCandidateTags, initializeCandidateTags} from '.
 import TagForm from './TagForm';
 
 const RelatedTagFormContainer = React.createClass({
+  getTagFormId() {
+    return `related-${this.props.targetTagName}`;
+  },
+
   handleAdd(tagName) {
     this.props.makeTagRelationship(this.props.targetTagName, tagName);
   },
 
   handleLoadCandidateTags(query) {
-    this.props.loadCandidateTags(query);
+    this.props.loadCandidateTags(this.getTagFormId(), query);
   },
 
   handleInitialCandidateTags() {
-    this.props.initializeCandidateTags();
+    this.props.initializeCandidateTags(this.getTagFormId());
   },
 
   render() {
+    const candidates = this.props.candidates[this.getTagFormId()];
     return (
       <TagForm
         onAdd={this.handleAdd}
         onLoadCandidateTags={this.handleLoadCandidateTags}
         onInitialCandidateTags={this.handleInitialCandidateTags}
-        candidateTags={this.props.candidates}
+        candidateTags={candidates}
         />
     );
   }
@@ -31,15 +36,15 @@ const RelatedTagFormContainer = React.createClass({
 
 const mapStateToProps = function (state) {
   return {
-    candidates: state.tag.candidate.tags
+    candidates: state.tag.candidate.byTagFormId
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
     makeTagRelationship: (targetTagName, relatedTagName) => makeTagRelationship(dispatch, targetTagName, relatedTagName),
-    initializeCandidateTags: () => initializeCandidateTags(dispatch),
-    loadCandidateTags: query => loadCandidateTags(dispatch, query)
+    initializeCandidateTags: tagFormId => initializeCandidateTags(dispatch, tagFormId),
+    loadCandidateTags: (tagFormId, query) => loadCandidateTags(dispatch, tagFormId, query)
   };
 };
 

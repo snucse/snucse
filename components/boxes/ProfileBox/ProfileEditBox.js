@@ -1,24 +1,35 @@
 import React from 'react';
 
+import Editor from '../../Editor';
+
 /*
  * props
  * - id
  * - name
  * - description
  * - onEdit
+ * - renderingMode
  */
 
 const ProfileEditBox = React.createClass({
   getInitialState() {
-    return {};
+    const {description, renderingMode} = this.props;
+    return {
+      description,
+      renderingMode
+    };
   },
 
   handleNameChange(e) {
     this.setState({name: e.target.value});
   },
 
-  handleDescChange(e) {
-    this.setState({description: e.target.value});
+  handleDescChange(value) {
+    this.setState({description: value});
+  },
+
+  handleModeChange(mode) {
+    this.setState({renderingMode: mode});
   },
 
   handleClick() {
@@ -30,6 +41,7 @@ const ProfileEditBox = React.createClass({
     if (description !== undefined) {
       data.description = description.trim();
     }
+    data.renderingMode = this.state.renderingMode;
     this.props.onEdit(data);
   },
 
@@ -42,7 +54,7 @@ const ProfileEditBox = React.createClass({
         </div>
         <div className="form-group">
           <label className="form-label" htmlFor="update-profile-form-description-input">설명</label>
-          <textarea id="update-profile-form-description-input" className="form-input" rows="3" defaultValue={this.props.description} onChange={this.handleDescChange}/>
+          <Editor value={this.state.description} mode={this.state.renderingMode} onChange={this.handleDescChange} onModeChange={this.handleModeChange}/>
         </div>
         <input id="update-profile-button" type="button" value="프로필 수정" onClick={this.handleClick}/>
       </div>

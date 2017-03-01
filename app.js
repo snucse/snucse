@@ -15,6 +15,7 @@ import {
   Others,
   Message,
   ProfileList,
+  ProfileMake,
   ProfileAdmin,
   ProfileAdminTransfer,
   Main,
@@ -43,15 +44,16 @@ ReactDOM.render(
         <Route path="/sign-up" component={SignUp}/>
         <Route path="/" component={Menu} pollInterval={2000}>
           <IndexRoute component={Main} pollInterval={2000}/>
-          <Route path="tags" component={TagInfo}/>
           <Route path="message" component={Message}/>
           <Route path="others" component={Others}/>
           <Route path="profiles" component={ProfileList}/>
-          <Route path="profiles/:id/write" component={ArticleWrite}/>
-          <Route path="settings" component={Settings}/>
+          <Route path="profiles/new" component={ProfileMake}/>
           <Route path="profiles/:id/admin" component={ProfileAdmin}/>
           <Route path="profiles/:id/transfer_admin" component={ProfileAdminTransfer}/>
+          <Route path="profiles/:id/write" component={ArticleWrite}/>
           <Route path="search" component={SearchResult}/>
+          <Route path="settings" component={Settings}/>
+          <Route path="tags" component={TagInfo}/>
           <Route path=":id" component={ClassManager}/>
           <Route path=":articleId/edit" component={ArticleEdit}/>
         </Route>

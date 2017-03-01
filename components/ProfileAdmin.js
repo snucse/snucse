@@ -19,24 +19,25 @@ const ProfileAdmin = React.createClass({
 
   render() {
     const {id} = this.props.params;
-    const {name, description, admin, userId} = this.props;
+    const {name, description, renderingMode, admin, userId} = this.props;
     const mine = admin && (admin.id === userId);
     return (
       <div id="profile-admin">
         <h5 id="profile-admin-title">프로필 관리</h5>
         <ProfileAdminTransferContainer id={id} admin={admin} mine={mine}/>
-        <ProfileEditBoxContainer id={id} name={name} description={description} mine={mine}/>
+        <ProfileEditBoxContainer id={id} name={name} description={description} mine={mine} renderingMode={renderingMode}/>
       </div>
     );
   }
 });
 
 const mapStateToProps = function (state) {
-  const {name, description, admin} = state.profile.current;
+  const {name, description, renderingMode, admin} = state.profile.current;
   const {userId} = state.userInfo;
   return {
     name,
     description,
+    renderingMode,
     admin,
     userId
   };
