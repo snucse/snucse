@@ -16,9 +16,7 @@ const ActivityPageNavigation = React.createClass({
       return query[key] !== undefined && query[key] !== null;
     }).map(key => {
       return `${key}=${query[key]}`;
-    }).reduce((p, c) => {
-      return `${c}&${p}`;
-    }, '');
+    }).join('&');
     return <Link className="activity-page" to={`/activities?${paramsString}`} key={`activities-link-${page}`}>{ch}</Link>;
   },
 

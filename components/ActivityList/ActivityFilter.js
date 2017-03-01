@@ -63,7 +63,7 @@ const mapping = {
 const MainCategoryItem = React.createClass({
 
   propTypes: {
-    onClickMainCategory: React.PropTypes.func,
+    onClickMainCategory: React.PropTypes.func.isRequired,
     isSelected: React.PropTypes.bool,
     filter: React.PropTypes.object
   },
@@ -91,7 +91,7 @@ const MainCategoryItem = React.createClass({
 const SubCategoryItem = React.createClass({
 
   propTypes: {
-    onClickSubCategory: React.PropTypes.func,
+    onClickSubCategory: React.PropTypes.func.isRequired,
     isSelected: React.PropTypes.bool,
     action: React.PropTypes.string
   },
@@ -141,34 +141,39 @@ const ActivityFilter = React.createClass({
   propTypes: {
     candidateProfiles: React.PropTypes.array,
     searchProfile: React.PropTypes.func,
-    query: React.PropTypes.object
+    query: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
-    const initialType = getFilterByType(this.props.query.type) || filters[0];
     return {
       opened: false,
-      previousType: initialType,
-      selectedType: initialType,
-      selectedAction: this.props.query.action || initialType.actions[0],
+      selectedType: filters[0],
+      selectedAction: filters[0].actions[0],
 
       isSearching: false,
       candidateProfileIndex: -1,
-      profileId: this.props.query.profileId,
-      timer: null,
-      isProfileSelected: this.props.query.profileId !== undefined
+      timer: null
     };
   },
 
   componentDidMount() {
-    if (this.state.isProfileSelected) {
-      DataCon.loadDataFromServer(Url.getUrl(`/profiles/${this.props.query.profileId}`)).then(profile => {
-        this.setState({
-          selectedProfileName: profile.name
-        });
-        this._query.value = profile.name;
-      }).catch(console.error);
-    }
+    const initialType = getFilterByType(this.props.query.type) || filters[0];
+    this.setState({
+      previousType: initialType,
+      selectedType: initialType,
+      selectedAction: this.props.query.action || initialType.actions[0],
+      profileId: this.props.query.profileId,
+      isProfileSelected: this.props.query.profileId !== undefined
+    }, () => {
+      if (this.state.isProfileSelected) {
+        DataCon.loadDataFromServer(Url.getUrl(`/profiles/${this.props.query.profileId}`)).then(profile => {
+          this.setState({
+            selectedProfileName: profile.name
+          });
+          this._query.value = profile.name;
+        }).catch(console.error);
+      }
+    });
   },
 
   componentWillReceiveProps(props) {
@@ -278,9 +283,7 @@ const ActivityFilter = React.createClass({
       return params[key] !== undefined && params[key] !== null;
     }).map(key => {
       return `${key}=${params[key]}`;
-    }).reduce((p, c) => {
-      return `${c}&${p}`;
-    }, '');
+    }).join('&');
     browserHistory.push(`/activities?${paramsString}`);
   },
 

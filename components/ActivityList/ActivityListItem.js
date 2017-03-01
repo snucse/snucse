@@ -43,7 +43,7 @@ const ActivityListItem = React.createClass({
 
   render() {
     const {actor, type, profile, article, action, createdAt} = this.props.activity;
-    const target = article ? article : profile;
+    const target = article || profile;
     moment.locale('ko');
     const date = moment(createdAt);
     return (
