@@ -34,15 +34,15 @@ module.exports = {
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader'
+          fallback: 'style-loader',
+          use: 'css-loader'
         })
       },
       {
         test: /\.styl$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
+          fallback: 'style-loader',
+          use: [
             'css-loader',
             'stylus-loader'
           ]
