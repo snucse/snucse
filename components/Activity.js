@@ -8,7 +8,7 @@ const Activity = React.createClass({
     const {query} = this.props.location;
     return (
       <div>
-        <h2>액티비티</h2>
+        <h2>활동</h2>
         <ActivityList query={query}/>
       </div>
     );

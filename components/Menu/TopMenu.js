@@ -21,7 +21,7 @@ const TopMenu = React.createClass({
                 <Link id="logo" to="/">SNUCSE</Link>
               </div>
               <a id="logout-link" href="#" onClick={this.handleLogout}>로그아웃</a>
-              <Link id="top-menu-activity-button" to={`/activities`}>액티비티</Link>
+              <Link id="top-menu-activity-button" to={`/activities`}>활동</Link>
               <SearchForm/>
             </div>
           </header>

@@ -29,7 +29,7 @@ const Profile = React.createClass({
     const {loading, id, userId, admin, name, renderedDescription} = this.props;
     const mine = admin && userId === admin.id;
     const activityButton = (
-      <Link id="profile-activity-button" to={`/activities?profileId=${id}`}>액티비티</Link>
+      <Link id="profile-activity-button" to={`/activities?profileId=${id}`}>활동</Link>
     );
     const rightButton = mine ? (
       <Link id="profile-admin-button" to={`/profiles/${id}/admin`}>프로필 설정</Link>
