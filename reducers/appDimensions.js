@@ -18,11 +18,11 @@ function updateAppDimensions(state, action) {
   return updateObject(state, {dimensions: action.dimensions});
 }
 
-function updatesIsMobile(state, action) {
+function updateIsMobile(state, action) {
   return updateObject(state, {isMobile: action.isMobile});
 }
 
 export default createReducer(APP_DIMENSIONS_INITIAL_STATE, {
   [UPDATE_APP_DIMENSIONS]: updateAppDimensions,
-  [UPDATE_MOBILE_STATE]: updatesIsMobile
+  [UPDATE_MOBILE_STATE]: updateIsMobile
 });
