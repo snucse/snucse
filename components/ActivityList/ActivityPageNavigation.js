@@ -36,7 +36,7 @@ const ActivityPageNavigation = React.createClass({
     for (let i = first; i < last; i++) {
       links.push(this.renderLink(query, i));
     }
-    const backLink = last <= first + linkStep ? null :
+    const backLink = last < first + linkStep ? null :
       this.renderLink(query, first + linkStep, '>');
     return (
       <footer id="activity-page-wrapper">
