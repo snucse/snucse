@@ -46,6 +46,33 @@ const FeedArticle = React.createClass({
     } else if (shrinked) {
       ellipsis = <span onClick={this.handleEllipsisClick} className="feed-article-content-ellipsis">더 보기</span>;
     }
+    const classname = classnames({
+      'article-content': true,
+      'feed-article-content': true,
+      'feed-article-content-shrinked': shrinked
+    });
+    const defaultCSS = '<style>img { max-width: 100% }</style>';
+    const contentView = (
+      /*
+      <div
+        className={classname}
+        dangerouslySetInnerHTML={{__html: article.feedContent}}
+        />
+      */
+      <div
+        className={classname}
+        >
+        <iframe
+          width="100%"
+          onLoad={function (event) {
+            const iframe = event.target;
+            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+          }}
+          sandbox={"allow-scripts allow-same-origin allow-forms"}
+          srcDoc={defaultCSS + article.renderedContent}
+          />
+      </div>
+    );
     return (
       <li className="feed-article">
         <small className="article-date" title={date.format('LLL')}>
@@ -62,14 +89,7 @@ const FeedArticle = React.createClass({
             <FileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
             <Measure onMeasure={this.handleMeasure}>
-              <div
-                className={classnames({
-                  'article-content': true,
-                  'feed-article-content': true,
-                  'feed-article-content-shrinked': shrinked
-                })}
-                dangerouslySetInnerHTML={{__html: article.feedContent}}
-                />
+              {contentView}
             </Measure>
             {ellipsis}
           </div>
