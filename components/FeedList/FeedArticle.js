@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import Measure from 'react-measure';
 import moment from 'moment';
 import classnames from 'classnames';
+import BrowserDetection from 'react-browser-detection';
 
 import Realtime from '../Realtime';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
@@ -51,14 +52,14 @@ const FeedArticle = React.createClass({
       'feed-article-content': true,
       'feed-article-content-shrinked': shrinked
     });
-    const defaultCSS = '<style>img { max-width: 100% }</style>';
-    const contentView = (
-      /*
+    const iframeNotSupportContentView = (
       <div
         className={classname}
         dangerouslySetInnerHTML={{__html: article.feedContent}}
         />
-      */
+    );
+    const defaultFeedCSS = '<style>img { max-width: 100% }</style>';
+    const iframeSupportContentView = (
       <div
         className={classname}
         >
@@ -69,10 +70,15 @@ const FeedArticle = React.createClass({
             iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
           }}
           sandbox={"allow-scripts allow-same-origin allow-forms"}
-          srcDoc={defaultCSS + article.renderedContent}
+          srcDoc={defaultFeedCSS + article.renderedContent}
           />
       </div>
     );
+    const contentViewHandler = {
+      ie: () => iframeNotSupportContentView,
+      edge: () => iframeNotSupportContentView,
+      default: () => iframeSupportContentView
+    };
     return (
       <li className="feed-article">
         <small className="article-date" title={date.format('LLL')}>
@@ -89,7 +95,9 @@ const FeedArticle = React.createClass({
             <FileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
             <Measure onMeasure={this.handleMeasure}>
-              {contentView}
+              <BrowserDetection once={false}>
+                {contentViewHandler}
+              </BrowserDetection>
             </Measure>
             {ellipsis}
           </div>
