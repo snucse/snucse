@@ -83,7 +83,9 @@ const TagViewWrapper = React.createClass({
   render() {
     const tag = this.props.tag;
     let view;
-    if (tag === null) {
+    if (this.props.loading) {
+      view = <p>Loading...</p>;
+    } else if (tag === null) {
       view = <TagEmptyView tagName={this.props.tagName}/>;
     } else {
       view = <TagView tagName={this.props.tagName} tag={tag}/>;

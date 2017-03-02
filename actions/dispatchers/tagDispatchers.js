@@ -69,6 +69,9 @@ export function deleteTagToProfile(dispatch, profileId, tagName) {
 
 export function loadTagInformation(dispatch, tagName) {
   if (tagName) {
+    dispatch({
+      type: types.RESET_TAG_INFORMATION
+    });
     DataCon.loadDataFromServer(Url.getUrl('/tags/show', {tag: tagName})).then(tagInformation => {
       dispatch({
         type: types.LOAD_TAG_INFORMATION,
