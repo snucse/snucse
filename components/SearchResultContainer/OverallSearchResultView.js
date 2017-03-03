@@ -25,7 +25,7 @@ const OverallSearchResultView = React.createClass({
           <ul id="search-result-article-list">
             {articleResults}
           </ul>
-          <footer>
+          <footer className="search-result-more-button">
             <span><Link to={`/search?category=article&query=${query}`}>더보기</Link> ({result.articles.count})</span>
           </footer>
         </section>
@@ -34,7 +34,7 @@ const OverallSearchResultView = React.createClass({
           <ul id="search-result-comment-list">
             {commentResults}
           </ul>
-          <footer>
+          <footer className="search-result-more-button">
             <span><Link to={`/search?category=comment&query=${query}`}>더보기</Link> ({result.comments.count})</span>
           </footer>
         </section>
@@ -43,7 +43,7 @@ const OverallSearchResultView = React.createClass({
           <ul id="search-result-profile-list">
             {profileResults}
           </ul>
-          <footer>
+          <footer className="search-result-more-button">
             <span><Link to={`/search?category=profile&query=${query}`}>더보기</Link> ({result.profiles.count})</span>
           </footer>
         </section>
@@ -52,7 +52,7 @@ const OverallSearchResultView = React.createClass({
           <ul id="search-result-tag-container">
             {tagResults}
           </ul>
-          <footer>
+          <footer className="search-result-more-button">
             <span><Link to={`/search?category=tag&query=${query}`}>더보기</Link> ({result.tags.count})</span>
           </footer>
         </section>
