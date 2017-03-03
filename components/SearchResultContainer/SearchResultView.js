@@ -1,5 +1,6 @@
 import React from 'react';
 
+import SearchForm from './SearchForm';
 import OverallSearchResultView from './OverallSearchResultView';
 import ArticleSearchResultView from './ArticleSearchResultView';
 import CommentSearchResultView from './CommentSearchResultView';
@@ -8,26 +9,34 @@ import TagSearchResultView from './TagSearchResultView';
 
 const SearchResultView = React.createClass({
   render() {
-    const {category} = this.props;
-    let SearchView;
+    const {category, query, page, result} = this.props;
+    let SearchResultSection;
     switch (category) {
       case 'article': {
-        SearchView = <ArticleSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
+        SearchResultSection = <ArticleSearchResultView query={query} page={page} result={result}/>;
       } break;
       case 'comment': {
-        SearchView = <CommentSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
+        SearchResultSection = <CommentSearchResultView query={query} page={page} result={result}/>;
       } break;
       case 'profile': {
-        SearchView = <ProfileSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
+        SearchResultSection = <ProfileSearchResultView query={query} page={page} result={result}/>;
       } break;
       case 'tag': {
-        SearchView = <TagSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
+        SearchResultSection = <TagSearchResultView query={query} page={page} result={result}/>;
       } break;
       default: {
-        SearchView = <OverallSearchResultView query={this.props.query} page={this.props.page} result={this.props.result}/>;
+        SearchResultSection = <OverallSearchResultView query={query} page={page} result={result}/>;
       } break;
     }
-    return SearchView;
+    return (
+      <div>
+        <SearchForm/>
+        <div id="search-result-container">
+          <h4 id="tag-title">{`'${query}'`} 검색 결과</h4>
+          {SearchResultSection}
+        </div>
+      </div>
+    );
   }
 });
 
