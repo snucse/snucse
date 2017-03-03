@@ -12,9 +12,11 @@ const TagSearchResultView = React.createClass({
       return <TagSearchResult tag={tag} key={`${query}-${tag.tag}`}/>;
     });
     return (
-      <section>
-        <h4>태그</h4>
-        {tagResults}
+      <section id="search-result-tag">
+        <h4 id="search-result-tag-title">태그</h4>
+        <ul id="search-result-tag-container">
+          {tagResults}
+        </ul>
         <footer>
           <SearchResultLinks category={'tag'} query={query} page={page} num={num} count={result.tags.count}/>
         </footer>

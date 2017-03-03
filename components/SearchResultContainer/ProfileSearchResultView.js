@@ -12,9 +12,9 @@ const ProfileSearchResultView = React.createClass({
       return <ProfileSearchResult profile={profile} key={`${query}-${profile.id}`}/>;
     });
     return (
-      <section>
-        <h4>프로필</h4>
-        <ul id="tag-info-profile-list">
+      <section id="search-result-profile">
+        <h4 id="search-result-profile-title">프로필</h4>
+        <ul id="search-result-profile-list">
           {profileResults}
         </ul>
         <footer>

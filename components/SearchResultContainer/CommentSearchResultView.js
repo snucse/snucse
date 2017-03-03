@@ -12,9 +12,11 @@ const CommentSearchResultView = React.createClass({
       return <CommentSearchResult comment={comment} key={`${query}-${comment.id}`}/>;
     });
     return (
-      <section>
-        <h4>댓글</h4>
-        {commentResults}
+      <section id="search-result-comment">
+        <h4 id="search-result-comment-title">댓글</h4>
+        <ul id="search-result-comment-list">
+          {commentResults}
+        </ul>
         <footer>
           <SearchResultLinks category={'comment'} query={query} page={page} num={num} count={result.comments.count}/>
         </footer>

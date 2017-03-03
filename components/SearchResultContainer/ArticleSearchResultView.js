@@ -12,11 +12,9 @@ const ArticleSearchResultView = React.createClass({
       return <ArticleSearchResult article={article} key={`${query}-${article.id}`}/>;
     });
     return (
-      <section>
-        <header>
-          <h4>글</h4>
-        </header>
-        <ul id="tag-info-article-list">
+      <section id="search-result-article">
+        <h4 id="search-result-article-title">글</h4>
+        <ul id="search-result-article-list">
           {articleResults}
         </ul>
         <footer>
