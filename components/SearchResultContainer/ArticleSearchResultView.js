@@ -13,19 +13,15 @@ const ArticleSearchResultView = React.createClass({
     });
     return (
       <section>
-        <h3>{`'${query}'`} 게시판 검색 결과</h3>
-        <form>서치 폼</form>
-        <section>
-          <header>
-            <h4>글</h4>
-          </header>
-          <ul id="tag-info-article-list">
-            {articleResults}
-          </ul>
-          <footer>
-            <SearchResultLinks category={'article'} query={query} page={page} num={num} count={result.articles.count}/>
-          </footer>
-        </section>
+        <header>
+          <h4>글</h4>
+        </header>
+        <ul id="tag-info-article-list">
+          {articleResults}
+        </ul>
+        <footer>
+          <SearchResultLinks category={'article'} query={query} page={page} num={num} count={result.articles.count}/>
+        </footer>
       </section>
     );
   }

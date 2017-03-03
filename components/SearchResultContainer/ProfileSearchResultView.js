@@ -13,17 +13,13 @@ const ProfileSearchResultView = React.createClass({
     });
     return (
       <section>
-        <h3>{`'${query}'`} 프로필 검색 결과</h3>
-        <form>서치 폼</form>
-        <section>
-          <h4>프로필</h4>
-          <ul id="tag-info-profile-list">
-            {profileResults}
-          </ul>
-          <footer>
-            <SearchResultLinks category={'profile'} query={query} page={page} num={num} count={result.profiles.count}/>
-          </footer>
-        </section>
+        <h4>프로필</h4>
+        <ul id="tag-info-profile-list">
+          {profileResults}
+        </ul>
+        <footer>
+          <SearchResultLinks category={'profile'} query={query} page={page} num={num} count={result.profiles.count}/>
+        </footer>
       </section>
     );
   }
