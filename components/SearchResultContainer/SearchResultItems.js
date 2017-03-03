@@ -45,7 +45,7 @@ export const CommentSearchResult = React.createClass({
             {content}
           </div>
           <div className="search-result-comment-info">
-            <div className="search-result-comment-recommendation-count">{recommendationCount}</div>
+            <div className="search-result-comment-recommendation-count">추천수 {recommendationCount}</div>
             <div className="search-result-comment-writer">{writer.name}</div>
             <small className="search-result-comment-date" title={date.format('LLL')}>
               <Realtime from={date}/>
