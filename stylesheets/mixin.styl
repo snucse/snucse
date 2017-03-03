@@ -4,10 +4,13 @@ clearfix()
   content " "
   display table
 box()
-  margin-bottom 20px
+  margin-bottom 10px
   background-color box-background-color
   border 1px solid box-border-color
-  padding 15px
+  padding 8px
+box-with-border-radius()
+  box()
+  border-radius 5px
 box-title()
   font-size 14px
   font-weight 600
@@ -22,7 +25,7 @@ button()
   border-radius 3px
   color button-color
   background transparent
-  border 1px solid button-color
+  border 1px solid button-border-color
   display inline-block
 button-hover()
   color #FFFFFF

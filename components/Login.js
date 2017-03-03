@@ -14,7 +14,7 @@ const Login = React.createClass({
     return (
       <div id="login-background">
         <div id="login-box-container">
-          <h2 id="login-box-title">SNUCSE Login</h2>
+          <h2 id="login-box-title">SNUCSE</h2>
           <div id="login-box">
             <h3 id="login-box-header">Welcome! :D</h3>
             <LoginForm/>
