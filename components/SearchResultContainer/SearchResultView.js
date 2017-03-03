@@ -32,7 +32,7 @@ const SearchResultView = React.createClass({
       <div>
         <SearchForm/>
         <div id="search-result-container">
-          <h4 id="tag-title">{`'${query}'`} 검색 결과</h4>
+          <h4 id="search-result-title">{`'${query}'`} 검색 결과</h4>
           {SearchResultSection}
         </div>
       </div>
