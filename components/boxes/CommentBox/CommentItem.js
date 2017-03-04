@@ -98,7 +98,12 @@ const CommentItem = React.createClass({
     let contentWrapper = null;
     let controller = null;
     if (!this.state.isEditMode) {
-      contentWrapper = <div className="comment-content">{this.props.comment.content}</div>;
+      contentWrapper = (
+        <div
+          className="comment-content"
+          dangerouslySetInnerHTML={{__html: this.props.comment.content}}
+          />
+      );
       const buttons = [];
       const id = this.props.comment.id;
       if (!this.props.isChild) {
