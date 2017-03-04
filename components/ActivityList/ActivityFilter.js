@@ -221,12 +221,14 @@ const ActivityFilter = React.createClass({
 
   timerCallback() {
     clearInterval(this.state.timer);
-    this.props.searchProfile(this._query.value);
-    this.setState({
-      timer: null,
-      isSearching: true,
-      candidateProfileIndex: -1
-    });
+    if (this._query === document.activeElement) {
+      this.props.searchProfile(this._query.value);
+      this.setState({
+        timer: null,
+        isSearching: true,
+        candidateProfileIndex: -1
+      });
+    }
   },
 
   handleClickCancleButton() {
