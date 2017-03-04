@@ -156,6 +156,12 @@ const ActivityFilter = React.createClass({
     };
   },
 
+  cancelSearch() {
+    this.setState({
+      isSearching: false
+    });
+  },
+
   componentDidMount() {
     const initialType = getFilterByType(this.props.query.type) || filters[0];
     this.setState({
@@ -174,6 +180,7 @@ const ActivityFilter = React.createClass({
         }).catch(console.error);
       }
     });
+    window.addEventListener('click', this.cancelSearch);
   },
 
   componentWillReceiveProps(props) {
@@ -184,6 +191,10 @@ const ActivityFilter = React.createClass({
       selectedType: initialType,
       selectedAction: props.query.filterAction || initialType.actions[0]
     });
+  },
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.cancelSearch);
   },
 
   searchProfile() {
@@ -199,9 +210,6 @@ const ActivityFilter = React.createClass({
     if (this.state.isProfileSelected) {
       event.target.value = this.state.selectedProfileName;
     }
-    this.setState({
-      isSearching: false
-    });
   },
 
   handleChangeInput(event) {
