@@ -49,7 +49,7 @@ const ActivityListItem = React.createClass({
     return (
       <li className="activity-list-item">
         <div className="activity-list-item-date">
-          {date.format('LLL')}
+          {date.format('YY.MM.DD H:mm')}
         </div>
         <div className="activity-list-item-link-wrapper">
           <Link className="activity-list-item-link" to={`/${target.id}`}>{messages[type][action](actor, target, this.props.activity)}</Link>
