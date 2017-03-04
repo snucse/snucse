@@ -199,6 +199,9 @@ const ActivityFilter = React.createClass({
     if (this.state.isProfileSelected) {
       event.target.value = this.state.selectedProfileName;
     }
+    this.setState({
+      isSearching: false
+    });
   },
 
   handleChangeInput(event) {
