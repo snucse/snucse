@@ -325,12 +325,18 @@ const ActivityFilter = React.createClass({
     });
     const nav = this.state.opened ? (
       <nav id="activity-filter-category-wrapper">
-        <ul id="activity-filter-main-category-wrapper">
-          {mainCategoriesView}
-        </ul>
-        <ul id="activity-filter-sub-category-wrapper">
-          {subCategoriesView}
-        </ul>
+        <section id="activity-filter-main-category-wrapper">
+          <h5 id="activity-filter-main-category-title">대분류</h5>
+          <ul id="activity-filter-main-category-list">
+            {mainCategoriesView}
+          </ul>
+        </section>
+        <section id="activity-filter-sub-category-wrapper">
+          <h5 id="activity-filter-sub-category-title">소분류</h5>
+          <ul id="activity-filter-sub-category-list">
+            {subCategoriesView}
+          </ul>
+        </section>
       </nav>
     ) : null;
 
