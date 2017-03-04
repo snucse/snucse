@@ -92,6 +92,9 @@ export function changeAdmin(dispatch, id, newId) {
 }
 
 export function searchProfile(dispatch, prefix, limit) {
+  if (prefix === '') {
+    return;
+  }
   dispatch({
     type: types.SEARCH_PROFILE_WITH_PREFIX_INIT
   });
