@@ -22,6 +22,12 @@ const FeedArticle = React.createClass({
     this.setState({loaded: true});
   },
 
+  handleIframeLoad(event) {
+    const iframe = event.target;
+    const doc = iframe.contentWindow.document;
+    iframe.style.height = (doc.scrollingElement || doc.body).scrollHeight + 'px';
+  },
+
   getInitialState() {
     return {
       loaded: false,
@@ -65,10 +71,7 @@ const FeedArticle = React.createClass({
         >
         <iframe
           width="100%"
-          onLoad={function (event) {
-            const iframe = event.target;
-            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-          }}
+          onLoad={this.handleIframeLoad}
           sandbox={"allow-scripts allow-same-origin allow-forms"}
           srcDoc={defaultFeedCSS + article.renderedContent}
           />
