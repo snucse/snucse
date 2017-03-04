@@ -352,7 +352,7 @@ const ActivityFilter = React.createClass({
           <span id="activity-filter-type" onClick={this.handleClickToggleButton}>분류</span>
           <input
             id="activity-filter-profile-input"
-            placeholder="프로필"
+            placeholder="프로필로 검색할 수 있습니다"
             onFocus={this.handleFocusInput}
             onBlur={this.handleBlurInput}
             onChange={this.handleChangeInput}
