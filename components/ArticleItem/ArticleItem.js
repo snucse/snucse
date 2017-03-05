@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {Link, browserHistory} from 'react-router';
+import InnerHTML from 'dangerously-set-inner-html';
 
 import Realtime from '../Realtime';
 import {Url, DataCon} from '../../utils';
@@ -24,6 +25,11 @@ const ArticleItem = React.createClass({
 
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
+    const articleContentView = article.renderingMode === 'html' ? (
+      <InnerHTML className="article-content" html={article.renderedContent}/>
+    ) : (
+      <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
+    );
     return (
       <div className="feed-article">
         <small className="article-date" title={date.format('LLL')}>
@@ -39,7 +45,7 @@ const ArticleItem = React.createClass({
           <div className="article-content-container">
             <FileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
-            <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
+            {articleContentView}
           </div>
         </div>
         <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
