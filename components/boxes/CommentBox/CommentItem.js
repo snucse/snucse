@@ -101,7 +101,7 @@ const CommentItem = React.createClass({
       contentWrapper = (
         <div
           className="comment-content"
-          dangerouslySetInnerHTML={{__html: this.props.comment.content}}
+          dangerouslySetInnerHTML={{__html: this.props.comment.renderedContent}}
           />
       );
       const buttons = [];
