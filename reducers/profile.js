@@ -1,4 +1,10 @@
-import {LOAD_PROFILE_DETAIL, CLEAR_PROFILE_DETAIL, ERR_PROFILE_DETAIL, UPDATE_FOLLOWING_STATE, LOAD_ALL_PROFILES} from '../actions/actionTypes';
+import {
+  LOAD_PROFILE_DETAIL,
+  CLEAR_PROFILE_DETAIL,
+  ERR_PROFILE_DETAIL,
+  UPDATE_FOLLOWING_STATE,
+  LOAD_ALL_PROFILES
+} from '../actions/actionTypes';
 import {updateObject, createReducer} from './common';
 
 const PROFILE_INITIAL_STATE = {

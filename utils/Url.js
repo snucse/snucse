@@ -3,7 +3,7 @@ export default {
     const query = [];
     if (typeof params === 'object') {
       for (const key of Object.keys(params)) {
-        if (params[key] !== undefined) {
+        if (params[key] !== undefined && key !== '') {
           query.push(`${key}=${encodeURIComponent(params[key])}`);
         }
       }
