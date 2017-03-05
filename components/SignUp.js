@@ -16,7 +16,7 @@ const SignUp = React.createClass({
           <h2 id="signup-box-title">SNUCSE</h2>
           <div id="signup-box">
             <div id="signup-box-header">
-              컴퓨터공학부 학사, 석사, 박사과정에 재학 중이거나 이수한 학생,<br/>부전공, 복수전공자 그리고 교직원에게만 계정이 발급됩니다.<br/>스누씨에는 <a href="https://www.snucse.org/Privacy.aspx" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>이 적용됩니다. 동의하지 않으시는 분은 가입을 중단해 주십시오.
+              컴퓨터공학부 학사, 석사, 박사과정에 재학 중이거나 이수한 학생,<br/>부전공, 복수전공자 그리고 교직원에게만 계정이 발급됩니다.<br/>스누씨에는 <a href="https://id.snucse.org/Privacy.aspx" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>이 적용됩니다. 동의하지 않으시는 분은 가입을 중단해 주십시오.
             </div>
             <SignUpForm/>
           </div>
