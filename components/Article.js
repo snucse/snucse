@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {loadArticle} from '../actions/dispatchers';
-import {ArticleItem, ArticleNotFound} from './ArticleItem';
+import {ArticleItem, ArticleLoading, ArticleNotFound} from './ArticleItem';
 
 const Article = React.createClass({
 
@@ -21,8 +21,7 @@ const Article = React.createClass({
     if (this.props.isError) {
       view = <ArticleNotFound/>;
     } else if (this.props.article === null) {
-      view = <ArticleNotFound/>;
-      // now loading
+      view = <ArticleLoading/>;
     } else {
       view = <ArticleItem article={this.props.article}/>;
     }
