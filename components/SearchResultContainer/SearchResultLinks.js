@@ -18,7 +18,7 @@ const SearchResultLinks = React.createClass({
     for (let i = first; i < last; i++) {
       links.push(this.renderLink(category, query, i));
     }
-    const backLink = last <= first + linkStep ? null :
+    const backLink = last < first + linkStep ? null :
       this.renderLink(category, query, first + linkStep, '>');
 
     return (

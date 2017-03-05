@@ -4,7 +4,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Always-enabled plugins
 const plugins = [
-  new ExtractTextPlugin('static/application.css'),
+  new ExtractTextPlugin({
+    filename: 'static/application.css'
+  }),
   new CopyWebpackPlugin([{from: '*.html'}])
 ];
 
@@ -28,27 +30,36 @@ module.exports = {
   devtool: 'source-map',
   plugins: process.env.NODE_ENV === 'production' ? plugins.concat(productionPlugins) : plugins,
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css')
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
       },
       {
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract('style', 'css!stylus')
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'stylus-loader'
+          ]
+        })
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
+        loader: 'babel-loader',
+        options: {
           presets: ['es2015', 'stage-3', 'react']
         }
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'xo'
+        loader: 'xo-loader'
       }
     ]
   },
@@ -60,7 +71,7 @@ module.exports = {
     proxy: [
       {
         context: ['/api', '/files'],
-        target: 'http://snucse.snucse.org:30100',
+        target: 'http://snucse.snucse.org:30110',
         secure: false
       }
     ]
