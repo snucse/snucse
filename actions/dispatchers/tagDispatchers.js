@@ -83,6 +83,9 @@ export function loadTagInformation(dispatch, tagName) {
         type: types.LOAD_TAG_INFORMATION,
         tagInformation: null
       });
+      alertModal(dispatch, '알림', '존재하지 않는 태그입니다.', () => {
+        browserHistory.goBack();
+      });
     });
   } else {
     alertModal(dispatch, '알림', '정상적이지 않은 접근입니다.', () => {
