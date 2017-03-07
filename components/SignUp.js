@@ -27,7 +27,7 @@ const SignUp = React.createClass({
   }
 });
 
-const formNames = ['username', 'password', 'password2', 'name', 'birthday', 'bsNumber', 'phoneNumber'];
+const formNames = ['username', 'password', 'password2', 'name', 'birthday', 'bsNumber', 'phoneNumber', 'email'];
 const birthReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 const bsNumReg = /^[0-9]{4}-[0-9]{5}$/;
 const phoneNumReg = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
@@ -109,6 +109,13 @@ const SignUpForm = connectModals(React.createClass({
       return null;
     }
 
+    if (values.email.length === 0) {
+      this.props.alertModal('알림', '이메일을 입력해주세요.', () => {
+        this.email.focus();
+      });
+      return null;
+    }
+
     return values;
   },
 
@@ -142,6 +149,10 @@ const SignUpForm = connectModals(React.createClass({
         <div className="signup-form-group">
           <label className="signup-form-label" htmlFor="signup-phoneNumber-input">휴대전화/연락처</label>
           {this.renderInput('phoneNumber', '010-1234-5678')}
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-email-input">이메일</label>
+          {this.renderInput('email', 'example@example.com')}
         </div>
         <div id="signup-button-container">
           <button id="signup-button" onClick={this.handleSignUp}>가입 신청</button>
