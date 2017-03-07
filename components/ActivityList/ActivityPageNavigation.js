@@ -9,13 +9,13 @@ const ActivityPageNavigation = React.createClass({
   },
 
   renderLink(originalQuery, page, ch = page) {
-    const query = {...originalQuery, ...{page}};
+    const query = {...originalQuery, page};
     const paramsString = Object.keys(query).filter(key => {
       return query[key] !== undefined && query[key] !== null;
     }).map(key => {
       return `${key}=${query[key]}`;
     }).join('&');
-    return page === (Number.parseInt(this.props.query.page, 10) || 0) ?
+    return page === (parseInt(this.props.query.page, 10) || 0) ?
       <span className="activity-page" key={`activities-link-${page}`}>[{ch}]</span> :
         <Link className="activity-page" to={`/activities?${paramsString}`} key={`activities-link-${page}`}>[{ch}]</Link>;
   },

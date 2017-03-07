@@ -8,7 +8,7 @@ export function loadActivity(dispatch, options) {
   // options: {profileId, filterType, filterAction, page, limit}
   // todo options 제약을 여기서 걸어야 하나?
   const page = parseInt(options.page || 0, 10) + 1;
-  const params = {...options, ...{page}};
+  const params = {...options, page};
   DataCon.loadDataFromServer(Url.getUrl('/activities', params)).then(response => {
     dispatch({
       type: types.LOAD_ACTIVITY_SUCCESS,
