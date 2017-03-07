@@ -60,6 +60,7 @@ const CommentItemContainer = React.createClass({
           id={this.props.id}
           parentCommentId={this.props.comment.id}
           writeComment={this.props.writeComment}
+          isChild
           />
       );
     }

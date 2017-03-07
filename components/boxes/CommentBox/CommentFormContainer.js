@@ -7,7 +7,8 @@ const CommentFormContainer = React.createClass({
   propTypes: {
     id: React.PropTypes.number.isRequired,
     parentCommentId: React.PropTypes.number,
-    writeComment: React.PropTypes.func.isRequired
+    writeComment: React.PropTypes.func.isRequired,
+    isChild: React.PropTypes.bool
   },
 
   handleWrite(content) {
@@ -15,7 +16,7 @@ const CommentFormContainer = React.createClass({
   },
 
   render() {
-    return <CommentForm onWrite={this.handleWrite}/>;
+    return <CommentForm onWrite={this.handleWrite} isChild={this.props.isChild}/>;
   }
 });
 

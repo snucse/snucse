@@ -1,10 +1,13 @@
 import React from 'react';
+import classnames from 'classnames';
+
 import {genRefCallback} from '../../../utils';
 
 const CommentForm = React.createClass({
 
   propTypes: {
-    onWrite: React.PropTypes.func.isRequired
+    onWrite: React.PropTypes.func.isRequired,
+    isChild: React.PropTypes.bool
   },
 
   handleSubmit(event) {
@@ -16,8 +19,11 @@ const CommentForm = React.createClass({
   },
 
   render() {
+    const clazz = classnames('comment-form', {
+      'reply-form': this.props.isChild
+    });
     return (
-      <form className="comment-form" onSubmit={this.handleSubmit}>
+      <form className={clazz} onSubmit={this.handleSubmit}>
         <div className="comment-input-container">
           <input className="comment-input" ref={genRefCallback(this, '_content')}/>
         </div>

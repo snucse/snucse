@@ -123,7 +123,7 @@ const CommentItem = React.createClass({
       let cancelReply = null;
       if (this.state.replyForm) {
         replyForm = this.props.replyForm;
-        cancelReply = <button onClick={this.handleHideReplyForm}>취소</button>;
+        cancelReply = <button className="reply-cancel-button" onClick={this.handleHideReplyForm}>취소</button>;
       }
       replyBox = (
         <div className="comment-reply">
