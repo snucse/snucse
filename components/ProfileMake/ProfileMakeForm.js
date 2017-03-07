@@ -85,7 +85,7 @@ const ProfileMakeForm = React.createClass({
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="create-profile-form-description-input">설명</label>
-            <Editor mode="md" onChange={this.handleDescChange} onModeChange={this.handleModeChange}/>
+            <Editor onChange={this.handleDescChange} onModeChange={this.handleModeChange}/>
           </div>
           <input id="create-profile-button" type="submit" value="그룹 만들기"/>
         </form>
