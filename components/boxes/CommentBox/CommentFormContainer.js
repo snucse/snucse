@@ -2,13 +2,14 @@ import React from 'react';
 
 import CommentForm from './CommentForm';
 
-/*
-  props
-  - id
-  - parentCommentId
-  - writeComment
-*/
 const CommentFormContainer = React.createClass({
+
+  propTypes: {
+    id: React.PropTypes.number.isRequired,
+    parentCommentId: React.PropTypes.number,
+    writeComment: React.PropTypes.func.isRequired
+  },
+
   handleWrite(content) {
     this.props.writeComment(this.props.id, content, this.props.parentCommentId);
   },

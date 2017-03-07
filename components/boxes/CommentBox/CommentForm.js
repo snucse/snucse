@@ -1,14 +1,12 @@
 import React from 'react';
 import {genRefCallback} from '../../../utils';
 
-/*
-  props
-  - onWrite
-
-  state
-  - content
-*/
 const CommentForm = React.createClass({
+
+  propTypes: {
+    onWrite: React.PropTypes.func.isRequired
+  },
+
   handleSubmit(event) {
     event.preventDefault();
     if ((this._content || false) && this._content.value !== '') {
