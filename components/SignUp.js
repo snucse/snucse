@@ -152,7 +152,7 @@ const SignUpForm = connectModals(React.createClass({
         </div>
         <div className="signup-form-group">
           <label className="signup-form-label" htmlFor="signup-email-input">이메일</label>
-          {this.renderInput('email', 'example@example.com')}
+          {this.renderInput('email', 'example@example.com', 'email')}
         </div>
         <div id="signup-button-container">
           <button id="signup-button" onClick={this.handleSignUp}>가입 신청</button>
