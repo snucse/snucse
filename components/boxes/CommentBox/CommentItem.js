@@ -5,24 +5,20 @@ import {Link} from 'react-router';
 import Realtime from '../../Realtime';
 import {connectModals} from '../../../utils';
 
-/*
-  props
-  - isEditable
-  - isDeletable
-  - comment
-  - replyList
-  - replyForm
-
-  - onDelete
-  - onEdit
-  - recommendBox
-
-  state
-  - newContent
-  - isEditMode
-  - replyForm
-*/
 const CommentItem = React.createClass({
+
+  propTypes: {
+    comment: React.PropTypes.object.isRequired,
+    isDeletable: React.PropTypes.bool,
+    onDelete: React.PropTypes.func,
+    isEditable: React.PropTypes.bool,
+    onEdit: React.PropTypes.func,
+    recommendBox: React.PropTypes.element,
+    isChild: React.PropTypes.bool,
+    replyList: React.PropTypes.element,
+    replyForm: React.PropTypes.element
+  },
+
   handleClickReply() {
     this.setState({replyForm: true});
   },
@@ -127,7 +123,7 @@ const CommentItem = React.createClass({
       let cancelReply = null;
       if (this.state.replyForm) {
         replyForm = this.props.replyForm;
-        cancelReply = <button onClick={this.handleHideReplyForm}>취소</button>;
+        cancelReply = <button className="reply-cancel-button" onClick={this.handleHideReplyForm}>취소</button>;
       }
       replyBox = (
         <div className="comment-reply">

@@ -4,28 +4,28 @@ import '../../../stylesheets/comment-box.styl';
 import CommentList from './CommentList';
 import CommentFormContainer from './CommentFormContainer';
 
-/*
-  props
-  - Box
-    - id
-    - lastComment
-    - commentCount
-    - isAddable
-    - loadComments
-    - setLastComment
-  - FormContainer
-    - writeComment
-  - List
-    - modifyFoldComments
-    - commentsInfo
-    - renderRecommendBox
-  - ItemContainer
-    - writeComment
-    - editComment
-    - deleteComment
-    - recommendBox
-*/
 const CommentBox = React.createClass({
+
+  propTypes: {
+    id: React.PropTypes.number.isRequired,
+    lastComment: React.PropTypes.object,
+    commentCount: React.PropTypes.number,
+    isAddable: React.PropTypes.bool,
+
+    loadComments: React.PropTypes.func,
+    loadReplies: React.PropTypes.func,
+    setLastComment: React.PropTypes.func,
+    writeComment: React.PropTypes.func,
+    modifyFoldComments: React.PropTypes.func,
+    editComment: React.PropTypes.func,
+    deleteComment: React.PropTypes.func,
+
+    commentsInfo: React.PropTypes.object,
+    repliesInfo: React.PropTypes.object,
+
+    renderRecommendBox: React.PropTypes.func
+  },
+
   componentDidMount() {
     this.props.setLastComment(this.props.id, this.props.lastComment, this.props.commentCount);
   },
