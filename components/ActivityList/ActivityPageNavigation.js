@@ -1,8 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-import {updateObject} from '../../reducers/common';
-
 const ActivityPageNavigation = React.createClass({
 
   propTypes: {
@@ -11,7 +9,7 @@ const ActivityPageNavigation = React.createClass({
   },
 
   renderLink(query, page, ch = page) {
-    query = updateObject(query, {page});
+    query = {...query, ...{page}};
     const paramsString = Object.keys(query).filter(key => {
       return query[key] !== undefined && query[key] !== null;
     }).map(key => {
