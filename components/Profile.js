@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import InnerHTML from 'dangerously-set-inner-html';
 
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/profile.styl';
@@ -26,7 +27,7 @@ const Profile = React.createClass({
   },
 
   render() {
-    const {loading, id, userId, admin, name, renderedDescription} = this.props;
+    const {loading, id, userId, admin, name, renderedDescription, renderingMode} = this.props;
     const mine = admin && userId === admin.id;
     const rightButton = mine ? (
       <Link id="profile-admin-button" to={`/profiles/${id}/admin`}>프로필 설정</Link>
@@ -43,12 +44,18 @@ const Profile = React.createClass({
       return null;
     }
 
+    const profileDescriptionView = renderingMode === 'html' ? (
+      <InnerHTML id="profile-description" html={renderedDescription}/>
+    ) : (
+      <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
+    );
+
     return (
       <div>
         <div id="profile-information">
           {rightButton}
           <h3 id="profile-name">{name}</h3>
-          <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
+          {profileDescriptionView}
           <ProfileTagBox profileId={id}/>
           <ProfileCommentBox
             profileId={id}
@@ -88,7 +95,7 @@ const FollowBox = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {loading, following, name, description, renderedDescription, admin, commentCount, lastComment} = state.profile.current;
+  const {loading, following, name, description, renderedDescription, renderingMode, admin, commentCount, lastComment} = state.profile.current;
   const {userLevel, userId} = state.userInfo;
   return {
     loading,
@@ -96,6 +103,7 @@ const mapStateToProps = function (state) {
     name,
     description,
     renderedDescription,
+    renderingMode,
     admin,
     commentCount,
     lastComment,
