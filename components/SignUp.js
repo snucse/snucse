@@ -22,6 +22,16 @@ const SignUp = React.createClass({
           </div>
         </div>
         {modal}
+        <div id="login-github">
+          <a
+            href="https://github.com/snucse/snucse"
+            target="_blank"
+            className="login-github-link"
+            rel="noopener noreferrer"
+            >
+            GitHub에서 코드 보기
+          </a>
+        </div>
       </div>
     );
   }
