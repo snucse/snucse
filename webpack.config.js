@@ -4,8 +4,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 
 const stylesheetDir = `${__dirname}/stylesheets`;
+const resetCss = `${stylesheetDir}/reset.css`;
 const markdownStyl = `${stylesheetDir}/markdown.styl`;
-const outMarkdownDir = `${__dirname}/dist/static`;
+const outStylesheetDir = `${__dirname}/dist/static`;
 
 // Always-enabled plugins
 const plugins = [
@@ -14,7 +15,10 @@ const plugins = [
   }),
   new CopyWebpackPlugin([{from: '*.html'}]),
   new WebpackShellPlugin({
-    onBuildEnd: [`stylus -I ${stylesheetDir} -o ${outMarkdownDir} ${markdownStyl}`]
+    onBuildEnd: [
+      `stylus -I ${stylesheetDir} -o ${outStylesheetDir} ${markdownStyl}`,
+      `cp ${resetCss} ${outStylesheetDir}`
+    ]
   })
 ];
 
