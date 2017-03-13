@@ -64,7 +64,20 @@ const FeedArticle = React.createClass({
         dangerouslySetInnerHTML={{__html: article.feedContent}}
         />
     );
-    const defaultFeedCSS = '<style>img { max-width: 100% }</style>';
+    const defaultFeedCSS = `
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/static/reset.css">
+      <link rel="stylesheet" type="text/css" href="/static/markdown.css">
+      <style>
+      body {
+          font-family: 'Roboto', 'Nanum Gothic', sans-serif;
+          font-size: 14px;
+          line-height: 1.6;
+          color: #1e3948;
+      }
+      </style>
+    `;
     const iframeSupportContentView = (
       <div
         className={classname}
