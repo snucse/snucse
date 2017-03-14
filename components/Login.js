@@ -38,7 +38,9 @@ const LoginForm = connectModals(React.createClass({
       username, password
     }).then(data => {
       localStorage.setItem('snucsesession', data.accessToken);
-      browserHistory.push('/');
+      const next = sessionStorage.getItem('entrypath') || '/';
+      sessionStorage.removeItem('entrypath');
+      browserHistory.push(next);
     }).catch(err => {
       if (err.status === 403) {
         this.props.alertModal('알림', '아이디 혹은 비밀번호를 확인해 주세요.');
