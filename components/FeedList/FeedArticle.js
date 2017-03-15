@@ -41,7 +41,7 @@ const FeedArticle = React.createClass({
   handleIframeLoad(event) {
     const iframe = event.target;
     const doc = iframe.contentWindow.document;
-    iframe.style.height = (doc.scrollingElement || doc.body).scrollHeight + 'px';
+    iframe.style.height = doc.body.scrollHeight + 'px';
   },
 
   getInitialState() {
