@@ -5,11 +5,27 @@ import Measure from 'react-measure';
 import moment from 'moment';
 import classnames from 'classnames';
 import BrowserDetection from 'react-browser-detection';
+import {iframeResizer} from 'iframe-resizer';
 
 import Realtime from '../Realtime';
 import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const FeedArticle = React.createClass({
+  bindIframeResizer(iframe) {
+    console.log(iframe);
+    function resizedCallback(args) {
+      // args: {iframe,height,width,type}
+      const {iframe, height} = args;
+      console.log(height);
+      iframe.style.height = height + 'px';
+    }
+    iframeResizer({
+      inPageLinks: true,
+      sizeHeight: true,
+      resizedCallback
+    }, iframe);
+  },
+
   handleArticleDelete(articleId) {
     this.props.onArticleDelete(articleId);
   },
@@ -84,6 +100,7 @@ const FeedArticle = React.createClass({
         className={classname}
         >
         <iframe
+          ref={this.bindIframeResizer}
           width="100%"
           onLoad={this.handleIframeLoad}
           sandbox={"allow-scripts allow-same-origin allow-forms allow-top-navigation"}
