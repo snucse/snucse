@@ -65,6 +65,7 @@ const FeedArticle = React.createClass({
         />
     );
     const defaultFeedCSS = `
+      <base target="_parent">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="/static/reset.css">
@@ -85,7 +86,7 @@ const FeedArticle = React.createClass({
         <iframe
           width="100%"
           onLoad={this.handleIframeLoad}
-          sandbox={"allow-scripts allow-same-origin allow-forms"}
+          sandbox={"allow-scripts allow-same-origin allow-forms allow-top-navigation"}
           srcDoc={defaultFeedCSS + article.renderedContent}
           />
       </div>
