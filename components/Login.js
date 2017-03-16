@@ -14,6 +14,16 @@ const Login = React.createClass({
     return (
       <div id="login-background">
         <div id="login-box-container">
+          <div id="login-github">
+            <a
+              href="https://github.com/snucse/snucse"
+              target="_blank"
+              className="login-github-link"
+              rel="noopener noreferrer"
+              >
+              GitHub
+            </a>
+          </div>
           <h2 id="login-box-title">SNUCSE Login</h2>
           <div id="login-box">
             <h3 id="login-box-header">Welcome! :D</h3>
@@ -24,16 +34,6 @@ const Login = React.createClass({
           </div>
         </div>
         {modal}
-        <div id="login-github">
-          <a
-            href="https://github.com/snucse/snucse"
-            target="_blank"
-            className="login-github-link"
-            rel="noopener noreferrer"
-            >
-            GitHub에서 코드 보기
-          </a>
-        </div>
       </div>
     );
   }
