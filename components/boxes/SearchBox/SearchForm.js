@@ -1,6 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 
+import '../../../stylesheets/search-form.styl';
 import {genRefCallback, connectModals} from '../../../utils';
 
 const SearchForm = React.createClass({
@@ -28,6 +29,7 @@ const SearchForm = React.createClass({
     return (
       <form id="search-form" onSubmit={this.handleSubmit}>
         <input id="search-form-input" ref={genRefCallback(this, '_content')} name="query" placeholder="SNUCSE검색"/>
+        <button id="search-form-button">검색</button>
       </form>
     );
   }
