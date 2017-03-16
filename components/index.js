@@ -6,6 +6,7 @@ import ProfileMake from './ProfileMake';
 import ProfileAdmin from './ProfileAdmin';
 import ProfileAdminTransfer from './ProfileAdminTransfer';
 import Main from './Main';
+import Activity from './Activity';
 import TagInfo from './TagInfo';
 import ArticleWrite from './ArticleWrite';
 import ArticleEdit from './ArticleEdit';
@@ -25,6 +26,7 @@ export {
   ProfileAdmin,
   ProfileAdminTransfer,
   Main,
+  Activity,
   TagInfo,
   ArticleWrite,
   ArticleEdit,

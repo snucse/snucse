@@ -1,0 +1,92 @@
+@import "mixin.styl"
+#activity-header
+  box()
+  padding 0px
+  position relative
+#activity-filter
+  display flex
+#activity-filter-type
+  display inline-block
+  margin 0px 10px
+  width: 50px;
+  padding 5px 10px
+  text-align: center;
+  cursor pointer
+#activity-filter-type:hover
+  a
+#activity-filter-profile-input
+  flex 1
+  padding-left 5px
+  border 1px solid
+  border-top none
+  border-bottom none
+#activity-filter-profile-cancel-button
+  margin 5px 10px
+#activity-filter-profile-candidate-wrapper
+  box()
+  position absolute
+  top 100%
+  left 70px
+  width calc(100% - 70px)
+.activity-filter-profile-candidate-item
+  margin 2px 0px
+  cursor pointer
+.activity-filter-profile-candidate-item:hover
+  background-color rgba(0, 0, 0, 0.1)
+#activity-sub-wrapper
+  box()
+#activity-filter-category-wrapper
+  padding-top 20px
+  padding 15px
+  border-top 1px solid
+#activity-filter-main-category-wrapper
+#activity-filter-sub-category-wrapper
+  display flex
+#activity-filter-main-category-title
+#activity-filter-sub-category-title
+  width 50px
+  padding-top 1px
+#activity-filter-main-category-list
+#activity-filter-sub-category-list
+  flex 1
+#activity-filter-main-category-list
+  margin-bottom 5px
+.activity-filter-main-category-item
+.activity-filter-sub-category-item
+  display inline-block
+  padding 1px 7px
+  border-right 1px solid black
+.activity-filter-main-category-item:last-child
+.activity-filter-sub-category-item:last-child
+  border-right none
+.activity-filter-main-category-item:hover
+.activity-filter-sub-category-item:hover
+  background-color rgba(0, 0, 0, 0.1)
+  cursor pointer
+.activity-filter-main-category-item-selected
+.activity-filter-sub-category-item-selected
+  font-weight bold
+
+.activity-list-item
+  display flex
+  padding 5px 0px
+  border-bottom 1px solid
+.activity-list-item:last-child
+  border-bottom none
+.activity-list-item-date
+  display flex
+  align-items center
+  width 60px
+  margin-right 10px
+  text-align center
+  font-size 12px
+.activity-list-item-link-wrapper
+  flex 1
+  display flex
+  align-items center
+
+#activity-page-wrapper
+  margin-top 15px
+  text-align center
+.activity-page
+  margin 0px 5px

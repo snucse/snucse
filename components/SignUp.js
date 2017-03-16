@@ -16,7 +16,7 @@ const SignUp = React.createClass({
           <h2 id="signup-box-title">SNUCSE</h2>
           <div id="signup-box">
             <div id="signup-box-header">
-              컴퓨터공학부 학사, 석사, 박사과정에 재학 중이거나 이수한 학생,<br/>부전공, 복수전공자 그리고 교직원에게만 계정이 발급됩니다.<br/>스누씨에는 <a href="https://www.snucse.org/Privacy.aspx" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>이 적용됩니다. 동의하지 않으시는 분은 가입을 중단해 주십시오.
+              컴퓨터공학부 학사, 석사, 박사과정에 재학 중이거나 이수한 학생,<br/>부전공, 복수전공자 그리고 교직원에게만 계정이 발급됩니다.<br/>스누씨에는 <a href="https://id.snucse.org/Privacy.aspx" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>이 적용됩니다. 동의하지 않으시는 분은 가입을 중단해 주십시오.
             </div>
             <SignUpForm/>
           </div>
@@ -27,7 +27,8 @@ const SignUp = React.createClass({
   }
 });
 
-const formNames = ['username', 'password', 'password2', 'name', 'birthday', 'bsNumber', 'phoneNumber'];
+const formNames = ['username', 'password', 'password2', 'name', 'birthday', 'bsNumber', 'phoneNumber', 'email'];
+const usernameReg = /^[A-Za-z][A-Za-z0-9]*$/;
 const birthReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 const bsNumReg = /^[0-9]{4}-[0-9]{5}$/;
 const phoneNumReg = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
@@ -60,8 +61,8 @@ const SignUpForm = connectModals(React.createClass({
       return {...prev, [curr]: this[curr].value};
     }, {});
 
-    if (values.username.length === 0) {
-      this.props.alertModal('알림', '아이디를 입력해주세요.', () => {
+    if (!(usernameReg.test(values.username))) {
+      this.props.alertModal('알림', '아이디는 영문자로 시작하며, 영문자 혹은 숫자로만 이루어져야 합니다.', () => {
         this.username.focus();
       });
       return null;
@@ -109,6 +110,13 @@ const SignUpForm = connectModals(React.createClass({
       return null;
     }
 
+    if (values.email.length === 0) {
+      this.props.alertModal('알림', '이메일을 입력해주세요.', () => {
+        this.email.focus();
+      });
+      return null;
+    }
+
     return values;
   },
 
@@ -142,6 +150,10 @@ const SignUpForm = connectModals(React.createClass({
         <div className="signup-form-group">
           <label className="signup-form-label" htmlFor="signup-phoneNumber-input">휴대전화/연락처</label>
           {this.renderInput('phoneNumber', '010-1234-5678')}
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-email-input">이메일</label>
+          {this.renderInput('email', 'example@example.com', 'email')}
         </div>
         <div id="signup-button-container">
           <button id="signup-button" onClick={this.handleSignUp}>가입 신청</button>

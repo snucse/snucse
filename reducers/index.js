@@ -1,5 +1,6 @@
 import userInfo from './userInfo';
 import feeds from './feeds';
+import activity from './activity';
 import article from './article';
 import profile from './profile';
 import profileAdmin from './profileAdmin';
@@ -16,6 +17,7 @@ import realtime from './realtime';
 
 const reducers = {
   article,
+  activity,
   profile,
   profileAdmin,
   feeds,

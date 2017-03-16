@@ -6,6 +6,14 @@ import {CommentRecommendBox} from '../';
 import CommentBox from './CommentBox';
 
 const ArticleCommentBox = React.createClass({
+
+  propTypes: {
+    articleId: React.PropTypes.number.isRequired,
+    lastComment: React.PropTypes.object,
+    commentCount: React.PropTypes.number,
+    isAddable: React.PropTypes.bool
+  },
+
   renderRecommendBox(comment) {
     return <CommentRecommendBox commentId={comment.id} count={comment.recommendationCount}/>;
   },
