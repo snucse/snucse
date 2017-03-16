@@ -16,6 +16,7 @@ const plugins = [
   new CopyWebpackPlugin([{from: '*.html'}]),
   new WebpackShellPlugin({
     onBuildEnd: [
+      `mkdir -p ${outStylesheetDir}`,
       `stylus -I ${stylesheetDir} -o ${outStylesheetDir} ${markdownStyl}`,
       `cp ${resetCss} ${outStylesheetDir}`
     ]
