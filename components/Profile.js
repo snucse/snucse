@@ -10,12 +10,34 @@ import {ProfileTagBox, ProfileCommentBox} from './boxes';
 import Feed from './Feed';
 
 const Profile = React.createClass({
+
+  getInitialState() {
+    return {
+      isFolded: false
+    };
+  },
+
   handleFollowChanged(following) {
     this.props.updateFollowingState(this.props.id, following);
   },
 
+  handleClickFoldButton() {
+    this.setState({
+      isFolded: true
+    });
+  },
+
+  handleClickUnfoldButton() {
+    this.setState({
+      isFolded: false
+    });
+  },
+
   componentWillMount() {
     this.props.loadProfileDetail(this.props.id);
+    this.setState({
+      isFolded: this.props.following
+    });
   },
 
   componentWillReceiveProps(props) {
@@ -23,6 +45,9 @@ const Profile = React.createClass({
     if (props.id !== this.props.id) {
       this.props.loadProfileDetail(props.id);
     }
+    this.setState({
+      isFolded: props.following
+    });
   },
 
   render() {
@@ -36,6 +61,11 @@ const Profile = React.createClass({
     ) : (
       <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
     );
+    const foldButton = this.state.isFolded ? (
+      <button id="profile-unfold-button" onClick={this.handleClickUnfoldButton}>대문 열기</button>
+    ) : (
+      <button id="profile-fold-button" onClick={this.handleClickFoldButton}>대문 접기</button>
+    );
 
     if (loading) {
       return <p>Loading...</p>;
@@ -46,20 +76,27 @@ const Profile = React.createClass({
       return null;
     }
 
+    const profileMain = this.state.isFolded ? null : (
+      <div id="profile-main">
+        <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
+        <ProfileTagBox profileId={id}/>
+        <ProfileCommentBox
+          profileId={id}
+          commentCount={this.props.commentCount}
+          lastComment={this.props.lastComment}
+          isAddable
+          />
+      </div>
+    );
+
     return (
       <div>
         <div id="profile-information">
           {rightButton}
           {activityButton}
+          {foldButton}
           <h3 id="profile-name">{name}</h3>
-          <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
-          <ProfileTagBox profileId={id}/>
-          <ProfileCommentBox
-            profileId={id}
-            commentCount={this.props.commentCount}
-            lastComment={this.props.lastComment}
-            isAddable
-            />
+          {profileMain}
         </div>
         <Feed profileId={id}/>
       </div>
