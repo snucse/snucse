@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import classnames from 'classnames';
 
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/profile.styl';
@@ -53,6 +54,20 @@ const Profile = React.createClass({
   render() {
     const {loading, id, userId, admin, name, renderedDescription} = this.props;
     const mine = admin && userId === admin.id;
+
+    if (loading) {
+      return <p>Loading...</p>;
+      // TODO insert loading component
+    }
+    if (!loading && !admin) {
+      return null;
+    }
+
+    const profileNameClass = classnames({
+      'profile-name-fold': this.state.isFolded,
+      'profile-name-unfold': !this.state.isFolded
+    });
+
     const activityButton = (
       <Link id="profile-activity-button" to={`/activities?profileId=${id}`}>활동</Link>
     );
@@ -62,20 +77,10 @@ const Profile = React.createClass({
       <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
     );
     const foldButton = this.state.isFolded ? (
-      <button id="profile-unfold-button" onClick={this.handleClickUnfoldButton}>대문 열기</button>
+      <button id="profile-unfold-button" title="대문 열기" onClick={this.handleClickUnfoldButton}>▼</button>
     ) : (
-      <button id="profile-fold-button" onClick={this.handleClickFoldButton}>대문 접기</button>
+      <button id="profile-fold-button" title="대문 접기" onClick={this.handleClickFoldButton}>◀</button>
     );
-
-    if (loading) {
-      return <p>Loading...</p>;
-      // TODO insert loading component
-    }
-
-    if (!loading && !admin) {
-      return null;
-    }
-
     const profileMain = this.state.isFolded ? null : (
       <div id="profile-main">
         <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
@@ -92,10 +97,10 @@ const Profile = React.createClass({
     return (
       <div>
         <div id="profile-information">
+          {foldButton}
           {rightButton}
           {activityButton}
-          {foldButton}
-          <h3 id="profile-name">{name}</h3>
+          <h3 id="profile-name" className={profileNameClass}>{name}</h3>
           {profileMain}
         </div>
         <Feed profileId={id}/>
