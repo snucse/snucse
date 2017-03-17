@@ -8,17 +8,17 @@ import '../stylesheets/profile.styl';
 
 const ProfileAdmin = React.createClass({
   componentDidMount() {
-    this.props.loadProfileDetail(this.props.params.id);
+    this.props.loadProfileDetail(this.props.match.params.id);
   },
 
   componentWillReceiveProps(props) {
-    if (this.props.params.id !== props.params.id) {
-      this.props.loadProfileDetail(props.params.id);
+    if (this.props.match.params.id !== props.match.params.id) {
+      this.props.loadProfileDetail(props.match.params.id);
     }
   },
 
   render() {
-    const {id} = this.props.params;
+    const {id} = this.props.match.params;
     const {name, description, renderingMode, admin, userId} = this.props;
     const mine = admin && (admin.id === userId);
     return (

@@ -1,4 +1,5 @@
-import {browserHistory} from 'react-router';
+import {goBack} from 'react-router-redux';
+
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
 import {loadProfileTag, updateFollowingList, alertModal} from './';
@@ -31,7 +32,7 @@ export function loadProfileDetail(dispatch, id) {
       type: types.ERR_PROFILE_DETAIL
     });
     alertModal(dispatch, '알림', '존재하지 않는 프로필입니다.', () => {
-      browserHistory.goBack();
+      dispatch(goBack());
     });
   });
 }

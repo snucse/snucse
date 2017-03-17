@@ -1,15 +1,12 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
 import {connectModals} from '../../utils';
 
 const DelEditBox = React.createClass({
-  updateArticle(articleId) {
-    browserHistory.push(`/${articleId}/edit`);
-  },
-
   handleArticleUpdate() {
-    this.updateArticle(this.props.articleId);
+    this.props.updateArticle(this.props.articleId);
   },
 
   handleArticleDelete() {
@@ -30,4 +27,10 @@ const DelEditBox = React.createClass({
   }
 });
 
-export default connectModals(DelEditBox);
+const mapDispatchToProps = function (dispatch) {
+  return {
+    updateArticle: articleId => dispatch(push(`/${articleId}/edit`))
+  };
+};
+
+export default connectModals(connect(null, mapDispatchToProps)(DelEditBox));

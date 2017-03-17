@@ -1,5 +1,4 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 
 import {DataCon, Url, genRefCallback, connectModals} from '../utils';
@@ -54,7 +53,7 @@ const SignUpForm = connectModals(React.createClass({
     DataCon.postDataToServer(Url.getUrl('/users/sign_up'), 'POST', values)
       .then(() => {
         this.props.alertModal('알림', '가입에 성공하였습니다.');
-        browserHistory.push('/login');
+        this.props.history.push('/login');
       }).catch(() => {
         // TODO: 에러 발생 조건에 뭐가 있는지 확인하기
         this.props.alertModal('알림', '가입에 실패했습니다.');

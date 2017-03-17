@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
+import queryString from 'query-string';
 
 const TagItem = React.createClass({
 
@@ -14,7 +15,12 @@ const TagItem = React.createClass({
 
   render() {
     const tagName = this.props.accessible ? (
-      <Link className="tag-item-name" to={{pathname: '/tags', query: {tag: this.props.tag.tag}}}>{this.props.tag.tag}</Link>
+      <Link
+        className="tag-item-name"
+        to={{pathname: '/tags', search: '?' + queryString.stringify({tag: this.props.tag.tag})}}
+        >
+        {this.props.tag.tag}
+      </Link>
     ) : (
       <span className="tag-item-name">{this.props.tag.tag}</span>
     );
