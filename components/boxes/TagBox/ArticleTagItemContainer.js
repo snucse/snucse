@@ -11,7 +11,7 @@ const ArticleTagItemContainer = React.createClass({
   },
 
   render() {
-    return <TagItem onDelete={this.handleDelete} tag={this.props.tag} accessible={UserLevel.tagAccessible(this.props.userLevel)}/>;
+    return <TagItem deletable onDelete={this.handleDelete} tag={this.props.tag} accessible={UserLevel.tagAccessible(this.props.userLevel)}/>;
   }
 });
 
