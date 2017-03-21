@@ -20,6 +20,7 @@ const Login = React.createClass({
             <LoginForm/>
             <section id="login-box-footer">
               <Link className="login-box-footer-link" to="/sign-up">가입 신청하기</Link>
+              <a className="login-box-footer-link" href="https://id.snucse.org/Authentication/FindAccountForm.aspx" target="_blank" rel="noopener noreferrer">비밀번호 찾기</a>
             </section>
           </div>
         </div>
