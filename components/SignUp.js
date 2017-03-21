@@ -13,6 +13,16 @@ const SignUp = React.createClass({
     return (
       <div id="login-background">
         <div id="signup-box-container">
+          <div id="login-github">
+            <a
+              href="https://github.com/snucse/snucse"
+              target="_blank"
+              className="login-github-link"
+              rel="noopener noreferrer"
+              >
+              GitHub
+            </a>
+          </div>
           <h2 id="signup-box-title">SNUCSE</h2>
           <div id="signup-box">
             <div id="signup-box-header">

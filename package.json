@@ -12,6 +12,7 @@
     "type": "git",
     "url": "git@dev.snucse.org:snucse/snucse-react.git"
   },
+  "license": "AGPL-3.0",
   "author": "",
   "devDependencies": {
     "babel-core": "^6.16.0",
