@@ -69,6 +69,9 @@ export function deleteTagToProfile(dispatch, profileId, tagName) {
 
 export function loadTagInformation(dispatch, tagName) {
   if (tagName) {
+    dispatch({
+      type: types.RESET_TAG_INFORMATION
+    });
     DataCon.loadDataFromServer(Url.getUrl('/tags/show', {tag: tagName})).then(tagInformation => {
       dispatch({
         type: types.LOAD_TAG_INFORMATION,
@@ -79,6 +82,9 @@ export function loadTagInformation(dispatch, tagName) {
       dispatch({
         type: types.LOAD_TAG_INFORMATION,
         tagInformation: null
+      });
+      alertModal(dispatch, '알림', '존재하지 않는 태그입니다.', () => {
+        browserHistory.goBack();
       });
     });
   } else {
