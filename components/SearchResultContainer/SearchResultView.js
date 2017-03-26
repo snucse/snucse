@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {SearchForm} from '../boxes';
+import SearchForm from './SearchForm';
 import OverallSearchResultView from './OverallSearchResultView';
 import ArticleSearchResultView from './ArticleSearchResultView';
 import CommentSearchResultView from './CommentSearchResultView';

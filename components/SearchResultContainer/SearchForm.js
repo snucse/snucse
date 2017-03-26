@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 
-import '../../../stylesheets/search-form.styl';
-import {genRefCallback, connectModals} from '../../../utils';
+import '../../stylesheets/search-form.styl';
+import {genRefCallback, connectModals} from '../../utils';
 
 const SearchForm = React.createClass({
   handleSubmit(event) {
