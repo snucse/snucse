@@ -6,6 +6,10 @@ import '../../stylesheets/search-form.styl';
 import {genRefCallback, connectModals} from '../../utils';
 
 const SearchForm = React.createClass({
+  propTypes: {
+    previousCategory: React.PropTypes.string
+  },
+
   handleSubmit(event) {
     event.preventDefault();
     // this.props.onSearch(this._content.value);
@@ -21,7 +25,15 @@ const SearchForm = React.createClass({
       this.props.alertModal('알림', '두 글자 이상 입력해주세요');
       return;
     }
-    this.props.search(query);
+    const category = /* value from form || */this.props.previousCategory;
+    const params = {query, category};
+    const paramsString = Object.keys(params).filter(key => {
+      return params[key] !== undefined && params[key] !== null;
+    }).map(key => {
+      return `${key}=${params[key]}`;
+    }).join('&');
+    // todo extract to util
+    this.props.search(paramsString);
   },
 
   render() {
@@ -38,7 +50,7 @@ const SearchForm = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    search: query => dispatch(push(`/search?query=${query}`))
+    search: paramsString => dispatch(push(`/search?${paramsString}`))
   };
 };
 
