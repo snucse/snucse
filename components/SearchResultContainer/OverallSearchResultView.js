@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import {ArticleSearchResult, CommentSearchResult, ProfileSearchResult, TagSearchResult} from './SearchResultItems';
+import {SearchResultTagBox} from '../boxes';
+import {ArticleSearchResult, CommentSearchResult, ProfileSearchResult} from './SearchResultItems';
 
 const OverallSearchResultView = React.createClass({
   render() {
@@ -14,9 +15,6 @@ const OverallSearchResultView = React.createClass({
     });
     const profileResults = result.profiles.data.map(profile => {
       return <ProfileSearchResult profile={profile} key={`${query}-${profile.id}`}/>;
-    });
-    const tagResults = result.tags.data.map(tag => {
-      return <TagSearchResult tag={tag} key={`${query}-${tag.tag}`}/>;
     });
     return (
       <div id="search-result-overview">
@@ -49,9 +47,7 @@ const OverallSearchResultView = React.createClass({
         </section>
         <section>
           <h4 id="search-result-tag-title">태그</h4>
-          <ul id="search-result-tag-container">
-            {tagResults}
-          </ul>
+          <SearchResultTagBox searchResultTags={result.tags.data}/>
           <footer className="search-result-more-button">
             <span><Link to={`/search?category=tag&query=${query}`}>더보기</Link> ({result.tags.count})</span>
           </footer>
