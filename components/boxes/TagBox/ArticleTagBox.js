@@ -22,6 +22,7 @@ const ArticleTagBox = React.createClass({
     return (
       <TagBox
         id={this.props.articleId}
+        addable
         addTag={this.props.addTagToArticle}
         candidates={this.props.candidates}
         loadCandidateTags={this.props.loadCandidateTags}

@@ -6,6 +6,7 @@ import TagFormContainer from './TagFormContainer';
 const TagBox = React.createClass({
   propTypes: {
     id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+    addable: React.PropTypes.bool,
     addTag: React.PropTypes.func,
     candidates: React.PropTypes.object,
     loadCandidateTags: React.PropTypes.func,
@@ -27,14 +28,14 @@ const TagBox = React.createClass({
           deleteTag={this.props.deleteTag}
           tags={this.props.tags}
           />
-        <TagFormContainer
+        {this.props.addable ? <TagFormContainer
           id={this.props.id}
           addTag={this.props.addTag}
           candidates={this.props.candidates}
           loadCandidateTags={this.props.loadCandidateTags}
           initializeCandidateTags={this.props.initializeCandidateTags}
           getTagFormId={this.props.getTagFormId}
-          />
+          /> : null}
       </div>
     );
   }

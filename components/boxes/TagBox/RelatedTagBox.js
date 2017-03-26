@@ -24,6 +24,7 @@ const RelatedTagBox = React.createClass({
     return (
       <TagBox
         id={this.props.targetTagName}
+        addable
         addTag={this.props.makeTagRelationship}
         candidates={this.props.candidates}
         loadCandidateTags={this.props.loadCandidateTags}
