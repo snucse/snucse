@@ -9,12 +9,12 @@ const TagList = React.createClass({
     userLevel: React.PropTypes.number,
     deletable: React.PropTypes.bool,
     deleteTag: React.PropTypes.func,
-    tags: React.PropTypes.object
+    tags: React.PropTypes.array
   },
 
   render() {
     const {id, userLevel, deletable, deleteTag} = this.props;
-    const tags = this.props.tags[id] || []; // give it to parent
+    const tags = this.props.tags || [];
     const tagItems = tags.map(tag => {
       return (
         <TagItemContainer

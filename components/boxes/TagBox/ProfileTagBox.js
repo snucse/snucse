@@ -30,7 +30,7 @@ const ProfileTagBox = React.createClass({
         userLevel={this.props.userLevel}
         deletable
         deleteTag={this.props.deleteTagToProfile}
-        tags={this.props.tags}
+        tags={this.props.tags[this.props.profileId]}
         />
     );
   }
