@@ -6,7 +6,7 @@ import TagItem from './TagItem';
 const TagItemContainer = React.createClass({
 
   propTypes: {
-    id: React.PropTypes.number.isRequired,
+    id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
     tag: React.PropTypes.object.isRequired,
     userLevel: React.PropTypes.number,
     deletable: React.PropTypes.bool,

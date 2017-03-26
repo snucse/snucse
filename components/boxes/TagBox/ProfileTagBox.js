@@ -11,7 +11,7 @@ import TagBox from './TagBox';
 
 const ProfileTagBox = React.createClass({
   propTypes: {
-    profileId: React.PropTypes.number.isRequired
+    profileId: React.PropTypes.string.isRequired
   },
 
   getTagFormId() {
