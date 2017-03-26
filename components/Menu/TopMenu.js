@@ -20,6 +20,14 @@ const TopMenu = React.createClass({
               <div id="logo-container">
                 <Link id="logo" to="/">SNUCSE</Link>
               </div>
+              <a
+                id="top-menu-github-link"
+                href="https://github.com/snucse/snucse"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                GitHub
+              </a>
               <a id="logout-link" href="#" onClick={this.handleLogout}>로그아웃</a>
               <Link id="top-menu-activity-button" to={`/activities`}>활동</Link>
               <SearchFormTopMenu/>
@@ -34,6 +42,14 @@ const TopMenu = React.createClass({
               <div id="logo-container">
                 <Link id="logo" to="/">SNUCSE</Link>
               </div>
+              <a
+                id="top-menu-github-link"
+                href="https://github.com/snucse/snucse"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                GitHub
+              </a>
               <a id="logout-link" href="#" onClick={this.handleLogout}>로그아웃</a>
             </div>
           </header>

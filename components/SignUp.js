@@ -13,6 +13,16 @@ const SignUp = React.createClass({
     return (
       <div id="login-background">
         <div id="signup-box-container">
+          <div id="login-github">
+            <a
+              href="https://github.com/snucse/snucse"
+              target="_blank"
+              className="login-github-link"
+              rel="noopener noreferrer"
+              >
+              GitHub
+            </a>
+          </div>
           <h2 id="signup-box-title">SNUCSE</h2>
           <div id="signup-box">
             <div id="signup-box-header">
@@ -27,7 +37,7 @@ const SignUp = React.createClass({
   }
 });
 
-const formNames = ['username', 'password', 'password2', 'name', 'birthday', 'bsNumber', 'phoneNumber', 'email'];
+const formNames = ['username', 'name', 'birthday', 'bsNumber', 'phoneNumber', 'email'];
 const usernameReg = /^[A-Za-z][A-Za-z0-9]*$/;
 const birthReg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 const bsNumReg = /^[0-9]{4}-[0-9]{5}$/;
@@ -64,20 +74,6 @@ const SignUpForm = connectModals(React.createClass({
     if (!(usernameReg.test(values.username))) {
       this.props.alertModal('알림', '아이디는 영문자로 시작하며, 영문자 혹은 숫자로만 이루어져야 합니다.', () => {
         this.username.focus();
-      });
-      return null;
-    }
-
-    if (values.password.length === 0) {
-      this.props.alertModal('알림', '비밀번호를 입력해주세요.', () => {
-        this.password.focus();
-      });
-      return null;
-    }
-
-    if (values.password !== values.password2) {
-      this.props.alertModal('알림', '비밀번호를 확인해주세요.', () => {
-        this.password2.focus();
       });
       return null;
     }
@@ -128,14 +124,6 @@ const SignUpForm = connectModals(React.createClass({
           {this.renderInput('username', 'ID')}
         </div>
         <div className="signup-form-group">
-          <label className="signup-form-label" htmlFor="signup-password-input">비밀번호</label>
-          {this.renderInput('password', '******', 'password')}
-        </div>
-        <div className="signup-form-group">
-          <label className="signup-form-label" htmlFor="signup-password2-input">비밀번호 확인</label>
-          {this.renderInput('password2', '******', 'password')}
-        </div>
-        <div className="signup-form-group">
           <label className="signup-form-label" htmlFor="signup-name-input">이름</label>
           {this.renderInput('name', '홍길동')}
         </div>
@@ -154,6 +142,9 @@ const SignUpForm = connectModals(React.createClass({
         <div className="signup-form-group">
           <label className="signup-form-label" htmlFor="signup-email-input">이메일</label>
           {this.renderInput('email', 'example@example.com', 'email')}
+          <div className="signup-form-description">
+            가입 승인 후 이메일로 임시 비밀번호가 발송됩니다.
+          </div>
         </div>
         <div id="signup-button-container">
           <button id="signup-button" onClick={this.handleSignUp}>가입 신청</button>

@@ -23,7 +23,7 @@ const TagContainer = React.createClass({
   render() {
     switch (this.props.userLevel) {
       case UserLevel.REGULAR:
-        return <TagViewWrapper tagName={this.props.tagName} tag={this.props.tag}/>;
+        return <TagViewWrapper tagName={this.props.tagName} loading={this.props.loading} tag={this.props.tag}/>;
 
       default:
         return <p>준회원은 태그 조회가 불가능합니다.</p>;
@@ -33,9 +33,10 @@ const TagContainer = React.createClass({
 
 const mapStateToProps = function (state) {
   const {userLevel} = state.userInfo;
-  const {targetTag} = state.tag.view;
+  const {loading, targetTag} = state.tag.view;
   return {
     userLevel,
+    loading,
     tag: targetTag
   };
 };
