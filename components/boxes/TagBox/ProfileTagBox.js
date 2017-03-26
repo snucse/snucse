@@ -22,6 +22,7 @@ const ProfileTagBox = React.createClass({
     return (
       <TagBox
         id={this.props.profileId}
+        addable
         addTag={this.props.addTagToProfile}
         candidates={this.props.candidates}
         loadCandidateTags={this.props.loadCandidateTags}
