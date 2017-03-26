@@ -14,7 +14,7 @@ const TagBox = React.createClass({
     userLevel: React.PropTypes.number,
     deletable: React.PropTypes.bool,
     deleteTag: React.PropTypes.func,
-    tags: React.PropTypes.object // move
+    tags: React.PropTypes.array
   },
 
   render() {

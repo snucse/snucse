@@ -30,7 +30,7 @@ const ArticleTagBox = React.createClass({
         userLevel={this.props.userLevel}
         deletable
         deleteTag={this.props.deleteTagToArticle}
-        tags={this.props.tags}
+        tags={this.props.tags[this.props.articleId]}
         />
     );
   }
