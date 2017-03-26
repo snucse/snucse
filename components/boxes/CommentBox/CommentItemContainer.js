@@ -8,7 +8,7 @@ import CommentItem from './CommentItem';
 const CommentItemContainer = React.createClass({
 
   propTypes: {
-    id: React.PropTypes.number.isRequired,
+    id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
     comment: React.PropTypes.object.isRequired,
     writer: React.PropTypes.number.isRequired,
     setLastComment: React.PropTypes.func,

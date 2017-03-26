@@ -7,7 +7,7 @@ import CommentFormContainer from './CommentFormContainer';
 const CommentBox = React.createClass({
 
   propTypes: {
-    id: React.PropTypes.number.isRequired,
+    id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
     lastComment: React.PropTypes.object,
     commentCount: React.PropTypes.number,
     isAddable: React.PropTypes.bool,
