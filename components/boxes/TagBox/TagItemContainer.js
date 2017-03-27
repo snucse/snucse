@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {UserLevel} from '../../../utils';
 import TagItem from './TagItem';
 
 const TagItemContainer = React.createClass({
@@ -8,7 +7,7 @@ const TagItemContainer = React.createClass({
   propTypes: {
     id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
     tag: React.PropTypes.object.isRequired,
-    userLevel: React.PropTypes.number,
+    accessible: React.PropTypes.bool,
     deletable: React.PropTypes.bool,
     deleteTag: React.PropTypes.func
   },
@@ -21,7 +20,7 @@ const TagItemContainer = React.createClass({
     return (
       <TagItem
         tag={this.props.tag}
-        accessible={UserLevel.tagAccessible(this.props.userLevel)}
+        accessible={this.props.accessible}
         deletable={this.props.deletable}
         onDelete={this.handleDelete}
         />

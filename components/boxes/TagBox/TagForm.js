@@ -1,8 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import classnames from 'classnames';
 
-import {genRefCallback, UserLevel} from '../../../utils';
+import {genRefCallback} from '../../../utils';
 
 const TagForm = React.createClass({
   addTag() {
@@ -112,62 +111,48 @@ const TagForm = React.createClass({
   },
 
   render() {
-    switch (this.props.userLevel) {
-      case UserLevel.REGULAR: {
-        const candidateTags = this.props.candidateTags || [];
-        const candidateTagListItems = candidateTags.map((candidateTag, i) => {
-          if (i === this.state.candidateTag) {
-            if (this._content !== null) {
-              this._content.value = candidateTag.tag;
-            }
-          }
-          return (
-            <li
-              className={classnames({
-                'autocomplete-tag-item': true,
-                'selected': i === this.state.candidateTag
-              })}
-              onClick={this.handleClickCandidateTag(candidateTag.tag)}
-              key={candidateTag.tag}
-              >
-              {candidateTag.tag}
-            </li>
-          );
-        });
-        const candidateTagList = this.state.isShowCandidateTags ?
-          <ul className="autocomplete-tag-list">
-            {candidateTagListItems}
-          </ul> : null;
-        const form = this.state.isEditMode ?
-          <form className="tag-form" onSubmit={this.handleSubmit}>
-            <input
-              className="tag-input"
-              ref={genRefCallback(this, '_content')}
-              onChange={this.handleChangeInput}
-              onKeyDown={this.handleKeyDownInput}
-              placeholder="태그 입력"
-              />
-            {candidateTagList}
-          </form> :
-          null;
-        return (
-          <section className="tag-form-container">
-            <button className="show-tag-form-button" onClick={this.handleClickShowForm}>태그추가</button>
-            {form}
-          </section>
-        );
+    const candidateTags = this.props.candidateTags || [];
+    const candidateTagListItems = candidateTags.map((candidateTag, i) => {
+      if (i === this.state.candidateTag) {
+        if (this._content !== null) {
+          this._content.value = candidateTag.tag;
+        }
       }
-
-      default:
-        return null;
-    }
+      return (
+        <li
+          className={classnames({
+            'autocomplete-tag-item': true,
+            'selected': i === this.state.candidateTag
+          })}
+          onClick={this.handleClickCandidateTag(candidateTag.tag)}
+          key={candidateTag.tag}
+          >
+          {candidateTag.tag}
+        </li>
+      );
+    });
+    const candidateTagList = this.state.isShowCandidateTags ?
+      <ul className="autocomplete-tag-list">
+        {candidateTagListItems}
+      </ul> : null;
+    const form = this.state.isEditMode ?
+      <form className="tag-form" onSubmit={this.handleSubmit}>
+        <input
+          className="tag-input"
+          ref={genRefCallback(this, '_content')}
+          onChange={this.handleChangeInput}
+          onKeyDown={this.handleKeyDownInput}
+          placeholder="태그 입력"
+          />
+        {candidateTagList}
+      </form> : null;
+    return (
+      <section className="tag-form-container">
+        <button className="show-tag-form-button" onClick={this.handleClickShowForm}>태그추가</button>
+        {form}
+      </section>
+    );
   }
 });
 
-function mapStateToProps(state) {
-  return {
-    userLevel: state.userInfo.userLevel
-  };
-}
-
-export default connect(mapStateToProps)(TagForm);
+export default TagForm;

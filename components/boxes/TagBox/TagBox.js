@@ -12,10 +12,10 @@ const TagBox = React.createClass({
     loadCandidateTags: React.PropTypes.func,
     initializeCandidateTags: React.PropTypes.func,
     getTagFormId: React.PropTypes.func,
-    userLevel: React.PropTypes.number,
     deletable: React.PropTypes.bool,
     deleteTag: React.PropTypes.func,
-    tags: React.PropTypes.array
+    tags: React.PropTypes.array,
+    accessible: React.PropTypes.bool
   },
 
   render() {
@@ -23,7 +23,7 @@ const TagBox = React.createClass({
       <div className="tag-container">
         <TagList
           id={this.props.id}
-          userLevel={this.props.userLevel}
+          accessible={this.props.accessible}
           deletable={this.props.deletable}
           deleteTag={this.props.deleteTag}
           tags={this.props.tags}
