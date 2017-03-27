@@ -1,5 +1,10 @@
 SNUCSE 3 Frontend
 ========
+<p align=right>
+  <strong>English</strong> |
+  <a href=README.ko.md>한국어</a>
+</p>
+
 Front-end source code of [snucse] community. It works alongside [snucse-api]
 project.
 
