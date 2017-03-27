@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {UserLevel} from '../../../utils';
 import {
   addTagToArticle,
   loadCandidateTags,
@@ -22,7 +23,7 @@ const ArticleTagBox = React.createClass({
     return (
       <TagBox
         id={this.props.articleId}
-        addable
+        addable={UserLevel.tagAddable(this.props.userLevel)}
         addTag={this.props.addTagToArticle}
         candidates={this.props.candidates}
         loadCandidateTags={this.props.loadCandidateTags}
@@ -32,6 +33,7 @@ const ArticleTagBox = React.createClass({
         deletable
         deleteTag={this.props.deleteTagToArticle}
         tags={this.props.tags[this.props.articleId]}
+        accessible={UserLevel.tagAccessible(this.props.userLevel)}
         />
     );
   }

@@ -4,6 +4,10 @@ const UserLevel = {
 
   tagAccessible(userLevel) {
     return userLevel === this.REGULAR;
+  },
+
+  tagAddable(userLevel) {
+    return userLevel === this.REGULAR;
   }
 };
 
