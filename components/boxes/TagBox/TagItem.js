@@ -16,7 +16,7 @@ const TagItem = React.createClass({
     const tagName = this.props.accessible ? (
       <Link className="tag-item-name" to={{pathname: '/tags', query: {tag: this.props.tag.tag}}}>{this.props.tag.tag}</Link>
     ) : (
-      <span>{this.props.tag.tag}</span>
+      <span className="tag-item-name">{this.props.tag.tag}</span>
     );
     const deleteButton = this.props.accessible && this.props.deletable ? (
       <button className="tag-item-delete-button" onClick={this.handleClickDelete}>×</button>
