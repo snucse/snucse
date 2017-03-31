@@ -16,7 +16,7 @@ export function loadArticle(dispatch, articleId) {
   }).then(article => {
     loadArticleTag(dispatch, article);
   }).catch(err => {
-    console.log(err);
+    console.error(err);
     dispatch({
       type: types.LOAD_ARTICLE,
       article: null,

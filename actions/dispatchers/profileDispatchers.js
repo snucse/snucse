@@ -26,7 +26,7 @@ export function loadProfileDetail(dispatch, id) {
     const {id, tags} = current;
     loadProfileTag(dispatch, id, tags);
   }).catch(err => {
-    console.log(err);
+    console.error(err);
     dispatch({
       type: types.ERR_PROFILE_DETAIL
     });
@@ -82,7 +82,7 @@ export function changeAdmin(dispatch, id, newId) {
   }).then(() => {
     loadProfileDetail(dispatch, id);
   }).catch(err => {
-    console.log(err);
+    console.error(err);
     if (err.status === 401) {
       alertModal(dispatch, '알림', '관리자가 아닙니다');
     } else {
