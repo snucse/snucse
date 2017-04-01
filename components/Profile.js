@@ -27,7 +27,7 @@ const Profile = React.createClass({
   },
 
   render() {
-    const {loading, id, userId, admin, name, renderedDescription, renderingMode} = this.props;
+    const {loading, id, userId, admin, name, renderedDescription} = this.props;
     const mine = admin && userId === admin.id;
     const rightButton = mine ? (
       <Link id="profile-admin-button" to={`/profiles/${id}/admin`}>프로필 설정</Link>
@@ -44,11 +44,7 @@ const Profile = React.createClass({
       return null;
     }
 
-    const profileDescriptionView = renderingMode === 'html' ? (
-      <InnerHTML id="profile-description" html={renderedDescription}/>
-    ) : (
-      <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
-    );
+    const profileDescriptionView = <InnerHTML id="profile-description" html={renderedDescription}/>;
 
     return (
       <div>

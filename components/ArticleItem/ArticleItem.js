@@ -25,12 +25,10 @@ const ArticleItem = React.createClass({
 
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
-    const articleContentView = article.renderingMode === 'html' ? (
+    const articleContentView = (
       <div className="article-content">
         <InnerHTML html={article.renderedContent}/>
       </div>
-    ) : (
-      <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
     );
     return (
       <div className="feed-article">
