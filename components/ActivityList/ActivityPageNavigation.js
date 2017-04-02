@@ -17,7 +17,7 @@ const ActivityPageNavigation = React.createClass({
     }).join('&');
     return page === (parseInt(this.props.query.page, 10) || 0) ?
       <span className="activity-page" key={`activities-link-${page}`}>[{ch}]</span> :
-        <Link className="activity-page" to={`/activities?${paramsString}`} key={`activities-link-${page}`}>[{ch}]</Link>;
+      <Link className="activity-page" to={`/activities?${paramsString}`} key={`activities-link-${page}`}>[{ch}]</Link>;
   },
 
   render() {

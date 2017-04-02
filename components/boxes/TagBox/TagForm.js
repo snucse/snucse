@@ -131,11 +131,12 @@ const TagForm = React.createClass({
         </li>
       );
     });
-    const candidateTagList = this.state.isShowCandidateTags ?
+    const candidateTagList = this.state.isShowCandidateTags ? (
       <ul className="autocomplete-tag-list">
         {candidateTagListItems}
-      </ul> : null;
-    const form = this.state.isEditMode ?
+      </ul>
+    ) : null;
+    const form = this.state.isEditMode ? (
       <form className="tag-form" onSubmit={this.handleSubmit}>
         <input
           className="tag-input"
@@ -145,7 +146,8 @@ const TagForm = React.createClass({
           placeholder="태그 입력"
           />
         {candidateTagList}
-      </form> : null;
+      </form>
+    ) : null;
     return (
       <section className="tag-form-container">
         <button className="show-tag-form-button" onClick={this.handleClickShowForm}>태그추가</button>
