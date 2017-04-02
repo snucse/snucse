@@ -6,7 +6,7 @@ import {
   addTagToProfile,
   loadCandidateTags,
   initializeCandidateTags,
-  deleteTagToProfile
+  deleteTagFromProfile
 } from '../../../actions/dispatchers';
 import TagBox from './TagBox';
 
@@ -31,7 +31,7 @@ const ProfileTagBox = React.createClass({
         getTagFormId={this.getTagFormId}
         userLevel={this.props.userLevel}
         deletable
-        deleteTag={this.props.deleteTagToProfile}
+        deleteTag={this.props.deleteTagFromProfile}
         tags={this.props.tags[this.props.profileId]}
         accessible={UserLevel.tagAccessible(this.props.userLevel)}
         />
@@ -49,7 +49,7 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    deleteTagToProfile: (profileId, tagName) => deleteTagToProfile(dispatch, profileId, tagName),
+    deleteTagFromProfile: (profileId, tagName) => deleteTagFromProfile(dispatch, profileId, tagName),
     addTagToProfile: (profileId, tagName) => addTagToProfile(dispatch, profileId, tagName),
     initializeCandidateTags: tagFormId => initializeCandidateTags(dispatch, tagFormId),
     loadCandidateTags: (tagFormId, query) => loadCandidateTags(dispatch, tagFormId, query)

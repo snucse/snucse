@@ -6,7 +6,7 @@ import {
   addTagToArticle,
   loadCandidateTags,
   initializeCandidateTags,
-  deleteTagToArticle
+  deleteTagFromArticle
 } from '../../../actions/dispatchers';
 import TagBox from './TagBox';
 
@@ -31,7 +31,7 @@ const ArticleTagBox = React.createClass({
         getTagFormId={this.getTagFormId}
         userLevel={this.props.userLevel}
         deletable
-        deleteTag={this.props.deleteTagToArticle}
+        deleteTag={this.props.deleteTagFromArticle}
         tags={this.props.tags[this.props.articleId]}
         accessible={UserLevel.tagAccessible(this.props.userLevel)}
         />
@@ -49,7 +49,7 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    deleteTagToArticle: (articleId, tagName) => deleteTagToArticle(dispatch, articleId, tagName),
+    deleteTagFromArticle: (articleId, tagName) => deleteTagFromArticle(dispatch, articleId, tagName),
     addTagToArticle: (articleId, tagName) => addTagToArticle(dispatch, articleId, tagName),
     initializeCandidateTags: tagFormId => initializeCandidateTags(dispatch, tagFormId),
     loadCandidateTags: (tagFormId, query) => loadCandidateTags(dispatch, tagFormId, query)

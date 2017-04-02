@@ -29,7 +29,7 @@ export function addTagToArticle(dispatch, articleId, tagName) {
   }).catch(console.error);
 }
 
-export function deleteTagToArticle(dispatch, articleId, tagName) {
+export function deleteTagFromArticle(dispatch, articleId, tagName) {
   const data = {
     tag: tagName
   };
@@ -57,7 +57,7 @@ export function addTagToProfile(dispatch, profileId, tagName) {
   }).catch(console.error);
 }
 
-export function deleteTagToProfile(dispatch, profileId, tagName) {
+export function deleteTagFromProfile(dispatch, profileId, tagName) {
   const data = {
     tag: tagName
   };
