@@ -27,7 +27,8 @@ const Profile = React.createClass({
   },
 
   shouldComponentUpdate(props) {
-    return this.props.loading !== props.loading;
+    return this.props.loading !== props.loading ||
+      this.props.following !== props.following;
   },
 
   render() {
