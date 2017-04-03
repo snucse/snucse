@@ -39,7 +39,7 @@ const FeedArticle = React.createClass({
     const {height} = dimensions;
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
-    const shrinked = !loaded && height >= 22.4 * 10;
+    const shrinked = !loaded && height >= 22 * 10;
     let ellipsis = null;
     if (height >= 22.4 * 150) {
       ellipsis = <Link to={`/${article.id}`} className="feed-article-content-ellipsis">더 보기</Link>;
