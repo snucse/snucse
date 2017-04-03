@@ -48,14 +48,12 @@ const Profile = React.createClass({
       return null;
     }
 
-    const profileDescriptionView = <InnerHTML id="profile-description" html={renderedDescription}/>;
-
     return (
       <div>
         <div id="profile-information">
           {rightButton}
           <h3 id="profile-name">{name}</h3>
-          {profileDescriptionView}
+          <InnerHTML id="profile-description" html={renderedDescription}/>
           <ProfileTagBox profileId={id}/>
           <ProfileCommentBox
             profileId={id}

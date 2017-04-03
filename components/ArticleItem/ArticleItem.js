@@ -25,11 +25,6 @@ const ArticleItem = React.createClass({
 
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
-    const articleContentView = (
-      <div className="article-content">
-        <InnerHTML html={article.renderedContent}/>
-      </div>
-    );
     return (
       <div className="feed-article">
         <small className="article-date" title={date.format('LLL')}>
@@ -45,7 +40,9 @@ const ArticleItem = React.createClass({
           <div className="article-content-container">
             <FileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
-            {articleContentView}
+            <div className="article-content">
+              <InnerHTML html={article.renderedContent}/>
+            </div>
           </div>
         </div>
         <ArticleRecommendBox articleId={article.id} count={article.recommendationCount}/>
