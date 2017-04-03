@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadProfileDetail} from '../actions/dispatchers';
+import {loadProfileDetail, clearProfileDetail} from '../actions/dispatchers';
 import {ProfileAdminTransferContainer, ProfileEditBoxContainer} from './boxes';
 
 import '../stylesheets/profile.styl';
@@ -28,6 +28,10 @@ const ProfileAdmin = React.createClass({
         <ProfileEditBoxContainer id={id} name={name} description={description} mine={mine} renderingMode={renderingMode}/>
       </div>
     );
+  },
+
+  componentWillUnmount() {
+    this.props.clearProfileDetail();
   }
 });
 
@@ -45,6 +49,7 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
+    clearProfileDetail: () => clearProfileDetail(dispatch),
     loadProfileDetail: id => loadProfileDetail(dispatch, id)
   };
 };

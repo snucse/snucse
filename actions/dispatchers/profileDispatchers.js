@@ -12,10 +12,14 @@ export function loadAllProfiles(dispatch) {
   }).catch(console.error);
 }
 
-export function loadProfileDetail(dispatch, id) {
+export function clearProfileDetail(dispatch) {
   dispatch({
     type: types.CLEAR_PROFILE_DETAIL
   });
+}
+
+export function loadProfileDetail(dispatch, id) {
+  clearProfileDetail(dispatch);
   DataCon.loadDataFromServer(Url.getUrl(`/profiles/${id}`)).then(current => {
     dispatch({
       type: types.LOAD_PROFILE_DETAIL,

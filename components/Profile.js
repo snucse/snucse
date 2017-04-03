@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import InnerHTML from 'dangerously-set-inner-html';
 
-import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
+import {updateFollowingList, clearProfileDetail, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/profile.styl';
 import {UserLevel} from '../utils';
 
@@ -24,6 +24,10 @@ const Profile = React.createClass({
     if (props.id !== this.props.id) {
       this.props.loadProfileDetail(props.id);
     }
+  },
+
+  shouldComponentUpdate(props) {
+    return this.props.loading !== props.loading;
   },
 
   render() {
@@ -63,6 +67,10 @@ const Profile = React.createClass({
         <Feed profileId={id}/>
       </div>
     );
+  },
+
+  componentWillUnmount() {
+    this.props.clearProfileDetail();
   }
 });
 
@@ -110,6 +118,7 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
+    clearProfileDetail: () => clearProfileDetail(dispatch),
     loadProfileDetail: id => loadProfileDetail(dispatch, id),
     updateFollowingState: (id, following) => updateFollowingState(dispatch, id, following),
     updateFollowingList: () => updateFollowingList(dispatch)
