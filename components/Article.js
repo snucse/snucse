@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {loadArticle} from '../actions/dispatchers';
+import {clearArticle, loadArticle} from '../actions/dispatchers';
 import {ArticleItem, ArticleLoading, ArticleNotFound} from './ArticleItem';
 
 const Article = React.createClass({
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.loadArticle(this.props.id);
   },
 
@@ -30,6 +30,10 @@ const Article = React.createClass({
         {view}
       </section>
     );
+  },
+
+  componentWillUnmount() {
+    this.props.clearArticle();
   }
 });
 
@@ -42,6 +46,7 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
+    clearArticle: () => clearArticle(dispatch),
     loadArticle: id => loadArticle(dispatch, id)
   };
 };
