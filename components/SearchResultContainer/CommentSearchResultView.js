@@ -12,16 +12,14 @@ const CommentSearchResultView = React.createClass({
       return <CommentSearchResult comment={comment} key={`${query}-${comment.id}`}/>;
     });
     return (
-      <section>
-        <h3>{`'${query}'`} 댓글 검색 결과</h3>
-        <form>서치 폼</form>
-        <section>
-          <h4>댓글</h4>
+      <section id="search-result-comment">
+        <h4 id="search-result-comment-title">댓글</h4>
+        <ul id="search-result-comment-list">
           {commentResults}
-          <footer>
-            <SearchResultLinks category={'comment'} query={query} page={page} num={num} count={result.comments.count}/>
-          </footer>
-        </section>
+        </ul>
+        <footer>
+          <SearchResultLinks category={'comment'} query={query} page={page} num={num} count={result.comments.count}/>
+        </footer>
       </section>
     );
   }

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
 import {UserLevel} from '../../utils';
-import {SearchForm} from '../boxes';
+import {SearchFormTopMenu} from '../boxes';
 
 const TopMenu = React.createClass({
   handleLogout() {
@@ -30,7 +30,7 @@ const TopMenu = React.createClass({
               </a>
               <a id="logout-link" href="#" onClick={this.handleLogout}>로그아웃</a>
               <Link id="top-menu-activity-button" to={`/activities`}>활동</Link>
-              <SearchForm/>
+              <SearchFormTopMenu/>
             </div>
           </header>
         );

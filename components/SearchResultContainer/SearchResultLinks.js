@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 
 const SearchResultLinks = React.createClass({
   renderLink(category, query, page, ch = page) {
-    return <Link to={`/search?category=${category}&query=${query}&page=${page}`} key={`search-link-${page}`}>{ch}</Link>;
+    return <Link className="search-link" to={`/search?category=${category}&query=${query}&page=${page}`} key={`search-link-${page}`}>[{ch}]</Link>;
   },
 
   render() {
@@ -18,11 +18,11 @@ const SearchResultLinks = React.createClass({
     for (let i = first; i < last; i++) {
       links.push(this.renderLink(category, query, i));
     }
-    const backLink = last <= first + linkStep ? null :
+    const backLink = last < first + linkStep ? null :
       this.renderLink(category, query, first + linkStep, '>');
 
     return (
-      <section className="search-links">
+      <section className="search-link-wrapper">
         {frontLink}
         {links}
         {backLink}

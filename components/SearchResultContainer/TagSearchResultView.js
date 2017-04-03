@@ -12,16 +12,14 @@ const TagSearchResultView = React.createClass({
       return <TagSearchResult tag={tag} key={`${query}-${tag.tag}`}/>;
     });
     return (
-      <section>
-        <h3>{`'${query}'`} 태그 검색 결과</h3>
-        <form>서치 폼</form>
-        <section>
-          <h4>태그</h4>
+      <section id="search-result-tag">
+        <h4 id="search-result-tag-title">태그</h4>
+        <ul id="search-result-tag-container">
           {tagResults}
-          <footer>
-            <SearchResultLinks category={'tag'} query={query} page={page} num={num} count={result.tags.count}/>
-          </footer>
-        </section>
+        </ul>
+        <footer>
+          <SearchResultLinks category={'tag'} query={query} page={page} num={num} count={result.tags.count}/>
+        </footer>
       </section>
     );
   }
