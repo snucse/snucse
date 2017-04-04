@@ -17,7 +17,7 @@ const ToTopButton = React.createClass({
     const showSecond = 1000;
     const currentScrollY = window.scrollY;
     if (currentScrollY === 0) {
-      clearInterval(this.state.dismiss); // ?
+      clearTimeout(this.state.dismiss); // ?
       this.setState({
         show: false
       });
@@ -27,10 +27,10 @@ const ToTopButton = React.createClass({
         show: true
       });
       if (this.state.dismiss !== null) {
-        clearInterval(this.state.dismiss);
+        clearTimeout(this.state.dismiss);
       }
       this.setState({
-        dismiss: setInterval(() => {
+        dismiss: setTimeout(() => {
           this.setState({
             show: false
           });
@@ -49,7 +49,7 @@ const ToTopButton = React.createClass({
   },
 
   componentWillUnmount() {
-    clearInterval(this.state.dismiss);
+    clearTimeout(this.state.dismiss);
     window.removeEventListener('scroll', this.scrollListener);
   },
 
