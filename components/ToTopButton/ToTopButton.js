@@ -49,6 +49,7 @@ const ToTopButton = React.createClass({
   },
 
   componentWillUnmount() {
+    clearInterval(this.state.dismiss);
     window.removeEventListener('scroll', this.scrollListener);
   },
 
