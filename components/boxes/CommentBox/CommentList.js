@@ -4,19 +4,23 @@ import CommentItemContainer from './CommentItemContainer';
 
 const FOLD_COMMENT_LIMIT = 1;
 
-/*
-  props
-  - id
-  - isChild
-  - loadComments
-  - modifyFoldComments
-  - writeComment
-  - editComment
-  - deleteComment
-  - commentsInfo
-  - renderRecommendBox
-*/
 const CommentList = React.createClass({
+
+  propTypes: {
+    id: React.PropTypes.number,
+    loadComments: React.PropTypes.func,
+    loadReplies: React.PropTypes.func,
+    setLastComment: React.PropTypes.func,
+    modifyFoldComments: React.PropTypes.func,
+    writeComment: React.PropTypes.func,
+    deleteComment: React.PropTypes.func,
+    editComment: React.PropTypes.func,
+    commentsInfo: React.PropTypes.object,
+    repliesInfo: React.PropTypes.object,
+    renderRecommendBox: React.PropTypes.func,
+    isChild: React.PropTypes.bool
+  },
+
   loadComments(id) {
     this.props.loadComments(id);
   },
@@ -51,20 +55,20 @@ const CommentList = React.createClass({
     const recommendBox = this.props.renderRecommendBox(comment);
     return (
       <CommentItemContainer
-        writer={comment.writer.id}
-        comment={comment}
-        key={comment.id}
         id={this.props.id}
+        comment={comment}
+        writer={comment.writer.id}
         loadReplies={this.props.loadReplies}
         setLastComment={this.props.setLastComment}
         modifyFoldComments={this.props.modifyFoldComments}
-        writeComment={this.props.writeComment}
         deleteComment={this.props.deleteComment}
         editComment={this.props.editComment}
-        repliesInfo={this.props.repliesInfo}
-        renderRecommendBox={this.props.renderRecommendBox}
         recommendBox={recommendBox}
         isChild={this.props.isChild}
+        repliesInfo={this.props.repliesInfo}
+        writeComment={this.props.writeComment}
+        renderRecommendBox={this.props.renderRecommendBox}
+        key={comment.id}
         />
     );
   },

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
+import queryString from 'query-string';
 import moment from 'moment';
 
 import Realtime from '../Realtime';
@@ -58,7 +59,7 @@ export const TagSearchResult = React.createClass({
     const {tag} = this.props.tag;
     return (
       <article className="search-item tag-search-item">
-        <Link to={{pathname: '/tags', query: {tag}}}>{tag}</Link>
+        <Link to={{pathname: '/tags', search: '?' + queryString.stringify({tag})}}>{tag}</Link>
       </article>
     );
   }

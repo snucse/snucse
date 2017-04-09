@@ -9,5 +9,6 @@ export * from './feedDispatchers';
 export * from './modalDispatchers';
 export * from './searchDispatchers';
 export * from './recommendDispatchers';
+export * from './activityDispatchers';
 export * from './settingsDispatchers';
 export * from './realtimeDispatchers';

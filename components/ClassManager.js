@@ -5,7 +5,7 @@ import Article from './Article';
 const re = /^\d+$/;
 const ClassManager = React.createClass({
   render() {
-    const {id} = this.props.params;
+    const {id} = this.props.match.params;
     if (re.test(id)) {
       return <Article id={id}/>;
     }

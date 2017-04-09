@@ -1,5 +1,4 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
 import {DataCon, Url, connectModals} from '../utils';
 import Editor from './Editor';
 
@@ -9,7 +8,7 @@ import '../stylesheets/article-write.styl';
 
 const ArticleEdit = React.createClass({
   loadArticleFromServer() {
-    const {articleId} = this.props.params;
+    const {articleId} = this.props.match.params;
     const url = Url.getUrl(`/articles/${articleId}`);
     DataCon.loadDataFromServer(Url.getUrl('/users/me')).then(data => {
       return data.id;
@@ -50,7 +49,7 @@ const ArticleEdit = React.createClass({
   },
 
   submitEdit(data) {
-    const {articleId} = this.props.params;
+    const {articleId} = this.props.match.params;
     const url = Url.getUrl(`/articles/${articleId}`);
     DataCon.postFormDataToServer(url, 'PUT', data)
       .catch(console.error);
@@ -124,7 +123,7 @@ const ArticleEdit = React.createClass({
       files
     });
     this.setState({title: '', content: '', renderingMode: 'text'});
-    browserHistory.goBack();
+    this.props.history.goBack();
   },
 
   render() {
@@ -135,7 +134,7 @@ const ArticleEdit = React.createClass({
 
     if (this.state.valid === false) {
       this.props.alertModal('알림', '권한이 없습니다.', () => {
-        browserHistory.goBack();
+        this.props.history.goBack();
       });
       return null;
     }
