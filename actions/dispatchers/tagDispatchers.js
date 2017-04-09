@@ -1,4 +1,5 @@
-import {browserHistory} from 'react-router';
+import {goBack} from 'react-router-redux';
+
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
 import {alertModal} from './modalDispatchers';
@@ -84,12 +85,12 @@ export function loadTagInformation(dispatch, tagName) {
         tagInformation: null
       });
       alertModal(dispatch, '알림', '존재하지 않는 태그입니다.', () => {
-        browserHistory.goBack();
+        dispatch(goBack());
       });
     });
   } else {
     alertModal(dispatch, '알림', '정상적이지 않은 접근입니다.', () => {
-      browserHistory.goBack();
+      dispatch(goBack());
     });
   }
 }

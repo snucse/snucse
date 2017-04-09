@@ -1,9 +1,9 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
 import {DataCon, Url, genRefCallback, connectModals} from '../../utils';
-import {updateFollowingList} from '../../actions/dispatchers';
+import {updateFollowingList, alertModal} from '../../actions/dispatchers';
 
 import Editor from '../Editor';
 import '../../stylesheets/profile-new.styl';
@@ -33,31 +33,24 @@ const ProfileMakeForm = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
 
-    const trimmed = {
+    const data = {
       id: this.formId.value.trim(),
       name: this.formName.value.trim(),
       description: this.state.description,
       renderingMode: this.state.renderingMode
     };
 
-    if (!reg.test(trimmed.id)) {
+    if (!reg.test(data.id)) {
       this.props.alertModal('알림', 'ID는 정규식 "^[a-zA-Z_][a-zA-Z0-9_]+$"에 맞아야 합니다.');
       return false;
     }
 
-    if (trimmed.name === '' || trimmed.description === '') {
+    if (data.name === '' || data.description === '') {
       this.props.alertModal('알림', '양식을 모두 채워주세요.');
       return false;
     }
 
-    const url = Url.getUrl('/profiles');
-    DataCon.postDataToServer(url, 'POST', trimmed).then(() => {
-      this.props.alertModal('알림', '프로필 생성에 성공하였습니다.');
-      this.props.updateFollowingList();
-      browserHistory.push(`/${trimmed.id}`);
-    }).catch(() => {
-      this.props.alertModal('알림', 'ID가 중복되었습니다.');
-    });
+    this.props.updateProfile(data);
   },
 
   render() {
@@ -96,7 +89,16 @@ const ProfileMakeForm = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    updateFollowingList: () => updateFollowingList(dispatch)
+    updateProfile: data => {
+      const url = Url.getUrl('/profiles');
+      DataCon.postDataToServer(url, 'POST', data).then(() => {
+        alertModal(dispatch, '알림', '프로필 생성에 성공하였습니다.');
+        updateFollowingList(dispatch);
+        dispatch(push(`/${data.id}`));
+      }).catch(() => {
+        alertModal(dispatch, '알림', 'ID가 중복되었습니다.');
+      });
+    }
   };
 };
 

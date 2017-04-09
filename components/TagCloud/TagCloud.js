@@ -1,6 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import queryString from 'query-string';
 
 import {UserLevel} from '../../utils';
 
@@ -11,7 +12,9 @@ const TagCloud = React.createClass({
         case UserLevel.REGULAR:
           return (
             <li className="tag-cloud-tag-item" key={tag.tag}>
-              <Link to={{pathname: '/tags', query: {tag: tag.tag}}}>{tag.tag}</Link>
+              <Link to={{pathname: '/tags', search: '?' + queryString.stringify({tag: tag.tag})}}>
+                {tag.tag}
+              </Link>
             </li>
           );
         default:

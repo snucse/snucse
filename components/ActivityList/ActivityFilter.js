@@ -1,5 +1,6 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 import classnames from 'classnames';
 
 import {DataCon, Url, genRefCallback} from '../../utils';
@@ -292,12 +293,7 @@ const ActivityFilter = React.createClass({
     params.filterType = this.state.selectedType.type;
     params.filterAction = this.state.selectedAction;
     params.profileId = this.state.profileId;
-    const paramsString = Object.keys(params).filter(key => {
-      return params[key] !== undefined && params[key] !== null;
-    }).map(key => {
-      return `${key}=${params[key]}`;
-    }).join('&');
-    browserHistory.push(`/activities?${paramsString}`);
+    this.props.pushHistory(params);
   },
 
   render() {
@@ -381,4 +377,17 @@ const ActivityFilter = React.createClass({
   }
 });
 
-export default ActivityFilter;
+const mapDispatchToProps = function (dispatch) {
+  return {
+    pushHistory: params => {
+      const paramsString = Object.entries(params).filter(([key, value]) => {
+        return typeof key === 'string' && value != null; // catches both undefined and null
+      }).map(([key, value]) => {
+        return `${key}=${value}`;
+      }).join('&');
+      dispatch(push(`/activities?${paramsString}`));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ActivityFilter);
