@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
@@ -28,6 +28,9 @@ const Profile = React.createClass({
   render() {
     const {loading, id, userId, admin, name, renderedDescription} = this.props;
     const mine = admin && userId === admin.id;
+    const activityButton = (
+      <Link id="profile-activity-button" to={`/activities?profileId=${id}`}>활동</Link>
+    );
     const rightButton = mine ? (
       <Link id="profile-admin-button" to={`/profiles/${id}/admin`}>프로필 설정</Link>
     ) : (
@@ -47,6 +50,7 @@ const Profile = React.createClass({
       <div>
         <div id="profile-information">
           {rightButton}
+          {activityButton}
           <h3 id="profile-name">{name}</h3>
           <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
           <ProfileTagBox profileId={id}/>

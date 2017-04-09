@@ -14,7 +14,8 @@ function fetchHelper(url, options) {
     return res.json();
   }).catch(err => {
     if (err.status === 401) {
-      location.href = '/login';
+      sessionStorage.setItem('entrypath', location.pathname);
+      location.replace('/login');
     }
     throw err;
   });

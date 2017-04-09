@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {UserLevel} from '../../utils';
@@ -20,7 +20,16 @@ const TopMenu = React.createClass({
               <div id="logo-container">
                 <Link id="logo" to="/">SNUCSE</Link>
               </div>
+              <a
+                id="top-menu-github-link"
+                href="https://github.com/snucse/snucse"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                GitHub
+              </a>
               <a id="logout-link" href="#" onClick={this.handleLogout}>로그아웃</a>
+              <Link id="top-menu-activity-button" to={`/activities`}>활동</Link>
               <SearchForm/>
             </div>
           </header>
@@ -33,6 +42,14 @@ const TopMenu = React.createClass({
               <div id="logo-container">
                 <Link id="logo" to="/">SNUCSE</Link>
               </div>
+              <a
+                id="top-menu-github-link"
+                href="https://github.com/snucse/snucse"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                GitHub
+              </a>
               <a id="logout-link" href="#" onClick={this.handleLogout}>로그아웃</a>
             </div>
           </header>

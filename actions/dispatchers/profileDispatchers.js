@@ -1,4 +1,5 @@
-import {browserHistory} from 'react-router';
+import {goBack} from 'react-router-redux';
+
 import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
 import {loadProfileTag, updateFollowingList, alertModal} from './';
@@ -31,7 +32,7 @@ export function loadProfileDetail(dispatch, id) {
       type: types.ERR_PROFILE_DETAIL
     });
     alertModal(dispatch, '알림', '존재하지 않는 프로필입니다.', () => {
-      browserHistory.goBack();
+      dispatch(goBack());
     });
   });
 }
@@ -88,5 +89,26 @@ export function changeAdmin(dispatch, id, newId) {
     } else {
       alertModal(dispatch, '알림', '해당하는 id를 찾을 수 없습니다.');
     }
+  });
+}
+
+export function searchProfile(dispatch, prefix, limit) {
+  if (prefix === '') {
+    return;
+  }
+  dispatch({
+    type: types.SEARCH_PROFILE_WITH_PREFIX_INIT
+  });
+  DataCon.loadDataFromServer(Url.getUrl('/profiles/autocomplete', {prefix, limit})).then(response => {
+    dispatch({
+      type: types.SEARCH_PROFILE_WITH_PREFIX_COMPLETE,
+      profiles: response.profiles
+    });
+  }).catch(err => {
+    console.error(err);
+    dispatch({
+      type: types.SEARCH_PROFILE_WITH_PREFIX_COMPLETE,
+      profiles: []
+    });
   });
 }

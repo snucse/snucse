@@ -1,5 +1,6 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
 import {genRefCallback, connectModals} from '../../../utils';
 
@@ -19,7 +20,7 @@ const SearchForm = React.createClass({
       this.props.alertModal('알림', '두 글자 이상 입력해주세요');
       return;
     }
-    browserHistory.push(`/search?query=${query}`);
+    this.props.search(query);
   },
 
   render() {
@@ -33,4 +34,10 @@ const SearchForm = React.createClass({
   }
 });
 
-export default connectModals(SearchForm);
+const mapDispatchToProps = function (dispatch) {
+  return {
+    search: query => dispatch(push(`/search?query=${query}`))
+  };
+};
+
+export default connectModals(connect(null, mapDispatchToProps)(SearchForm));

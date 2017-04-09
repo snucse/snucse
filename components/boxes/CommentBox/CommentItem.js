@@ -1,28 +1,24 @@
 import React from 'react';
 import moment from 'moment';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import Realtime from '../../Realtime';
 import {connectModals} from '../../../utils';
 
-/*
-  props
-  - isEditable
-  - isDeletable
-  - comment
-  - replyList
-  - replyForm
-
-  - onDelete
-  - onEdit
-  - recommendBox
-
-  state
-  - newContent
-  - isEditMode
-  - replyForm
-*/
 const CommentItem = React.createClass({
+
+  propTypes: {
+    comment: React.PropTypes.object.isRequired,
+    isDeletable: React.PropTypes.bool,
+    onDelete: React.PropTypes.func,
+    isEditable: React.PropTypes.bool,
+    onEdit: React.PropTypes.func,
+    recommendBox: React.PropTypes.element,
+    isChild: React.PropTypes.bool,
+    replyList: React.PropTypes.element,
+    replyForm: React.PropTypes.element
+  },
+
   handleClickReply() {
     this.setState({replyForm: true});
   },
@@ -86,19 +82,24 @@ const CommentItem = React.createClass({
   },
 
   render() {
-    const editBox = this.props.isEditable && this.state.isEditMode ?
+    const editBox = this.props.isEditable && this.state.isEditMode ? (
       <form className="comment-edit-form" onSubmit={this.handleSubmit}>
         <div className="comment-edit-input-container">
           <input className="comment-edit-input" onChange={this.handleEdit} defaultValue={this.state.newContent}/>
         </div>
         <button className="comment-edit-submit-button">수정</button>
         <button className="comment-edit-cancel-button" onClick={this.handleClickCancel}>취소</button>
-      </form> :
-      null;
+      </form>
+    ) : null;
     let contentWrapper = null;
     let controller = null;
     if (!this.state.isEditMode) {
-      contentWrapper = <div className="comment-content">{this.props.comment.content}</div>;
+      contentWrapper = (
+        <div
+          className="comment-content"
+          dangerouslySetInnerHTML={{__html: this.props.comment.renderedContent}}
+          />
+      );
       const buttons = [];
       const id = this.props.comment.id;
       if (!this.props.isChild) {
@@ -122,7 +123,7 @@ const CommentItem = React.createClass({
       let cancelReply = null;
       if (this.state.replyForm) {
         replyForm = this.props.replyForm;
-        cancelReply = <button onClick={this.handleHideReplyForm}>취소</button>;
+        cancelReply = <button className="reply-cancel-button" onClick={this.handleHideReplyForm}>취소</button>;
       }
       replyBox = (
         <div className="comment-reply">

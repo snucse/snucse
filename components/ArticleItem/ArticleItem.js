@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {Link, browserHistory} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import Realtime from '../Realtime';
 import {Url, DataCon} from '../../utils';
@@ -14,7 +14,7 @@ const ArticleItem = React.createClass({
     const url = Url.getUrl(`/articles/${articleId}`);
     DataCon.postDataToServer(url, 'DELETE')
       .then(() => {
-        browserHistory.goBack();
+        this.props.history.goBack();
       }).catch(console.error);
   },
 

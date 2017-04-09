@@ -3,9 +3,11 @@ import 'core-js/shim';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, browserHistory, IndexRoute} from 'react-router';
-import {createStore, combineReducers} from 'redux';
+import {Route, Switch} from 'react-router';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import {ConnectedRouter, routerReducer, routerMiddleware} from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 
 import './stylesheets/reset.css';
 import './stylesheets/common.styl';
@@ -19,6 +21,7 @@ import {
   ProfileAdmin,
   ProfileAdminTransfer,
   Main,
+  Activity,
   TagInfo,
   ArticleWrite,
   ArticleEdit,
@@ -33,31 +36,55 @@ import {
 import reducers from './reducers';
 
 const rootElement = document.getElementById('content');
+const history = createHistory();
+const middleware = routerMiddleware(history);
 
-const store = createStore(combineReducers(reducers));
+const store = createStore(
+  combineReducers({...reducers, routerReducer}),
+  applyMiddleware(middleware)
+);
+
+const ProfileIdRoute = ({match}) => (
+  <Switch>
+    <Route path={`${match.url}/admin`} component={ProfileAdmin}/>
+    <Route path={`${match.url}/transfer_admin`} component={ProfileAdminTransfer}/>
+    <Route path={`${match.url}/write`} component={ArticleWrite}/>
+  </Switch>
+);
+const ProfileRoute = ({match}) => (
+  <Switch>
+    <Route exact path={`${match.url}`} component={ProfileList}/>
+    <Route path={`${match.url}/new`} component={ProfileMake}/>
+    <Route path={`${match.url}/:id`} component={ProfileIdRoute}/>
+  </Switch>
+);
+const MenuRoute = () => (
+  <Menu>
+    <Switch>
+      <Route exact path="/" component={Main}/>
+      <Route path="/message" component={Message}/>
+      <Route path="/others" component={Others}/>
+      <Route path="/profiles" component={ProfileRoute}/>
+      <Route path="/search" component={SearchResult}/>
+      <Route path="/settings" component={Settings}/>
+      <Route path="/tags" component={TagInfo}/>
+      <Route path="/activities" component={Activity}/>
+      <Route path="/:articleId/edit" component={ArticleEdit}/>
+      <Route exact path="/:id" component={ClassManager}/>
+    </Switch>
+  </Menu>
+);
 
 ReactDOM.render(
   <Provider store={store}>
     <TimeManager>
-      <Router history={browserHistory}>
-        <Route path="/login" component={Login}/>
-        <Route path="/sign-up" component={SignUp}/>
-        <Route path="/" component={Menu} pollInterval={2000}>
-          <IndexRoute component={Main} pollInterval={2000}/>
-          <Route path="message" component={Message}/>
-          <Route path="others" component={Others}/>
-          <Route path="profiles" component={ProfileList}/>
-          <Route path="profiles/new" component={ProfileMake}/>
-          <Route path="profiles/:id/admin" component={ProfileAdmin}/>
-          <Route path="profiles/:id/transfer_admin" component={ProfileAdminTransfer}/>
-          <Route path="profiles/:id/write" component={ArticleWrite}/>
-          <Route path="search" component={SearchResult}/>
-          <Route path="settings" component={Settings}/>
-          <Route path="tags" component={TagInfo}/>
-          <Route path=":id" component={ClassManager}/>
-          <Route path=":articleId/edit" component={ArticleEdit}/>
-        </Route>
-      </Router>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route path="/login" component={Login}/>
+          <Route path="/sign-up" component={SignUp}/>
+          <Route path="/" component={MenuRoute}/>
+        </Switch>
+      </ConnectedRouter>
     </TimeManager>
   </Provider>,
   rootElement
