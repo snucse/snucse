@@ -1,8 +1,10 @@
 import React from 'react';
-import {Link, browserHistory} from 'react-router';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
-import {DataCon, Url, genRefCallback, connectModals} from '../utils';
+import {DataCon, Url, genRefCallback} from '../utils';
+import {alertModal} from '../actions/dispatchers';
 import Modal from './Modal';
 import '../stylesheets/modalbox.styl';
 
@@ -40,26 +42,12 @@ const Login = React.createClass({
   }
 });
 
-const LoginForm = connectModals(React.createClass({
+const LoginFormBase = React.createClass({
   handleLogin(event) {
     event.preventDefault();
     const username = this.id.value.trim();
     const password = this.password.value;
-    DataCon.postDataToServer(Url.getUrl('/users/sign_in'), 'POST', {
-      username, password
-    }).then(data => {
-      localStorage.setItem('snucsesession', data.accessToken);
-      const next = sessionStorage.getItem('entrypath') || '/';
-      sessionStorage.removeItem('entrypath');
-      browserHistory.push(next);
-    }).catch(err => {
-      if (err.status === 403) {
-        this.props.alertModal('알림', '아이디 혹은 비밀번호를 확인해 주세요.');
-        this.password.value = '';
-      } else if (err.status === 419) {
-        this.props.alertModal('알림', '회원가입 대기중입니다.');
-      }
-    });
+    this.props.login(username, password);
   },
   render() {
     return (
@@ -84,7 +72,31 @@ const LoginForm = connectModals(React.createClass({
       </form>
     );
   }
-}));
+});
+
+const mapDispatchToProps = function (dispatch) {
+  return {
+    login: (username, password) => {
+      DataCon.postDataToServer(Url.getUrl('/users/sign_in'), 'POST', {
+        username, password
+      }).then(data => {
+        localStorage.setItem('snucsesession', data.accessToken);
+        const next = sessionStorage.getItem('entrypath') || '/';
+        sessionStorage.removeItem('entrypath');
+        dispatch(push(next));
+      }).catch(err => {
+        if (err.status === 403) {
+          alertModal(dispatch, '알림', '아이디 혹은 비밀번호를 확인해 주세요.');
+          this.password.value = '';
+        } else if (err.status === 419) {
+          alertModal(dispatch, '알림', '회원가입 대기중입니다.');
+        }
+      });
+    }
+  };
+};
+
+const LoginForm = connect(null, mapDispatchToProps)(LoginFormBase);
 
 const mapStateToProps = function (state) {
   return {

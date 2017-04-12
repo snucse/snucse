@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import isEqual from 'deep-equal';
+import queryString from 'query-string';
 
 import '../../stylesheets/search-result.styl';
 import {loadSearchResult} from '../../actions/dispatchers';
@@ -12,19 +13,21 @@ const SearchResultContainer = React.createClass({
   },
 
   componentDidMount() {
-    this.loadSearchResult(this.props.location.query);
+    this.loadSearchResult(queryString.parse(this.props.location.search));
   },
 
   componentWillReceiveProps(props) {
-    if (!isEqual(props.location.query, this.props.location.query)) {
+    const oldQ = queryString.parse(this.props.location.search);
+    const newQ = queryString.parse(props.location.search);
+    if (!isEqual(oldQ, newQ)) {
       window.scrollTo(0, 0);
-      this.loadSearchResult(props.location.query);
+      this.loadSearchResult(newQ);
     }
   },
 
   render() {
     const {result} = this.props;
-    const {category, query, page} = this.props.location.query;
+    const {category, query, page} = queryString.parse(this.props.location.search);
     return <SearchResultView category={category} query={query} page={page} result={result}/>;
   }
 });

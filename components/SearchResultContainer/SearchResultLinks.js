@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 const SearchResultLinks = React.createClass({
   renderLink(category, query, page, ch = page) {

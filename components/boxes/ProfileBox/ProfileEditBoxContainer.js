@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {browserHistory} from 'react-router';
+import {push} from 'react-router-redux';
 import {DataCon, Url, connectModals} from '../../../utils';
 
 import {updateFollowingList, loadProfileDetail} from '../../../actions/dispatchers';
@@ -16,20 +16,12 @@ import ProfileEditBox from './ProfileEditBox';
  */
 
 const ProfileEditBoxContainer = React.createClass({
-  submitEdit(data) {
-    const url = Url.getUrl(`/profiles/${this.props.id}`);
-    DataCon.postDataToServer(url, 'PUT', data)
-      .then(() => this.props.updateFollowingList())
-      .then(() => this.props.loadProfileDetail(this.props.id));
-  },
-
   handleEdit(data) {
     if (data.name === '' || data.description === '') {
       this.props.alertModal('알림', '이름과 설명을 모두 입력해주세요.');
       return;
     }
-    this.submitEdit(data);
-    browserHistory.push(`/${this.props.id}`);
+    this.props.submitEdit(data, this.props.id);
   },
 
   render() {
@@ -47,7 +39,15 @@ const ProfileEditBoxContainer = React.createClass({
 const mapDispatchToProps = function (dispatch) {
   return {
     updateFollowingList: () => updateFollowingList(dispatch),
-    loadProfileDetail: id => loadProfileDetail(dispatch, id)
+    loadProfileDetail: id => loadProfileDetail(dispatch, id),
+    submitEdit: (data, id) => {
+      const url = Url.getUrl(`/profiles/${this.props.id}`);
+      DataCon.postDataToServer(url, 'PUT', data)
+        .then(() => this.props.updateFollowingList())
+        .then(() => this.props.loadProfileDetail(this.props.id))
+        .then(() => dispatch(push(`/${id}`)))
+        .catch(console.error);
+    }
   };
 };
 

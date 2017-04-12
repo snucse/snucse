@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 import '../../stylesheets/taginfo.styl';
@@ -63,9 +63,7 @@ const TagView = React.createClass({
         <small id="tag-description">만든이 {creator.name}</small>
         <h3 id="tag-title">{this.props.tagName}</h3>
         <h4 id="tag-info-related-tag-title">연관 태그</h4>
-        <section>
-          <RelatedTagBox targetTagName={this.props.tagName} relatedTags={relatedTags}/>
-        </section>
+        <RelatedTagBox targetTagName={this.props.tagName} relatedTags={relatedTags}/>
         <h4 id="tag-info-article-title">관련 글</h4>
         <ul id="tag-info-article-list">
           {articlesView}

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import Realtime from '../../Realtime';
 import {connectModals} from '../../../utils';
@@ -82,15 +82,15 @@ const CommentItem = React.createClass({
   },
 
   render() {
-    const editBox = this.props.isEditable && this.state.isEditMode ?
+    const editBox = this.props.isEditable && this.state.isEditMode ? (
       <form className="comment-edit-form" onSubmit={this.handleSubmit}>
         <div className="comment-edit-input-container">
           <input className="comment-edit-input" onChange={this.handleEdit} defaultValue={this.state.newContent}/>
         </div>
         <button className="comment-edit-submit-button">수정</button>
         <button className="comment-edit-cancel-button" onClick={this.handleClickCancel}>취소</button>
-      </form> :
-      null;
+      </form>
+    ) : null;
     let contentWrapper = null;
     let controller = null;
     if (!this.state.isEditMode) {
