@@ -19,7 +19,7 @@ const TagItem = React.createClass({
         className="tag-item-name"
         to={{pathname: '/tags', search: '?' + queryString.stringify({tag: this.props.tag.tag})}}
         >
-        {this.props.tag.tag}
+        <span title={`tagged by ${this.props.tag.writer.name}`}>{this.props.tag.tag}</span>
       </Link>
     ) : (
       <span className="tag-item-name">{this.props.tag.tag}</span>
