@@ -17,7 +17,7 @@ const ACTIVITY_INITIAL_STATE = {
 };
 
 function load(state) {
-  return updateObject(state, {loading: true, isError: false});
+  return updateObject(state, {activities: [], count: undefined, loading: true, isError: false});
 }
 
 function success(state, action) {
