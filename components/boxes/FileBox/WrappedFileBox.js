@@ -32,7 +32,7 @@ const WrappedFileBox = React.createClass({
         onAliveChange={this.props.onAliveChange}
         />
     ) : null;
-    return (
+    return (this.props.files || []).length === 0 ? null : (
       <div className="file-box-wrapper">
         <span onClick={this.handleClickToggleButton}>첨부파일 ({this.props.files.length})</span>
         {fileBox}
