@@ -6,7 +6,7 @@ import moment from 'moment';
 import classnames from 'classnames';
 
 import Realtime from '../Realtime';
-import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
+import {WrappedFileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const FeedArticle = React.createClass({
   handleArticleDelete(articleId) {
@@ -59,7 +59,7 @@ const FeedArticle = React.createClass({
           </div>
           <div className="article-divider"/>
           <div className="article-content-container">
-            <FileBox files={article.files}/>
+            <WrappedFileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
             <Measure onMeasure={this.handleMeasure}>
               <div
