@@ -22,6 +22,9 @@ const ActivityPageNavigation = React.createClass({
 
   render() {
     const count = this.props.count;
+    if (!count) {
+      return null;
+    }
     // fixme
     const {query} = this.props;
     const page = query.page || 0;
