@@ -44,20 +44,16 @@ const store = createStore(
   applyMiddleware(middleware)
 );
 
-const ProfileIdRoute = ({match}) => (
-  <Switch>
-    <Route path={`${match.url}/admin`} component={ProfileAdmin}/>
-    <Route path={`${match.url}/transfer_admin`} component={ProfileAdminTransfer}/>
-    <Route path={`${match.url}/write`} component={ArticleWrite}/>
-  </Switch>
-);
 const ProfileRoute = ({match}) => (
   <Switch>
     <Route exact path={`${match.url}`} component={ProfileList}/>
     <Route path={`${match.url}/new`} component={ProfileMake}/>
-    <Route path={`${match.url}/:id`} component={ProfileIdRoute}/>
+    <Route path={`${match.url}/:id/admin`} component={ProfileAdmin}/>
+    <Route path={`${match.url}/:id/transfer_admin`} component={ProfileAdminTransfer}/>
+    <Route path={`${match.url}/:id/write`} component={ArticleWrite}/>
   </Switch>
 );
+
 const MenuRoute = () => (
   <Menu>
     <Switch>
