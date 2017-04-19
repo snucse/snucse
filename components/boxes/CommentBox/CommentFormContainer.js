@@ -5,7 +5,7 @@ import CommentForm from './CommentForm';
 const CommentFormContainer = React.createClass({
 
   propTypes: {
-    id: React.PropTypes.number.isRequired,
+    id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
     parentCommentId: React.PropTypes.number,
     writeComment: React.PropTypes.func.isRequired,
     isChild: React.PropTypes.bool

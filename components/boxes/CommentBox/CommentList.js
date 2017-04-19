@@ -7,7 +7,7 @@ const FOLD_COMMENT_LIMIT = 1;
 const CommentList = React.createClass({
 
   propTypes: {
-    id: React.PropTypes.number,
+    id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
     loadComments: React.PropTypes.func,
     loadReplies: React.PropTypes.func,
     setLastComment: React.PropTypes.func,
