@@ -4,11 +4,26 @@ import {Link} from 'react-router-dom';
 import Measure from 'react-measure';
 import moment from 'moment';
 import classnames from 'classnames';
+import BrowserDetection from 'react-browser-detection';
+import {iframeResizer} from 'iframe-resizer';
 
 import Realtime from '../Realtime';
-import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
+import {WrappedFileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 const FeedArticle = React.createClass({
+  bindIframeResizer(iframe) {
+    function resizedCallback(args) {
+      // args: {iframe,height,width,type}
+      const {iframe, height} = args;
+      iframe.style.height = height + 'px';
+    }
+    iframeResizer({
+      inPageLinks: true,
+      sizeHeight: true,
+      resizedCallback
+    }, iframe);
+  },
+
   handleArticleDelete(articleId) {
     this.props.onArticleDelete(articleId);
   },
@@ -19,6 +34,12 @@ const FeedArticle = React.createClass({
 
   handleEllipsisClick() {
     this.setState({loaded: true});
+  },
+
+  handleIframeLoad(event) {
+    const iframe = event.target;
+    const doc = iframe.contentWindow.document;
+    iframe.style.height = doc.body.scrollHeight + 'px';
   },
 
   getInitialState() {
@@ -39,13 +60,57 @@ const FeedArticle = React.createClass({
     const {height} = dimensions;
     const date = moment(article.createdAt);
     const mine = (this.props.userId === article.writer.id);
-    const shrinked = !loaded && height >= 22.4 * 10;
+    const shrinked = !loaded && height >= 22 * 10;
     let ellipsis = null;
-    if (height >= 22.4 * 40) {
+    if (height >= (22.4 * 149) + 20) {
       ellipsis = <Link to={`/${article.id}`} className="feed-article-content-ellipsis">더 보기</Link>;
     } else if (shrinked) {
       ellipsis = <span onClick={this.handleEllipsisClick} className="feed-article-content-ellipsis">더 보기</span>;
     }
+    const classname = classnames({
+      'article-content': true,
+      'feed-article-content': true,
+      'feed-article-content-shrinked': shrinked
+    });
+    const iframeNotSupportContentView = (
+      <div
+        className={classname}
+        dangerouslySetInnerHTML={{__html: article.feedContent}}
+        />
+    );
+    const defaultFeedCSS = `
+      <base target="_parent">
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/static/reset.css">
+      <link rel="stylesheet" type="text/css" href="/static/markdown.css">
+      <style>
+      body {
+          font-family: 'Roboto', 'Nanum Gothic', sans-serif;
+          font-size: 14px;
+          line-height: 1.6;
+          color: #1e3948;
+      }
+      </style>
+    `;
+    const iframeSupportContentView = (
+      <div
+        className={classname}
+        >
+        <iframe
+          ref={this.bindIframeResizer}
+          width="100%"
+          onLoad={this.handleIframeLoad}
+          sandbox={"allow-scripts allow-same-origin allow-forms allow-top-navigation"}
+          srcDoc={defaultFeedCSS + article.renderedContent}
+          />
+      </div>
+    );
+    const contentViewHandler = {
+      ie: () => iframeNotSupportContentView,
+      edge: () => iframeNotSupportContentView,
+      default: () => iframeSupportContentView
+    };
     return (
       <li className="feed-article">
         <small className="article-date" title={date.format('LLL')}>
@@ -59,17 +124,12 @@ const FeedArticle = React.createClass({
           </div>
           <div className="article-divider"/>
           <div className="article-content-container">
-            <FileBox files={article.files}/>
+            <WrappedFileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
             <Measure onMeasure={this.handleMeasure}>
-              <div
-                className={classnames({
-                  'article-content': true,
-                  'feed-article-content': true,
-                  'feed-article-content-shrinked': shrinked
-                })}
-                dangerouslySetInnerHTML={{__html: article.feedContent}}
-                />
+              <BrowserDetection once={false}>
+                {contentViewHandler}
+              </BrowserDetection>
             </Measure>
             {ellipsis}
           </div>

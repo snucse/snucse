@@ -44,11 +44,23 @@
 .article-content-container
   float left
   width 795px
+.file-box-wrapper
+  position relative
+  text-align right
+  cursor pointer
+  .file-box
+    position absolute
+    right -2px
+    margin-bottom 20px
+    padding 15px 20px
+    border 1px solid #05181e
+    text-align justify
+    background-color #fff
 .article-content
   word-break break-all
   markdown-style()
 .feed-article-content
-  max-height: (22.4 * 40)px
+  max-height: (22.4 * 150)px
   overflow: hidden
 .feed-article-content-shrinked
   max-height: (22.4 * 10)px

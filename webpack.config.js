@@ -1,13 +1,26 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
+
+const stylesheetDir = `${__dirname}/stylesheets`;
+const resetCss = `${stylesheetDir}/reset.css`;
+const markdownStyl = `${stylesheetDir}/markdown.styl`;
+const outStylesheetDir = `${__dirname}/dist/static`;
 
 // Always-enabled plugins
 const plugins = [
   new ExtractTextPlugin({
     filename: 'static/application.css'
   }),
-  new CopyWebpackPlugin([{from: '*.html'}])
+  new CopyWebpackPlugin([{from: '*.html'}]),
+  new WebpackShellPlugin({
+    onBuildEnd: [
+      `mkdir -p ${outStylesheetDir}`,
+      `stylus -I ${stylesheetDir} -o ${outStylesheetDir} ${markdownStyl}`,
+      `cp ${resetCss} ${outStylesheetDir}`
+    ]
+  })
 ];
 
 // Production-only plugins
