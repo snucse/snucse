@@ -12,11 +12,9 @@ import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentB
 
 const FeedArticle = React.createClass({
   bindIframeResizer(iframe) {
-    console.log(iframe);
     function resizedCallback(args) {
       // args: {iframe,height,width,type}
       const {iframe, height} = args;
-      console.log(height);
       iframe.style.height = height + 'px';
     }
     iframeResizer({
