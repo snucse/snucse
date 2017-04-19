@@ -52,9 +52,10 @@ const Profile = React.createClass({
     });
   },
 
-  shouldComponentUpdate(props) {
+  shouldComponentUpdate(props, state) {
     return this.props.loading !== props.loading ||
-      this.props.following !== props.following;
+      this.props.following !== props.following ||
+      this.state.isFolded !== state.isFolded;
   },
 
   render() {
