@@ -41,10 +41,10 @@ const mapDispatchToProps = function (dispatch) {
     updateFollowingList: () => updateFollowingList(dispatch),
     loadProfileDetail: id => loadProfileDetail(dispatch, id),
     submitEdit: (data, id) => {
-      const url = Url.getUrl(`/profiles/${this.props.id}`);
+      const url = Url.getUrl(`/profiles/${id}`);
       DataCon.postDataToServer(url, 'PUT', data)
-        .then(() => this.props.updateFollowingList())
-        .then(() => this.props.loadProfileDetail(this.props.id))
+        .then(() => updateFollowingList(dispatch))
+        .then(() => loadProfileDetail(dispatch, id))
         .then(() => dispatch(push(`/${id}`)))
         .catch(console.error);
     }
