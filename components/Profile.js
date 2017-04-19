@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import InnerHTML from 'dangerously-set-inner-html';
 import classnames from 'classnames';
 
-import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
+import {updateFollowingList, clearProfileDetail, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/profile.styl';
 import {UserLevel} from '../utils';
 
@@ -51,6 +52,12 @@ const Profile = React.createClass({
     });
   },
 
+  shouldComponentUpdate(props, state) {
+    return this.props.loading !== props.loading ||
+      this.props.following !== props.following ||
+      this.state.isFolded !== state.isFolded;
+  },
+
   render() {
     const {loading, id, userId, admin, name, renderedDescription} = this.props;
     const mine = admin && userId === admin.id;
@@ -83,7 +90,7 @@ const Profile = React.createClass({
     );
     const profileMain = this.state.isFolded ? null : (
       <div id="profile-main">
-        <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
+        <InnerHTML id="profile-description" html={renderedDescription}/>
         <ProfileTagBox profileId={id}/>
         <ProfileCommentBox
           profileId={id}
@@ -106,6 +113,10 @@ const Profile = React.createClass({
         <Feed profileId={id}/>
       </div>
     );
+  },
+
+  componentWillUnmount() {
+    this.props.clearProfileDetail();
   }
 });
 
@@ -134,7 +145,7 @@ const FollowBox = React.createClass({
 });
 
 const mapStateToProps = function (state) {
-  const {loading, following, name, description, renderedDescription, admin, commentCount, lastComment} = state.profile.current;
+  const {loading, following, name, description, renderedDescription, renderingMode, admin, commentCount, lastComment} = state.profile.current;
   const {userLevel, userId} = state.userInfo;
   return {
     loading,
@@ -142,6 +153,7 @@ const mapStateToProps = function (state) {
     name,
     description,
     renderedDescription,
+    renderingMode,
     admin,
     commentCount,
     lastComment,
@@ -152,6 +164,7 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
+    clearProfileDetail: () => clearProfileDetail(dispatch),
     loadProfileDetail: id => loadProfileDetail(dispatch, id),
     updateFollowingState: (id, following) => updateFollowingState(dispatch, id, following),
     updateFollowingList: () => updateFollowingList(dispatch)

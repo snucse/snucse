@@ -2,10 +2,14 @@ import {DataCon, Url} from '../../utils';
 import * as types from '../actionTypes';
 import {loadArticleTag} from './tagDispatchers';
 
-export function loadArticle(dispatch, articleId) {
+export function clearArticle(dispatch) {
   dispatch({
     type: types.CLEAR_ARTICLE_VIEW
   });
+}
+
+export function loadArticle(dispatch, articleId) {
+  clearArticle(dispatch);
   DataCon.loadDataFromServer(Url.getUrl(`/articles/${articleId}`)).then(article => {
     dispatch({
       type: types.LOAD_ARTICLE,
@@ -16,7 +20,7 @@ export function loadArticle(dispatch, articleId) {
   }).then(article => {
     loadArticleTag(dispatch, article);
   }).catch(err => {
-    console.log(err);
+    console.error(err);
     dispatch({
       type: types.LOAD_ARTICLE,
       article: null,
