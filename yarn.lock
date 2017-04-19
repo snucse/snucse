@@ -1420,9 +1420,9 @@ d@^0.1.1, d@~0.1.1:
   dependencies:
     es5-ext "~0.10.2"
 
-dangerously-set-inner-html:
+"dangerously-set-inner-html@https://github.com/Leeingnyo/dangerously-set-inner-html.git":
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/dangerously-set-inner-html/-/dangerously-set-inner-html-2.0.0.tgz#da73f26330c9ef0b6b12ca443091904406ddb73a"
+  resolved "https://github.com/Leeingnyo/dangerously-set-inner-html.git#5f725fba4259738ef41db5a3d294f5f168d83a90"
   dependencies:
     lodash.flatten "^4.4.0"
     parse5 "^2.2.3"
@@ -3892,14 +3892,7 @@ qs@~6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
 
-query-string@^4.1.0:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.2.3.tgz#9f27273d207a25a8ee4c7b8c74dcd45d556db822"
-  dependencies:
-    object-assign "^4.1.0"
-    strict-uri-encode "^1.0.0"
-
-query-string@^4.3.2:
+query-string@^4.1.0, query-string@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.2.tgz#ec0fd765f58a50031a3968c2431386f8947a5cdd"
   dependencies:
