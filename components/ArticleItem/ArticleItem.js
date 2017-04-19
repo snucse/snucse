@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 import Realtime from '../Realtime';
 import {Url, DataCon} from '../../utils';
-import {FileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
+import {WrappedFileBox, DelEditBox, ArticleTagBox, ArticleRecommendBox, ArticleCommentBox} from '../boxes';
 
 import '../../stylesheets/article.styl';
 
@@ -37,7 +37,7 @@ const ArticleItem = React.createClass({
           </div>
           <div className="article-divider"/>
           <div className="article-content-container">
-            <FileBox files={article.files}/>
+            <WrappedFileBox files={article.files}/>
             <DelEditBox mine={mine} articleId={article.id} onArticleDelete={this.handleArticleDelete}/>
             <div className="article-content" dangerouslySetInnerHTML={{__html: article.renderedContent}}/>
           </div>
