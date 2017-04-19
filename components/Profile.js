@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import classnames from 'classnames';
 
 import {updateFollowingList, loadProfileDetail, updateFollowingState} from '../actions/dispatchers';
 import '../stylesheets/profile.styl';
@@ -10,12 +11,34 @@ import {ProfileTagBox, ProfileCommentBox} from './boxes';
 import Feed from './Feed';
 
 const Profile = React.createClass({
+
+  getInitialState() {
+    return {
+      isFolded: false
+    };
+  },
+
   handleFollowChanged(following) {
     this.props.updateFollowingState(this.props.id, following);
   },
 
+  handleClickFoldButton() {
+    this.setState({
+      isFolded: true
+    });
+  },
+
+  handleClickUnfoldButton() {
+    this.setState({
+      isFolded: false
+    });
+  },
+
   componentWillMount() {
     this.props.loadProfileDetail(this.props.id);
+    this.setState({
+      isFolded: this.props.following
+    });
   },
 
   componentWillReceiveProps(props) {
@@ -23,11 +46,28 @@ const Profile = React.createClass({
     if (props.id !== this.props.id) {
       this.props.loadProfileDetail(props.id);
     }
+    this.setState({
+      isFolded: props.following
+    });
   },
 
   render() {
     const {loading, id, userId, admin, name, renderedDescription} = this.props;
     const mine = admin && userId === admin.id;
+
+    if (loading) {
+      return <p>Loading...</p>;
+      // TODO insert loading component
+    }
+    if (!loading && !admin) {
+      return null;
+    }
+
+    const profileNameClass = classnames({
+      'profile-name-fold': this.state.isFolded,
+      'profile-name-unfold': !this.state.isFolded
+    });
+
     const activityButton = (
       <Link id="profile-activity-button" to={`/activities?profileId=${id}`}>활동</Link>
     );
@@ -36,30 +76,32 @@ const Profile = React.createClass({
     ) : (
       <FollowBox userLevel={this.props.userLevel} following={this.props.following} onFollowChanged={this.handleFollowChanged}/>
     );
-
-    if (loading) {
-      return <p>Loading...</p>;
-      // TODO insert loading component
-    }
-
-    if (!loading && !admin) {
-      return null;
-    }
+    const foldButton = this.state.isFolded ? (
+      <button id="profile-unfold-button" title="대문 열기" onClick={this.handleClickUnfoldButton}>▼</button>
+    ) : (
+      <button id="profile-fold-button" title="대문 접기" onClick={this.handleClickFoldButton}>◀</button>
+    );
+    const profileMain = this.state.isFolded ? null : (
+      <div id="profile-main">
+        <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
+        <ProfileTagBox profileId={id}/>
+        <ProfileCommentBox
+          profileId={id}
+          commentCount={this.props.commentCount}
+          lastComment={this.props.lastComment}
+          isAddable
+          />
+      </div>
+    );
 
     return (
       <div>
         <div id="profile-information">
+          {foldButton}
           {rightButton}
           {activityButton}
-          <h3 id="profile-name">{name}</h3>
-          <div id="profile-description" dangerouslySetInnerHTML={{__html: renderedDescription}}/>
-          <ProfileTagBox profileId={id}/>
-          <ProfileCommentBox
-            profileId={id}
-            commentCount={this.props.commentCount}
-            lastComment={this.props.lastComment}
-            isAddable
-            />
+          <h3 id="profile-name" className={profileNameClass}>{name}</h3>
+          {profileMain}
         </div>
         <Feed profileId={id}/>
       </div>
