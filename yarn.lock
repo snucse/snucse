@@ -2460,6 +2460,10 @@ ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
+iframe-resizer@^3.5.11:
+  version "3.5.11"
+  resolved "https://registry.yarnpkg.com/iframe-resizer/-/iframe-resizer-3.5.11.tgz#42c6373b970807a4979336eb3c73b044dc917e96"
+
 ignore@^3.1.2, ignore@^3.1.5:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.0.tgz#8d88f03c3002a0ac52114db25d2c673b0bf1e435"
@@ -3922,6 +3926,10 @@ rc@^1.0.1, rc@^1.1.6, rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
+react-browser-detection@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-browser-detection/-/react-browser-detection-1.0.2.tgz#3ae164d463eb2825d3955a0fba3cb79c209f78bf"
+
 react-dom@^15.3.1:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.2.tgz#c46b0aa5380d7b838e7a59c4a7beff2ed315531f"
@@ -4559,7 +4567,7 @@ stylus-loader:
     loader-utils "^0.2.9"
     when "~3.6.x"
 
-stylus@>=0.52.4:
+stylus@^0.54.5:
   version "0.54.5"
   resolved "https://registry.yarnpkg.com/stylus/-/stylus-0.54.5.tgz#42b9560931ca7090ce8515a798ba9e6aa3d6dc79"
   dependencies:
@@ -4901,6 +4909,10 @@ webpack-dev-server@^2.4.1:
     supports-color "^3.1.1"
     webpack-dev-middleware "^1.9.0"
     yargs "^6.0.0"
+
+webpack-shell-plugin@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/webpack-shell-plugin/-/webpack-shell-plugin-0.5.0.tgz#29b8a1d80ddeae0ddb10e729667f728653c2c742"
 
 webpack-sources@^0.1.0:
   version "0.1.2"
