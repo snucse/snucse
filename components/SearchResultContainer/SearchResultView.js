@@ -28,13 +28,16 @@ const SearchResultView = React.createClass({
         SearchResultSection = <OverallSearchResultView query={query} page={page} result={result}/>;
       } break;
     }
+    const view = query === undefined || query.trim() === '' ? null : (
+      <div id="search-result-container">
+        <h4 id="search-result-title">{`'${query}'`} 검색 결과</h4>
+        {SearchResultSection}
+      </div>
+    );
     return (
       <div>
         <SearchForm previousCategory={category}/>
-        <div id="search-result-container">
-          <h4 id="search-result-title">{`'${query}'`} 검색 결과</h4>
-          {SearchResultSection}
-        </div>
+        {view}
       </div>
     );
   }
