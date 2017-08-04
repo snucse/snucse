@@ -41,7 +41,7 @@ const SearchForm = React.createClass({
     // condition boxes will be enabled by its props
     return (
       <form id="search-form" onSubmit={this.handleSubmit}>
-        <input id="search-form-input" ref={genRefCallback(this, '_content')} name="query" placeholder="SNUCSE검색"/>
+        <input id="search-form-input" ref={genRefCallback(this, '_content')} name="query" placeholder="키워드로 검색하실 수 있습니다"/>
         <button id="search-form-button">검색</button>
       </form>
     );
