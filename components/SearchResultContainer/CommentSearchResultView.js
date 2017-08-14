@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {CommentSearchResult} from './SearchResultItems';
+import EmptyResultView from './EmptyResultView';
 import SearchResultLinks from './SearchResultLinks';
 
 const CommentSearchResultView = React.createClass({
@@ -11,12 +12,15 @@ const CommentSearchResultView = React.createClass({
     const commentResults = result.comments.data.map(comment => {
       return <CommentSearchResult comment={comment} key={`${query}-${comment.id}`}/>;
     });
+    const resultsView = result.comments.count === 0 ? <EmptyResultView/> : (
+      <ul id="search-result-comment-list">
+        {commentResults}
+      </ul>
+    );
     return (
       <section id="search-result-comment">
         <h4 id="search-result-comment-title">댓글</h4>
-        <ul id="search-result-comment-list">
-          {commentResults}
-        </ul>
+        {resultsView}
         <footer>
           <SearchResultLinks category={'comment'} query={query} page={page} num={num} count={result.comments.count}/>
         </footer>
