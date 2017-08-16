@@ -1,0 +1,211 @@
+@import "mixin.styl"
+@import "variable.styl"
+#search-form
+  box()
+  padding 0px
+  position relative
+  display flex
+#search-form-input
+  flex 1
+  padding-left 5px
+  border none
+  border-right 1px solid
+#search-form-button
+  margin 5px 10px
+  cursor pointer
+  background none
+  border none
+  outline none
+#search-result-container
+  box()
+#search-result-title
+  font-size 16px
+  font-weight 600
+  padding-bottom 10px
+  border-bottom 1px solid box-border-color
+  margin-bottom 14px
+.search-result-more-button
+  text-align right
+#search-result-article-title
+  box-title()
+#search-result-article-list
+  margin 0 -15px
+#search-result-article-empty
+  margin-left 15px
+  margin-bottom 10px
+.search-result-article-container
+  float left
+  width 50%
+  padding 0 15px
+.search-result-article-container:nth-child(2n + 1)
+  clear left
+.search-result-article
+  box()
+  background-color article-background-color
+  padding 10px 15px
+.search-result-article-date
+  float right
+  color article-date-color
+  font-size 12px
+.search-result-article-header
+  font-size 16px
+  font-weight 600
+  margin-bottom 5px
+  white-space nowrap
+.search-result-article-title
+  display inline-block
+  vertical-align middle
+  max-width 210px
+  overflow hidden
+  text-overflow ellipsis
+.search-result-article-profiles
+  display inline-block
+  vertical-align middle
+  margin-top 5px
+  color article-profiles-color
+  max-width 70px
+  overflow hidden
+  text-overflow ellipsis
+  font-size 12px
+  font-weight normal
+.search-result-article-writer-container
+  display table-cell
+  vertical-align top
+  padding-right 10px
+.search-result-article-writer-image
+  display block
+  margin auto
+  width 50px
+  height 50px
+  border-radius 100%
+  margin-right 5px
+.search-result-article-writer-name
+  font-size 14px
+  font-weight 600
+  text-align center
+  width 50px
+  overflow hidden
+  text-overflow ellipsis
+.search-result-article-main
+  display table-cell
+  vertical-align top
+  width 10000px
+.search-result-article-content
+  word-break break-all
+  height 3.2em
+  overflow hidden
+  text-overflow ellipsis
+#search-result-article-list:after
+  clearfix()
+
+#search-result-comment-title
+  box-title()
+#search-result-comment-list
+  margin 0 -15px
+#search-result-comment-empty
+  margin-left 15px
+  margin-bottom 10px
+.search-result-comment-container
+  float left
+  width 50%
+  padding 0 15px
+.search-result-comment-container:nth-child(2n + 1)
+  clear left
+.search-result-comment
+  margin-bottom 20px
+  background-color rgb(255, 255, 255)
+  border-width 1px
+  border-style solid
+  border-color rgb(5, 24, 30)
+  border-image initial
+  padding 10px 15px
+.search-result-comment-content
+  font-size 16px
+.search-result-comment-recommendation-count
+  float right
+  font-size 12px
+.search-result-comment-writer
+  display inline-block
+  font-size 12px
+.search-result-comment-date
+  display inline-block
+  margin-left 2px
+  vertical-align middle
+  color rgb(104, 120, 129)
+  max-width 70px
+  text-overflow ellipsis
+  font-size 12px
+  font-weight normal
+  overflow hidden
+.search-result-comment-article
+  clear both
+  font-size 12px
+#search-result-comment-list:after
+  clearfix()
+
+#search-result-tag-title
+  box-title()
+#search-result-tag-container
+  margin-bottom 10px
+#search-result-tag-container:before
+  content "\25B6"
+#search-result-tag-list
+  margin-left 10px
+  display inline-block
+  height 25px
+#search-result-tag-list:before
+  content " "
+  display inline-block
+
+#search-result-profile-title
+  box-title()
+#search-result-profile-list
+  margin 0 -15px
+#search-result-profile-empty
+  margin-left 15px
+  margin-bottom 10px
+.search-result-profile-container
+  float left
+  width 33.333333%
+  padding 0 15px
+.search-result-profile
+  box()
+  background-color article-background-color
+  padding 10px 15px
+.search-result-profile-name
+  font-size 16px
+  font-weight 600
+  margin-bottom 5px
+.search-result-profile-description
+  word-break break-all
+  height 3.2em
+  overflow hidden
+  text-overflow ellipsis
+#search-result-profile-list:after
+  clearfix()
+
+.search-link-wrapper
+  margin-top 15px
+  text-align center
+.search-link
+  margin 0px 5px
+
+@media (max-width: 768px)
+  .search-result-article-container
+    width 100%
+  .search-result-article-writer-container
+    display block
+  .search-result-article-writer-image
+    display inline
+    width 40px
+    height 40px
+    vertical-align middle
+  .search-result-article-writer-name
+    display inline
+    width auto
+    margin-left 5px
+    vertical-align middle
+  .search-result-comment-container
+    width 100%
+  .search-result-profile-container
+    width 100%

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import isEqual from 'deep-equal';
 import queryString from 'query-string';
 
+import '../../stylesheets/search-result.styl';
 import {loadSearchResult} from '../../actions/dispatchers';
 import SearchResultView from './SearchResultView';
 

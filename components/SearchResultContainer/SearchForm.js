@@ -2,9 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 
-import {genRefCallback, connectModals} from '../../../utils';
+import '../../stylesheets/search-form.styl';
+import {genRefCallback, connectModals} from '../../utils';
 
 const SearchForm = React.createClass({
+  propTypes: {
+    previousCategory: React.PropTypes.string
+  },
+
   handleSubmit(event) {
     event.preventDefault();
     // this.props.onSearch(this._content.value);
@@ -20,7 +25,15 @@ const SearchForm = React.createClass({
       this.props.alertModal('알림', '두 글자 이상 입력해주세요');
       return;
     }
-    this.props.search(query);
+    const category = /* value from form || */this.props.previousCategory;
+    const params = {query, category};
+    const paramsString = Object.keys(params).filter(key => {
+      return params[key] !== undefined && params[key] !== null;
+    }).map(key => {
+      return `${key}=${params[key]}`;
+    }).join('&');
+    // todo extract to util
+    this.props.search(paramsString);
   },
 
   render() {
@@ -28,7 +41,8 @@ const SearchForm = React.createClass({
     // condition boxes will be enabled by its props
     return (
       <form id="search-form" onSubmit={this.handleSubmit}>
-        <input id="search-form-input" ref={genRefCallback(this, '_content')} name="query" placeholder="SNUCSE검색"/>
+        <input id="search-form-input" ref={genRefCallback(this, '_content')} name="query" placeholder="키워드로 검색하실 수 있습니다"/>
+        <button id="search-form-button">검색</button>
       </form>
     );
   }
@@ -36,7 +50,7 @@ const SearchForm = React.createClass({
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    search: query => dispatch(push(`/search?query=${query}`))
+    search: paramsString => dispatch(push(`/search?${paramsString}`))
   };
 };
 

@@ -15,6 +15,7 @@ const ActivityPageNavigation = React.createClass({
     }).map(key => {
       return `${key}=${query[key]}`;
     }).join('&');
+    // todo extract to util
     return page === (parseInt(this.props.query.page, 10) || 0) ?
       <span className="activity-page" key={`activities-link-${page}`}>[{ch}]</span> :
         <Link className="activity-page" to={`/activities?${paramsString}`} key={`activities-link-${page}`}>[{ch}]</Link>;

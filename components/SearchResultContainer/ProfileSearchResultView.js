@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {ProfileSearchResult} from './SearchResultItems';
+import EmptyResultView from './EmptyResultView';
 import SearchResultLinks from './SearchResultLinks';
 
 const ProfileSearchResultView = React.createClass({
@@ -11,17 +12,18 @@ const ProfileSearchResultView = React.createClass({
     const profileResults = result.profiles.data.map(profile => {
       return <ProfileSearchResult profile={profile} key={`${query}-${profile.id}`}/>;
     });
+    const resultsView = result.profiles.count === 0 ? <EmptyResultView/> : (
+      <ul id="search-result-profile-list">
+        {profileResults}
+      </ul>
+    );
     return (
-      <section>
-        <h3>{`'${query}'`} 프로필 검색 결과</h3>
-        <form>서치 폼</form>
-        <section>
-          <h4>프로필</h4>
-          {profileResults}
-          <footer>
-            <SearchResultLinks category={'profile'} query={query} page={page} num={num} count={result.profiles.count}/>
-          </footer>
-        </section>
+      <section id="search-result-profile">
+        <h4 id="search-result-profile-title">프로필</h4>
+        {resultsView}
+        <footer>
+          <SearchResultLinks category={'profile'} query={query} page={page} num={num} count={result.profiles.count}/>
+        </footer>
       </section>
     );
   }
