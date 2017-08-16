@@ -95,3 +95,7 @@ export const CLEAR_ARTICLE_VIEW = 'CLEAR_ARTICLE_VIEW';
 
 // action types related with realtime
 export const UPDATE_TIMES = 'UPDATE_TIMES';
+
+// action types related with measure screen
+export const UPDATE_APP_DIMENSIONS = 'UPDATE_APP_DIMENSIONS';
+export const UPDATE_MOBILE_STATE = 'UPDATE_MOBILE_STATE';
