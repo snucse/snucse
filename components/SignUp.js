@@ -112,6 +112,13 @@ const SignUpForm = connectModals(React.createClass({
       return null;
     }
 
+    if (!this.privacy.checked) {
+      this.props.alertModal('알림', '개인정보 수집, 이용 및 제공에 동의해주세요.', () => {
+        this.privacy.focus();
+      });
+      return null;
+    }
+
     return values;
   },
 
@@ -143,6 +150,12 @@ const SignUpForm = connectModals(React.createClass({
           {this.renderInput('email', 'example@example.com', 'email')}
           <div className="signup-form-description">
             가입 승인 후 이메일로 임시 비밀번호가 발송됩니다.
+          </div>
+        </div>
+        <div className="signup-form-group">
+          <label className="signup-form-label" htmlFor="signup-privacy-input">개인정보 수집, 이용 동의</label>
+          <div className="signup-form-box">
+            {this.renderInput('privacy', '', 'checkbox')} <a href="#" target="_blank" rel="noopener noreferrer">개인정보 수집, 이용 및 제공</a>에 동의합니다.
           </div>
         </div>
         <div id="signup-button-container">
