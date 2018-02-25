@@ -21,6 +21,9 @@ const SideMenu = React.createClass({
               <FollowingProfileList/>
             </section>
             <TagCloud/>
+            <section id="sidemenu-footer">
+              <a href="https://id.snucse.org/Privacy.aspx" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>
+            </section>
           </aside>
         );
 
@@ -36,6 +39,9 @@ const SideMenu = React.createClass({
               <FollowingProfileList/>
             </section>
             <TagCloud/>
+            <section id="sidemenu-footer">
+              <a href="https://id.snucse.org/Privacy.aspx" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>
+            </section>
           </aside>
         );
     }
