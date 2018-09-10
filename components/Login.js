@@ -31,7 +31,7 @@ const Login = React.createClass({
             <h3 id="login-box-header">Welcome! :D</h3>
             <LoginForm/>
             <section id="login-box-footer">
-              <a className="login-box-footer-link" href="https://id.snucse.org/verify">가입 신청하기</a>
+              <a className="login-box-footer-link" href="https://id.snucse.org/verify" target="_blank" rel="noopener noreferrer">가입 신청하기</a>
               <a className="login-box-footer-link" href="https://id.snucse.org/password-reset" target="_blank" rel="noopener noreferrer">비밀번호 찾기</a>
               <a className="login-box-footer-link" href="https://id.snucse.org/Privacy.aspx" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>
             </section>
