@@ -22,7 +22,7 @@
     "babel-preset-stage-3": "^6.17.0",
     "copy-webpack-plugin": "^4.0.0",
     "css-loader": "^0.25.0",
-    "eslint": "^3.7.1",
+    "eslint": "^4.18.2",
     "eslint-config-xo-react": "^0.10.0",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-react": "^6.3.0",
